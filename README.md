@@ -1,13 +1,13 @@
-# Theo Project Portal
+# Project-Ai
 
-> 汇集所有项目的单一入口。
+> 汇集所有 AI 相关项目的单一入口。
 
 ## Active Projects
 
 | Project | Description |
 |---------|-------------|
-| [AI+ 教育教学培训](https://jeekeagle.github.io/ai-edu-lecture/) | 面向青岛市教育系统的 AI 赋能教师培训项目 |
-| [明德双语学校讲座](https://jeekeagle.github.io/ai-edu-lecture/mingde/) | K-12 全学段教师专项培训（2026-04-17） |
+| [AI+ 教育教学培训](https://jeekeagle.github.io/Project-Ai/) | 面向青岛市教育系统的 AI 赋能教师培训项目 |
+| [明德双语学校讲座](https://jeekeagle.github.io/Project-Ai/mingde/) | K-12 全学段教师专项培训（2026-04-17） |
 
 ## Labs
 
