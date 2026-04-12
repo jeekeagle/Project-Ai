@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>明德双语学校案例 — AI+ 教育教学培训</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;510;590&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #08090a;
+      --bg-panel:     #0f1011;
+      --bg-surface:   #191a1b;
+      --bg-elevated:   #28282c;
+      --border:       rgba(255,255,255,0.05);
+      --border-std:   rgba(255,255,255,0.08);
+      --border-muted: rgba(255,255,255,0.04);
+      --text:         #f7f8f8;
+      --text-body:    #d0d6e0;
+      --text-dim:     #8a8f98;
+      --text-muted:   #62666d;
+      --accent:       #5e6ad2;
+      --accent-glow:  #7170ff;
+      --accent-hover: #828fff;
+      --green:        #27a644;
+      --yellow:       #e3a308;
+      --font:         'Inter', system-ui, -apple-system, sans-serif;
+      --mono:         'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: 'cv01', 'ss03';
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      background: rgba(8,9,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .logo {
+      font-size: 14px;
+      font-weight: 510;
+      letter-spacing: -0.24px;
+      color: var(--text);
+    }
+    nav .logo span { color: var(--accent-glow); }
+    nav .nav-links {
+      display: flex;
+      gap: 24px;
+      margin-left: 40px;
+    }
+    nav .nav-links a {
+      font-size: 13px;
+      font-weight: 510;
+      color: var(--text-body);
+      text-decoration: none;
+      letter-spacing: -0.13px;
+      transition: color 0.15s;
+    }
+    nav .nav-links a:hover { color: var(--text); }
+    nav .nav-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .badge-live {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 510;
+      color: var(--yellow);
+      background: rgba(227,163,8,0.1);
+      border: 1px solid rgba(227,163,8,0.2);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      letter-spacing: 0.04em;
+    }
+    .badge-live .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--yellow);
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.25; }
+    }
+    .btn-back {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 510;
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .btn-back:hover { color: var(--text); border-color: var(--border-std); }
+    .btn-back svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 130px 40px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 28px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .breadcrumb a {
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .breadcrumb a:hover { color: var(--text); }
+    .breadcrumb svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+    .hero-meta {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .meta-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 510;
+      color: var(--text-dim);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 6px;
+      letter-spacing: -0.08px;
+    }
+    .meta-chip svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 510;
+      line-height: 1.05;
+      letter-spacing: -1.056px;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .hero h1 .accent { color: var(--accent-glow); }
+    .hero-school {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-dim);
+      margin-bottom: 32px;
+      letter-spacing: -0.165px;
+    }
+    .hero-goal {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-std);
+      border-radius: 10px;
+      padding: 24px 28px;
+      max-width: 720px;
+    }
+    .hero-goal-label {
+      font-size: 11px;
+      font-weight: 510;
+      color: var(--accent-glow);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .hero-goal p {
+      font-size: 15px;
+      color: var(--text-body);
+      line-height: 1.65;
+      letter-spacing: -0.13px;
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      max-width: 1200px;
+      margin: 0 auto 80px;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .stat-item {
+      background: var(--bg-panel);
+      padding: 20px 24px;
+    }
+    .stat-num {
+      font-size: 26px;
+      font-weight: 510;
+      letter-spacing: -0.48px;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .stat-label {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-dim);
+      letter-spacing: -0.08px;
+    }
+
+    /* ── SECTION ── */
+    .section-header {
+      max-width: 1200px;
+      margin: 0 auto 48px;
+      padding: 0 40px;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 510;
+      color: var(--accent-glow);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 510;
+      letter-spacing: -0.576px;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .section-desc {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    /* ── OUTLINE ── */
+    .outline-section {
+      max-width: 1200px;
+      margin: 0 auto 100px;
+      padding: 0 40px;
+    }
+    .outline-timeline {
+      position: relative;
+      padding-left: 40px;
+    }
+    .outline-timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px; top: 8px; bottom: 8px;
+      width: 1px;
+      background: var(--border-std);
+    }
+    .outline-block {
+      position: relative;
+      margin-bottom: 32px;
+    }
+    .outline-block:last-child { margin-bottom: 0; }
+    .outline-marker {
+      position: absolute;
+      left: -36px; top: 6px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 0 3px var(--bg);
+    }
+    .outline-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .outline-header {
+      padding: 24px 28px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      transition: background 0.15s;
+    }
+    .outline-header:hover { background: rgba(255,255,255,0.02); }
+    .outline-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      min-width: 28px;
+      letter-spacing: 0.04em;
+    }
+    .outline-title-group { flex: 1; }
+    .outline-title {
+      font-size: 17px;
+      font-weight: 590;
+      color: var(--text);
+      margin-bottom: 3px;
+      letter-spacing: -0.24px;
+    }
+    .outline-time {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent-glow);
+    }
+    .outline-expand {
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+    .outline-expand svg { width: 12px; height: 12px; stroke: var(--text-dim); fill: none; stroke-width: 2; }
+    .outline-block.open .outline-expand { transform: rotate(45deg); }
+    .outline-body {
+      display: none;
+      padding: 0 28px 28px 28px;
+      border-top: 1px solid var(--border);
+    }
+    .outline-block.open .outline-body { display: block; }
+    .outline-objectives {
+      padding-top: 20px;
+      margin-bottom: 20px;
+    }
+    .outline-objectives-label {
+      font-size: 11px;
+      font-weight: 510;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    .outline-objectives li {
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.65;
+      margin-left: 18px;
+      margin-bottom: 6px;
+    }
+    .outline-keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      font-size: 11px;
+      font-weight: 510;
+      color: var(--text-dim);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 4px;
+      letter-spacing: -0.08px;
+    }
+    .tag-accent {
+      color: var(--accent-glow);
+      background: rgba(94,106,210,0.1);
+      border-color: rgba(94,106,210,0.2);
+    }
+
+    /* ── TOOLS ── */
+    .tools-section {
+      max-width: 1200px;
+      margin: 0 auto 100px;
+      padding: 0 40px;
+    }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .tool-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .tool-card:hover {
+      border-color: var(--border-std);
+      background: rgba(255,255,255,0.03);
+    }
+    .tool-category {
+      font-size: 10px;
+      font-weight: 510;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .tool-name {
+      font-size: 15px;
+      font-weight: 590;
+      color: var(--text);
+      margin-bottom: 5px;
+      letter-spacing: -0.165px;
+    }
+    .tool-desc {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      max-width: 800px;
+      margin: 0 auto 100px;
+      padding: 60px 40px;
+      text-align: center;
+    }
+    .cta-box {
+      background: rgba(94,106,210,0.06);
+      border: 1px solid rgba(94,106,210,0.15);
+      border-radius: 16px;
+      padding: 48px;
+    }
+    .cta-title {
+      font-size: 22px;
+      font-weight: 510;
+      color: var(--text);
+      margin-bottom: 12px;
+      letter-spacing: -0.384px;
+    }
+    .cta-desc {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 28px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 510;
+      padding: 10px 20px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s;
+      letter-spacing: -0.13px;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.02);
+      color: var(--text-body);
+      font-size: 14px;
+      font-weight: 510;
+      padding: 10px 20px;
+      border-radius: 6px;
+      border: 1px solid var(--border-std);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s;
+      letter-spacing: -0.13px;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.04); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px;
+      text-align: center;
+    }
+    footer p { font-size: 12px; color: var(--text-muted); }
+
+    @media (max-width: 768px) {
+      .tools-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-bar { grid-template-columns: repeat(3, 1fr); }
+      nav .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">AI<span>+</span> Education</div>
+    <div class="nav-links">
+      <a href="../index.html#modules">讲座模块</a>
+      <a href="../index.html#workflow">工作流</a>
+      <a href="../index.html#cases">案例</a>
+    </div>
+    <div class="nav-right">
+      <div class="badge-live">
+        <span class="dot"></span>
+        即将交付
+      </div>
+      <a href="../index.html" class="btn-back">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        返回项目
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="breadcrumb">
+      <a href="../index.html">AI+ Education</a>
+      <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+      <span>明德双语学校</span>
+    </div>
+    <div class="hero-meta">
+      <span class="meta-chip">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        2026-04-17
+      </span>
+      <span class="meta-chip">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        2 小时
+      </span>
+      <span class="meta-chip">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        全学段教师
+      </span>
+      <span class="meta-chip">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        青岛市 · K-12
+      </span>
+    </div>
+    <h1>明德双语学校<br><span class="accent">全学段教师培训</span></h1>
+    <p class="hero-school">Mingde Bilingual School · 2026 春季学期</p>
+    <div class="hero-goal">
+      <div class="hero-goal-label">培训目标</div>
+      <p>面向明德双语学校全体教师，建立对 AI 变革的清晰认知，掌握国产大模型环境下的日常备课辅助工具链，现场演练「语音 → 讲稿 → PPT」的完整端到端工作流。</p>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">核心模块</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2h</div>
+      <div class="stat-label">讲座时长</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">K-12</div>
+      <div class="stat-label">全学段覆盖</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4+</div>
+      <div class="stat-label">工具演示</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1:1</div>
+      <div class="stat-label">实操演练</div>
+    </div>
+  </div>
+
+  <!-- OUTLINE -->
+  <section class="outline-section">
+    <div class="section-header">
+      <div class="section-label">Lecture Outline</div>
+      <h2 class="section-title">讲座大纲</h2>
+      <p class="section-desc">三段式结构：认知建立 → 工具展示 → 现场实操。点击展开各模块详情。</p>
+    </div>
+    <div class="outline-timeline">
+
+      <!-- Module 1 -->
+      <div class="outline-block open" id="m1">
+        <div class="outline-marker"></div>
+        <div class="outline-card">
+          <div class="outline-header" onclick="toggleOutline('m1')">
+            <div class="outline-num">01</div>
+            <div class="outline-title-group">
+              <div class="outline-title">认知建立：智能时代的教育者定位</div>
+              <div class="outline-time">25–30 分钟</div>
+            </div>
+            <div class="outline-expand">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+          </div>
+          <div class="outline-body">
+            <div class="outline-objectives">
+              <div class="outline-objectives-label">预期收获</div>
+              <ul>
+                <li>理解信息化三阶段（工具 → 平台 → 智能体）的演进逻辑，建立清晰的变革定位认知</li>
+                <li>了解「CHATPRO 框架」——人与 AI 协作的四种基本模式，能识别日常工作中哪些环节适合交给 AI</li>
+                <li>建立驾驭工程思维：不是学习工具，是设计工作流，从「学什么」转向「用什么解决什么」</li>
+                <li>消解对 AI 的焦虑感，建立「人机协同」的积极心态</li>
+              </ul>
+            </div>
+            <div class="outline-keywords">
+              <span class="tag">信息化三阶段</span>
+              <span class="tag">CHATPRO 框架</span>
+              <span class="tag">驾驭工程</span>
+              <span class="tag">人机协同</span>
+              <span class="tag">变革定位</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 2 -->
+      <div class="outline-block" id="m2">
+        <div class="outline-marker"></div>
+        <div class="outline-card">
+          <div class="outline-header" onclick="toggleOutline('m2')">
+            <div class="outline-num">02</div>
+            <div class="outline-title-group">
+              <div class="outline-title">工具展示：国产大模型工具链</div>
+              <div class="outline-time">35 分钟</div>
+            </div>
+            <div class="outline-expand">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+          </div>
+          <div class="outline-body">
+            <div class="outline-objectives">
+              <div class="outline-objectives-label">工具清单与演示</div>
+              <ul>
+                <li><strong>搜索</strong>：秘塔 AI 搜索 —— 结构化输出，无广告，适合教育类信息检索</li>
+                <li><strong>内容生成</strong>：通义千问 / Kimi —— 讲稿生成、教案辅助、学生评语撰写</li>
+                <li><strong>语音处理</strong>：讯飞听见 / 飞书妙记 —— 会议转录、口述笔记、课堂录音整理</li>
+                <li><strong>PPT 辅助</strong>：iSlide、Gamma —— 大纲驱动生成、配色与排版辅助</li>
+                <li><strong>浏览器插件</strong>： Monica / Sider —— 随时唤起 AI 辅助，不打断工作流</li>
+              </ul>
+            </div>
+            <div class="outline-keywords">
+              <span class="tag">秘塔搜索</span>
+              <span class="tag tag-accent">通义 / Kimi</span>
+              <span class="tag">讯飞听见</span>
+              <span class="tag">iSlide</span>
+              <span class="tag">Gamma</span>
+              <span class="tag">Monica</span>
+              <span class="tag">Sider</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 3 -->
+      <div class="outline-block" id="m3">
+        <div class="outline-marker"></div>
+        <div class="outline-card">
+          <div class="outline-header" onclick="toggleOutline('m3')">
+            <div class="outline-num">03</div>
+            <div class="outline-title-group">
+              <div class="outline-title">实操演练：备课工作流端到端</div>
+              <div class="outline-time">50–60 分钟</div>
+            </div>
+            <div class="outline-expand">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+          </div>
+          <div class="outline-body">
+            <div class="outline-objectives">
+              <div class="outline-objectives-label">完整工作流演练</div>
+              <ul>
+                <li>老师口述讲课需求（语音输入，无需打字），系统实时转写</li>
+                <li>大模型根据口述内容生成结构化讲稿初稿</li>
+                <li>老师微调讲稿，确认价值导向和教学目标</li>
+                <li>导入 iSlide / Gamma 生成 PPT 大纲与初稿</li>
+                <li>老师进行最终个性化调整，直接用于课堂</li>
+              </ul>
+            </div>
+            <div class="outline-keywords">
+              <span class="tag tag-accent">语音输入</span>
+              <span class="tag">讲稿生成</span>
+              <span class="tag">PPT 辅助</span>
+              <span class="tag tag-accent">端到端闭环</span>
+              <span class="tag">1:1 实操</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section class="tools-section">
+    <div class="section-header">
+      <div class="section-label">Tool Chain</div>
+      <h2 class="section-title">本次演示工具清单</h2>
+      <p class="section-desc">全部为国产可用工具，无需翻墙，老师当天可立即安装使用。</p>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-category">搜索</div>
+        <div class="tool-name">秘塔 AI 搜索</div>
+        <div class="tool-desc">无广告结构化搜索结果，适合教育类内容调研</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-category">内容</div>
+        <div class="tool-name">通义千问</div>
+        <div class="tool-desc">讲稿生成、教案辅助、学生评语等文本任务</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-category">内容</div>
+        <div class="tool-name">Kimi</div>
+        <div class="tool-desc">长文本处理，适合课程设计文档分析</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-category">语音</div>
+        <div class="tool-name">讯飞听见</div>
+        <div class="tool-desc">语音转文字，口述备课，课堂录音整理</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-category">PPT</div>
+        <div class="tool-name">iSlide</div>
+        <div class="tool-desc">PPT 大纲生成、排版与配色辅助</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-category">PPT</div>
+        <div class="tool-name">Gamma</div>
+        <div class="tool-desc">大纲驱动生成，AI 辅助设计演示文稿</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-category">插件</div>
+        <div class="tool-name">Monica</div>
+        <div class="tool-desc">浏览器侧边栏 AI 助手，随时唤起</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-category">插件</div>
+        <div class="tool-name">Sider</div>
+        <div class="tool-desc">页面内 AI 辅助，阅读与写作增强</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-box">
+      <div class="cta-title">查看完整项目主页</div>
+      <p class="cta-desc">了解更多 AI+ 教育教学培训项目的设计理念、讲座结构和交付体系。</p>
+      <div class="cta-actions">
+        <a href="../index.html" class="btn-primary">项目主页</a>
+        <a href="../index.html#cases" class="btn-ghost">其他案例</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>AI+ Education · 明德双语学校案例 · 2026-04-17</p>
+  </footer>
+
+  <script>
+    function toggleOutline(id) {
+      const block = document.getElementById(id);
+      block.classList.toggle('open');
+    }
+  </script>
+
+</body>
+</html>
