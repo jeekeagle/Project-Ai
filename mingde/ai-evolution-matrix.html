@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>信息化·数字化·智能化 演进矩阵</title>
+<style>
+:root {
+--bg-color: #f5f5f7; --text-main: #1d1d1f; --text-muted: #86868b;
+--accent-blue: #0066cc; --accent-green: #34c759; --accent-orange: #ff9500; --accent-red: #ff3b30;
+--glass-bg: rgba(255, 255, 255, 0.7); --glass-border: rgba(255, 255, 255, 0.5);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif; }
+body { background-color: var(--bg-color); color: var(--text-main); height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background-image: radial-gradient(circle at 20% 20%, #e0eaf5 0%, transparent 40%), radial-gradient(circle at 80% 80%, #fdf2f4 0%, transparent 40%); }
+.dashboard { width: 94vw; max-width: 1600px; height: 94vh; background: var(--glass-bg); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); border: 1px solid var(--glass-border); border-radius: 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.08); display: flex; overflow: hidden; }
+.left-panel { flex: 1.3; padding: 50px 60px; display: flex; flex-direction: column; border-right: 1px solid var(--glass-border); background: rgba(255,255,255,0.3); }
+.header h1 { font-size: 30px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.5px; }
+.header p { font-size: 15px; color: var(--text-muted); margin-bottom: 40px; }
+.matrix-container { flex: 1; display: flex; align-items: center; justify-content: center; position: relative; }
+.grid-wrapper { position: relative; transform: rotateX(12deg) rotateY(-12deg); transform-style: preserve-3d; margin-left: 20px; margin-bottom: 20px; }
+.axis-x { position: absolute; bottom: -25px; left: -5px; width: calc(100% + 40px); height: 3px; background: rgba(0,0,0,0.15); display: flex; justify-content: space-evenly; align-items: flex-start; z-index: 0; border-radius: 2px; }
+.axis-x::after { content: ''; position: absolute; right: -10px; top: -5px; border: 6px solid transparent; border-left-color: rgba(0,0,0,0.15); }
+.axis-x .tick { width: 3px; height: 10px; background: rgba(0,0,0,0.15); border-radius: 2px; }
+.axis-y { position: absolute; left: -25px; bottom: -5px; height: calc(100% + 40px); width: 3px; background: rgba(0,0,0,0.15); display: flex; flex-direction: column-reverse; justify-content: space-evenly; align-items: flex-end; z-index: 0; border-radius: 2px; }
+.axis-y::after { content: ''; position: absolute; top: -10px; left: -5px; border: 6px solid transparent; border-bottom-color: rgba(0,0,0,0.15); }
+.axis-y .tick { height: 3px; width: 10px; background: rgba(0,0,0,0.15); border-radius: 2px; }
+.axis-label { position: absolute; font-size: 13px; font-weight: 700; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; }
+.y-axis-label { left: -60px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+.x-axis-label { bottom: -60px; left: 50%; transform: translateX(-50%); }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 16px; width: 380px; height: 380px; position: relative; z-index: 10; }
+.cell { background: rgba(255,255,255,0.7); border: 1px solid rgba(0,0,0,0.06); border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); position: relative; box-shadow: 0 4px 12px rgba(0,0,0,0.02); padding: 12px 8px; }
+.cell:hover { transform: translateZ(12px) scale(1.04); background: rgba(255,255,255,0.95); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
+.cell.active { transform: translateZ(24px) scale(1.08); z-index: 20; border: 2px solid transparent; }
+.cell.sync.active { background: #f0f7ff; border-color: var(--accent-blue); box-shadow: 0 15px 35px rgba(0,102,204,0.25); }
+.cell.warn.active { background: #fff8f0; border-color: var(--accent-orange); box-shadow: 0 15px 35px rgba(255,149,0,0.25); }
+.cell.error.active { background: #fff0f0; border-color: var(--accent-red); box-shadow: 0 15px 35px rgba(255,59,48,0.25); }
+.cell-title { font-size: 14px; font-weight: 700; margin-bottom: 5px; pointer-events: none; text-align: center; line-height: 1.3; }
+.cell-coord { font-size: 10px; color: var(--text-muted); pointer-events: none; font-weight: 500; }
+.controls { display: flex; gap: 30px; margin-top: 30px; }
+.control-group { flex: 1; }
+.control-label { font-size: 14px; font-weight: 700; margin-bottom: 12px; color: #333; }
+.stepper { display: flex; background: rgba(0,0,0,0.06); border-radius: 14px; padding: 5px; position: relative; }
+.step-btn { flex: 1; text-align: center; padding: 10px 0; font-size: 13px; cursor: pointer; color: var(--text-muted); z-index: 2; font-weight: 600; transition: color 0.3s; }
+.step-btn.active { color: var(--text-main); }
+.step-slider { position: absolute; top: 5px; bottom: 5px; width: calc(33.33% - 3.3px); background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); z-index: 1; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+.right-panel { flex: 1; padding: 40px; display: flex; align-items: center; justify-content: center; background: rgba(230, 235, 240, 0.3); position: relative; }
+.info-card { width: 100%; max-width: 540px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(50px); -webkit-backdrop-filter: blur(50px); border: 1px solid rgba(255,255,255,0.8); border-radius: 36px; padding: 50px 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.08), inset 0 2px 0 rgba(255,255,255,1); position: relative; overflow: hidden; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.status-badge { display: inline-block; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-bottom: 24px; letter-spacing: 0.5px; text-transform: uppercase; }
+.badge-sync { background: rgba(0,102,204,0.1); color: var(--accent-blue); }
+.badge-warn { background: rgba(255,149,0,0.1); color: var(--accent-orange); }
+.badge-error { background: rgba(255,59,48,0.1); color: var(--accent-red); }
+.info-content { animation: cardPop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.info-content h2 { font-size: 28px; font-weight: 800; margin-bottom: 20px; color: var(--text-main); letter-spacing: -0.5px; }
+.coord-hint { font-size: 14px; color: var(--accent-blue); font-weight: 600; margin-bottom: 24px; display: inline-block; padding-bottom: 10px; border-bottom: 2px solid rgba(0,102,204,0.1); }
+.info-content p, .info-content li { font-size: 16px; line-height: 1.7; color: #333; margin-bottom: 16px; font-weight: 400; }
+.info-content strong { font-weight: 700; color: #000; }
+.conclusion-box { margin-top: 30px; padding: 20px; background: rgba(0,0,0,0.03); border-radius: 16px; font-size: 14px; font-weight: 500; color: #444; border-left: 4px solid var(--text-muted); }
+@keyframes cardPop {
+0% { opacity: 0; transform: translateY(20px) scale(0.98); }
+100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+</style>
+</head>
+<body>
+<div class="dashboard">
+<div class="left-panel">
+<div class="header">
+<h1 id="ui-title"></h1>
+<p id="ui-subtitle"></p>
+</div>
+<div class="matrix-container">
+<div class="grid-wrapper">
+<div class="axis-x">
+<div class="tick"></div><div class="tick"></div><div class="tick"></div> </div>
+<div class="axis-y">
+<div class="tick"></div><div class="tick"></div><div class="tick"></div>
+</div>
+<div class="axis-label y-axis-label" id="ui-y-label"></div>
+<div class="axis-label x-axis-label" id="ui-x-label"></div>
+<div class="grid" id="matrix-grid"></div>
+</div>
+</div>
+<div class="controls">
+<div class="control-group">
+<div class="control-label" id="ui-x-control-label"></div>
+<div class="stepper" id="x-stepper">
+<div class="step-slider" id="x-slider"></div>
+</div>
+</div>
+<div class="control-group">
+<div class="control-label" id="ui-y-control-label"></div>
+<div class="stepper" id="y-stepper">
+<div class="step-slider" id="y-slider"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="right-panel">
+<div class="info-card" id="info-card">
+<div id="info-display" class="info-content"></div>
+</div>
+</div>
+</div>
+<script>
+const sandboxConfig = {
+global: {
+title: "信息化·数字化·智能化 演进矩阵",
+subtitle: "技术演进 × 工作价值：失衡就撕裂",
+conclusion: ""
+},
+xAxis: {
+name: "AI技术成熟度",
+levels: ["信息化", "数字化", "智能化"]
+},
+yAxis: {
+name: "工作价值层级",
+levels: ["低价值重复", "高价值重复", "高价值非重复"]
+},
+cells: {
+"0,0": {
+type: "sync",
+title: "纸质替代",
+badgeText: "基础适配",
+content: "<p>把纸质台账换成Excel，把手写登记换成系统录入。<strong>信息从纸张搬进了计算机，可复制、可搜索、可传输。</strong>这是信息化的原点——不是转型，是翻译。工作本身没有变化，只是介质变了。危险在于：把这种「翻译」当成「数字化转型」，然后停在这里。<strong>「买了系统就是转型」是信息化最大的认知陷阱。</strong>"
+},
+"1,0": {
+type: "warn",
+title: "效率的牢笼",
+badgeText: "轻度错位",
+content: "<p>系统开始量化工作流程，但工作内容还是机械重复。<strong>SOP被系统固化，人变成流程的执行节点。</strong>数据驱动了效率，但效率服务于谁？系统比人更清楚每一步该怎么做，人只需要「配合」就好。<strong>人在服务系统，不是系统放大人。</strong>当优化结果以KPI形式反馈给人，人就成了被优化的变量，而不是优化本身的主体。"
+},
+"2,0": {
+type: "error",
+title: "工具的错付",
+badgeText: "极度撕裂",
+content: "<p>AI已经能预测未来，但被用来做「帮我把这1000条数据分类」。<strong>用GPT-4做简单加法运算，用神经网络做二分类——智能化反而降低效率。</strong>原文的警告正在发生：能耗成本高于价值产出。最讽刺的现实场景：最强大的AI工具，被用来做最低效的机械劳动。<strong>人在AI旁边继续填Excel——这是AI落地最普遍的真实场景。</strong>"
+},
+"0,1": {
+type: "warn",
+title: "经验的孤岛",
+badgeText: "能力超前",
+content: "<p>人在做需要专业知识和高价值判断的工作，但工具停留在信息记录层面。<strong>老员工靠「手感」做决策，系统只能记录结果，无法捕捉「为什么」。</strong>经验困在人的脑子里，流不到系统里。数据孤岛让组织决策质量取决于「谁在会议室里」，而不是「什么数据最准确」。<strong>工作需要判断，但工具只支持记录</strong>——这是一个人被工具拖住的典型状态。"
+},
+"1,1": {
+type: "sync",
+title: "飞轮启动",
+badgeText: "同步跃迁",
+content: "<p>数据开始<strong>反向驱动业务</strong>——不是记录发生了什么，而是预测接下来会发生什么，并主动调整。<strong>人有专业知识，系统有精准数据，人机协同形成增强回路。</strong>每一次决策有数据支撑，每一次错误被快速验证和纠正。原文描述的状态：<strong>数字化把人的专业能力从「经验」升级为「可验证的科学」。</strong>这是数字化真正发挥作用的区间，也是大部分企业数字化转型应该到达的位置。"
+},
+"2,1": {
+type: "warn",
+title: "空转焦虑",
+badgeText: "角色滞后",
+content: "<p>AI的预测能力已经超越人类专家，但人的角色定位没有更新。<strong>系统给出推荐，人负责执行——执行者不理解推荐逻辑，AI不理解执行场景。</strong>Context层记住了用户特征，但人没有被告知如何利用这些特征做更高层次的判断。原文的洞察：<strong>人从「问题的解决者」变成「问题的定义者」——但这个转变还没发生，人还在用解决者的姿态应对定义者的任务。</strong>"
+},
+"0,2": {
+type: "error",
+title: "创新的原始社会",
+badgeText: "工具缺配",
+content: "<p>最有创造力的人在用最原始的工具协作。<strong>邮件、文档、会议纪要——创新过程没法被记录、没法被追踪、没法被快速迭代。</strong>探索性工作需要的是「快速实验+即时反馈」，但信息化只能记录结果。真正需要AI的人，拿不到AI的入场券。<strong>工作需要「预测」，工具只支持「记录」——这是高价值工作最容易被忽视的错配。</strong>"
+},
+"1,2": {
+type: "warn",
+title: "创新被流程化",
+badgeText: "量化异化",
+content: "<p>数字化让创新可见、可测量，但当探索性工作被拆解成KPI，<strong>创造性压力就变成了表演性压力</strong>。数据驱动决策是对的，但前提是数据质量足够高——颗粒度够细、噪音够低。如果数据颗粒度太粗，数字化的精准反而放大错误判断的代价。<strong>组织有了数字孪生，但创新者仍在问：「这个模型真的反映了现实吗？」——模型的精确不等于现实的准确。</strong>"
+},
+"2,2": {
+type: "sync",
+title: "认知拓展",
+badgeText: "最佳状态",
+content: "<p>AI不是工具，是<strong>思维伙伴</strong>；人不执行指令，是<strong>定义问题和评判结果</strong>。<strong>人可以同时思考更多变量，尝试更多路径，评估更多可能性——这是原文所说的「认知带宽的拓展」。</strong>系统能够预判（Prediction），人负责定义什么是值得预测的。这一状态的标志：<strong>人提出的问题质量，决定了AI产出价值的质量</strong>。原文的终极愿景：技术演进让人可以专注在「不可计算」的事物上——艺术、伦理、直觉、创造。AI负责拓展认知边界，人负责守护那个边界内的意义。"
+}
+}
+};
+
+let currentX = 0;
+let currentY = 0;
+
+function initSandbox() {
+document.getElementById('ui-title').innerText = sandboxConfig.global.title;
+document.getElementById('ui-subtitle').innerText = sandboxConfig.global.subtitle;
+document.getElementById('ui-x-label').innerText = sandboxConfig.xAxis.name;
+document.getElementById('ui-y-label').innerText = sandboxConfig.yAxis.name;
+document.getElementById('ui-x-control-label').innerText = "调节 " + sandboxConfig.xAxis.name;
+document.getElementById('ui-y-control-label').innerText = "调节 " + sandboxConfig.yAxis.name;
+
+const xStepper = document.getElementById('x-stepper');
+const yStepper = document.getElementById('y-stepper');
+
+sandboxConfig.xAxis.levels.forEach((lvl, i) => {
+const btn = document.createElement('div');
+btn.className = 'step-btn';
+btn.innerText = lvl;
+btn.onclick = () => setAxis('x', i);
+xStepper.appendChild(btn);
+});
+
+sandboxConfig.yAxis.levels.forEach((lvl, i) => {
+const btn = document.createElement('div');
+btn.className = 'step-btn';
+btn.innerText = lvl;
+btn.onclick = () => setAxis('y', i);
+yStepper.appendChild(btn);
+});
+
+const grid = document.getElementById('matrix-grid');
+for(let y = 2; y >= 0; y--) {
+for(let x = 0; x <= 2; x++) {
+const cellData = sandboxConfig.cells[`${x},${y}`];
+const cell = document.createElement('div');
+cell.className = `cell ${cellData.type}`;
+cell.dataset.x = x;
+cell.dataset.y = y;
+cell.innerHTML = `<div class="cell-title">${cellData.title}</div><div class="cell-coord">(${sandboxConfig.xAxis.levels[x].slice(0,2)}, ${sandboxConfig.yAxis.levels[y].slice(0,2)})</div>`;
+cell.onclick = () => setAxis(null, null, x, y);
+grid.appendChild(cell);
+}
+}
+updateUI();
+}
+
+function setAxis(axis, val, setX = null, setY = null) {
+if (axis === 'x') currentX = val;
+if (axis === 'y') currentY = val;
+if (setX !== null) currentX = setX;
+if (setY !== null) currentY = setY;
+updateUI();
+}
+
+function updateUI() {
+document.getElementById('x-slider').style.transform = `translateX(${currentX * 100}%)`;
+document.getElementById('y-slider').style.transform = `translateX(${currentY * 100}%)`;
+document.querySelectorAll('#x-stepper .step-btn').forEach((btn, i) => btn.classList.toggle('active', i === currentX));
+document.querySelectorAll('#y-stepper .step-btn').forEach((btn, i) => btn.classList.toggle('active', i === currentY));
+document.querySelectorAll('.cell').forEach(cell => {
+cell.classList.toggle('active', parseInt(cell.dataset.x) === currentX && parseInt(cell.dataset.y) === currentY);
+});
+
+const data = sandboxConfig.cells[`${currentX},${currentY}`];
+const display = document.getElementById('info-display');
+display.style.animation = 'none';
+display.offsetHeight;
+let badgeClass = data.type === 'sync' ? 'badge-sync' : (data.type === 'warn' ? 'badge-warn' : 'badge-error');
+display.innerHTML = `
+<span class="status-badge ${badgeClass}">${data.badgeText}</span>
+<h2>${data.title}</h2>
+<div class="coord-hint">X轴：${sandboxConfig.xAxis.levels[currentX]} ｜ Y轴：${sandboxConfig.yAxis.levels[currentY]}</div>
+${data.content}
+`;
+display.style.animation = 'cardPop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+}
+
+window.onload = initSandbox;
+</script>
+</body>
+</html>
