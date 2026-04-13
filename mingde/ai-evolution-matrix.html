@@ -52,13 +52,10 @@ body { background-color: var(--bg-color); color: var(--text-main); height: 100vh
 .info-content { animation: cardPop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 .info-content h2 { font-size: 28px; font-weight: 800; margin-bottom: 20px; color: var(--text-main); letter-spacing: -0.5px;}
 .coord-hint { font-size: 14px; color: var(--accent-blue); font-weight: 600; margin-bottom: 24px; display: inline-block; padding-bottom: 10px; border-bottom: 2px solid rgba(0,102,204,0.1); }
-.info-content p, .info-content li { font-size: 16px; line-height: 1.7; color: #333; margin-bottom: 16px; font-weight: 400;}
+.info-content p { font-size: 16px; line-height: 1.7; color: #333; margin-bottom: 16px; font-weight: 400;}
 .info-content strong { font-weight: 700; color: #000; }
 .conclusion-box { margin-top: 30px; padding: 20px; background: rgba(0,0,0,0.03); border-radius: 16px; font-size: 14px; font-weight: 500; color: #444; border-left: 4px solid var(--accent-red);}
-@keyframes cardPop {
-0% { opacity: 0; transform: translateY(20px) scale(0.98); }
-100% { opacity: 1; transform: translateY(0) scale(1); }
-}
+@keyframes cardPop { 0% { opacity: 0; transform: translateY(20px) scale(0.98); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
 </style>
 </head>
 <body>
@@ -106,12 +103,12 @@ body { background-color: var(--bg-color); color: var(--text-main); height: 100vh
 const sandboxConfig = {
 global: {
 title: "智能时代认知地图",
-subtitle: "从"知识搬运工"到"灵魂建筑师"的惊险跃迁",
+subtitle: "从「知识搬运工」到「灵魂建筑师」的惊险跃迁",
 conclusion: "技术的潮水正在无情淹没底层价值。尽早将机械工作外包给AI，在纵轴全力向上攀登，去做不可量化的、充满人性光辉的高价值工作，是避免被时代撕裂的唯一破局之道。"
 },
 xAxis: { name: "技术浪潮", levels: ["信息化阶段", "数字化阶段", "智能化阶段"] },
 yAxis: { name: "价值阶梯", levels: ["机械重复执行", "结构化分析", "创新与情感价值"] },
-cells: {"0,0": {"type": "sync", "title": "传统搬运", "badgeText": "时代平缓期", "content": "<p><strong>现象：</strong>工具仅仅是物理世界的屏幕复刻。老师拿着Word教案和PPT讲课，批改着几百份同质化的选择题。</p><p><strong>状态：</strong>处于过去的舒适区。虽然表面安稳运转，但在即将爆发的智能浪潮面前，毫无抵抗力。</p>"}, "1,0": {"type": "warn", "title": "效率枷锁", "badgeText": "轻度错位", "content": "<p><strong>现象：</strong>上了教务系统、排课系统、阅卷系统，但老师变成了系统的执行节点，数据采了一大堆却从没改善过一堂课。</p><p><strong>状态：</strong>数字化空转——有数据，无洞察；有系统，无反馈。</p>"}, "2,0": {"type": "error", "title": "工具错配", "badgeText": "极度撕裂", "content": "<p><strong>现象：</strong>最强大的AI工具，被用来做最低效的机械工作——一键生成PPT、自动出题、批量批改选择题。</p><p><strong>状态：</strong>机器在教书，人在配合机器。智能化的危险不是取代人，而是让人产生依赖并丧失对教学本质的感知。</p>"}, "0,1": {"type": "warn", "title": "巧妇难为", "badgeText": "工具掣肘", "content": "<p><strong>现象：</strong>你具备拆解大纲、结构化分析考点的优秀能力，但受限于落后的信息化基建，数据无法流动和复用。</p><p><strong>状态：</strong>缺乏量化数据支撑，只能依靠人工比对过往试卷，大量脑力在低效工具中被内耗。</p>"}, "1,1": {"type": "sync", "title": "教学飞轮", "badgeText": "同步跃迁", "content": "<p><strong>现象：</strong>数据开始反向驱动教学决策——系统告诉你李明不是不够努力，而是「空间几何」这个知识点上连环丢分。</p><p><strong>状态：</strong>直觉依然在，但现在有数据支撑。机器是仪表盘，人是手握方向盘的司机。</p>"}, "2,1": {"type": "warn", "title": "角色迷失", "badgeText": "角色滞后", "content": "<p><strong>现象：</strong>AI已经能诊断每个学生的学习状态、生成个性化路径——但老师还在负责「讲完这节课」和「批完这份作业」。</p><p><strong>状态：</strong>老师在用「演员」的方式扮演「规划者」的角色，但脚本是AI写的。角色错位，焦虑就来了。</p>"}, "0,2": {"type": "error", "title": "空中楼阁", "badgeText": "极度匮乏", "content": "<p><strong>现象：</strong>拥有极高的教育情怀和创新视角，渴望关注每个孩子的情感诉求，但完全没有底层数据和先进工具的支撑。</p><p><strong>状态：</strong>空有「灵魂建筑师」的想法，却只能靠直觉和肉身死磕，极度疲惫且成果无法规模化。</p>"}, "1,2": {"type": "warn", "title": "创新表演化", "badgeText": "指标异化", "content": "<p><strong>现象：</strong>教学创新可见、可测量——但被拆解成KPI：论文数量、课题数量、赛课获奖次数。</p><p><strong>状态：</strong>创造性压力变成了表演性压力。精确 ≠ 有效，量化 ≠ 质量。</p>"}, "2,2": {"type": "sync", "title": "认知跃迁", "badgeText": "最佳状态", "content": "<p><strong>现象：</strong>AI拓展认知边界，老师守护成长的意义。机器处理可量化的，人处理不可量化的。</p><p><strong>状态：</strong>从「知识的搬运工」到「灵魂的建筑师」——你的价值不再是告诉学生「是什么」，而是激发他们「想知道为什么」。</p>"}}
+cells: {"0,0": {"type": "sync", "title": "传统搬运", "badgeText": "时代平缓期", "content": "<p><strong>现象：</strong>工具仅仅是物理世界的屏幕复刻。老师拿着Word教案和PPT讲课，批改着几百份同质化的选择题。</p><p><strong>状态：</strong>处于过去的舒适区。虽然表面安稳运转，但在即将爆发的智能浪潮面前，毫无抵抗力。</p>"}, "1,0": {"type": "warn", "title": "数据困局", "badgeText": "被动留痕", "content": "<p><strong>现象：</strong>学校强推数字化系统，但老师仍停留在机械执行层面，曾经灵活的教学被生硬地强加了数据考核。</p><p><strong>状态：</strong>个人能力没跟上系统，反而被各种打卡、留痕、线上填表所困，悲哀地沦为系统的「做表机器」。</p>"}, "2,0": {"type": "error", "title": "降维淘汰", "badgeText": "极度撕裂", "content": "<p><strong>现象：</strong>AI已具备全息多语种讲解和自主学习纠错能力，而你仍在做着纯人工背诵和机械打分。</p><p><strong>状态：</strong>核心竞争力被无情秒杀。你引以为傲的熟练度，在智能体面前毫无胜算，直接处于被清退的断崖边缘。</p>"}, "0,1": {"type": "warn", "title": "巧妇难为", "badgeText": "工具掣肘", "content": "<p><strong>现象：</strong>你具备拆解大纲、结构化分析考点的优秀能力，但受限于落后的信息化基建，数据无法流动和复用。</p><p><strong>状态：</strong>缺乏量化数据支撑，只能依靠人工比对过往试卷，大量脑力在低效工具中被内耗。</p>"}, "1,1": {"type": "sync", "title": "数据驱动", "badgeText": "人机协同", "content": "<p><strong>现象：</strong>利用数据重构教学流程。你通过平台数据精准洞察到某位同学在「空间几何」上的薄弱点。</p><p><strong>状态：</strong>数字成为了洞察真相的像素。系统负责把问题量化摊开，你负责结合结构化思维制定对策，达成平稳的人机协同运作。</p>"}, "2,1": {"type": "warn", "title": "路径依赖", "badgeText": "存在危机", "content": "<p><strong>现象：</strong>你还在熬夜制定中规中矩的期末复习计划，结果发现大模型用3秒生成的方案比你严密十倍。</p><p><strong>状态：</strong>智能化工具向上溢出，逐渐侵蚀结构化分析的壁垒。如果只停留在这个层级，会产生强烈的存在危机与系统依赖症。</p>"}, "0,2": {"type": "error", "title": "空中楼阁", "badgeText": "极度匮乏", "content": "<p><strong>现象：</strong>拥有极高的教育情怀和创新视角，渴望关注每个孩子的情感诉求，但完全没有底层数据和先进工具的支撑。</p><p><strong>状态：</strong>空有「灵魂建筑师」的想法，却只能靠直觉和肉身死磕，极度疲惫且成果无法规模化。</p>"}, "1,2": {"type": "warn", "title": "孤岛洞察", "badgeText": "分身乏术", "content": "<p><strong>现象：</strong>能用数字化仪表盘发现深层问题，也想开展个性化干预，但缺乏系统自主进化的辅助机制。</p><p><strong>状态：</strong>虽然诊断方向正确，但面对海量学生的差异化诉求，必须全靠人工思考对策，工作量爆炸，有心无力。</p>"}, "2,2": {"type": "sync", "title": "灵魂建筑师", "badgeText": "完美跃迁", "content": "<p><strong>现象：</strong>系统不仅诊断问题，还主动提供个性化练习方案和沟通话术建议。你只需做最后的策略微调与情感倾注。</p><p><strong>状态：</strong>完成惊险跃迁。机器处理可量化的，你处理不可量化的。聚焦于激发好奇、共情陪伴，成为无法被替代的超级名师。</p>"}}
 };
 let currentX = 0; let currentY = 0;
 function initSandbox() {
