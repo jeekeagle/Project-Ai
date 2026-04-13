@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>信息化·数字化·智能化 演进矩阵</title>
+<title>教育信息化演进矩阵</title>
 <style>
 :root {
 --bg-color: #f5f5f7; --text-main: #1d1d1f; --text-muted: #86868b;
@@ -11,10 +11,10 @@
 --glass-bg: rgba(255, 255, 255, 0.7); --glass-border: rgba(255, 255, 255, 0.5);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif; }
-body { background-color: var(--bg-color); color: var(--text-main); height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background-image: radial-gradient(circle at 20% 20%, #e0eaf5 0%, transparent 40%), radial-gradient(circle at 80% 80%, #fdf2f4 0%, transparent 40%); }
+body { background-color: var(--bg-color); color: var(--text-main); height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background-image: radial-gradient(circle at 20% 20%, #e8f0fe 0%, transparent 40%), radial-gradient(circle at 80% 80%, #fef9f0 0%, transparent 40%); }
 .dashboard { width: 94vw; max-width: 1600px; height: 94vh; background: var(--glass-bg); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); border: 1px solid var(--glass-border); border-radius: 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.08); display: flex; overflow: hidden; }
 .left-panel { flex: 1.3; padding: 50px 50px; display: flex; flex-direction: column; border-right: 1px solid var(--glass-border); background: rgba(255,255,255,0.3); }
-.header h1 { font-size: 34px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.5px; }
+.header h1 { font-size: 34px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px; }
 .header p { font-size: 17px; color: var(--text-muted); margin-bottom: 40px; }
 .matrix-container { flex: 1; display: flex; align-items: center; justify-content: center; position: relative; }
 .grid-wrapper { position: relative; transform: rotateX(10deg) rotateY(-10deg); transform-style: preserve-3d; margin-left: 30px; margin-bottom: 30px; }
@@ -38,23 +38,23 @@ body { background-color: var(--bg-color); color: var(--text-main); height: 100vh
 .cell-coord { font-size: 14px; color: var(--text-muted); pointer-events: none; font-weight: 500; }
 .controls { display: flex; gap: 30px; margin-top: 30px; }
 .control-group { flex: 1; }
-.control-label { font-size: 16px; font-weight: 700; margin-bottom: 12px; color: #333; }
+.control-label { font-size: 14px; font-weight: 700; margin-bottom: 12px; color: #333; }
 .stepper { display: flex; background: rgba(0,0,0,0.06); border-radius: 14px; padding: 5px; position: relative; }
-.step-btn { flex: 1; text-align: center; padding: 10px 0; font-size: 15px; cursor: pointer; color: var(--text-muted); z-index: 2; font-weight: 600; transition: color 0.3s; }
+.step-btn { flex: 1; text-align: center; padding: 10px 0; font-size: 13px; cursor: pointer; color: var(--text-muted); z-index: 2; font-weight: 600; transition: color 0.3s; }
 .step-btn.active { color: var(--text-main); }
 .step-slider { position: absolute; top: 5px; bottom: 5px; width: calc(33.33% - 3.3px); background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); z-index: 1; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-.right-panel { flex: 1; padding: 40px; display: flex; align-items: center; justify-content: center; background: rgba(230, 235, 240, 0.3); position: relative; }
+.right-panel { flex: 1; padding: 52px 48px; display: flex; align-items: center; justify-content: center; background: rgba(230, 235, 240, 0.3); position: relative; }
 .info-card { width: 100%; max-width: 540px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(50px); -webkit-backdrop-filter: blur(50px); border: 1px solid rgba(255,255,255,0.8); border-radius: 36px; padding: 52px 48px; box-shadow: 0 40px 80px rgba(0,0,0,0.08), inset 0 2px 0 rgba(255,255,255,1); position: relative; overflow: hidden; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
 .status-badge { display: inline-block; padding: 8px 18px; border-radius: 20px; font-size: 15px; font-weight: 700; margin-bottom: 20px; letter-spacing: 0.5px; text-transform: uppercase; border-top-width: 3px; border-top-style: solid; border-radius: 4px 16px 16px 4px; }
-.badge-sync { background: rgba(0,102,204,0.1); color: var(--accent-blue); border-top: 3px solid #0066cc; }
-.badge-warn { background: rgba(255,149,0,0.1); color: var(--accent-orange); border-top: 3px solid #ff9500; }
-.badge-error { background: rgba(255,59,48,0.1); color: var(--accent-red); border-top: 3px solid #ff3b30; }
+.badge-sync { background: rgba(0,102,204,0.1); color: var(--accent-blue); border-top-color: #0066cc; }
+.badge-warn { background: rgba(255,149,0,0.1); color: var(--accent-orange); border-top-color: #ff9500; }
+.badge-error { background: rgba(255,59,48,0.1); color: var(--accent-red); border-top-color: #ff3b30; }
 .info-content { animation: cardPop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 .info-content h2 { font-size: 30px; font-weight: 800; margin-bottom: 24px; color: var(--text-main); letter-spacing: -0.5px; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,0.06); }
 .coord-hint { font-size: 15px; color: #86868b; font-weight: 500; margin-bottom: 22px; display: flex; align-items: center; gap: 8px; }
 .info-content p { font-size: 17px; line-height: 1.85; color: #2a2a2a; margin-bottom: 14px; font-weight: 400; border-left: 3px solid rgba(0,102,204,0.2); padding-left: 14px; }
 .info-content strong { font-weight: 700; color: #0066cc; }
-.conclusion-box { margin-top: 28px; padding: 18px 20px; background: rgba(0,0,0,0.03); border-radius: 12px; font-size: 15px; font-weight: 500; color: #555; border-left: 4px solid var(--accent-blue); background: rgba(0,102,204,0.04); }
+.conclusion-box { margin-top: 28px; padding: 18px 20px; background: rgba(0,102,204,0.04); border-radius: 12px; font-size: 15px; font-weight: 500; color: #555; border-left: 4px solid var(--accent-blue); }
 @keyframes cardPop {
 0% { opacity: 0; transform: translateY(20px) scale(0.98); }
 100% { opacity: 1; transform: translateY(0) scale(1); }
@@ -104,72 +104,72 @@ body { background-color: var(--bg-color); color: var(--text-main); height: 100vh
 <script>
 const sandboxConfig = {
 global: {
-title: "信息化·数字化·智能化 演进矩阵",
-subtitle: "技术演进 × 工作价值：失衡就撕裂",
+title: "教育信息化演进矩阵",
+subtitle: "技术演进 × 教学价值：你的学校走到哪一步？",
 conclusion: ""
 },
 xAxis: {
-name: "AI技术成熟度",
+name: "技术成熟度",
 levels: ["信息化", "数字化", "智能化"]
 },
 yAxis: {
-name: "工作价值层级",
-levels: ["低价值重复", "高价值重复", "高价值非重复"]
+name: "教学价值层级",
+levels: ["机械性教学", "专家性教学", "创新性教学"]
 },
 cells: {
 "0,0": {
 type: "sync",
-title: "纸质替代",
+title: "电子化替代",
 badgeText: "基础适配",
-content: "<p>把纸质台账换成Excel，把手写登记换成系统录入。<strong>信息从纸张搬进了计算机，可复制、可搜索、可传输。</strong>这是信息化的原点——不是转型，是翻译。工作本身没有变化，只是介质变了。危险在于：把这种「翻译」当成「数字化转型」，然后停在这里。<strong>「买了系统就是转型」是信息化最大的认知陷阱。</strong>"
+content: "<p>把纸质教案换成Word，把成绩册换成Excel，把公告栏换成微信群。</p><p>信息从纸张<strong>搬进了屏幕</strong>——可复制、可搜索、可转发。</p><p>教学记录变得规范，但教学方式没有变化。</p><p style="color:#86868b;font-size:15px;margin-top:8px;">危险陷阱：把「买了电子设备」当成「教育数字化转型」，然后停在这里。</p>"
 },
 "1,0": {
 type: "warn",
-title: "效率的牢笼",
+title: "效率的枷锁",
 badgeText: "轻度错位",
-content: "<p>系统开始量化工作流程，但工作内容还是机械重复。<strong>SOP被系统固化，人变成流程的执行节点。</strong>数据驱动了效率，但效率服务于谁？系统比人更清楚每一步该怎么做，人只需要「配合」就好。<strong>人在服务系统，不是系统放大人。</strong>当优化结果以KPI形式反馈给人，人就成了被优化的变量，而不是优化本身的主体。"
+content: "<p>学校上了教务系统、排课系统、阅卷系统，但课堂还是「老师讲、学生听」。</p><p>系统量化了教学流程，教师变成流程的执行节点——<strong>人在配合系统，不是系统服务人</strong>。</p><p>每个老师都在填表、录成绩、上传资料，但<strong>这些数据有没有反馈到课堂上？</strong></p><p style="color:#86868b;font-size:15px;margin-top:8px;">危险：数据采了一大堆，却从没被用来改善一堂课。</p>"
 },
 "2,0": {
 type: "error",
-title: "工具的错付",
+title: "工具的错配",
 badgeText: "极度撕裂",
-content: "<p>AI已经能预测未来，但被用来做「帮我把这1000条数据分类」。<strong>用GPT-4做简单加法运算，用神经网络做二分类——智能化反而降低效率。</strong>原文的警告正在发生：能耗成本高于价值产出。最讽刺的现实场景：最强大的AI工具，被用来做最低效的机械劳动。<strong>人在AI旁边继续填Excel——这是AI落地最普遍的真实场景。</strong>"
+content: "<p>AI已经能生成课件、自动批改作文、预测学生成绩——却被大量用来<strong>做「一键生成PPT」和「自动生成课后习题」</strong>。</p><p>用最强大的智能工具做最机械的工作，<strong>智能化为的不是学生，是减轻行政负担</strong>。</p><p style="color:#ff3b30;font-size:15px;margin-top:8px;font-weight:600;">最讽刺：AI批改作业，老师只负责「确认」——机器在教书，人在配合机器。</p>"
 },
 "0,1": {
 type: "warn",
 title: "经验的孤岛",
 badgeText: "能力超前",
-content: "<p>人在做需要专业知识和高价值判断的工作，但工具停留在信息记录层面。<strong>老员工靠「手感」做决策，系统只能记录结果，无法捕捉「为什么」。</strong>经验困在人的脑子里，流不到系统里。数据孤岛让组织决策质量取决于「谁在会议室里」，而不是「什么数据最准确」。<strong>工作需要判断，但工具只支持记录</strong>——这是一个人被工具拖住的典型状态。"
+content: "<p>资深老师在用「教学手感」做高价值判断——哪些学生需要关注、课堂节奏怎么调——但这些经验只存在于老师的脑子里。</p><p>系统只能记录「上课了没」和「交作业了没」，<strong>无法捕捉「为什么这节课效果不好」</strong>。</p><p style="color:#86868b;font-size:15px;margin-top:8px;">核心矛盾：教学需要判断，但系统只记录行为。</p>"
 },
 "1,1": {
 type: "sync",
-title: "飞轮启动",
+title: "教学飞轮",
 badgeText: "同步跃迁",
-content: "<p>数据开始<strong>反向驱动业务</strong>——不是记录发生了什么，而是预测接下来会发生什么，并主动调整。<strong>人有专业知识，系统有精准数据，人机协同形成增强回路。</strong>每一次决策有数据支撑，每一次错误被快速验证和纠正。原文描述的状态：<strong>数字化把人的专业能力从「经验」升级为「可验证的科学」。</strong>这是数字化真正发挥作用的区间，也是大部分企业数字化转型应该到达的位置。"
+content: "<p>学习数据开始<strong>反向驱动教学决策</strong>——不是记录学生做了什么，而是预测谁可能会掉队，并主动调整教学策略。</p><p>教师有学科专业知识，平台有精准的学习数据，<strong>人机协同形成「数据感知—诊断—干预」的增强回路</strong>。</p><p>数字化把教师的「经验」升级为「<strong>可循证的教学实践</strong>」，每一次教学决策都有数据支撑。</p>"
 },
 "2,1": {
 type: "warn",
-title: "空转焦虑",
+title: "角色迷失",
 badgeText: "角色滞后",
-content: "<p>AI的预测能力已经超越人类专家，但人的角色定位没有更新。<strong>系统给出推荐，人负责执行——执行者不理解推荐逻辑，AI不理解执行场景。</strong>Context层记住了用户特征，但人没有被告知如何利用这些特征做更高层次的判断。原文的洞察：<strong>人从「问题的解决者」变成「问题的定义者」——但这个转变还没发生，人还在用解决者的姿态应对定义者的任务。</strong>"
+content: "<p>AI已经能诊断每个学生的学习状态、生成个性化学习路径，但老师还在负责「讲课」和「批作业」。</p><p>系统给出学习推荐，学生跟着走——<strong>老师不知道推荐背后的逻辑，AI不理解课堂的真实情境</strong>。</p><p>老师在用「演员」的方式扮演「规划者」的角色，但脚本是AI写的。</p><p style="color:#86868b;font-size:15px;margin-top:8px;">本质：教师角色从「知识传授者」到「学习规划者」的转变还没有发生。</p>"
 },
 "0,2": {
 type: "error",
-title: "创新的原始社会",
+title: "创新的荒漠",
 badgeText: "工具缺配",
-content: "<p>最有创造力的人在用最原始的工具协作。<strong>邮件、文档、会议纪要——创新过程没法被记录、没法被追踪、没法被快速迭代。</strong>探索性工作需要的是「快速实验+即时反馈」，但信息化只能记录结果。真正需要AI的人，拿不到AI的入场券。<strong>工作需要「预测」，工具只支持「记录」——这是高价值工作最容易被忽视的错配。</strong>"
+content: "<p>最有创造力的老师在做最需要创新的工作——课程设计、教学实验、跨学科项目——却只配备了最原始的工具。</p><p>教案用Word写，项目成果用PPT展示，学习过程没法被追踪和量化。</p><p style="color:#ff3b30;font-size:15px;margin-top:8px;font-weight:600;">真正需要智能化工具来支撑教学创新的老师，拿不到智能化工具的入场券。</p>"
 },
 "1,2": {
 type: "warn",
-title: "创新被流程化",
-badgeText: "量化异化",
-content: "<p>数字化让创新可见、可测量，但当探索性工作被拆解成KPI，<strong>创造性压力就变成了表演性压力</strong>。数据驱动决策是对的，但前提是数据质量足够高——颗粒度够细、噪音够低。如果数据颗粒度太粗，数字化的精准反而放大错误判断的代价。<strong>组织有了数字孪生，但创新者仍在问：「这个模型真的反映了现实吗？」——模型的精确不等于现实的准确。</strong>"
+title: "创新被量化",
+badgeText: "指标异化",
+content: "<p>数字化让教学创新可见、可测量，但当探索性教学被拆解成KPI——发表论文数量、课题数量、赛课获奖次数——<strong>创造性教学压力变成了表演性科研压力</strong>。</p><p>学校有了数据看板，但教学创新者仍在问：「这个数字<strong>真的反映我的教学效果吗？</strong>」</p><p style="color:#86868b;font-size:15px;margin-top:8px;">精确 ≠ 有效，量化 ≠ 质量。</p>"
 },
 "2,2": {
 type: "sync",
-title: "认知拓展",
+title: "因材施教",
 badgeText: "最佳状态",
-content: "<p>AI不是工具，是<strong>思维伙伴</strong>；人不执行指令，是<strong>定义问题和评判结果</strong>。<strong>人可以同时思考更多变量，尝试更多路径，评估更多可能性——这是原文所说的「认知带宽的拓展」。</strong>系统能够预判（Prediction），人负责定义什么是值得预测的。这一状态的标志：<strong>人提出的问题质量，决定了AI产出价值的质量</strong>。原文的终极愿景：技术演进让人可以专注在「不可计算」的事物上——艺术、伦理、直觉、创造。AI负责拓展认知边界，人负责守护那个边界内的意义。"
+content: "<p><strong>AI不是替代老师，是放大老师</strong>——系统负责规模化诊断和路径规划，老师负责定义「什么是好的学习」和「每个学生需要什么」。</p><p>AI感知每个学生的知识状态，自动生成适配的学习内容；老师从「统一授课」中解放出来，专注在<strong>思辨、陪伴、价值塑造</strong>这些只有人才能做的事。</p><p>这是教育的终极愿景：<strong>技术负责规模化，人负责温度。</strong></p><p style="color:#0066cc;font-size:15px;margin-top:8px;font-weight:600;">好的教育：AI拓展认知边界，老师守护成长的意义。</p>"
 }
 }
 };
@@ -245,7 +245,7 @@ let badgeClass = data.type === 'sync' ? 'badge-sync' : (data.type === 'warn' ? '
 display.innerHTML = `
 <span class="status-badge ${badgeClass}">${data.badgeText}</span>
 <h2>${data.title}</h2>
-<div class="coord-hint">X轴：${sandboxConfig.xAxis.levels[currentX]} ｜ Y轴：${sandboxConfig.yAxis.levels[currentY]}</div>
+<div class="coord-hint">技术：${sandboxConfig.xAxis.levels[currentX]} &nbsp;·&nbsp; 教学：${sandboxConfig.yAxis.levels[currentY]}</div>
 ${data.content}
 `;
 display.style.animation = 'cardPop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards';
