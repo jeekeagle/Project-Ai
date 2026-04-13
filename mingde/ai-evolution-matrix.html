@@ -131,7 +131,7 @@ for(let y = 2; y >= 0; y--) {
 for(let x = 0; x <= 2; x++) {
 const cellData = sandboxConfig.cells[`${x},${y}`];
 const cell = document.createElement('div'); cell.className = `cell ${cellData.type}`; cell.dataset.x = x; cell.dataset.y = y;
-cell.innerHTML = `<div class="cell-title">${cellData.title}</div><div class="cell-coord">(${sandboxConfig.xAxis.levels[x].slice(0,2)}, ${sandboxConfig.yAxis.levels[y].slice(0,2)})</div>`;
+cell.innerHTML = `<div class="cell-title">${cellData.title}</div><div class="cell-coord">(${sandboxConfig.xAxis.levels[x].slice(0,3)}, ${sandboxConfig.yAxis.levels[y].slice(0,3)})</div>`;
 cell.onclick = () => setAxis(null, null, x, y); grid.appendChild(cell);
 }
 } updateUI();
