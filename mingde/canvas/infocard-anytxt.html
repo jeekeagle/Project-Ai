@@ -1,475 +1,187 @@
-&lt;!DOCTYPE html&gt;
-&lt;html lang="zh-CN"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;AnyTxt Searcher 鈥?宸ュ叿浠嬬粛鍗?/title&gt;
-  &lt;link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"&gt;
-  &lt;style&gt;
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnyTxt Searcher 鈥� 宸ュ叿浠嬬粛鍗�</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --bg: #f7f7fa;
-      --card-bg: #ffffff;
-      --text-primary: #1a1a1a;
-      --text-secondary: #555555;
-      --text-muted: #999999;
-      --accent: #7c3aed;
-      --accent-light: #ede9fe;
-      --accent-dark: #5b21b6;
-      --border: #e5e7eb;
-      --shadow: 0 4px 24px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
-      --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.09), 0 2px 6px rgba(0, 0, 0, 0.04);
+      --bg: #f7f7fa; --card-bg: #ffffff; --text-primary: #1a1a1a;
+      --text-secondary: #555555; --text-muted: #999999; --accent: #7c3aed;
+      --accent-light: #ede9fe; --accent-dark: #5b21b6; --border: #e5e7eb;
+      --shadow: 0 4px 24px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-hover: 0 8px 32px rgba(0,0,0,0.09), 0 2px 6px rgba(0,0,0,0.04);
       --radius: 12px;
     }
-
-    .topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
-    .topbar a{font-size:.82rem;color:var(--accent);text-decoration:none;font-weight:600;letter-spacing:.02em}
-    .topbar a:hover{text-decoration:underline}
-    body{padding-top:56px}
     body {
-
-      font-family: 'Noto Serif SC', 'Source Han Serif CN', Georgia, serif;
-      background: var(--bg);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      color: var(--text-primary);
-      line-height: 1.6;
+      font-family: 'Noto Serif SC', Georgia, serif;
+      background: var(--bg); min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px 20px; color: var(--text-primary); line-height: 1.6;
     }
-
     .card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      max-width: 680px;
-      width: 100%;
-      padding: 44px 48px;
-      position: relative;
-      transition: box-shadow 0.3s ease;
+      background: var(--card-bg); border-radius: var(--radius);
+      box-shadow: var(--shadow); max-width: 680px; width: 100%;
+      padding: 44px 48px; position: relative; transition: box-shadow 0.3s ease;
     }
-
-    .card:hover {
-      box-shadow: var(--shadow-hover);
-    }
-
-    /* Bottom-left decorative accent */
+    .card:hover { box-shadow: var(--shadow-hover); }
     .card::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 100px;
-      height: 100px;
+      content: ''; position: absolute; bottom: 0; right: 0; width: 100px; height: 100px;
       background: linear-gradient(315deg, var(--accent-light) 0%, transparent 70%);
-      border-radius: 0 0 var(--radius) 0;
-      opacity: 0.6;
+      border-radius: 0 0 var(--radius) 0; opacity: 0.6;
     }
-
-    /* Header */
-    .header {
-      margin-bottom: 30px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-
+    .header { margin-bottom: 30px; padding-bottom: 24px; border-bottom: 1px solid var(--border); position: relative; }
     .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      font-weight: 500;
-      color: var(--accent);
-      background: var(--accent-light);
-      padding: 3px 10px;
-      border-radius: 4px;
-      letter-spacing: 0.8px;
-      margin-bottom: 12px;
-      text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;
+      color: var(--accent); background: var(--accent-light); padding: 3px 10px;
+      border-radius: 4px; letter-spacing: 0.8px; margin-bottom: 12px; text-transform: uppercase;
     }
-
-    .tag svg {
-      width: 10px;
-      height: 10px;
-      stroke: var(--accent);
-      stroke-width: 2;
-      fill: none;
-    }
-
-    .title {
-      font-size: 25px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-      letter-spacing: -0.2px;
-    }
-
-    .subtitle {
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
-
-    /* Section title */
+    .tag svg { width: 10px; height: 10px; stroke: var(--accent); stroke-width: 2; fill: none; }
+    .title { font-size: 25px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.2px; }
+    .subtitle { font-size: 14px; color: var(--text-secondary); }
     .section-title {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 11px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
     }
-
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* 5 Feature tags in a row */
-    .feature-tags {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-    }
-
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .feature-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
     .feature-tag {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      background: #fafafa;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      flex: 1;
-      min-width: 130px;
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px; background: #fafafa; border-radius: 8px;
+      border: 1px solid var(--border); flex: 1; min-width: 130px;
     }
-
     .feature-tag-icon {
-      width: 28px;
-      height: 28px;
-      background: var(--accent);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      width: 28px; height: 28px; background: var(--accent); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-
-    .feature-tag-icon svg {
-      width: 14px;
-      height: 14px;
-      stroke: white;
-      stroke-width: 2;
-      fill: none;
-    }
-
-    .feature-tag-text {
-      font-size: 12px;
-      color: var(--text-primary);
-      font-weight: 600;
-    }
-
-    /* Format coverage pills */
-    .formats {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-    }
-
+    .feature-tag-icon svg { width: 14px; height: 14px; stroke: white; stroke-width: 2; fill: none; }
+    .feature-tag-text { font-size: 12px; color: var(--text-primary); font-weight: 600; }
+    .formats { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 28px; }
     .format-pill {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: var(--accent-dark);
-      background: var(--accent-light);
-      padding: 3px 10px;
-      border-radius: 12px;
-      border: 1px solid #ddd6fe;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px;
+      color: var(--accent-dark); background: var(--accent-light);
+      padding: 3px 10px; border-radius: 12px; border: 1px solid #ddd6fe;
     }
-
-    /* Compare + Workflow */
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 28px;
-    }
-
-    /* Compare panel */
-    .compare {
-      padding: 18px;
-      background: #fafafa;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-    }
-
-    .compare-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 10px 0;
-    }
-
-    .compare-row + .compare-row {
-      border-top: 1px solid var(--border);
-    }
-
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
+    .compare { padding: 18px; background: #fafafa; border-radius: 10px; border: 1px solid var(--border); }
+    .compare-row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; }
+    .compare-row + .compare-row { border-top: 1px solid var(--border); }
     .compare-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      font-weight: 500;
-      padding: 3px 8px;
-      border-radius: 4px;
-      flex-shrink: 0;
-      min-width: 64px;
-      text-align: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500;
+      padding: 3px 8px; border-radius: 4px; flex-shrink: 0; min-width: 64px; text-align: center;
     }
-
-    .label-listary {
-      background: #e0f7fa;
-      color: #0891b2;
-    }
-
-    .label-anytxt {
-      background: var(--accent-light);
-      color: var(--accent-dark);
-    }
-
-    .compare-text {
-      font-size: 12px;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    /* Setup steps */
-    .steps {
-      padding: 18px;
-      background: #fafafa;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-    }
-
-    .step {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 7px 0;
-    }
-
-    .step + .step {
-      border-top: 1px solid var(--border);
-    }
-
+    .label-listary { background: #e0f7fa; color: #0891b2; }
+    .label-anytxt { background: var(--accent-light); color: var(--accent-dark); }
+    .compare-text { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+    .steps { padding: 18px; background: #fafafa; border-radius: 10px; border: 1px solid var(--border); }
+    .step { display: flex; align-items: center; gap: 10px; padding: 7px 0; }
+    .step + .step { border-top: 1px solid var(--border); }
     .step-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      font-weight: 500;
-      color: white;
-      background: var(--accent);
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;
+      color: white; background: var(--accent); width: 20px; height: 20px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-
-    .step-text {
-      font-size: 12px;
-      color: var(--text-primary);
-    }
-
-    /* Scenarios */
-    .scenarios {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 28px;
-    }
-
-    .scenario {
-      font-size: 12px;
-      color: var(--text-secondary);
-      background: #f5f5f5;
-      border: 1px solid var(--border);
-      padding: 5px 12px;
-      border-radius: 16px;
-    }
-
-    /* Footer */
-    .footer {
-      padding-top: 18px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-left {
-      font-size: 11px;
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .footer-right {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .dot {
-      width: 5px;
-      height: 5px;
-      background: #22c55e;
-      border-radius: 50%;
-      animation: pulse 2.5s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    /* Responsive */
+    .step-text { font-size: 12px; }
+    .scenarios { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+    .scenario { font-size: 12px; color: var(--text-secondary); background: #f5f5f5; border: 1px solid var(--border); padding: 5px 12px; border-radius: 16px; }
+    .footer { padding-top: 18px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .footer-left { font-size: 11px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+    .footer-right { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-muted); }
+    .dot { width: 5px; height: 5px; background: #22c55e; border-radius: 50%; animation: pulse 2.5s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     @media (max-width: 600px) {
-      .card {
-        padding: 30px 26px;
-      }
-      .two-col {
-        grid-template-columns: 1fr;
-      }
-      .title {
-        font-size: 22px;
-      }
+      .card { padding: 30px 26px; }
+      .two-col { grid-template-columns: 1fr; }
+      .title { font-size: 22px; }
     }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;div class="topbar"&gt;&lt;a href="../index.html"&gt;&#8592; 返回主页&lt;/a&gt;&lt;/div&gt;
+ 
+ .topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,0.08);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
+ .topbar a{font-size:.82rem;color:#7c3aed;text-decoration:none;font-weight:600;letter-spacing:.02em}
+ .topbar a:hover{text-decoration:underline}
+ body{padding-top:56px}
 
-  &lt;div class="card"&gt;
-    &lt;header class="header"&gt;
-      &lt;span class="tag"&gt;
-        &lt;svg viewBox="0 0 24 24"&gt;&lt;path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/&gt;&lt;polyline points="14,2 14,8 20,8"/&gt;&lt;line x1="16" y1="13" x2="8" y2="13"/&gt;&lt;line x1="16" y1="17" x2="8" y2="17"/&gt;&lt;polyline points="10,9 9,9 8,9"/&gt;&lt;/svg&gt;
+</style>
+</head>
+<body>
+<div class="topbar"><a href="../index.html">&#8592; 返回主页</a></div>
+  <div class="card">
+    <header class="header">
+      <span class="tag">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
         Full-Text Search
-      &lt;/span&gt;
-      &lt;h1 class="title"&gt;AnyTxt Searcher&lt;/h1&gt;
-      &lt;p class="subtitle"&gt;鎼滄枃妗ｅ唴瀹?路 涓嶄粎鏄枃浠跺悕 路 姣绾у叏鏂囧畾浣?/p&gt;
-    &lt;/header&gt;
-
-    &lt;!-- Feature Tags --&gt;
-    &lt;h2 class="section-title"&gt;鏍稿績鑳藉姏&lt;/h2&gt;
-    &lt;div class="feature-tags"&gt;
-      &lt;div class="feature-tag"&gt;
-        &lt;div class="feature-tag-icon"&gt;
-          &lt;svg viewBox="0 0 24 24"&gt;&lt;circle cx="11" cy="11" r="8"/&gt;&lt;line x1="21" y1="21" x2="16.65" y2="16.65"/&gt;&lt;/svg&gt;
-        &lt;/div&gt;
-        &lt;span class="feature-tag-text"&gt;鍏ㄦ枃妫€绱?/span&gt;
-      &lt;/div&gt;
-      &lt;div class="feature-tag"&gt;
-        &lt;div class="feature-tag-icon"&gt;
-          &lt;svg viewBox="0 0 24 24"&gt;&lt;polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/&gt;&lt;/svg&gt;
-        &lt;/div&gt;
-        &lt;span class="feature-tag-text"&gt;姣鍝嶅簲&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class="feature-tag"&gt;
-        &lt;div class="feature-tag-icon"&gt;
-          &lt;svg viewBox="0 0 24 24"&gt;&lt;rect x="3" y="3" width="18" height="18" rx="2"/&gt;&lt;path d="M3 9h18M9 21V9"/&gt;&lt;/svg&gt;
-        &lt;/div&gt;
-        &lt;span class="feature-tag-text"&gt;瀹炴椂棰勮&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class="feature-tag"&gt;
-        &lt;div class="feature-tag-icon"&gt;
-          &lt;svg viewBox="0 0 24 24"&gt;&lt;circle cx="12" cy="12" r="10"/&gt;&lt;line x1="8" y1="12" x2="16" y2="12"/&gt;&lt;/svg&gt;
-        &lt;/div&gt;
-        &lt;span class="feature-tag-text"&gt;甯冨皵閫昏緫&lt;/span&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Format pills --&gt;
-    &lt;div class="formats"&gt;
-      &lt;span class="format-pill"&gt;Word&lt;/span&gt;
-      &lt;span class="format-pill"&gt;Excel&lt;/span&gt;
-      &lt;span class="format-pill"&gt;PPT&lt;/span&gt;
-      &lt;span class="format-pill"&gt;PDF&lt;/span&gt;
-      &lt;span class="format-pill"&gt;WPS&lt;/span&gt;
-      &lt;span class="format-pill"&gt;TXT&lt;/span&gt;
-      &lt;span class="format-pill"&gt;HTML&lt;/span&gt;
-      &lt;span class="format-pill"&gt;Python&lt;/span&gt;
-      &lt;span class="format-pill"&gt;JS&lt;/span&gt;
-      &lt;span class="format-pill"&gt;Outlook&lt;/span&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Compare + Setup --&gt;
-    &lt;div class="two-col"&gt;
-      &lt;div&gt;
-        &lt;h2 class="section-title"&gt;涓?Listary 鐨勫垎宸?/h2&gt;
-        &lt;div class="compare"&gt;
-          &lt;div class="compare-row"&gt;
-            &lt;span class="compare-label label-listary"&gt;Listary&lt;/span&gt;
-            &lt;span class="compare-text"&gt;鎵?鏂囦欢鍚?&lt;br&gt;蹇€熻烦杞€佸惎鍔ㄨ蒋浠?/span&gt;
-          &lt;/div&gt;
-          &lt;div class="compare-row"&gt;
-            &lt;span class="compare-label label-anytxt"&gt;AnyTxt&lt;/span&gt;
-            &lt;span class="compare-text"&gt;鎵?鏂囦欢鍐呭"&lt;br&gt;娴烽噺鏂囨。涓寲鎺樹俊鎭?/span&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;div&gt;
-        &lt;h2 class="section-title"&gt;瀹夎閰嶇疆&lt;/h2&gt;
-        &lt;div class="steps"&gt;
-          &lt;div class="step"&gt;
-            &lt;span class="step-num"&gt;1&lt;/span&gt;
-            &lt;span class="step-text"&gt;涓嬭浇 anytxt.net 鈫?瀹夎鍒?D:\&lt;/span&gt;
-          &lt;/div&gt;
-          &lt;div class="step"&gt;
-            &lt;span class="step-num"&gt;2&lt;/span&gt;
-            &lt;span class="step-text"&gt;棣栨鍚姩閫夋嫨纾佺洏锛岀瓑寰呯储寮曞缓绔?/span&gt;
-          &lt;/div&gt;
-          &lt;div class="step"&gt;
-            &lt;span class="step-num"&gt;3&lt;/span&gt;
-            &lt;span class="step-text"&gt;Language 鈫?Chinese 鍒囨崲涓枃&lt;/span&gt;
-          &lt;/div&gt;
-          &lt;div class="step"&gt;
-            &lt;span class="step-num"&gt;4&lt;/span&gt;
-            &lt;span class="step-text"&gt;璁剧疆 鈫?寮€鏈鸿嚜鍚姩&lt;/span&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Scenarios --&gt;
-    &lt;div class="scenarios"&gt;
-      &lt;span class="scenario"&gt;馃搫 璁烘枃姒傚康瀹氫綅&lt;/span&gt;
-      &lt;span class="scenario"&gt;馃摑 璇曢搴撳叧閿瘝鏌ユ壘&lt;/span&gt;
-      &lt;span class="scenario"&gt;馃搵 鏃ф暀妗堝唴瀹瑰鐢?/span&gt;
-      &lt;span class="scenario"&gt;琛ㄦ牸瀛︾敓鍚嶅崟鎼滅储&lt;/span&gt;
-    &lt;/div&gt;
-
-    &lt;footer class="footer"&gt;
-      &lt;span class="footer-left"&gt;anytxt.net 路 Windows&lt;/span&gt;
-      &lt;div class="footer-right"&gt;
-        &lt;span class="dot"&gt;&lt;/span&gt;
-        绱㈠紩甯搁┗
-      &lt;/div&gt;
-    &lt;/footer&gt;
-  &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+      </span>
+      <h1 class="title">AnyTxt Searcher</h1>
+      <p class="subtitle">鎼滄枃妗ｅ唴瀹� 路 涓嶄粎鏄�鏂囦欢鍚� 路 姣�绉掔骇鍏ㄦ枃瀹氫綅</p>
+    </header>
+    <h2 class="section-title">鏍稿績鑳藉姏</h2>
+    <div class="feature-tags">
+      <div class="feature-tag">
+        <div class="feature-tag-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <span class="feature-tag-text">鍏ㄦ枃妫�绱�</span>
+      </div>
+      <div class="feature-tag">
+        <div class="feature-tag-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <span class="feature-tag-text">姣�绉掑搷搴�</span>
+      </div>
+      <div class="feature-tag">
+        <div class="feature-tag-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <span class="feature-tag-text">瀹炴椂棰勮��</span>
+      </div>
+      <div class="feature-tag">
+        <div class="feature-tag-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
+        <span class="feature-tag-text">甯冨皵閫昏緫</span>
+      </div>
+    </div>
+    <div class="formats">
+      <span class="format-pill">Word</span>
+      <span class="format-pill">Excel</span>
+      <span class="format-pill">PPT</span>
+      <span class="format-pill">PDF</span>
+      <span class="format-pill">WPS</span>
+      <span class="format-pill">TXT</span>
+      <span class="format-pill">HTML</span>
+      <span class="format-pill">Python</span>
+      <span class="format-pill">JS</span>
+      <span class="format-pill">Outlook</span>
+    </div>
+    <div class="two-col">
+      <div>
+        <h2 class="section-title">涓� Listary 鐨勫垎宸�</h2>
+        <div class="compare">
+          <div class="compare-row">
+            <span class="compare-label label-listary">Listary</span>
+            <span class="compare-text">鎵�"鏂囦欢鍚�"<br>蹇�閫熻烦杞�銆佸惎鍔ㄨ蒋浠�</span>
+          </div>
+          <div class="compare-row">
+            <span class="compare-label label-anytxt">AnyTxt</span>
+            <span class="compare-text">鎵�"鏂囦欢鍐呭��"<br>娴烽噺鏂囨。涓�鎸栨帢淇℃伅</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2 class="section-title">瀹夎�呴厤缃�</h2>
+        <div class="steps">
+          <div class="step"><span class="step-num">1</span><span class="step-text">涓嬭浇 anytxt.net 鈫� 瀹夎�呭埌 D:\</span></div>
+          <div class="step"><span class="step-num">2</span><span class="step-text">棣栨�″惎鍔ㄩ�夋嫨纾佺洏锛岀瓑寰呯储寮曞缓绔�</span></div>
+          <div class="step"><span class="step-num">3</span><span class="step-text">Language 鈫� Chinese 鍒囨崲涓�鏂�</span></div>
+          <div class="step"><span class="step-num">4</span><span class="step-text">璁剧疆 鈫� 寮�鏈鸿嚜鍚�鍔�</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="scenarios">
+      <span class="scenario">馃搫 璁烘枃姒傚康瀹氫綅</span>
+      <span class="scenario">馃摑 璇曢�樺簱鍏抽敭璇嶆煡鎵�</span>
+      <span class="scenario">馃搵 鏃ф暀妗堝唴瀹瑰�嶇敤</span>
+      <span class="scenario">琛ㄦ牸瀛︾敓鍚嶅崟鎼滅储</span>
+    </div>
+    <footer class="footer">
+      <span class="footer-left">anytxt.net 路 Windows</span>
+      <div class="footer-right"><span class="dot"></span>绱㈠紩甯搁┗</div>
+    </footer>
+  </div>
+</body>
+</html>

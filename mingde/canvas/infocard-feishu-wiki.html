@@ -1,500 +1,191 @@
-&lt;!DOCTYPE html&gt;
-&lt;html lang="zh-CN"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;椋炰功鐭ヨ瘑搴?鈥?宸ュ叿浠嬬粛鍗?/title&gt;
-  &lt;link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"&gt;
-  &lt;style&gt;
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>椋炰功鐭ヨ瘑搴� 鈥� 宸ュ叿浠嬬粛鍗�</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --bg: #f0f2f8;
-      --card-bg: #ffffff;
-      --text-primary: #1a1a1a;
-      --text-secondary: #555555;
-      --text-muted: #999999;
-      --accent: #3370ff;
-      --accent-light: #e6eeff;
-      --accent-dark: #1d4ed8;
-      --border: #e5e7eb;
-      --shadow: 0 4px 24px rgba(51, 112, 255, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
-      --shadow-hover: 0 8px 32px rgba(51, 112, 255, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+      --bg: #f0f2f8; --card-bg: #ffffff; --text-primary: #1a1a1a;
+      --text-secondary: #555555; --text-muted: #999999; --accent: #3370ff;
+      --accent-light: #e6eeff; --accent-dark: #1d4ed8; --border: #e5e7eb;
+      --shadow: 0 4px 24px rgba(51,112,255,0.08), 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-hover: 0 8px 32px rgba(51,112,255,0.12), 0 2px 6px rgba(0,0,0,0.04);
       --radius: 12px;
     }
-
-    .topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
-    .topbar a{font-size:.82rem;color:var(--accent);text-decoration:none;font-weight:600;letter-spacing:.02em}
-    .topbar a:hover{text-decoration:underline}
-    body{padding-top:56px}
     body {
-
-      font-family: 'Noto Serif SC', 'Source Han Serif CN', Georgia, serif;
-      background: var(--bg);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      color: var(--text-primary);
-      line-height: 1.6;
+      font-family: 'Noto Serif SC', Georgia, serif;
+      background: var(--bg); min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px 20px; color: var(--text-primary); line-height: 1.6;
     }
-
     .card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      max-width: 680px;
-      width: 100%;
-      padding: 44px 48px;
-      position: relative;
-      transition: box-shadow 0.3s ease;
+      background: var(--card-bg); border-radius: var(--radius);
+      box-shadow: var(--shadow); max-width: 680px; width: 100%;
+      padding: 44px 48px; position: relative; transition: box-shadow 0.3s ease;
     }
-
-    .card:hover {
-      box-shadow: var(--shadow-hover);
-    }
-
-    /* Top-left decorative accent */
+    .card:hover { box-shadow: var(--shadow-hover); }
     .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100px;
-      height: 100px;
+      content: ''; position: absolute; top: 0; left: 0; width: 100px; height: 100px;
       background: linear-gradient(135deg, var(--accent-light) 0%, transparent 70%);
-      border-radius: var(--radius) 0 0 0;
-      opacity: 0.7;
+      border-radius: var(--radius) 0 0 0; opacity: 0.7;
     }
-
-    /* Header */
-    .header {
-      margin-bottom: 30px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-
+    .header { margin-bottom: 30px; padding-bottom: 24px; border-bottom: 1px solid var(--border); position: relative; }
     .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      font-weight: 500;
-      color: var(--accent);
-      background: var(--accent-light);
-      padding: 3px 10px;
-      border-radius: 4px;
-      letter-spacing: 0.8px;
-      margin-bottom: 12px;
-      text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;
+      color: var(--accent); background: var(--accent-light); padding: 3px 10px;
+      border-radius: 4px; letter-spacing: 0.8px; margin-bottom: 12px; text-transform: uppercase;
     }
-
-    .tag svg {
-      width: 10px;
-      height: 10px;
-      stroke: var(--accent);
-      stroke-width: 2;
-      fill: none;
-    }
-
-    .title {
-      font-size: 25px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-      letter-spacing: -0.2px;
-    }
-
-    .subtitle {
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
-
-    /* Section title */
+    .tag svg { width: 10px; height: 10px; stroke: var(--accent); stroke-width: 2; fill: none; }
+    .title { font-size: 25px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.2px; }
+    .subtitle { font-size: 14px; color: var(--text-secondary); }
     .section-title {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 11px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
     }
-
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* Feature grid 2x2 */
-    .features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 28px;
-    }
-
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
     .feature {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 14px 16px;
-      background: #fafafa;
-      border-radius: 10px;
-      border: 1px solid var(--border);
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px; background: #fafafa; border-radius: 10px; border: 1px solid var(--border);
     }
-
     .feature-icon {
-      width: 32px;
-      height: 32px;
-      background: var(--accent);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      width: 32px; height: 32px; background: var(--accent); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-
-    .feature-icon svg {
-      width: 16px;
-      height: 16px;
-      stroke: white;
-      stroke-width: 2;
-      fill: none;
+    .feature-icon svg { width: 16px; height: 16px; stroke: white; stroke-width: 2; fill: none; }
+    .feature-body { flex: 1; }
+    .feature-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .feature-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
+    .workflow-bar {
+      display: flex; align-items: center; gap: 0;
+      margin-bottom: 28px; padding: 14px 18px;
+      background: #fafafa; border-radius: 10px; border: 1px solid var(--border);
     }
-
-    .feature-body {
-      flex: 1;
-    }
-
-    .feature-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 2px;
-    }
-
-    .feature-desc {
-      font-size: 12px;
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-
-    /* Workflow + Tips */
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 28px;
-    }
-
-    .steps {
-      padding: 18px;
-      background: #fafafa;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-    }
-
-    .step {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 7px 0;
-    }
-
-    .step + .step {
-      border-top: 1px solid var(--border);
-    }
-
+    .workflow-item { flex: 1; text-align: center; font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+    .workflow-arrow { font-size: 14px; color: var(--accent); flex-shrink: 0; padding: 0 8px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
+    .steps { padding: 18px; background: #fafafa; border-radius: 10px; border: 1px solid var(--border); }
+    .step { display: flex; align-items: center; gap: 10px; padding: 7px 0; }
+    .step + .step { border-top: 1px solid var(--border); }
     .step-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      font-weight: 500;
-      color: white;
-      background: var(--accent);
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;
+      color: white; background: var(--accent); width: 20px; height: 20px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-
-    .step-text {
-      font-size: 12px;
-      color: var(--text-primary);
-    }
-
-    /* Tips panel */
+    .step-text { font-size: 12px; }
     .tips {
       padding: 18px;
       background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-      border-radius: 10px;
-      border: 1px solid #bfdbfe;
+      border-radius: 10px; border: 1px solid #bfdbfe;
     }
-
-    .tips-title {
-      font-size: 11px;
-      font-weight: 600;
-      color: #1e40af;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-    }
-
-    .tip {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .tip:last-child {
-      margin-bottom: 0;
-    }
-
-    .tip-bullet {
-      font-size: 13px;
-      line-height: 1.3;
-      flex-shrink: 0;
-    }
-
-    .tip-text {
-      font-size: 12px;
-      color: #1e3a8a;
-      line-height: 1.5;
-    }
-
-    /* Workflow concept bar */
-    .workflow-bar {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      margin-bottom: 28px;
-      padding: 14px 18px;
-      background: #fafafa;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-    }
-
-    .workflow-item {
-      flex: 1;
-      text-align: center;
-      font-size: 12px;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-
-    .workflow-arrow {
-      font-size: 14px;
-      color: var(--accent);
-      flex-shrink: 0;
-      padding: 0 8px;
-    }
-
-    /* Scenarios */
-    .scenarios {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 28px;
-    }
-
-    .scenario {
-      font-size: 12px;
-      color: var(--text-secondary);
-      background: #f5f5f5;
-      border: 1px solid var(--border);
-      padding: 5px 12px;
-      border-radius: 16px;
-    }
-
-    /* Footer */
-    .footer {
-      padding-top: 18px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-left {
-      font-size: 11px;
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .footer-right {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .dot {
-      width: 5px;
-      height: 5px;
-      background: #22c55e;
-      border-radius: 50%;
-      animation: pulse 2.5s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    /* Responsive */
+    .tips-title { font-size: 11px; font-weight: 600; color: #1e40af; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+    .tip { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+    .tip:last-child { margin-bottom: 0; }
+    .tip-bullet { font-size: 13px; line-height: 1.3; flex-shrink: 0; }
+    .tip-text { font-size: 12px; color: #1e3a8a; line-height: 1.5; }
+    .scenarios { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+    .scenario { font-size: 12px; color: var(--text-secondary); background: #f5f5f5; border: 1px solid var(--border); padding: 5px 12px; border-radius: 16px; }
+    .footer { padding-top: 18px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .footer-left { font-size: 11px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+    .footer-right { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-muted); }
+    .dot { width: 5px; height: 5px; background: #22c55e; border-radius: 50%; animation: pulse 2.5s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     @media (max-width: 600px) {
-      .card {
-        padding: 30px 26px;
-      }
-      .features {
-        grid-template-columns: 1fr;
-      }
-      .two-col {
-        grid-template-columns: 1fr;
-      }
-      .title {
-        font-size: 22px;
-      }
+      .card { padding: 30px 26px; }
+      .features, .two-col { grid-template-columns: 1fr; }
+      .title { font-size: 22px; }
     }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;div class="topbar"&gt;&lt;a href="../index.html"&gt;&#8592; 返回主页&lt;/a&gt;&lt;/div&gt;
+ 
+ .topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,0.08);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
+ .topbar a{font-size:.82rem;color:#7c3aed;text-decoration:none;font-weight:600;letter-spacing:.02em}
+ .topbar a:hover{text-decoration:underline}
+ body{padding-top:56px}
 
-  &lt;div class="card"&gt;
-    &lt;header class="header"&gt;
-      &lt;span class="tag"&gt;
-        &lt;svg viewBox="0 0 24 24"&gt;&lt;path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/&gt;&lt;path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/&gt;&lt;/svg&gt;
+</style>
+</head>
+<body>
+<div class="topbar"><a href="../index.html">&#8592; 返回主页</a></div>
+  <div class="card">
+    <header class="header">
+      <span class="tag">
+        <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
         Knowledge Base
-      &lt;/span&gt;
-      &lt;h1 class="title"&gt;椋炰功鐭ヨ瘑搴?/h1&gt;
-      &lt;p class="subtitle"&gt;鏍戠姸鐭ヨ瘑浣撶郴 路 澶氱淮琛ㄦ牸 路 鍙屽悜閾炬帴 路 绮剧粏鏉冮檺&lt;/p&gt;
-    &lt;/header&gt;
-
-    &lt;!-- 4 Core Features --&gt;
-    &lt;h2 class="section-title"&gt;鏍稿績鑳藉姏&lt;/h2&gt;
-    &lt;div class="features"&gt;
-      &lt;div class="feature"&gt;
-        &lt;div class="feature-icon"&gt;
-          &lt;svg viewBox="0 0 24 24"&gt;&lt;line x1="8" y1="6" x2="21" y2="6"/&gt;&lt;line x1="8" y1="12" x2="21" y2="12"/&gt;&lt;line x1="8" y1="18" x2="21" y2="18"/&gt;&lt;line x1="3" y1="6" x2="3.01" y2="6"/&gt;&lt;line x1="3" y1="12" x2="3.01" y2="12"/&gt;&lt;line x1="3" y1="18" x2="3.01" y2="18"/&gt;&lt;/svg&gt;
-        &lt;/div&gt;
-        &lt;div class="feature-body"&gt;
-          &lt;div class="feature-title"&gt;鏍戠姸鐩綍&lt;/div&gt;
-          &lt;div class="feature-desc"&gt;鎷栨嫿璋冨眰绾?br&gt;涓€鐪肩湅娓呯煡璇嗗叏璨?/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="feature"&gt;
-        &lt;div class="feature-icon"&gt;
-          &lt;svg viewBox="0 0 24 24"&gt;&lt;rect x="3" y="3" width="18" height="18" rx="2"/&gt;&lt;path d="M3 9h18M9 21V9"/&gt;&lt;/svg&gt;
-        &lt;/div&gt;
-        &lt;div class="feature-body"&gt;
-          &lt;div class="feature-title"&gt;澶氱淮琛ㄦ牸&lt;/div&gt;
-          &lt;div class="feature-desc"&gt;璇剧▼杩涘害路瀛︾敓妗ｆ&lt;br&gt;绉戠爺璇鹃绠＄悊&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="feature"&gt;
-        &lt;div class="feature-icon"&gt;
-          &lt;svg viewBox="0 0 24 24"&gt;&lt;path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/&gt;&lt;path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/&gt;&lt;/svg&gt;
-        &lt;/div&gt;
-        &lt;div class="feature-body"&gt;
-          &lt;div class="feature-title"&gt;鍙屽悜閾炬帴&lt;/div&gt;
-          &lt;div class="feature-desc"&gt;@寮曠敤椤甸潰/浠诲姟/浜哄憳&lt;br&gt;淇℃伅浜掕仈鎴愮綉&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="feature"&gt;
-        &lt;div class="feature-icon"&gt;
-          &lt;svg viewBox="0 0 24 24"&gt;&lt;path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/&gt;&lt;/svg&gt;
-        &lt;/div&gt;
-        &lt;div class="feature-body"&gt;
-          &lt;div class="feature-title"&gt;绮剧粏鏉冮檺&lt;/div&gt;
-          &lt;div class="feature-desc"&gt;浠呴槄璇?/ 鍙紪杈?br&gt;/ 绂佹瀵煎嚭&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Workflow concept bar --&gt;
-    &lt;div class="workflow-bar"&gt;
-      &lt;span class="workflow-item"&gt;馃摜 鏀朵欢绠?br&gt;&lt;span style="font-size:11px;color:var(--text-muted)"&gt;涓存椂瀛樻斁&lt;/span&gt;&lt;/span&gt;
-      &lt;span class="workflow-arrow"&gt;鈫?/span&gt;
-      &lt;span class="workflow-item"&gt;馃摎 鐭ヨ瘑搴?br&gt;&lt;span style="font-size:11px;color:var(--text-muted)"&gt;绯荤粺鏁寸悊&lt;/span&gt;&lt;/span&gt;
-      &lt;span class="workflow-arrow"&gt;鈫?/span&gt;
-      &lt;span class="workflow-item"&gt;馃摛 鍒嗕韩&lt;br&gt;&lt;span style="font-size:11px;color:var(--text-muted)"&gt;鏁欏杈撳嚭&lt;/span&gt;&lt;/span&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Start + Tips --&gt;
-    &lt;div class="two-col"&gt;
-      &lt;div&gt;
-        &lt;h2 class="section-title"&gt;蹇€熶笂鎵?/h2&gt;
-        &lt;div class="steps"&gt;
-          &lt;div class="step"&gt;
-            &lt;span class="step-num"&gt;1&lt;/span&gt;
-            &lt;span class="step-text"&gt;椋炰功瀹㈡埛绔?鈫?浜戞枃妗?鈫?鐭ヨ瘑搴?/span&gt;
-          &lt;/div&gt;
-          &lt;div class="step"&gt;
-            &lt;span class="step-num"&gt;2&lt;/span&gt;
-            &lt;span class="step-text"&gt;鐐瑰嚮"鏂板缓" 鈫?鍒涘缓鐭ヨ瘑搴擄紙鍙€夋暀鑲叉ā鏉匡級&lt;/span&gt;
-          &lt;/div&gt;
-          &lt;div class="step"&gt;
-            &lt;span class="step-num"&gt;3&lt;/span&gt;
-            &lt;span class="step-text"&gt;Word / Markdown 涓€閿壒閲忓鍏?/span&gt;
-          &lt;/div&gt;
-          &lt;div class="step"&gt;
-            &lt;span class="step-num"&gt;4&lt;/span&gt;
-            &lt;span class="step-text"&gt;鎵嬫満 App 鎷嶇収鎵弿 鈫?鑷姩璇嗗埆鍏ュ簱&lt;/span&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;div&gt;
-        &lt;h2 class="section-title"&gt;浣跨敤璐村＋&lt;/h2&gt;
-        &lt;div class="tips"&gt;
-          &lt;div class="tip"&gt;
-            &lt;span class="tip-bullet"&gt;馃敆&lt;/span&gt;
-            &lt;span class="tip-text"&gt;杈撳叆 @ 寮曠敤椤甸潰/浠诲姟/浜哄憳锛屾瀯寤虹煡璇嗙綉缁?/span&gt;
-          &lt;/div&gt;
-          &lt;div class="tip"&gt;
-            &lt;span class="tip-bullet"&gt;馃搮&lt;/span&gt;
-            &lt;span class="tip-text"&gt;澶氱淮琛ㄦ牸璁炬埅姝㈡棩鏈?鈫?鏈哄櫒浜鸿嚜鍔ㄦ彁閱?/span&gt;
-          &lt;/div&gt;
-          &lt;div class="tip"&gt;
-            &lt;span class="tip-bullet"&gt;馃彿锔?/span&gt;
-            &lt;span class="tip-text"&gt;棰樺簱鍔犳爣绛撅紙闅惧害/鑰冪偣锛夆啋 鑰冨墠蹇€熺瓫閫?/span&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Scenarios --&gt;
-    &lt;div class="scenarios"&gt;
-      &lt;span class="scenario"&gt;馃摉 涓汉鏁欏鐧剧&lt;/span&gt;
-      &lt;span class="scenario"&gt;馃敩 璇鹃缁勫崗鍚?/span&gt;
-      &lt;span class="scenario"&gt;馃摑 閿欓璧勬簮搴?/span&gt;
-      &lt;span class="scenario"&gt;馃搵 瀛︾敓妗ｆ绠＄悊&lt;/span&gt;
-    &lt;/div&gt;
-
-    &lt;footer class="footer"&gt;
-      &lt;span class="footer-left"&gt;feishu.cn 路 鍐呯疆鍔熻兘&lt;/span&gt;
-      &lt;div class="footer-right"&gt;
-        &lt;span class="dot"&gt;&lt;/span&gt;
-        鍥㈤槦鍏变韩
-      &lt;/div&gt;
-    &lt;/footer&gt;
-  &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+      </span>
+      <h1 class="title">椋炰功鐭ヨ瘑搴�</h1>
+      <p class="subtitle">鏍戠姸鐭ヨ瘑浣撶郴 路 澶氱淮琛ㄦ牸 路 鍙屽悜閾炬帴 路 绮剧粏鏉冮檺</p>
+    </header>
+    <h2 class="section-title">鏍稿績鑳藉姏</h2>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
+        <div class="feature-body">
+          <div class="feature-title">鏍戠姸鐩�褰�</div>
+          <div class="feature-desc">鎷栨嫿璋冨眰绾�<br>涓�鐪肩湅娓呯煡璇嗗叏璨�</div>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <div class="feature-body">
+          <div class="feature-title">澶氱淮琛ㄦ牸</div>
+          <div class="feature-desc">璇剧▼杩涘害路瀛︾敓妗ｆ��<br>绉戠爺璇鹃�樼�＄悊</div>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+        <div class="feature-body">
+          <div class="feature-title">鍙屽悜閾炬帴</div>
+          <div class="feature-desc">@寮曠敤椤甸潰/浠诲姟/浜哄憳<br>淇℃伅浜掕仈鎴愮綉</div>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="feature-body">
+          <div class="feature-title">绮剧粏鏉冮檺</div>
+          <div class="feature-desc">浠呴槄璇� / 鍙�缂栬緫<br>/ 绂佹�㈠�煎嚭</div>
+        </div>
+      </div>
+    </div>
+    <div class="workflow-bar">
+      <span class="workflow-item">馃摜 鏀朵欢绠�<br><span style="font-size:11px;color:var(--text-muted)">涓存椂瀛樻斁</span></span>
+      <span class="workflow-arrow">鈫�</span>
+      <span class="workflow-item">馃摎 鐭ヨ瘑搴�<br><span style="font-size:11px;color:var(--text-muted)">绯荤粺鏁寸悊</span></span>
+      <span class="workflow-arrow">鈫�</span>
+      <span class="workflow-item">馃摛 鍒嗕韩<br><span style="font-size:11px;color:var(--text-muted)">鏁欏�﹁緭鍑�</span></span>
+    </div>
+    <div class="two-col">
+      <div>
+        <h2 class="section-title">蹇�閫熶笂鎵�</h2>
+        <div class="steps">
+          <div class="step"><span class="step-num">1</span><span class="step-text">椋炰功瀹㈡埛绔� 鈫� 浜戞枃妗� 鈫� 鐭ヨ瘑搴�</span></div>
+          <div class="step"><span class="step-num">2</span><span class="step-text">鐐瑰嚮"鏂板缓" 鈫� 鍒涘缓鐭ヨ瘑搴擄紙鍙�閫夋暀鑲叉ā鏉匡級</span></div>
+          <div class="step"><span class="step-num">3</span><span class="step-text">Word / Markdown 涓�閿�鎵归噺瀵煎叆</span></div>
+          <div class="step"><span class="step-num">4</span><span class="step-text">鎵嬫満 App 鎷嶇収鎵�鎻� 鈫� 鑷�鍔ㄨ瘑鍒�鍏ュ簱</span></div>
+        </div>
+      </div>
+      <div>
+        <h2 class="section-title">浣跨敤璐村＋</h2>
+        <div class="tips">
+          <div class="tip"><span class="tip-bullet">馃敆</span><span class="tip-text">杈撳叆 @ 寮曠敤椤甸潰/浠诲姟/浜哄憳锛屾瀯寤虹煡璇嗙綉缁�</span></div>
+          <div class="tip"><span class="tip-bullet">馃搮</span><span class="tip-text">澶氱淮琛ㄦ牸璁炬埅姝㈡棩鏈� 鈫� 鏈哄櫒浜鸿嚜鍔ㄦ彁閱�</span></div>
+          <div class="tip"><span class="tip-bullet">馃彿锔�</span><span class="tip-text">棰樺簱鍔犳爣绛撅紙闅惧害/鑰冪偣锛夆啋 鑰冨墠蹇�閫熺瓫閫�</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="scenarios">
+      <span class="scenario">馃摉 涓�浜烘暀瀛︾櫨绉�</span>
+      <span class="scenario">馃敩 璇鹃�樼粍鍗忓悓</span>
+      <span class="scenario">馃摑 閿欓�樿祫婧愬簱</span>
+      <span class="scenario">馃搵 瀛︾敓妗ｆ�堢�＄悊</span>
+    </div>
+    <footer class="footer">
+      <span class="footer-left">feishu.cn 路 鍐呯疆鍔熻兘</span>
+      <div class="footer-right"><span class="dot"></span>鍥㈤槦鍏变韩</div>
+    </footer>
+  </div>
+</body>
+</html>

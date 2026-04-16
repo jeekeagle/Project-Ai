@@ -1,492 +1,190 @@
-&lt;!DOCTYPE html&gt;
-&lt;html lang="zh-CN"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;Listary 鈥?宸ュ叿浠嬬粛鍗?/title&gt;
-  &lt;link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"&gt;
-  &lt;style&gt;
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listary 鈥� 宸ュ叿浠嬬粛鍗�</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --bg: #f5f7fa;
-      --card-bg: #ffffff;
-      --text-primary: #1a1a1a;
-      --text-secondary: #555555;
-      --text-muted: #999999;
-      --accent: #0891b2;
-      --accent-light: #e0f7fa;
-      --accent-dark: #0e7490;
-      --border: #e5e7eb;
-      --shadow: 0 4px 24px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
-      --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.09), 0 2px 6px rgba(0, 0, 0, 0.04);
+      --bg: #f5f7fa; --card-bg: #ffffff; --text-primary: #1a1a1a;
+      --text-secondary: #555555; --text-muted: #999999; --accent: #0891b2;
+      --accent-light: #e0f7fa; --accent-dark: #0e7490; --border: #e5e7eb;
+      --shadow: 0 4px 24px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-hover: 0 8px 32px rgba(0,0,0,0.09), 0 2px 6px rgba(0,0,0,0.04);
       --radius: 12px;
     }
-
-    .topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
-    .topbar a{font-size:.82rem;color:var(--accent);text-decoration:none;font-weight:600;letter-spacing:.02em}
-    .topbar a:hover{text-decoration:underline}
-    body{padding-top:56px}
     body {
-
-      font-family: 'Noto Serif SC', 'Source Han Serif CN', Georgia, serif;
-      background: var(--bg);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      color: var(--text-primary);
-      line-height: 1.6;
+      font-family: 'Noto Serif SC', Georgia, serif;
+      background: var(--bg); min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px 20px; color: var(--text-primary); line-height: 1.6;
     }
-
     .card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      max-width: 680px;
-      width: 100%;
-      padding: 44px 48px;
-      position: relative;
-      transition: box-shadow 0.3s ease;
+      background: var(--card-bg); border-radius: var(--radius);
+      box-shadow: var(--shadow); max-width: 680px; width: 100%;
+      padding: 44px 48px; position: relative; transition: box-shadow 0.3s ease;
     }
-
-    .card:hover {
-      box-shadow: var(--shadow-hover);
-    }
-
-    /* Top-right decorative accent */
+    .card:hover { box-shadow: var(--shadow-hover); }
     .card::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 80px;
-      height: 80px;
+      content: ''; position: absolute; top: 0; right: 0; width: 80px; height: 80px;
       background: linear-gradient(225deg, var(--accent-light) 0%, transparent 70%);
-      border-radius: 0 var(--radius) 0 0;
-      opacity: 0.7;
+      border-radius: 0 var(--radius) 0 0; opacity: 0.7;
     }
-
-    /* Header */
-    .header {
-      margin-bottom: 30px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-
+    .header { margin-bottom: 30px; padding-bottom: 24px; border-bottom: 1px solid var(--border); position: relative; }
     .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      font-weight: 500;
-      color: var(--accent);
-      background: var(--accent-light);
-      padding: 3px 10px;
-      border-radius: 4px;
-      letter-spacing: 0.8px;
-      margin-bottom: 12px;
-      text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;
+      color: var(--accent); background: var(--accent-light); padding: 3px 10px;
+      border-radius: 4px; letter-spacing: 0.8px; margin-bottom: 12px; text-transform: uppercase;
     }
-
-    .tag svg {
-      width: 10px;
-      height: 10px;
-      stroke: var(--accent);
-      stroke-width: 2;
-      fill: none;
-    }
-
-    .title {
-      font-size: 25px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-      letter-spacing: -0.2px;
-    }
-
-    .subtitle {
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
-
-    /* Section title */
+    .tag svg { width: 10px; height: 10px; stroke: var(--accent); stroke-width: 2; fill: none; }
+    .title { font-size: 25px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.2px; }
+    .subtitle { font-size: 14px; color: var(--text-secondary); }
     .section-title {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 11px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
     }
-
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* 2x2 Feature grid */
-    .features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 28px;
-    }
-
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
     .feature {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 14px 16px;
-      background: #fafafa;
-      border-radius: 10px;
-      border: 1px solid var(--border);
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px; background: #fafafa; border-radius: 10px; border: 1px solid var(--border);
     }
-
     .feature-icon {
-      width: 32px;
-      height: 32px;
-      background: var(--accent);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      width: 32px; height: 32px; background: var(--accent); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-
-    .feature-icon svg {
-      width: 16px;
-      height: 16px;
-      stroke: white;
-      stroke-width: 2;
-      fill: none;
-    }
-
-    .feature-body {
-      flex: 1;
-    }
-
-    .feature-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 2px;
-    }
-
-    .feature-desc {
-      font-size: 12px;
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-
+    .feature-icon svg { width: 16px; height: 16px; stroke: white; stroke-width: 2; fill: none; }
+    .feature-body { flex: 1; }
+    .feature-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .feature-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
     .feature-key {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      background: var(--accent-light);
-      color: var(--accent-dark);
-      padding: 1px 6px;
-      border-radius: 3px;
-      margin-left: 4px;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px;
+      background: var(--accent-light); color: var(--accent-dark);
+      padding: 1px 6px; border-radius: 3px; margin-left: 4px;
     }
-
-    /* Workflow + Advanced */
-    .bottom-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 28px;
-    }
-
-    /* Workflow */
-    .workflow {
-      padding: 18px;
-      background: #fafafa;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-    }
-
-    .step {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 7px 0;
-    }
-
-    .step + .step {
-      border-top: 1px solid var(--border);
-    }
-
+    .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
+    .workflow { padding: 18px; background: #fafafa; border-radius: 10px; border: 1px solid var(--border); }
+    .step { display: flex; align-items: center; gap: 10px; padding: 7px 0; }
+    .step + .step { border-top: 1px solid var(--border); }
     .step-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      font-weight: 500;
-      color: white;
-      background: var(--accent);
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;
+      color: white; background: var(--accent); width: 20px; height: 20px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-
-    .step-text {
-      font-size: 12px;
-      color: var(--text-primary);
-    }
-
-    /* Advanced search panel */
+    .step-text { font-size: 12px; }
     .advanced {
       padding: 18px;
       background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
-      border-radius: 10px;
-      border: 1px solid #a7f3d0;
+      border-radius: 10px; border: 1px solid #a7f3d0;
     }
-
-    .advanced-title {
-      font-size: 11px;
-      font-weight: 600;
-      color: #065f46;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-    }
-
-    .custom-search {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .search-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      color: #065f46;
-    }
-
+    .advanced-title { font-size: 11px; font-weight: 600; color: #065f46; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+    .custom-search { display: flex; flex-direction: column; gap: 6px; }
+    .search-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #065f46; }
     .search-key {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      background: #d1fae5;
-      color: #065f46;
-      padding: 2px 8px;
-      border-radius: 4px;
-      border: 1px solid #6ee7b7;
-      min-width: 40px;
-      text-align: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      background: #d1fae5; color: #065f46; padding: 2px 8px; border-radius: 4px;
+      border: 1px solid #6ee7b7; min-width: 40px; text-align: center;
     }
-
-    .search-example {
-      font-size: 11px;
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    /* Scenarios */
-    .scenarios {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 28px;
-    }
-
-    .scenario {
-      font-size: 12px;
-      color: var(--text-secondary);
-      background: #f5f5f5;
-      border: 1px solid var(--border);
-      padding: 5px 12px;
-      border-radius: 16px;
-    }
-
-    /* Footer */
-    .footer {
-      padding-top: 18px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-left {
-      font-size: 11px;
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .footer-right {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .dot {
-      width: 5px;
-      height: 5px;
-      background: #22c55e;
-      border-radius: 50%;
-      animation: pulse 2.5s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    /* Responsive */
+    .search-example { font-size: 11px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; margin-top: 10px; }
+    .scenarios { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+    .scenario { font-size: 12px; color: var(--text-secondary); background: #f5f5f5; border: 1px solid var(--border); padding: 5px 12px; border-radius: 16px; }
+    .footer { padding-top: 18px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .footer-left { font-size: 11px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+    .footer-right { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-muted); }
+    .dot { width: 5px; height: 5px; background: #22c55e; border-radius: 50%; animation: pulse 2.5s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     @media (max-width: 600px) {
-      .card {
-        padding: 30px 26px;
-      }
-      .features {
-        grid-template-columns: 1fr;
-      }
-      .bottom-grid {
-        grid-template-columns: 1fr;
-      }
-      .title {
-        font-size: 22px;
-      }
+      .card { padding: 30px 26px; }
+      .features, .bottom-grid { grid-template-columns: 1fr; }
+      .title { font-size: 22px; }
     }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;div class="topbar"&gt;&lt;a href="../index.html"&gt;&#8592; 返回主页&lt;/a&gt;&lt;/div&gt;
+ 
+ .topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,0.08);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
+ .topbar a{font-size:.82rem;color:#7c3aed;text-decoration:none;font-weight:600;letter-spacing:.02em}
+ .topbar a:hover{text-decoration:underline}
+ body{padding-top:56px}
 
-  &lt;div class="card"&gt;
-    &lt;header class="header"&gt;
-      &lt;span class="tag"&gt;
-        &lt;svg viewBox="0 0 24 24"&gt;&lt;circle cx="11" cy="11" r="8"/&gt;&lt;line x1="21" y1="21" x2="16.65" y2="16.65"/&gt;&lt;/svg&gt;
+</style>
+</head>
+<body>
+<div class="topbar"><a href="../index.html">&#8592; 返回主页</a></div>
+  <div class="card">
+    <header class="header">
+      <span class="tag">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         File Search
-      &lt;/span&gt;
-      &lt;h1 class="title"&gt;Listary&lt;/h1&gt;
-      &lt;p class="subtitle"&gt;Windows 鏂囦欢绉掓悳 路 瀵硅瘽妗嗗揩鎹疯烦鐩綍 路 鑷畾涔夌綉缁滄悳绱?/p&gt;
-    &lt;/header&gt;
-
-    &lt;!-- 4 Core Features --&gt;
-    &lt;h2 class="section-title"&gt;鏍稿績鍔熻兘&lt;/h2&gt;
-    &lt;div class="features"&gt;
-      &lt;div class="feature"&gt;
-        &lt;div class="feature-icon"&gt;
-          &lt;svg viewBox="0 0 24 24"&gt;&lt;circle cx="11" cy="11" r="8"/&gt;&lt;line x1="21" y1="21" x2="16.65" y2="16.65"/&gt;&lt;/svg&gt;
-        &lt;/div&gt;
-        &lt;div class="feature-body"&gt;
-          &lt;div class="feature-title"&gt;姣鍏ㄧ洏鎼滅储&lt;/div&gt;
-          &lt;div class="feature-desc"&gt;杈撳叆閮ㄥ垎瀛楃鎴栨嫾闊崇缉鍐?br&gt;鍑犲崄涓囨枃浠剁灛闂村畾浣?/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="feature"&gt;
-        &lt;div class="feature-icon"&gt;
-          &lt;svg viewBox="0 0 24 24"&gt;&lt;path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/&gt;&lt;line x1="12" y1="11" x2="12" y2="17"/&gt;&lt;line x1="9" y1="14" x2="15" y2="14"/&gt;&lt;/svg&gt;
-        &lt;/div&gt;
-        &lt;div class="feature-body"&gt;
-          &lt;div class="feature-title"&gt;Quick Switch&lt;span class="feature-key"&gt;Ctrl+G&lt;/span&gt;&lt;/div&gt;
-          &lt;div class="feature-desc"&gt;淇濆瓨/鎵撳紑瀵硅瘽妗嗕腑&lt;br&gt;涓€閿烦杞洰鏍囨枃浠跺す&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="feature"&gt;
-        &lt;div class="feature-icon"&gt;
-          &lt;svg viewBox="0 0 24 24"&gt;&lt;circle cx="12" cy="12" r="10"/&gt;&lt;line x1="12" y1="8" x2="12" y2="12"/&gt;&lt;line x1="12" y1="16" x2="12.01" y2="16"/&gt;&lt;/svg&gt;
-        &lt;/div&gt;
-        &lt;div class="feature-body"&gt;
-          &lt;div class="feature-title"&gt;Actions 鍔ㄤ綔鑿滃崟&lt;/div&gt;
-          &lt;div class="feature-desc"&gt;鍙抽敭鎴?Ctrl+O&lt;br&gt;澶嶅埗璺緞 / 鎵撳紑鎵€鍦ㄦ枃浠跺す&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="feature"&gt;
-        &lt;div class="feature-icon"&gt;
-          &lt;svg viewBox="0 0 24 24"&gt;&lt;circle cx="12" cy="12" r="10"/&gt;&lt;line x1="2" y1="12" x2="22" y2="12"/&gt;&lt;path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/&gt;&lt;/svg&gt;
-        &lt;/div&gt;
-        &lt;div class="feature-body"&gt;
-          &lt;div class="feature-title"&gt;缃戠粶鎼滅储&lt;/div&gt;
-          &lt;div class="feature-desc"&gt;杈撳叆 g + 鍏抽敭璇?br&gt;鐩存帴璋冭捣娴忚鍣?Google&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Workflow + Advanced --&gt;
-    &lt;div class="bottom-grid"&gt;
-      &lt;div&gt;
-        &lt;h2 class="section-title"&gt;瀹夎鍚姩&lt;/h2&gt;
-        &lt;div class="workflow"&gt;
-          &lt;div class="step"&gt;
-            &lt;span class="step-num"&gt;1&lt;/span&gt;
-            &lt;span class="step-text"&gt;涓嬭浇 listary.net 鈫?瀹夎鍒?D:\&lt;/span&gt;
-          &lt;/div&gt;
-          &lt;div class="step"&gt;
-            &lt;span class="step-num"&gt;2&lt;/span&gt;
-            &lt;span class="step-text"&gt;鍏佽纾佺洏绱㈠紩鎵弿锛堝揩閫熸悳绱㈠熀纭€锛?/span&gt;
-          &lt;/div&gt;
-          &lt;div class="step"&gt;
-            &lt;span class="step-num"&gt;3&lt;/span&gt;
-            &lt;span class="step-text"&gt;鎵樼洏鍥炬爣 鈫?Options 鈫?Language 鈫?绠€浣撲腑鏂?/span&gt;
-          &lt;/div&gt;
-          &lt;div class="step"&gt;
-            &lt;span class="step-num"&gt;4&lt;/span&gt;
-            &lt;span class="step-text"&gt;鍙屽嚮 Ctrl 寮€濮嬫悳绱?/span&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;div&gt;
-        &lt;h2 class="section-title"&gt;鑷畾涔夌綉缁滄悳绱?/h2&gt;
-        &lt;div class="advanced"&gt;
-          &lt;div class="advanced-title"&gt;杩涢樁閰嶇疆&lt;/div&gt;
-          &lt;div class="custom-search"&gt;
-            &lt;div class="search-row"&gt;
-              &lt;span class="search-key"&gt;g&lt;/span&gt;
-              &lt;span&gt;鈫?Google 鎼滅储&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;div class="search-row"&gt;
-              &lt;span class="search-key"&gt;bd&lt;/span&gt;
-              &lt;span&gt;鈫?鐧惧害鎼滅储&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;div class="search-row"&gt;
-              &lt;span class="search-key"&gt;cnki&lt;/span&gt;
-              &lt;span&gt;鈫?鐭ョ綉鎼滅储&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;div class="search-row"&gt;
-              &lt;span class="search-key"&gt;db&lt;/span&gt;
-              &lt;span&gt;鈫?璞嗙摚鎼滅储&lt;/span&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-          &lt;div class="search-example" style="margin-top: 10px; font-size: 11px; color: var(--text-muted);"&gt;
-            鍙屽嚮 Ctrl 鈫?cnki 鐩稿璁?鈫?鑷姩鎵撳紑鐭ョ綉
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Scenarios --&gt;
-    &lt;div class="scenarios"&gt;
-      &lt;span class="scenario"&gt;馃搨 璇句欢鏋侀€熻皟鐢?/span&gt;
-      &lt;span class="scenario"&gt;馃搧 浣滀笟蹇€熷綊妗?/span&gt;
-      &lt;span class="scenario"&gt;馃搫 璁烘枃瀹氫綅绠＄悊&lt;/span&gt;
-    &lt;/div&gt;
-
-    &lt;footer class="footer"&gt;
-      &lt;span class="footer-left"&gt;listary.net 路 Windows&lt;/span&gt;
-      &lt;div class="footer-right"&gt;
-        &lt;span class="dot"&gt;&lt;/span&gt;
-        寮€鏈鸿嚜鍚?      &lt;/div&gt;
-    &lt;/footer&gt;
-  &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+      </span>
+      <h1 class="title">Listary</h1>
+      <p class="subtitle">Windows 鏂囦欢绉掓悳 路 瀵硅瘽妗嗗揩鎹疯烦鐩�褰� 路 鑷�瀹氫箟缃戠粶鎼滅储</p>
+    </header>
+    <h2 class="section-title">鏍稿績鍔熻兘</h2>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <div class="feature-body">
+          <div class="feature-title">姣�绉掑叏鐩樻悳绱�</div>
+          <div class="feature-desc">杈撳叆閮ㄥ垎瀛楃�︽垨鎷奸煶缂╁啓<br>鍑犲崄涓囨枃浠剁灛闂村畾浣�</div>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="feature-body">
+          <div class="feature-title">Quick Switch<span class="feature-key">Ctrl+G</span></div>
+          <div class="feature-desc">淇濆瓨/鎵撳紑瀵硅瘽妗嗕腑<br>涓�閿�璺宠浆鐩�鏍囨枃浠跺す</div>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div class="feature-body">
+          <div class="feature-title">Actions 鍔ㄤ綔鑿滃崟</div>
+          <div class="feature-desc">鍙抽敭鎴� Ctrl+O<br>澶嶅埗璺�寰� / 鎵撳紑鎵�鍦ㄦ枃浠跺す</div>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div class="feature-body">
+          <div class="feature-title">缃戠粶鎼滅储</div>
+          <div class="feature-desc">杈撳叆 g + 鍏抽敭璇�<br>鐩存帴璋冭捣娴忚�堝櫒 Google</div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-grid">
+      <div>
+        <h2 class="section-title">瀹夎�呭惎鍔�</h2>
+        <div class="workflow">
+          <div class="step"><span class="step-num">1</span><span class="step-text">涓嬭浇 listary.net 鈫� 瀹夎�呭埌 D:\</span></div>
+          <div class="step"><span class="step-num">2</span><span class="step-text">鍏佽�哥�佺洏绱㈠紩鎵�鎻忥紙蹇�閫熸悳绱㈠熀纭�锛�</span></div>
+          <div class="step"><span class="step-num">3</span><span class="step-text">鎵樼洏鍥炬爣 鈫� Options 鈫� Language 鈫� 绠�浣撲腑鏂�</span></div>
+          <div class="step"><span class="step-num">4</span><span class="step-text">鍙屽嚮 Ctrl 寮�濮嬫悳绱�</span></div>
+        </div>
+      </div>
+      <div>
+        <h2 class="section-title">鑷�瀹氫箟缃戠粶鎼滅储</h2>
+        <div class="advanced">
+          <div class="advanced-title">杩涢樁閰嶇疆</div>
+          <div class="custom-search">
+            <div class="search-row"><span class="search-key">g</span><span>鈫� Google 鎼滅储</span></div>
+            <div class="search-row"><span class="search-key">bd</span><span>鈫� 鐧惧害鎼滅储</span></div>
+            <div class="search-row"><span class="search-key">cnki</span><span>鈫� 鐭ョ綉鎼滅储</span></div>
+            <div class="search-row"><span class="search-key">db</span><span>鈫� 璞嗙摚鎼滅储</span></div>
+          </div>
+          <div class="search-example">鍙屽嚮 Ctrl 鈫� cnki 鐩稿�硅�� 鈫� 鑷�鍔ㄦ墦寮�鐭ョ綉</div>
+        </div>
+      </div>
+    </div>
+    <div class="scenarios">
+      <span class="scenario">馃搨 璇句欢鏋侀�熻皟鐢�</span>
+      <span class="scenario">馃搧 浣滀笟蹇�閫熷綊妗�</span>
+      <span class="scenario">馃搫 璁烘枃瀹氫綅绠＄悊</span>
+    </div>
+    <footer class="footer">
+      <span class="footer-left">listary.net 路 Windows</span>
+      <div class="footer-right"><span class="dot"></span>寮�鏈鸿嚜鍚�</div>
+    </footer>
+  </div>
+</body>
+</html>

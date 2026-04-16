@@ -1,541 +1,197 @@
-&lt;!DOCTYPE html&gt;
-&lt;html lang="zh-CN"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;椋炰功鏅鸿兘闂瓟 鈥?宸ュ叿浠嬬粛鍗?/title&gt;
-  &lt;link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"&gt;
-  &lt;style&gt;
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>椋炰功鏅鸿兘闂�绛� 鈥� 宸ュ叿浠嬬粛鍗�</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --bg: #f0f2f8;
-      --card-bg: #ffffff;
-      --text-primary: #1a1a1a;
-      --text-secondary: #555555;
-      --text-muted: #999999;
-      --accent: #4f46e5;
-      --accent-light: #eef2ff;
-      --accent-dark: #3730a3;
-      --border: #e5e7eb;
-      --shadow: 0 4px 24px rgba(79, 70, 229, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
-      --shadow-hover: 0 8px 32px rgba(79, 70, 229, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+      --bg: #f0f2f8; --card-bg: #ffffff; --text-primary: #1a1a1a;
+      --text-secondary: #555555; --text-muted: #999999; --accent: #4f46e5;
+      --accent-light: #eef2ff; --accent-dark: #3730a3; --border: #e5e7eb;
+      --shadow: 0 4px 24px rgba(79,70,229,0.08), 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-hover: 0 8px 32px rgba(79,70,229,0.12), 0 2px 6px rgba(0,0,0,0.04);
       --radius: 12px;
     }
-
-    .topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
-    .topbar a{font-size:.82rem;color:var(--accent);text-decoration:none;font-weight:600;letter-spacing:.02em}
-    .topbar a:hover{text-decoration:underline}
-    body{padding-top:56px}
     body {
-
-      font-family: 'Noto Serif SC', 'Source Han Serif CN', Georgia, serif;
-      background: var(--bg);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      color: var(--text-primary);
-      line-height: 1.6;
+      font-family: 'Noto Serif SC', Georgia, serif;
+      background: var(--bg); min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px 20px; color: var(--text-primary); line-height: 1.6;
     }
-
     .card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      max-width: 680px;
-      width: 100%;
-      padding: 44px 48px;
-      position: relative;
-      transition: box-shadow 0.3s ease;
+      background: var(--card-bg); border-radius: var(--radius);
+      box-shadow: var(--shadow); max-width: 680px; width: 100%;
+      padding: 44px 48px; position: relative; transition: box-shadow 0.3s ease;
     }
-
-    .card:hover {
-      box-shadow: var(--shadow-hover);
-    }
-
-    /* Bottom decorative accent */
+    .card:hover { box-shadow: var(--shadow-hover); }
     .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100px;
-      height: 100px;
+      content: ''; position: absolute; top: 0; right: 0; width: 100px; height: 100px;
       background: linear-gradient(225deg, var(--accent-light) 0%, transparent 70%);
-      border-radius: 0 var(--radius) 0 0;
-      opacity: 0.6;
+      border-radius: 0 var(--radius) 0 0; opacity: 0.6;
     }
-
-    /* Header */
-    .header {
-      margin-bottom: 30px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-
+    .header { margin-bottom: 30px; padding-bottom: 24px; border-bottom: 1px solid var(--border); position: relative; }
     .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      font-weight: 500;
-      color: var(--accent);
-      background: var(--accent-light);
-      padding: 3px 10px;
-      border-radius: 4px;
-      letter-spacing: 0.8px;
-      margin-bottom: 12px;
-      text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;
+      color: var(--accent); background: var(--accent-light); padding: 3px 10px;
+      border-radius: 4px; letter-spacing: 0.8px; margin-bottom: 12px; text-transform: uppercase;
     }
-
-    .tag svg {
-      width: 10px;
-      height: 10px;
-      stroke: var(--accent);
-      stroke-width: 2;
-      fill: none;
-    }
-
-    .title {
-      font-size: 25px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-      letter-spacing: -0.2px;
-    }
-
-    .subtitle {
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
-
-    /* Section title */
+    .tag svg { width: 10px; height: 10px; stroke: var(--accent); stroke-width: 2; fill: none; }
+    .title { font-size: 25px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.2px; }
+    .subtitle { font-size: 14px; color: var(--text-secondary); }
     .section-title {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 11px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
     }
-
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* Features 2x2 grid */
-    .features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 28px;
-    }
-
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
     .feature {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 14px 16px;
-      background: #fafafa;
-      border-radius: 10px;
-      border: 1px solid var(--border);
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px; background: #fafafa; border-radius: 10px; border: 1px solid var(--border);
     }
-
     .feature-icon {
-      width: 32px;
-      height: 32px;
-      background: var(--accent);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      width: 32px; height: 32px; background: var(--accent); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-
-    .feature-icon svg {
-      width: 16px;
-      height: 16px;
-      stroke: white;
-      stroke-width: 2;
-      fill: none;
-    }
-
-    .feature-body {
-      flex: 1;
-    }
-
-    .feature-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 2px;
-    }
-
-    .feature-desc {
-      font-size: 12px;
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-
-    /* Three-step pipeline */
-    .pipeline {
-      display: flex;
-      align-items: stretch;
-      gap: 0;
-      margin-bottom: 28px;
-    }
-
-    .pipe-step {
-      flex: 1;
-      padding: 16px 14px;
-      text-align: center;
-      background: #fafafa;
-      border: 1px solid var(--border);
-    }
-
-    .pipe-step:first-child {
-      border-radius: 10px 0 0 10px;
-    }
-
-    .pipe-step:last-child {
-      border-radius: 0 10px 10px 0;
-    }
-
-    .pipe-step + .pipe-step {
-      border-left: none;
-    }
-
+    .feature-icon svg { width: 16px; height: 16px; stroke: white; stroke-width: 2; fill: none; }
+    .feature-body { flex: 1; }
+    .feature-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .feature-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
+    .pipeline { display: flex; align-items: stretch; gap: 0; margin-bottom: 28px; }
+    .pipe-step { flex: 1; padding: 16px 14px; text-align: center; background: #fafafa; border: 1px solid var(--border); }
+    .pipe-step:first-child { border-radius: 10px 0 0 10px; }
+    .pipe-step:last-child { border-radius: 0 10px 10px 0; }
+    .pipe-step + .pipe-step { border-left: none; }
     .pipe-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      font-weight: 500;
-      color: white;
-      background: var(--accent);
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 8px;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;
+      color: white; background: var(--accent); width: 20px; height: 20px;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 8px;
     }
-
-    .pipe-title {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 4px;
-    }
-
-    .pipe-desc {
-      font-size: 11px;
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-
-    .pipe-arrow {
-      display: flex;
-      align-items: center;
-      font-size: 14px;
-      color: var(--accent);
-      padding: 0 2px;
-      background: #fafafa;
-      border: 1px solid var(--border);
-      border-left: none;
-      border-right: none;
-    }
-
-    /* Examples + Tips */
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 28px;
-    }
-
-    .examples {
-      padding: 18px;
-      background: #fafafa;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-    }
-
-    .example {
-      font-size: 12px;
-      color: var(--text-secondary);
-      padding: 6px 0;
-      line-height: 1.5;
-    }
-
-    .example::before {
-      content: '鉁?;
-      color: var(--accent);
-      margin-right: 6px;
-      font-size: 10px;
-    }
-
-    .example + .example {
-      border-top: 1px solid var(--border);
-    }
-
-    /* Tips */
+    .pipe-title { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+    .pipe-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.4; }
+    .pipe-arrow { display: flex; align-items: center; font-size: 14px; color: var(--accent); padding: 0 2px; background: #fafafa; border: 1px solid var(--border); border-left: none; border-right: none; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
+    .examples { padding: 18px; background: #fafafa; border-radius: 10px; border: 1px solid var(--border); }
+    .example { font-size: 12px; color: var(--text-secondary); padding: 6px 0; line-height: 1.5; }
+    .example::before { content: '鉁�'; color: var(--accent); margin-right: 6px; font-size: 10px; }
+    .example + .example { border-top: 1px solid var(--border); }
     .tips {
       padding: 18px;
       background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
-      border-radius: 10px;
-      border: 1px solid #c7d2fe;
+      border-radius: 10px; border: 1px solid #c7d2fe;
     }
-
-    .tips-title {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--accent-dark);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-    }
-
-    .tip {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .tip:last-child {
-      margin-bottom: 0;
-    }
-
-    .tip-bullet {
-      font-size: 13px;
-      line-height: 1.3;
-      flex-shrink: 0;
-    }
-
-    .tip-text {
-      font-size: 12px;
-      color: #312e81;
-      line-height: 1.5;
-    }
-
-    /* Scenarios */
-    .scenarios {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 28px;
-    }
-
-    .scenario {
-      font-size: 12px;
-      color: var(--text-secondary);
-      background: #f5f5f5;
-      border: 1px solid var(--border);
-      padding: 5px 12px;
-      border-radius: 16px;
-    }
-
-    /* Footer */
-    .footer {
-      padding-top: 18px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-left {
-      font-size: 11px;
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .footer-right {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .dot {
-      width: 5px;
-      height: 5px;
-      background: #22c55e;
-      border-radius: 50%;
-      animation: pulse 2.5s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    /* Responsive */
+    .tips-title { font-size: 11px; font-weight: 600; color: var(--accent-dark); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+    .tip { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+    .tip:last-child { margin-bottom: 0; }
+    .tip-bullet { font-size: 13px; line-height: 1.3; flex-shrink: 0; }
+    .tip-text { font-size: 12px; color: #312e81; line-height: 1.5; }
+    .scenarios { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+    .scenario { font-size: 12px; color: var(--text-secondary); background: #f5f5f5; border: 1px solid var(--border); padding: 5px 12px; border-radius: 16px; }
+    .footer { padding-top: 18px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .footer-left { font-size: 11px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+    .footer-right { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-muted); }
+    .dot { width: 5px; height: 5px; background: #22c55e; border-radius: 50%; animation: pulse 2.5s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     @media (max-width: 600px) {
-      .card {
-        padding: 30px 26px;
-      }
-      .features {
-        grid-template-columns: 1fr;
-      }
-      .two-col {
-        grid-template-columns: 1fr;
-      }
-      .pipeline {
-        flex-direction: column;
-      }
-      .pipe-step {
-        border-radius: 10px !important;
-        border-left: 1px solid var(--border) !important;
-      }
-      .pipe-step + .pipe-step {
-        border-top: none;
-      }
-      .pipe-arrow {
-        display: none;
-      }
-      .title {
-        font-size: 22px;
-      }
+      .card { padding: 30px 26px; }
+      .features, .two-col { grid-template-columns: 1fr; }
+      .pipeline { flex-direction: column; }
+      .pipe-step { border-radius: 10px !important; border-left: 1px solid var(--border) !important; }
+      .pipe-step + .pipe-step { border-top: none; }
+      .pipe-arrow { display: none; }
+      .title { font-size: 22px; }
     }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;div class="topbar"&gt;&lt;a href="../index.html"&gt;&#8592; 返回主页&lt;/a&gt;&lt;/div&gt;
+ 
+ .topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,0.08);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
+ .topbar a{font-size:.82rem;color:#7c3aed;text-decoration:none;font-weight:600;letter-spacing:.02em}
+ .topbar a:hover{text-decoration:underline}
+ body{padding-top:56px}
 
-  &lt;div class="card"&gt;
-    &lt;header class="header"&gt;
-      &lt;span class="tag"&gt;
-        &lt;svg viewBox="0 0 24 24"&gt;&lt;circle cx="12" cy="12" r="10"/&gt;&lt;path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/&gt;&lt;line x1="12" y1="17" x2="12.01" y2="17"/&gt;&lt;/svg&gt;
+</style>
+</head>
+<body>
+<div class="topbar"><a href="../index.html">&#8592; 返回主页</a></div>
+  <div class="card">
+    <header class="header">
+      <span class="tag">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         AI Q&A
-      &lt;/span&gt;
-      &lt;h1 class="title"&gt;椋炰功鏅鸿兘闂瓟&lt;/h1&gt;
-      &lt;p class="subtitle"&gt;绉佹湁鐭ヨ瘑 RAG 妫€绱?路 淇℃簮閫愬彞婧簮 路 璺ㄦ枃妗ｈ涔夋眹鎬?/p&gt;
-    &lt;/header&gt;
-
-    &lt;!-- 4 Core Capabilities --&gt;
-    &lt;h2 class="section-title"&gt;鏍稿績鑳藉姏&lt;/h2&gt;
-    &lt;div class="features"&gt;
-      &lt;div class="feature"&gt;
-        &lt;div class="feature-icon"&gt;
-          &lt;svg viewBox="0 0 24 24"&gt;&lt;path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/&gt;&lt;/svg&gt;
-        &lt;/div&gt;
-        &lt;div class="feature-body"&gt;
-          &lt;div class="feature-title"&gt;RAG 绮惧噯鍥炵瓟&lt;/div&gt;
-          &lt;div class="feature-desc"&gt;鍩轰簬绉佹湁鏂囨。鍥炵瓟&lt;br&gt;鎷掔粷澶фā鍨嬪够瑙?/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="feature"&gt;
-        &lt;div class="feature-icon"&gt;
-          &lt;svg viewBox="0 0 24 24"&gt;&lt;path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/&gt;&lt;path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/&gt;&lt;/svg&gt;
-        &lt;/div&gt;
-        &lt;div class="feature-body"&gt;
-          &lt;div class="feature-title"&gt;閫愬彞婧簮&lt;/div&gt;
-          &lt;div class="feature-desc"&gt;姣忓彞鏍囨敞鍑哄&lt;br&gt;鐐瑰嚮璺宠浆鍘熸枃娈佃惤&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="feature"&gt;
-        &lt;div class="feature-icon"&gt;
-          &lt;svg viewBox="0 0 24 24"&gt;&lt;rect x="3" y="3" width="18" height="18" rx="2"/&gt;&lt;path d="M3 9h18M9 21V9"/&gt;&lt;/svg&gt;
-        &lt;/div&gt;
-        &lt;div class="feature-body"&gt;
-          &lt;div class="feature-title"&gt;澶氭ā鎬佽В鏋?/div&gt;
-          &lt;div class="feature-desc"&gt;PDF路澶氱淮琛ㄦ牸&lt;br&gt;鍥剧墖鏂囧瓧路浠ｇ爜鍧?/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="feature"&gt;
-        &lt;div class="feature-icon"&gt;
-          &lt;svg viewBox="0 0 24 24"&gt;&lt;polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/&gt;&lt;/svg&gt;
-        &lt;/div&gt;
-        &lt;div class="feature-body"&gt;
-          &lt;div class="feature-title"&gt;璺ㄦ枃妗ｆ眹鎬?/div&gt;
-          &lt;div class="feature-desc"&gt;澶氭枃浠跺す妯悜瀵规瘮&lt;br&gt;鎬荤粨鎻愮偧鍏抽敭淇℃伅&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Three-step pipeline --&gt;
-    &lt;h2 class="section-title"&gt;涓夋涓婃墜&lt;/h2&gt;
-    &lt;div class="pipeline"&gt;
-      &lt;div class="pipe-step"&gt;
-        &lt;div class="pipe-num"&gt;1&lt;/div&gt;
-        &lt;div class="pipe-title"&gt;寤哄簱&lt;/div&gt;
-        &lt;div class="pipe-desc"&gt;涓婁紶 Word / PDF / Excel&lt;br&gt;鍒伴涔︾煡璇嗗簱&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="pipe-arrow"&gt;鈫?/div&gt;
-      &lt;div class="pipe-step"&gt;
-        &lt;div class="pipe-num"&gt;2&lt;/div&gt;
-        &lt;div class="pipe-title"&gt;鎸傝浇鑼冨洿&lt;/div&gt;
-        &lt;div class="pipe-desc"&gt;鍏宠仈鐭ヨ瘑搴?br&gt;闄愬畾浠呮悳绉佹湁鏂囨。&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="pipe-arrow"&gt;鈫?/div&gt;
-      &lt;div class="pipe-step"&gt;
-        &lt;div class="pipe-num"&gt;3&lt;/div&gt;
-        &lt;div class="pipe-title"&gt;绮剧‘鎻愰棶&lt;/div&gt;
-        &lt;div class="pipe-desc"&gt;鐐瑰嚮 [1] 楠岃瘉鍘熸枃&lt;br&gt;瀹℃牳鍚庣洿鎺ュ紩鐢?/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Examples + Tips --&gt;
-    &lt;div class="two-col"&gt;
-      &lt;div&gt;
-        &lt;h2 class="section-title"&gt;澶囪鎻愰棶绀轰緥&lt;/h2&gt;
-        &lt;div class="examples"&gt;
-          &lt;div class="example"&gt;鏍规嵁寰€骞磋浠跺拰鏂拌鏍囷紝鍒椾竴涓垵涓夌涓€鍗曞厓澶囪鎻愮翰&lt;/div&gt;
-          &lt;div class="example"&gt;浠庝範棰橀泦涓寫 3 閬撻€傚悎璇惧爞缁冧範鐨勭畝鍗曢&lt;/div&gt;
-          &lt;div class="example"&gt;杩欏鏈熷皬鏄庡悓瀛﹁〃鐜版湁鍝簺涓昏娉㈠姩锛?/div&gt;
-          &lt;div class="example"&gt;鍏充簬"澶у崟鍏冩暀瀛?鐨勪富娴佸疄鏂界瓥鐣ユ湁鍝簺锛?/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;div&gt;
-        &lt;h2 class="section-title"&gt;浣跨敤璐村＋&lt;/h2&gt;
-        &lt;div class="tips"&gt;
-          &lt;div class="tip"&gt;
-            &lt;span class="tip-bullet"&gt;馃敀&lt;/span&gt;
-            &lt;span class="tip-text"&gt;鏂囨。鏈垎浜垯鍏朵粬浜轰笉鍙锛屾潈闄愯嚜鍔ㄩ殧绂?/span&gt;
-          &lt;/div&gt;
-          &lt;div class="tip"&gt;
-            &lt;span class="tip-bullet"&gt;馃摲&lt;/span&gt;
-            &lt;span class="tip-text"&gt;鎵弿浠?PDF 寤鸿鍏堢敤澶╄嫢 OCR 杞枃瀛?/span&gt;
-          &lt;/div&gt;
-          &lt;div class="tip"&gt;
-            &lt;span class="tip-bullet"&gt;鉁忥笍&lt;/span&gt;
-            &lt;span class="tip-text"&gt;鏂囨。澶氳 H1/H2 鏍囬灞傜骇锛屾绱㈢簿搴︾炕鍊?/span&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Scenarios --&gt;
-    &lt;div class="scenarios"&gt;
-      &lt;span class="scenario"&gt;馃摉 瀛︾鏁板瓧鍥句功棣?/span&gt;
-      &lt;span class="scenario"&gt;馃 瀛︾敓鑷姪绛旂枒&lt;/span&gt;
-      &lt;span class="scenario"&gt;馃搳 浣滀笟琛ㄧ幇鍒嗘瀽&lt;/span&gt;
-      &lt;span class="scenario"&gt;馃摎 绉戠爺缁艰堪杈呭姪&lt;/span&gt;
-    &lt;/div&gt;
-
-    &lt;footer class="footer"&gt;
-      &lt;span class="footer-left"&gt;feishu.cn 路 鍐呯疆鍔熻兘&lt;/span&gt;
-      &lt;div class="footer-right"&gt;
-        &lt;span class="dot"&gt;&lt;/span&gt;
-        闆堕厤缃嵆鐢?      &lt;/div&gt;
-    &lt;/footer&gt;
-  &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+      </span>
+      <h1 class="title">椋炰功鏅鸿兘闂�绛�</h1>
+      <p class="subtitle">绉佹湁鐭ヨ瘑 RAG 妫�绱� 路 淇℃簮閫愬彞婧�婧� 路 璺ㄦ枃妗ｈ��涔夋眹鎬�</p>
+    </header>
+    <h2 class="section-title">鏍稿績鑳藉姏</h2>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="feature-body">
+          <div class="feature-title">RAG 绮惧噯鍥炵瓟</div>
+          <div class="feature-desc">鍩轰簬绉佹湁鏂囨。鍥炵瓟<br>鎷掔粷澶фā鍨嬪够瑙�</div>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+        <div class="feature-body">
+          <div class="feature-title">閫愬彞婧�婧�</div>
+          <div class="feature-desc">姣忓彞鏍囨敞鍑哄��<br>鐐瑰嚮璺宠浆鍘熸枃娈佃惤</div>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <div class="feature-body">
+          <div class="feature-title">澶氭ā鎬佽В鏋�</div>
+          <div class="feature-desc">PDF路澶氱淮琛ㄦ牸<br>鍥剧墖鏂囧瓧路浠ｇ爜鍧�</div>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="feature-body">
+          <div class="feature-title">璺ㄦ枃妗ｆ眹鎬�</div>
+          <div class="feature-desc">澶氭枃浠跺す妯�鍚戝�规瘮<br>鎬荤粨鎻愮偧鍏抽敭淇℃伅</div>
+        </div>
+      </div>
+    </div>
+    <h2 class="section-title">涓夋�ヤ笂鎵�</h2>
+    <div class="pipeline">
+      <div class="pipe-step"><div class="pipe-num">1</div><div class="pipe-title">寤哄簱</div><div class="pipe-desc">涓婁紶 Word / PDF / Excel<br>鍒伴�炰功鐭ヨ瘑搴�</div></div>
+      <div class="pipe-arrow">鈫�</div>
+      <div class="pipe-step"><div class="pipe-num">2</div><div class="pipe-title">鎸傝浇鑼冨洿</div><div class="pipe-desc">鍏宠仈鐭ヨ瘑搴�<br>闄愬畾浠呮悳绉佹湁鏂囨。</div></div>
+      <div class="pipe-arrow">鈫�</div>
+      <div class="pipe-step"><div class="pipe-num">3</div><div class="pipe-title">绮剧‘鎻愰棶</div><div class="pipe-desc">鐐瑰嚮 [1] 楠岃瘉鍘熸枃<br>瀹℃牳鍚庣洿鎺ュ紩鐢�</div></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <h2 class="section-title">澶囪�炬彁闂�绀轰緥</h2>
+        <div class="examples">
+          <div class="example">鏍规嵁寰�骞磋�句欢鍜屾柊璇炬爣锛屽垪涓�涓�鍒濅笁绗�涓�鍗曞厓澶囪�炬彁绾�</div>
+          <div class="example">浠庝範棰橀泦涓�鎸� 3 閬撻�傚悎璇惧爞缁冧範鐨勭畝鍗曢��</div>
+          <div class="example">杩欏�︽湡灏忔槑鍚屽�﹁〃鐜版湁鍝�浜涗富瑕佹尝鍔�锛�</div>
+          <div class="example">鍏充簬"澶у崟鍏冩暀瀛�"鐨勪富娴佸疄鏂界瓥鐣ユ湁鍝�浜涳紵</div>
+        </div>
+      </div>
+      <div>
+        <h2 class="section-title">浣跨敤璐村＋</h2>
+        <div class="tips">
+          <div class="tip"><span class="tip-bullet">馃敀</span><span class="tip-text">鏂囨。鏈�鍒嗕韩鍒欏叾浠栦汉涓嶅彲瑙侊紝鏉冮檺鑷�鍔ㄩ殧绂�</span></div>
+          <div class="tip"><span class="tip-bullet">馃摲</span><span class="tip-text">鎵�鎻忎欢 PDF 寤鸿��鍏堢敤澶╄嫢 OCR 杞�鏂囧瓧</span></div>
+          <div class="tip"><span class="tip-bullet">鉁忥笍</span><span class="tip-text">鏂囨。澶氳�� H1/H2 鏍囬�樺眰绾э紝妫�绱㈢簿搴︾炕鍊�</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="scenarios">
+      <span class="scenario">馃摉 瀛︾�戞暟瀛楀浘涔﹂��</span>
+      <span class="scenario">馃�� 瀛︾敓鑷�鍔╃瓟鐤�</span>
+      <span class="scenario">馃搳 浣滀笟琛ㄧ幇鍒嗘瀽</span>
+      <span class="scenario">馃摎 绉戠爺缁艰堪杈呭姪</span>
+    </div>
+    <footer class="footer">
+      <span class="footer-left">feishu.cn 路 鍐呯疆鍔熻兘</span>
+      <div class="footer-right"><span class="dot"></span>闆堕厤缃�鍗崇敤</div>
+    </footer>
+  </div>
+</body>
+</html>

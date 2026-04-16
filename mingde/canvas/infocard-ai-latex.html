@@ -1,470 +1,195 @@
-&lt;!DOCTYPE html&gt;
-&lt;html lang="zh-CN"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;Scholarly Precision 鈥?AI + LaTeX Workflow Card&lt;/title&gt;
-  &lt;link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"&gt;
-  &lt;style&gt;
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>鍥剧墖杞�鍑虹増绾� PDF 鈥� 宸ュ叿鍗�</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --bg: #f8f8f8;
-      --card-bg: #ffffff;
-      --text-primary: #1a1a1a;
-      --text-secondary: #555555;
-      --text-muted: #888888;
-      --accent: #2563eb;
-      --accent-light: #dbeafe;
-      --border: #e5e5e5;
-      --shadow: 0 4px 24px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
-      --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+      --bg: #f8f8f8; --card-bg: #ffffff; --text-primary: #1a1a1a;
+      --text-secondary: #555555; --text-muted: #888888; --accent: #2563eb;
+      --accent-light: #dbeafe; --border: #e5e5e5;
+      --shadow: 0 4px 24px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-hover: 0 8px 32px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
       --radius: 12px;
     }
-
-    .topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
-    .topbar a{font-size:.82rem;color:var(--accent);text-decoration:none;font-weight:600;letter-spacing:.02em}
-    .topbar a:hover{text-decoration:underline}
-    body{padding-top:56px}
     body {
-
-      font-family: 'Noto Serif SC', 'Source Han Serif CN', Georgia, serif;
-      background: var(--bg);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      color: var(--text-primary);
-      line-height: 1.6;
+      font-family: 'Noto Serif SC', Georgia, serif;
+      background: var(--bg); min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px 20px; color: var(--text-primary); line-height: 1.6;
     }
-
     .card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      max-width: 720px;
-      width: 100%;
-      padding: 48px 52px;
-      position: relative;
-      transition: box-shadow 0.3s ease;
+      background: var(--card-bg); border-radius: var(--radius);
+      box-shadow: var(--shadow); max-width: 720px; width: 100%;
+      padding: 48px 52px; position: relative; transition: box-shadow 0.3s ease;
     }
-
-    .card:hover {
-      box-shadow: var(--shadow-hover);
-    }
-
-    /* Decorative corner accent */
+    .card:hover { box-shadow: var(--shadow-hover); }
     .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 80px;
-      height: 80px;
+      content: ''; position: absolute; top: 0; right: 0; width: 80px; height: 80px;
       background: linear-gradient(135deg, var(--accent-light) 0%, transparent 60%);
-      border-radius: 0 var(--radius) 0 0;
-      opacity: 0.5;
+      border-radius: 0 var(--radius) 0 0; opacity: 0.5;
     }
-
-    /* Header */
-    .header {
-      margin-bottom: 36px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-
+    .header { margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--border); position: relative; }
     .tag {
-      display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--accent);
-      background: var(--accent-light);
-      padding: 4px 10px;
-      border-radius: 4px;
-      letter-spacing: 0.5px;
-      margin-bottom: 14px;
-      text-transform: uppercase;
+      display: inline-block; font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 500; color: var(--accent);
+      background: var(--accent-light); padding: 4px 10px; border-radius: 4px;
+      letter-spacing: 0.5px; margin-bottom: 14px; text-transform: uppercase;
     }
-
-    .title {
-      font-size: 26px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 10px;
-      letter-spacing: -0.3px;
-    }
-
-    .subtitle {
-      font-size: 15px;
-      color: var(--text-secondary);
-      max-width: 520px;
-    }
-
-    /* Section styles */
-    .section {
-      margin-bottom: 32px;
-    }
-
-    .section:last-child {
-      margin-bottom: 0;
-    }
-
+    .title { font-size: 26px; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.3px; }
+    .subtitle { font-size: 15px; color: var(--text-secondary); max-width: 520px; }
+    .section { margin-bottom: 32px; }
+    .section:last-child { margin-bottom: 0; }
     .section-title {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-size: 12px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
     }
-
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* Features grid */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
     .feature {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 14px 16px;
-      background: #fafafa;
-      border-radius: 8px;
-      border: 1px solid var(--border);
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 14px 16px; background: #fafafa; border-radius: 8px; border: 1px solid var(--border);
     }
-
     .feature-icon {
-      width: 32px;
-      height: 32px;
-      background: var(--accent);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      width: 32px; height: 32px; background: var(--accent); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-
-    .feature-icon svg {
-      width: 16px;
-      height: 16px;
-      stroke: white;
-      stroke-width: 2;
-      fill: none;
-    }
-
-    .feature-text {
-      font-size: 13px;
-      color: var(--text-primary);
-      line-height: 1.5;
-    }
-
-    .feature-text strong {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-
-    /* Workflow */
-    .workflow {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .step {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 18px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .step:last-child {
-      border-bottom: none;
-    }
-
+    .feature-icon svg { width: 16px; height: 16px; stroke: white; stroke-width: 2; fill: none; }
+    .feature-text { font-size: 13px; line-height: 1.5; }
+    .feature-text strong { display: block; font-weight: 600; margin-bottom: 2px; }
+    .workflow { display: flex; flex-direction: column; gap: 0; }
+    .step { display: flex; align-items: flex-start; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+    .step:last-child { border-bottom: none; }
     .step-number {
-      width: 28px;
-      height: 28px;
-      background: var(--text-primary);
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      font-weight: 500;
-      flex-shrink: 0;
+      width: 28px; height: 28px; background: var(--text-primary); color: white;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; flex-shrink: 0;
     }
-
-    .step-content {
-      flex: 1;
-    }
-
-    .step-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 4px;
-    }
-
-    .step-desc {
-      font-size: 13px;
-      color: var(--text-secondary);
-    }
-
-    .step-tools {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
+    .step-content { flex: 1; }
+    .step-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .step-desc { font-size: 13px; color: var(--text-secondary); }
+    .step-tools { display: flex; gap: 8px; margin-top: 10px; }
     .tool-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      padding: 4px 10px;
-      background: #f0f0f0;
-      border-radius: 4px;
-      color: var(--text-secondary);
-      border: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      padding: 4px 10px; background: #f0f0f0; border-radius: 4px;
+      color: var(--text-secondary); border: 1px solid var(--border);
     }
-
-    /* Tips */
-    .tips {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
+    .tips { display: flex; flex-direction: column; gap: 10px; }
     .tip {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 14px;
+      display: flex; align-items: center; gap: 12px; padding: 12px 14px;
       background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-      border-radius: 8px;
-      border-left: 3px solid #f59e0b;
+      border-radius: 8px; border-left: 3px solid #f59e0b;
     }
-
-    .tip-icon {
-      font-size: 16px;
-      flex-shrink: 0;
-    }
-
-    .tip-text {
-      font-size: 13px;
-      color: #92400e;
-    }
-
-    /* Footer */
-    .footer {
-      margin-top: 32px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-text {
-      font-size: 12px;
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .footer-badge {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .footer-badge span {
-      width: 6px;
-      height: 6px;
-      background: #22c55e;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    /* Code snippet styling */
+    .tip-icon { font-size: 16px; flex-shrink: 0; }
+    .tip-text { font-size: 13px; color: #92400e; }
+    .footer { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .footer-text { font-size: 12px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+    .footer-badge { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-muted); }
+    .footer-badge span { width: 6px; height: 6px; background: #22c55e; border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
     .code-block {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      background: #1a1a1a;
-      color: #d4d4d4;
-      padding: 14px 18px;
-      border-radius: 6px;
-      overflow-x: auto;
-      margin-top: 12px;
-      line-height: 1.7;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      background: #1a1a1a; color: #d4d4d4; padding: 14px 18px;
+      border-radius: 6px; overflow-x: auto; margin-top: 12px; line-height: 1.7;
     }
-
     .code-block .comment { color: #6a9955; }
     .code-block .keyword { color: #569cd6; }
     .code-block .command { color: #d7ba7d; }
     .code-block .bracket { color: #ffd700; }
-
-    /* Responsive */
     @media (max-width: 600px) {
-      .card {
-        padding: 32px 28px;
-      }
-      .features {
-        grid-template-columns: 1fr;
-      }
-      .title {
-        font-size: 22px;
-      }
+      .card { padding: 32px 28px; }
+      .features { grid-template-columns: 1fr; }
+      .title { font-size: 22px; }
     }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;div class="topbar"&gt;&lt;a href="../index.html"&gt;&#8592; 返回主页&lt;/a&gt;&lt;/div&gt;
+ 
+ .topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,0.08);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
+ .topbar a{font-size:.82rem;color:#7c3aed;text-decoration:none;font-weight:600;letter-spacing:.02em}
+ .topbar a:hover{text-decoration:underline}
+ body{padding-top:56px}
 
-  &lt;div class="card"&gt;
-    &lt;header class="header"&gt;
-      &lt;span class="tag"&gt;Tool Workflow&lt;/span&gt;
-      &lt;h1 class="title"&gt;鍥剧墖杞嚭鐗堢骇 PDF&lt;/h1&gt;
-      &lt;p class="subtitle"&gt;澶氭ā鎬?AI 璇嗗埆鎵嬪啓鍏紡 + LaTeX 宸ヤ笟绾ф帓鐗?= 绮剧編鐭㈤噺鏂囨。&lt;/p&gt;
-    &lt;/header&gt;
-
-    &lt;section class="section"&gt;
-      &lt;h2 class="section-title"&gt;鏍稿績鑳藉姏&lt;/h2&gt;
-      &lt;div class="features"&gt;
-        &lt;div class="feature"&gt;
-          &lt;div class="feature-icon"&gt;
-            &lt;svg viewBox="0 0 24 24"&gt;&lt;path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/&gt;&lt;path d="M12 6v6l4 2"/&gt;&lt;/svg&gt;
-          &lt;/div&gt;
-          &lt;div class="feature-text"&gt;
-            &lt;strong&gt;璇箟绾ц瘑鍒?/strong&gt;
-            鐞嗚В鍏紡缁撴瀯銆佸寲瀛﹀紡銆佹祦绋嬪浘
-          &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class="feature"&gt;
-          &lt;div class="feature-icon"&gt;
-            &lt;svg viewBox="0 0 24 24"&gt;&lt;path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/&gt;&lt;polyline points="14,2 14,8 20,8"/&gt;&lt;/svg&gt;
-          &lt;/div&gt;
-          &lt;div class="feature-text"&gt;
-            &lt;strong&gt;LaTeX 绮惧噯杈撳嚭&lt;/strong&gt;
-            淇濈暀鎵€鏈変笂涓嬫爣銆佺煩闃点€佺壒娈婄鍙?          &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class="feature"&gt;
-          &lt;div class="feature-icon"&gt;
-            &lt;svg viewBox="0 0 24 24"&gt;&lt;rect x="3" y="3" width="18" height="18" rx="2"/&gt;&lt;path d="M7 7h10M7 12h10M7 17h6"/&gt;&lt;/svg&gt;
-          &lt;/div&gt;
-          &lt;div class="feature-text"&gt;
-            &lt;strong&gt;鐭㈤噺 PDF 娓叉煋&lt;/strong&gt;
-            鏃犻檺缂╂斁涓嶅け鐪燂紝娓呮櫚搴﹁繙瓒呭浘鐗?          &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class="feature"&gt;
-          &lt;div class="feature-icon"&gt;
-            &lt;svg viewBox="0 0 24 24"&gt;&lt;path d="M9 11l3 3L22 4"/&gt;&lt;path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/&gt;&lt;/svg&gt;
-          &lt;/div&gt;
-          &lt;div class="feature-text"&gt;
-            &lt;strong&gt;鏅鸿兘绾犻敊&lt;/strong&gt;
-            鑷姩淇 l/1銆丱/0 绛夋槗娣锋穯瀛楃
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/section&gt;
-
-    &lt;section class="section"&gt;
-      &lt;h2 class="section-title"&gt;鎿嶄綔娴佺▼&lt;/h2&gt;
-      &lt;div class="workflow"&gt;
-        &lt;div class="step"&gt;
-          &lt;span class="step-number"&gt;1&lt;/span&gt;
-          &lt;div class="step-content"&gt;
-            &lt;div class="step-title"&gt;鍏冨疂璇嗗埆 鈫?鎻愬彇浠ｇ爜&lt;/div&gt;
-            &lt;div class="step-desc"&gt;鍙戦€佸浘鐗囷紝闄勬彁绀鸿瘝锛氳姹傛爣鍑?LaTeX 浠ｇ爜锛屼粎杈撳嚭浠ｇ爜涓嶈 Markdown 鍧?/div&gt;
-            &lt;div class="step-tools"&gt;
-              &lt;span class="tool-tag"&gt;娣峰厓澶氭ā鎬?/span&gt;
-              &lt;span class="tool-tag"&gt;鍏冨疂 APP&lt;/span&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class="step"&gt;
-          &lt;span class="step-number"&gt;2&lt;/span&gt;
-          &lt;div class="step-content"&gt;
-            &lt;div class="step-title"&gt;绮樿创鍒?LaTeX 妯℃澘&lt;/div&gt;
-            &lt;div class="step-desc"&gt;鏀惧叆 document 鐜涔嬮棿&lt;/div&gt;
-            &lt;div class="code-block"&gt;
-&lt;span class="command"&gt;\documentclass&lt;/span&gt;{article}&lt;br&gt;
-&lt;span class="command"&gt;\usepackage&lt;/span&gt;{amsmath}&lt;br&gt;
-&lt;span class="bracket"&gt;\begin&lt;/span&gt;{document}&lt;br&gt;
-&nbsp;&nbsp;&lt;span class="comment"&gt;% 鍦ㄦ绮樿创璇嗗埆鐨?LaTeX 浠ｇ爜&lt;/span&gt;&lt;br&gt;
-&lt;span class="bracket"&gt;\end&lt;/span&gt;{document}
-            &lt;/div&gt;
-            &lt;div class="step-tools"&gt;
-              &lt;span class="tool-tag"&gt;TeXstudio&lt;/span&gt;
-              &lt;span class="tool-tag"&gt;MiKTeX&lt;/span&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class="step"&gt;
-          &lt;span class="step-number"&gt;3&lt;/span&gt;
-          &lt;div class="step-content"&gt;
-            &lt;div class="step-title"&gt;缂栬瘧 鈫?鐢熸垚 PDF&lt;/div&gt;
-            &lt;div class="step-desc"&gt;鐐瑰嚮鏋勫缓骞舵煡鐪嬶紝鍚岀骇鐩綍杈撳嚭绮剧編鐭㈤噺鏂囨。&lt;/div&gt;
-            &lt;div class="step-tools"&gt;
-              &lt;span class="tool-tag"&gt;PDF&lt;/span&gt;
-              &lt;span class="tool-tag"&gt;鐭㈤噺鏍煎紡&lt;/span&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/section&gt;
-
-    &lt;section class="section"&gt;
-      &lt;h2 class="section-title"&gt;浣跨敤璐村＋&lt;/h2&gt;
-      &lt;div class="tips"&gt;
-        &lt;div class="tip"&gt;
-          &lt;span class="tip-icon"&gt;馃挕&lt;/span&gt;
-          &lt;span class="tip-text"&gt;琛屽唴鍏紡鐢?&lt;code&gt;$...$&lt;/code&gt;锛岀嫭绔嬪叕寮忕敤 &lt;code&gt;$$...$$&lt;/code&gt;&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;div class="tip"&gt;
-          &lt;span class="tip-icon"&gt;馃摑&lt;/span&gt;
-          &lt;span class="tip-text"&gt;鍚腑鏂囨椂鏀圭敤 &lt;code&gt;\documentclass[UTF8]{ctexart}&lt;/code&gt;&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;div class="tip"&gt;
-          &lt;span class="tip-icon"&gt;鉁傦笍&lt;/span&gt;
-          &lt;span class="tip-text"&gt;闀挎枃妗ｅ缓璁垎棰樼洰鎴浘璇嗗埆锛屼繚璇佺簿搴﹀拰涓婁笅鏂?/span&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/section&gt;
-
-    &lt;footer class="footer"&gt;
-      &lt;span class="footer-text"&gt;鍏冨疂 + MiKTeX + TeXstudio&lt;/span&gt;
-      &lt;div class="footer-badge"&gt;
-        &lt;span&gt;&lt;/span&gt;
-        闆舵垚鏈柟妗?      &lt;/div&gt;
-    &lt;/footer&gt;
-  &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+</style>
+</head>
+<body>
+<div class="topbar"><a href="../index.html">&#8592; 返回主页</a></div>
+  <div class="card">
+    <header class="header">
+      <span class="tag">Tool Workflow</span>
+      <h1 class="title">鍥剧墖杞�鍑虹増绾� PDF</h1>
+      <p class="subtitle">澶氭ā鎬� AI 璇嗗埆鎵嬪啓鍏�寮� + LaTeX 宸ヤ笟绾ф帓鐗� = 绮剧編鐭㈤噺鏂囨。</p>
+    </header>
+    <section class="section">
+      <h2 class="section-title">鏍稿績鑳藉姏</h2>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg></div>
+          <div class="feature-text"><strong>璇�涔夌骇璇嗗埆</strong>鐞嗚В鍏�寮忕粨鏋勩�佸寲瀛﹀紡銆佹祦绋嬪浘</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div>
+          <div class="feature-text"><strong>LaTeX 绮惧噯杈撳嚭</strong>淇濈暀鎵�鏈変笂涓嬫爣銆佺煩闃点�佺壒娈婄�﹀彿</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10M7 12h10M7 17h6"/></svg></div>
+          <div class="feature-text"><strong>鐭㈤噺 PDF 娓叉煋</strong>鏃犻檺缂╂斁涓嶅け鐪燂紝娓呮櫚搴﹁繙瓒呭浘鐗�</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+          <div class="feature-text"><strong>鏅鸿兘绾犻敊</strong>鑷�鍔ㄤ慨姝� l/1銆丱/0 绛夋槗娣锋穯瀛楃��</div>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <h2 class="section-title">鎿嶄綔娴佺▼</h2>
+      <div class="workflow">
+        <div class="step">
+          <span class="step-number">1</span>
+          <div class="step-content">
+            <div class="step-title">鍏冨疂璇嗗埆 鈫� 鎻愬彇浠ｇ爜</div>
+            <div class="step-desc">鍙戦�佸浘鐗囷紝闄勬彁绀鸿瘝锛氳�佹眰鏍囧噯 LaTeX 浠ｇ爜锛屼粎杈撳嚭浠ｇ爜涓嶈�� Markdown 鍧�</div>
+            <div class="step-tools"><span class="tool-tag">娣峰厓澶氭ā鎬�</span><span class="tool-tag">鍏冨疂 APP</span></div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-number">2</span>
+          <div class="step-content">
+            <div class="step-title">绮樿创鍒� LaTeX 妯℃澘</div>
+            <div class="step-desc">鏀惧叆 document 鐜�澧冧箣闂�</div>
+            <div class="code-block">
+<span class="command">\documentclass</span>{article}<br>
+<span class="command">\usepackage</span>{amsmath}<br>
+<span class="bracket">\begin</span>{document}<br>
+&nbsp;&nbsp;<span class="comment">% 鍦ㄦ�ょ矘璐磋瘑鍒�鐨� LaTeX 浠ｇ爜</span><br>
+<span class="bracket">\end</span>{document}
+            </div>
+            <div class="step-tools"><span class="tool-tag">TeXstudio</span><span class="tool-tag">MiKTeX</span></div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-number">3</span>
+          <div class="step-content">
+            <div class="step-title">缂栬瘧 鈫� 鐢熸垚 PDF</div>
+            <div class="step-desc">鐐瑰嚮鏋勫缓骞舵煡鐪嬶紝鍚岀骇鐩�褰曡緭鍑虹簿缇庣煝閲忔枃妗�</div>
+            <div class="step-tools"><span class="tool-tag">PDF</span><span class="tool-tag">鐭㈤噺鏍煎紡</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <h2 class="section-title">浣跨敤璐村＋</h2>
+      <div class="tips">
+        <div class="tip"><span class="tip-icon">馃挕</span><span class="tip-text">琛屽唴鍏�寮忕敤 <code>$...$</code>锛岀嫭绔嬪叕寮忕敤 <code>$$...$$</code></span></div>
+        <div class="tip"><span class="tip-icon">馃摑</span><span class="tip-text">鍚�涓�鏂囨椂鏀圭敤 <code>\documentclass[UTF8]{ctexart}</code></span></div>
+        <div class="tip"><span class="tip-icon">鉁傦笍</span><span class="tip-text">闀挎枃妗ｅ缓璁�鍒嗛�樼洰鎴�鍥捐瘑鍒�锛屼繚璇佺簿搴﹀拰涓婁笅鏂�</span></div>
+      </div>
+    </section>
+    <footer class="footer">
+      <span class="footer-text">鍏冨疂 + MiKTeX + TeXstudio</span>
+      <div class="footer-badge"><span></span>闆舵垚鏈�鏂规��</div>
+    </footer>
+  </div>
+</body>
+</html>
