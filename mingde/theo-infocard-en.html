@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Teaching Misalignment Diagnosis ‚Ä?Checklist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #ffffff;
+  --bg: #f0f4ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: rgba(59,130,246,0.12);
+  --border-strong: rgba(59,130,246,0.22);
+  --shadow: rgba(67,97,238,0.08);
+  --info-accent: #f97316;
+  --info-bg: rgba(249,115,22,0.06);
+  --info-border: rgba(249,115,22,0.15);
+  --digit-accent: #6366f1;
+  --digit-bg: rgba(99,102,241,0.06);
+  --digit-border: rgba(99,102,241,0.15);
+  --intel-accent: #10b981;
+  --intel-bg: rgba(16,185,129,0.06);
+  --intel-border: rgba(16,185,129,0.15);
+  --warn: #ef4444;
+  --warn-bg: rgba(239,68,68,0.06);
+  --warn-border: rgba(239,68,68,0.15);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans SC', 'Manrope', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2rem 1.5rem 3rem;
+}
+.main-card {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--border-strong);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px var(--shadow);
+}
+.band {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  padding: 1.8rem 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+.band-left { position: relative; z-index: 1; }
+.band-stage { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.25rem; }
+.band-title { font-family: 'Manrope', sans-serif; font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 900; color: #fff; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 0.15rem; }
+.band-en { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+.band-right { position: relative; z-index: 1; display: flex; align-items: center; gap: 0.75rem; }
+.band-badge { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.25); border-radius: 10px; padding: 0.5rem 0.9rem; text-align: center; }
+.band-badge-icon { font-size: 1.2rem; }
+.band-badge-label { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #fca5a5; margin-top: 0.1rem; }
+.insight-strip {
+  background: linear-gradient(135deg, rgba(239,68,68,0.05) 0%, rgba(249,115,22,0.05) 100%);
+  border-bottom: 1px solid rgba(239,68,68,0.1);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+.insight-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem; }
+.insight-text { font-size: 0.82rem; color: #1e293b; line-height: 1.7; font-weight: 500; }
+.insight-text strong { color: #ef4444; font-weight: 800; }
+.insight-text em { color: #f97316; font-style: normal; font-weight: 700; }
+.card-body { padding: 1.6rem 1.8rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; }
+.section-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.2rem 1.3rem;
+  position: relative;
+  overflow: hidden;
+}
+.section-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+}
+.section-card.full { grid-column: 1 / -1; }
+.section-card.info { background: var(--info-bg); border-color: var(--info-border); }
+.section-card.info::before { background: linear-gradient(90deg, var(--info-accent), #fb923c); }
+.section-card.digit { background: var(--digit-bg); border-color: var(--digit-border); }
+.section-card.digit::before { background: linear-gradient(90deg, var(--digit-accent), #818cf8); }
+.section-card.intel { background: var(--intel-bg); border-color: var(--intel-border); }
+.section-card.intel::before { background: linear-gradient(90deg, var(--intel-accent), #34d399); }
+.section-card.warn { background: var(--warn-bg); border-color: var(--warn-border); }
+.section-card.warn::before { background: linear-gradient(90deg, var(--warn), #f87171); }
+.section-card.core { background: rgba(30,41,59,0.04); border-color: rgba(30,41,59,0.1); }
+.section-card.core::before { background: linear-gradient(90deg, #475569, #64748b); }
+.section-label { font-size: 0.58rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem; }
+.section-label::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.lbl-warn { color: var(--warn); }
+.lbl-warn::before { background: var(--warn); }
+.lbl-intel { color: var(--intel-accent); }
+.lbl-intel::before { background: var(--intel-accent); }
+.lbl-core { color: #475569; }
+.lbl-core::before { background: #475569; }
+.lbl-info { color: var(--info-accent); }
+.lbl-info::before { background: var(--info-accent); }
+.lbl-digit { color: var(--digit-accent); }
+.lbl-digit::before { background: var(--digit-accent); }
+.section-title { font-size: 0.92rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 0.65rem; line-height: 1.3; }
+.check-list { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.5rem; }
+.check-item { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.74rem; color: var(--text); line-height: 1.6; font-weight: 400; padding: 0.55rem 0.7rem; background: rgba(255,255,255,0.65); border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; user-select: none; }
+.check-item:hover { background: rgba(255,255,255,0.95); border-color: var(--border-strong); }
+.check-box { width: 16px; height: 16px; border-radius: 4px; border: 2px solid currentColor; flex-shrink: 0; margin-top: 0.05rem; opacity: 0.4; transition: all 0.2s; }
+.check-item.checked .check-box { opacity: 1; background: currentColor; color: #fff; }
+.check-item.checked .check-text { text-decoration: line-through; color: var(--text-muted); }
+.check-text { flex: 1; }
+.check-tag { font-size: 0.56rem; font-weight: 700; padding: 0.1rem 0.35rem; border-radius: 4px; flex-shrink: 0; margin-top: 0.05rem; }
+.tag-warn { background: rgba(252,165,165,0.3); color: var(--warn); }
+.tag-intel { background: rgba(16,185,129,0.2); color: var(--intel-accent); }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.9rem; }
+.col-card { border-radius: 12px; padding: 0.95rem 1rem; border: 1px solid; }
+.col-card.info-col { background: var(--info-bg); border-color: var(--info-border); }
+.col-card.digit-col { background: var(--digit-bg); border-color: var(--digit-border); }
+.col-card.intel-col { background: var(--intel-bg); border-color: var(--intel-border); }
+.col-title { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.35rem; }
+.col-title.info-col { color: var(--info-accent); }
+.col-title.digit-col { color: var(--digit-accent); }
+.col-title.intel-col { color: var(--intel-accent); }
+.col-num { font-family: 'Manrope', sans-serif; font-size: 1.5rem; font-weight: 900; line-height: 1; }
+.col-items { display: flex; flex-direction: column; gap: 0.5rem; }
+.col-item { display: flex; align-items: flex-start; gap: 0.35rem; font-size: 0.68rem; line-height: 1.5; color: var(--text); }
+.col-x { color: var(--warn); font-weight: 900; flex-shrink: 0; font-size: 0.75rem; }
+.col-check { color: var(--intel-accent); font-weight: 800; flex-shrink: 0; font-size: 0.75rem; }
+.example-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+.example-box { background: rgba(255,255,255,0.55); border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; }
+.example-label { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--warn); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.3rem; }
+.example-text { font-size: 0.72rem; color: var(--text); line-height: 1.65; font-weight: 400; }
+.example-text strong { color: var(--warn); font-weight: 700; }
+.example-text em { color: var(--text); font-style: normal; font-weight: 600; }
+.formula-box { background: rgba(30,41,59,0.04); border: 1px solid rgba(30,41,59,0.1); border-radius: 14px; padding: 1.1rem 1.4rem; text-align: center; }
+.formula-label { font-size: 0.6rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.6rem; }
+.formula-text { font-size: clamp(0.95rem, 2.5vw, 1.3rem); font-weight: 900; letter-spacing: -0.02em; color: #1e293b; line-height: 1.5; }
+.formula-text .old { color: var(--info-accent); text-decoration: line-through; }
+.formula-text .mid { color: #94a3b8; }
+.formula-text .new { color: var(--intel-accent); }
+.formula-note { font-size: 0.7rem; color: var(--text-muted); line-height: 1.65; margin-top: 0.6rem; font-weight: 400; }
+.key-q-list { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.5rem; }
+.key-q { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.74rem; line-height: 1.6; color: var(--text); padding: 0.55rem 0.7rem; background: rgba(255,255,255,0.6); border: 1px solid var(--border); border-radius: 10px; }
+.key-q-num { font-family: 'Manrope', sans-serif; font-size: 1.1rem; font-weight: 900; color: var(--digit-accent); flex-shrink: 0; line-height: 1; margin-top: 0.05rem; }
+.key-q-text { flex: 1; }
+.key-q-text strong { color: var(--text); }
+.summary-bar { grid-column: 1 / -1; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 14px; padding: 1.1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.summary-left { position: relative; z-index: 1; }
+.summary-eyebrow { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.12rem; }
+.summary-text { font-size: 0.92rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; line-height: 1.3; }
+.summary-right { position: relative; z-index: 1; display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: flex-end; }
+.sum-tag { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); color: #fff; padding: 0.18rem 0.6rem; border-radius: 100px; font-size: 0.62rem; font-weight: 600; white-space: nowrap; }
+.card-footer { padding: 0.9rem 2rem 1.3rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+.footer-left { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+.footer-link { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 0.22rem 0.55rem; color: #64748b; font-size: 0.65rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+.footer-link:hover { background: var(--white); border-color: var(--border-strong); color: var(--text); }
+@media (max-width: 720px) {
+  body { padding: 1rem 0.75rem 2rem; }
+  .card-body { grid-template-columns: 1fr; padding: 1.2rem 1rem; }
+  .section-card.full { grid-column: 1; }
+  .three-col { grid-template-columns: 1fr; }
+  .example-grid { grid-template-columns: 1fr; }
+  .summary-bar { flex-direction: column; align-items: flex-start; }
+  .summary-right { justify-content: flex-start; }
+  .insight-strip { padding: 0.9rem 1.2rem; }
+  .band { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="main-card">
+
+  <!-- TOP BAND -->
+  <div class="band">
+    <div class="band-left">
+      <div class="band-stage">Theo &nbsp;/&nbsp; Checklist</div>
+      <div class="band-title">AI Teaching Misalignment</div>
+      <div class="band-en">AI ÊïôÂ≠¶Èîô‰ΩçËØäÊñ≠</div>
+    </div>
+    <div class="band-right">
+      <div class="band-badge">
+        <div class="band-badge-icon">&#9888;</div>
+        <div class="band-badge-label">Diagnosis Checklist</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CORE INSIGHT -->
+  <div class="insight-strip">
+    <div class="insight-icon">&#9888;</div>
+    <div class="insight-text">
+      <strong>Core Misalignment:</strong> Using <em>Informatization methods</em> to invoke <em>Intelligentization tools</em>.
+      Treating AI like a search engine, using LLMs as secretaries ‚Ä?with no personal experience or RAG materials to back it up.
+      This "intelligentization" is just informatization in disguise.
+    </div>
+  </div>
+
+  <!-- CARD BODY -->
+  <div class="card-body">
+
+    <!-- PART 1: QUICK DIAGNOSIS -->
+    <div class="section-card warn full">
+      <div class="section-label lbl-warn">&#9679; Quick Self-Diagnosis ‚Ä?Common Misalignments</div>
+      <div class="section-title">Which of these apply to you?</div>
+      <div class="check-list">
+        <div class="check-item" onclick="this.classList.toggle('checked')">
+          <div class="check-box"></div>
+          <div class="check-text">You ask AI: "Write a lesson plan for Unit 1, Grade 6 English" ‚Ä?with no context about your students, class level, or teaching objectives</div>
+          <span class="check-tag tag-warn">Informatization</span>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('checked')">
+          <div class="check-box"></div>
+          <div class="check-text">Whatever AI generates, you use directly ‚Ä?no review, no personalization, no professional judgment applied</div>
+          <span class="check-tag tag-warn">Informatization</span>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('checked')">
+          <div class="check-box"></div>
+          <div class="check-text">You use AI to generate lesson plans and materials, but have no teaching reflection library or case base to feed it</div>
+          <span class="check-tag tag-warn">Digitalization</span>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('checked')">
+          <div class="check-box"></div>
+          <div class="check-text">No accumulation of personal teaching experience, class data, or student profiles ‚Ä?entirely dependent on AI output</div>
+          <span class="check-tag tag-warn">Digitalization</span>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('checked')">
+          <div class="check-box"></div>
+          <div class="check-text">Treating AI as the authority: whatever AI says must be right ‚Ä?no professional judgment applied</div>
+          <span class="check-tag tag-intel">Intelligentization</span>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('checked')">
+          <div class="check-box"></div>
+          <div class="check-text">Using AI to replace thinking: letting AI do everything instead of collaborating with AI</div>
+          <span class="check-tag tag-intel">Intelligentization</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART 2: THREE STAGE MISALIGNMENTS -->
+    <div class="section-card core full">
+      <div class="section-label lbl-core">&#9679; Three-Stage Misalignment Breakdown</div>
+      <div class="section-title">Which stage's method are you using incorrectly?</div>
+      <div class="three-col">
+        <div class="col-card info-col">
+          <div class="col-title info-col"><span class="col-num">01</span> &nbsp;Informatization Misuse</div>
+          <div class="col-items">
+            <div class="col-item"><span class="col-x">&#10005;</span><span>Treating AI like a search engine ‚Ä?ask, receive, use without thinking</span></div>
+            <div class="col-item"><span class="col-x">&#10005;</span><span>Vague prompts ‚Ä?no role, context, or objectives provided</span></div>
+            <div class="col-item"><span class="col-x">&#10005;</span><span>Using AI output directly without review or adjustment</span></div>
+            <div class="col-item"><span class="col-x">&#10005;</span><span>Human gives orders, AI executes ‚Ä?human is "master", AI is just a shallow tool</span></div>
+          </div>
+        </div>
+        <div class="col-card digit-col">
+          <div class="col-title digit-col"><span class="col-num">02</span> &nbsp;Digitalization Misuse</div>
+          <div class="col-items">
+            <div class="col-item"><span class="col-x">&#10005;</span><span>Using digital tools but no personal knowledge accumulation ‚Ä?AI has nothing to draw from</span></div>
+            <div class="col-item"><span class="col-x">&#10005;</span><span>No IAG system: AI doesn't know who you are or your students' characteristics</span></div>
+            <div class="col-item"><span class="col-x">&#10005;</span><span>Tools used, but experience remains fragmented ‚Ä?not structured or systematized</span></div>
+            <div class="col-item"><span class="col-x">&#10005;</span><span>No team collaboration or sharing ‚Ä?everyone reinventing the wheel</span></div>
+          </div>
+        </div>
+        <div class="col-card intel-col">
+          <div class="col-title intel-col"><span class="col-num">03</span> &nbsp;Intelligentization Misuse</div>
+          <div class="col-items">
+            <div class="col-item"><span class="col-x">&#10005;</span><span>Treating AI as the authority ‚Ä?AI says it, so it must be true</span></div>
+            <div class="col-item"><span class="col-x">&#10005;</span><span>Using AI to replace thinking, not amplify it ‚Ä?human gets lazier, not stronger</span></div>
+            <div class="col-item"><span class="col-x">&#10005;</span><span>No human-AI collaboration mindset: either not using AI, or letting AI do everything</span></div>
+            <div class="col-item"><span class="col-x">&#10005;</span><span>No personal AI workflow established ‚Ä?tools and capabilities scattered everywhere</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART 3: WRONG EXAMPLES -->
+    <div class="section-card info full">
+      <div class="section-label lbl-info">&#9679; Classic Case Studies ‚Ä?What's Wrong</div>
+      <div class="section-title">Which of these scenarios have you seen?</div>
+      <div class="example-grid">
+        <div class="example-box">
+          <div class="example-label">&#9888; Case A: Vague Prompt</div>
+          <div class="example-text">
+            "Write a lesson plan for Unit 1, Grade 6 English."
+            <br><br>
+            <strong>What's wrong:</strong> No class context, no student level, no teaching objectives.
+            AI can only give a generic template, not <em>your lesson plan</em>.
+          </div>
+        </div>
+        <div class="example-box">
+          <div class="example-label">&#9888; Case B: Copy-Paste Usage</div>
+          <div class="example-text">
+            AI generates 30 slides ‚Ä?you send them directly to students without any modification.
+            <br><br>
+            <strong>What's wrong:</strong> No integration of your teaching style, no adaptation to this specific class.
+            AI gives generic; <em>you</em> make it personal.
+          </div>
+        </div>
+        <div class="example-box">
+          <div class="example-label">&#9888; Case C: Zero Accumulation AI</div>
+          <div class="example-text">
+            Every lesson prep starts from scratch ‚Ä?no reflection library, no case base, no student records.
+            <br><br>
+            <strong>What's wrong:</strong> AI is guessing your situation every time. Real efficiency comes from:
+            <em>your accumulation √ó AI's capability</em>.
+          </div>
+        </div>
+        <div class="example-box">
+          <div class="example-label">&#9888; Case D: Authority Dependence</div>
+          <div class="example-text">
+            AI says this concept is hard for students ‚Ä?you believe it, without checking your own records.
+            <br><br>
+            <strong>What's wrong:</strong> AI suggestions need your experience to validate.
+            <em>Your experience + AI capability = optimal solution</em>, not <em>AI = answer</em>.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART 4: RIGHT APPROACH -->
+    <div class="section-card intel">
+      <div class="section-label lbl-intel">&#9679; The Right Approach</div>
+      <div class="section-title">How to use intelligent tools correctly</div>
+      <div class="check-list">
+        <div class="check-item" style="background:rgba(16,185,129,0.07);border-color:rgba(16,185,129,0.2);" onclick="this.classList.toggle('checked')">
+          <div class="check-box" style="color:var(--intel-accent);"></div>
+          <div class="check-text"><strong style="color:var(--intel-accent)">Give AI context first:</strong> Describe class situation, student level, and objectives before generating</div>
+        </div>
+        <div class="check-item" style="background:rgba(16,185,129,0.07);border-color:rgba(16,185,129,0.2);" onclick="this.classList.toggle('checked')">
+          <div class="check-box" style="color:var(--intel-accent);"></div>
+          <div class="check-text"><strong style="color:var(--intel-accent)">AI drafts, you optimize:</strong> AI produces draft, you review, personalize, and refine</div>
+        </div>
+        <div class="check-item" style="background:rgba(16,185,129,0.07);border-color:rgba(16,185,129,0.2);" onclick="this.classList.toggle('checked')">
+          <div class="check-box" style="color:var(--intel-accent);"></div>
+          <div class="check-text"><strong style="color:var(--intel-accent)">Build your personal RAG:</strong> Use Obsidian / Feishu to accumulate reflections, cases, and student data ‚Ä?let AI know you</div>
+        </div>
+        <div class="check-item" style="background:rgba(16,185,129,0.07);border-color:rgba(16,185,129,0.2);" onclick="this.classList.toggle('checked')">
+          <div class="check-box" style="color:var(--intel-accent);"></div>
+          <div class="check-text"><strong style="color:var(--intel-accent)">Amplify, don't replace:</strong> AI handles repetition, you focus on creation; AI suggests options, you make the judgment</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART 5: CORE FORMULA -->
+    <div class="section-card core">
+      <div class="section-label lbl-core">&#9679; Core Formula</div>
+      <div class="section-title">The equation for real efficiency</div>
+      <div class="formula-box">
+        <div class="formula-label">Your AI Effectiveness =</div>
+        <div class="formula-text">
+          <span class="old">Your Experience (IAG)</span>
+          <span class="mid">&nbsp;&#215;&nbsp;</span>
+          <span class="new">&#129302; AI Capability</span>
+        </div>
+        <div class="formula-note">
+          Without the left side, the right side is a house of cards.<br>
+          Without the right side, even the deepest experience can't scale efficiently.
+        </div>
+      </div>
+    </div>
+
+    <!-- PART 6: KEY QUESTIONS -->
+    <div class="section-card digit full">
+      <div class="section-label lbl-digit">&#9679; Three Core Questions</div>
+      <div class="section-title">Ask yourself these before every AI interaction</div>
+      <div class="key-q-list">
+        <div class="key-q">
+          <div class="key-q-num">Q1</div>
+          <div class="key-q-text"><strong>Did I give AI enough context?</strong> (Class situation, student level, objectives, time allocation) ‚Ä?without context, AI gives generic output.</div>
+        </div>
+        <div class="key-q">
+          <div class="key-q-num">Q2</div>
+          <div class="key-q-text"><strong>Can I judge whether AI's output is correct?</strong> ‚Ä?if you trust AI blindly, your own professional accumulation is insufficient.</div>
+        </div>
+        <div class="key-q">
+          <div class="key-q-num">Q3</div>
+          <div class="key-q-text"><strong>Did I accumulate this output in my knowledge base?</strong> ‚Ä?if not, next time you start from zero. No compounding, ever.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="summary-bar">
+      <div class="summary-left">
+        <div class="summary-eyebrow">One-Line Summary</div>
+        <div class="summary-text">AI Efficiency = Your Accumulation &#215; AI Capability &nbsp;|&nbsp; Without accumulation, AI = Zero</div>
+      </div>
+      <div class="summary-right">
+        <span class="sum-tag">Context</span>
+        <span class="sum-tag">Experience Check</span>
+        <span class="sum-tag">Personal RAG</span>
+        <span class="sum-tag">Human-AI Team</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="card-footer">
+    <div class="footer-left">Theo &nbsp;&middot;&nbsp; AI Teaching Misalignment Checklist &nbsp;&middot;&nbsp; 2026</div>
+    <div>
+      <a href="cognitive-map-en.html" class="footer-link">&#8592; Cognitive Map</a>
+      <a href="informatization-en.html" class="footer-link">Informatization</a>
+      <a href="digitalization-en.html" class="footer-link">Digitalization</a>
+      <a href="intelligentization-en.html" class="footer-link">Intelligentization</a>
+      <a href="action-path-en.html" class="footer-link">Action Path</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+document.querySelectorAll('.check-item').forEach(function(item) {
+  item.addEventListener('click', function() {
+    this.classList.toggle('checked');
+  });
+});
+</script>
+
+</body>
+</html>
