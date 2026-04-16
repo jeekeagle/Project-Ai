@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>闂�鐢佃�� 鈥� 宸ュ叿浠嬬粛鍗�</title>
+  <title>闪电说 — 工具介绍卡</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -79,7 +79,7 @@
     .tip-text { font-size: 12px; color: #78350f; line-height: 1.5; }
     .scenarios { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
     .scenario { font-size: 12px; color: var(--text-secondary); background: #f5f5f5; border: 1px solid var(--border); padding: 5px 12px; border-radius: 16px; }
-    .scenario::before { content: '鈼� '; color: var(--accent); font-size: 10px; }
+    .scenario::before { content: '◈ '; color: var(--accent); font-size: 10px; }
     .footer { padding-top: 18px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
     .footer-left { font-size: 11px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
     .footer-right { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-muted); }
@@ -91,12 +91,7 @@
       .two-col { grid-template-columns: 1fr; }
       .title { font-size: 22px; }
     }
- 
- .topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,0.08);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
- .topbar a{font-size:.82rem;color:#7c3aed;text-decoration:none;font-weight:600;letter-spacing:.02em}
- .topbar a:hover{text-decoration:underline}
- body{padding-top:56px}
-
+  .topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,0.08);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)} .topbar a{font-size:.82rem;color:#7c3aed;text-decoration:none;font-weight:600;letter-spacing:.02em} .topbar a:hover{text-decoration:underline} body{padding-top:56px}
 </style>
 </head>
 <body>
@@ -107,54 +102,54 @@
         <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
         Voice Input
       </span>
-      <h1 class="title">闂�鐢佃��</h1>
-      <p class="subtitle">璇�闊冲疄鏃惰浆鏂囧瓧 路 鏈�鍦扮�荤嚎妯″瀷 路 鏅鸿兘鏂�鍙ユ爣鐐�</p>
+      <h1 class="title">闪电说</h1>
+      <p class="subtitle">语音实时转文字 · 本地离线模型 · 智能断句标点</p>
     </header>
     <div class="feature-row">
       <div class="feature-card">
         <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></div>
-        <div class="feature-title">瀹炴椂鍚�鍐�</div>
-        <div class="feature-desc">涓�鑻辨枃娣疯緭<br>璇磋瘽鍗虫樉绀�</div>
+        <div class="feature-title">实时听写</div>
+        <div class="feature-desc">中英文混输<br>说话即显示</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-        <div class="feature-title">鏈�鍦扮�荤嚎</div>
-        <div class="feature-desc">涓嬭浇妯″瀷鍚庢柇缃戝彲鐢�<br>淇濇姢鏁欏�﹂殣绉�</div>
+        <div class="feature-title">本地离线</div>
+        <div class="feature-desc">下载模型后断网可用<br>保护教学隐私</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <div class="feature-title">鏅鸿兘鏍囩偣</div>
-        <div class="feature-desc">鑷�鍔ㄦ柇鍙�<br>璇�璋冨仠椤垮姞鏍囩偣</div>
+        <div class="feature-title">智能标点</div>
+        <div class="feature-desc">自动断句<br>语调停顿加标点</div>
       </div>
     </div>
     <div class="two-col">
       <div>
-        <h2 class="section-title">鍚�鍔ㄦ祦绋�</h2>
+        <h2 class="section-title">启动流程</h2>
         <div class="workflow">
-          <div class="step"><span class="step-num">1</span><span class="step-text">涓嬭浇瀹夎�� shandianshuo.cn</span></div>
-          <div class="step"><span class="step-num">2</span><span class="step-text">鎺堜簣楹﹀厠椋庢潈闄愶紙Windows 闅愮�佽�剧疆锛�</span></div>
-          <div class="step"><span class="step-num">3</span><span class="step-text">璁剧疆涓�涓嬭浇绂荤嚎璇�闊虫ā鍨�</span></div>
-          <div class="step"><span class="step-num">4</span><span class="step-text">鎸夊揩鎹烽敭鍚�鍔�锛屽紑濮嬭�磋瘽</span></div>
+          <div class="step"><span class="step-num">1</span><span class="step-text">下载安装 shandianshuo.cn</span></div>
+          <div class="step"><span class="step-num">2</span><span class="step-text">授予麦克风权限（Windows 隐私设置）</span></div>
+          <div class="step"><span class="step-num">3</span><span class="step-text">设置中下载离线语音模型</span></div>
+          <div class="step"><span class="step-num">4</span><span class="step-text">按快捷键启动，开始说话</span></div>
         </div>
       </div>
       <div>
-        <h2 class="section-title">浣跨敤璐村＋</h2>
+        <h2 class="section-title">使用贴士</h2>
         <div class="tips">
-          <div class="tip"><span class="tip-bullet">馃挕</span><span class="tip-text">閰嶅悎棰嗗す楹︼紝璇嗗埆鐜囦粠 90% 鈫� 98%+</span></div>
-          <div class="tip"><span class="tip-bullet">馃摉</span><span class="tip-text">鍦ㄧ敤鎴疯瘝鍏搁�勮�剧敓鍍昏瘝锛堜汉鍚�/鏈�璇�锛�</span></div>
-          <div class="tip"><span class="tip-bullet">鈿�</span><span class="tip-text">鎼�閰� Listary 涓�閿�鍞よ捣锛�"鎼滅储-鍚�鍔�-杈撳叆"鍏ㄨ嚜鍔ㄥ寲</span></div>
+          <div class="tip"><span class="tip-bullet">💡</span><span class="tip-text">配合领夹麦，识别率从 90% → 98%+</span></div>
+          <div class="tip"><span class="tip-bullet">📖</span><span class="tip-text">在用户词典预设生僻词（人名/术语）</span></div>
+          <div class="tip"><span class="tip-bullet">⚡</span><span class="tip-text">搭配 Listary 一键唤起，"搜索-启动-输入"全自动化</span></div>
         </div>
       </div>
     </div>
     <div class="scenarios">
-      <span class="scenario">璇惧悗鏁欏�﹀弽鎬�</span>
-      <span class="scenario">寰�璇惧瓧骞曠敓鎴�</span>
-      <span class="scenario">鏁欑爺浼氳��绾�瑕�</span>
-      <span class="scenario">铻嶅悎鏁欒偛鍚�杈�</span>
+      <span class="scenario">课后教学反思</span>
+      <span class="scenario">微课字幕生成</span>
+      <span class="scenario">教研会议纪要</span>
+      <span class="scenario">融合教育听辅</span>
     </div>
     <footer class="footer">
-      <span class="footer-left">shandianshuo.cn 路 Windows</span>
-      <div class="footer-right"><span class="dot"></span>鏈�鍦颁紭鍏�</div>
+      <span class="footer-left">shandianshuo.cn · Windows</span>
+      <div class="footer-right"><span class="dot"></span>本地优先</div>
     </footer>
   </div>
 </body>
