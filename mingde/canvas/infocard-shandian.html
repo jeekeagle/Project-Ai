@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>闪电说 — 工具介绍卡</title>
+  <title>闪电�?�?工具介绍�?/title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
@@ -26,7 +26,12 @@
       --radius: 12px;
     }
 
+    .topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
+    .topbar a{font-size:.82rem;color:var(--accent);text-decoration:none;font-weight:600;letter-spacing:.02em}
+    .topbar a:hover{text-decoration:underline}
+    body{padding-top:56px}
     body {
+
       font-family: 'Noto Serif SC', 'Source Han Serif CN', Georgia, serif;
       background: var(--bg);
       min-height: 100vh;
@@ -285,7 +290,7 @@
     }
 
     .scenario::before {
-      content: '◈ ';
+      content: '�?';
       color: var(--accent);
       font-size: 10px;
     }
@@ -344,14 +349,16 @@
   </style>
 </head>
 <body>
+  <div class="topbar"><a href="../index.html">&#8592; ������ҳ</a></div>
+
   <div class="card">
     <header class="header">
       <span class="tag">
         <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
         Voice Input
       </span>
-      <h1 class="title">闪电说</h1>
-      <p class="subtitle">语音实时转文字 · 本地离线模型 · 智能断句标点</p>
+      <h1 class="title">闪电�?/h1>
+      <p class="subtitle">语音实时转文�?· 本地离线模型 · 智能断句标点</p>
     </header>
 
     <!-- 3 Feature Cards -->
@@ -361,21 +368,21 @@
           <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
         </div>
         <div class="feature-title">实时听写</div>
-        <div class="feature-desc">中英文混输<br>说话即显示</div>
+        <div class="feature-desc">中英文混�?br>说话即显�?/div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
           <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
         <div class="feature-title">本地离线</div>
-        <div class="feature-desc">下载模型后断网可用<br>保护教学隐私</div>
+        <div class="feature-desc">下载模型后断网可�?br>保护教学隐私</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
         <div class="feature-title">智能标点</div>
-        <div class="feature-desc">自动断句<br>语调停顿加标点</div>
+        <div class="feature-desc">自动断句<br>语调停顿加标�?/div>
       </div>
     </div>
 
@@ -390,15 +397,15 @@
           </div>
           <div class="step">
             <span class="step-num">2</span>
-            <span class="step-text">授予麦克风权限（Windows 隐私设置）</span>
+            <span class="step-text">授予麦克风权限（Windows 隐私设置�?/span>
           </div>
           <div class="step">
             <span class="step-num">3</span>
-            <span class="step-text">设置中下载离线语音模型</span>
+            <span class="step-text">设置中下载离线语音模�?/span>
           </div>
           <div class="step">
             <span class="step-num">4</span>
-            <span class="step-text">按快捷键启动，开始说话</span>
+            <span class="step-text">按快捷键启动，开始说�?/span>
           </div>
         </div>
       </div>
@@ -408,14 +415,14 @@
         <div class="tips">
           <div class="tip">
             <span class="tip-bullet">💡</span>
-            <span class="tip-text">配合领夹麦，识别率从 90% → 98%+</span>
+            <span class="tip-text">配合领夹麦，识别率从 90% �?98%+</span>
           </div>
           <div class="tip">
             <span class="tip-bullet">📖</span>
-            <span class="tip-text">在用户词典预设生僻词（人名/术语）</span>
+            <span class="tip-text">在用户词典预设生僻词（人�?术语�?/span>
           </div>
           <div class="tip">
-            <span class="tip-bullet">⚡</span>
+            <span class="tip-bullet">�?/span>
             <span class="tip-text">搭配 Listary 一键唤起，"搜索-启动-输入"全自动化</span>
           </div>
         </div>
@@ -424,7 +431,7 @@
 
     <!-- Scenarios -->
     <div class="scenarios">
-      <span class="scenario">课后教学反思</span>
+      <span class="scenario">课后教学反�?/span>
       <span class="scenario">微课字幕生成</span>
       <span class="scenario">教研会议纪要</span>
       <span class="scenario">融合教育听辅</span>

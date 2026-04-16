@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>天若OCR — 工具介绍卡</title>
+  <title>天若OCR �?工具介绍�?/title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
@@ -26,7 +26,12 @@
       --radius: 12px;
     }
 
+    .topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
+    .topbar a{font-size:.82rem;color:var(--accent);text-decoration:none;font-weight:600;letter-spacing:.02em}
+    .topbar a:hover{text-decoration:underline}
+    body{padding-top:56px}
     body {
+
       font-family: 'Noto Serif SC', 'Source Han Serif CN', Georgia, serif;
       background: var(--bg);
       min-height: 100vh;
@@ -242,7 +247,7 @@
     }
 
     .info-item::before {
-      content: '—';
+      content: '�?;
       color: var(--text-muted);
       font-size: 10px;
     }
@@ -338,11 +343,13 @@
   </style>
 </head>
 <body>
+  <div class="topbar"><a href="../index.html">&#8592; ������ҳ</a></div>
+
   <div class="card">
     <header class="header">
       <span class="tag">Windows 工具</span>
       <h1 class="title">天若OCR</h1>
-      <p class="subtitle">截图即识别 · 快捷键驱动 · 文字/公式/表格全覆盖</p>
+      <p class="subtitle">截图即识�?· 快捷键驱�?· 文字/公式/表格全覆�?/p>
     </header>
 
     <!-- Features + Tips -->
@@ -352,37 +359,37 @@
         <div class="features">
           <div class="feature">
             <span class="feature-dot"></span>
-            <span class="feature-text"><strong>文字识别</strong> — 截图转可编辑文本</span>
+            <span class="feature-text"><strong>文字识别</strong> �?截图转可编辑文本</span>
           </div>
           <div class="feature">
             <span class="feature-dot"></span>
-            <span class="feature-text"><strong>公式识别</strong> — 输出 LaTeX 源码</span>
+            <span class="feature-text"><strong>公式识别</strong> �?输出 LaTeX 源码</span>
           </div>
           <div class="feature">
             <span class="feature-dot"></span>
-            <span class="feature-text"><strong>表格识别</strong> — 导出 Excel 格式</span>
+            <span class="feature-text"><strong>表格识别</strong> �?导出 Excel 格式</span>
           </div>
           <div class="feature">
             <span class="feature-dot"></span>
-            <span class="feature-text"><strong>排版优化</strong> — 自动去除多余空行</span>
+            <span class="feature-text"><strong>排版优化</strong> �?自动去除多余空行</span>
           </div>
         </div>
       </div>
 
       <div>
-        <h2 class="section-title">快速上手</h2>
+        <h2 class="section-title">快速上�?/h2>
         <div class="tips-panel">
           <div class="tip">
             <span class="tip-num">1</span>
-            <span class="tip-text">下载解压到任意目录，双击运行主程序</span>
+            <span class="tip-text">下载解压到任意目录，双击运行主程�?/span>
           </div>
           <div class="tip">
             <span class="tip-num">2</span>
-            <span class="tip-text">按 <span class="key-badge">F4</span> 启动截图框，拖动选中区域</span>
+            <span class="tip-text">�?<span class="key-badge">F4</span> 启动截图框，拖动选中区域</span>
           </div>
           <div class="tip">
             <span class="tip-num">3</span>
-            <span class="tip-text">右键托盘图标 → 设置 → 接口，切换识别引擎（搜狗/腾讯/百度）</span>
+            <span class="tip-text">右键托盘图标 �?设置 �?接口，切换识别引擎（搜狗/腾讯/百度�?/span>
           </div>
         </div>
       </div>
@@ -394,23 +401,22 @@
         <div class="info-title">安装要求</div>
         <div class="info-row-items">
           <div class="info-item">.NET Framework 4.0+</div>
-          <div class="info-item">绿色软件，解压即用</div>
+          <div class="info-item">绿色软件，解压即�?/div>
           <div class="info-item">
             开源版 GitHub 免费
             <span class="version-tag">Free</span>
           </div>
           <div class="info-item">
-            专业版官网授权
-            <span class="version-tag">¥</span>
+            专业版官网授�?            <span class="version-tag">¥</span>
           </div>
         </div>
       </div>
       <div class="info-block">
-        <div class="info-title">快捷键</div>
+        <div class="info-title">快捷�?/div>
         <div class="info-row-items">
           <div class="info-item"><span class="key-badge">F4</span> 全局截图识别</div>
-          <div class="info-item">托盘右键 → 设置</div>
-          <div class="info-item">建议开启「开机自启」</div>
+          <div class="info-item">托盘右键 �?设置</div>
+          <div class="info-item">建议开启「开机自启�?/div>
         </div>
       </div>
     </div>
@@ -419,7 +425,7 @@
     <div class="scenarios">
       <span class="scenario">📚 课件素材收集</span>
       <span class="scenario">✏️ 数学公式录入</span>
-      <span class="scenario">📜 古籍电子化</span>
+      <span class="scenario">📜 古籍电子�?/span>
       <span class="scenario">🌐 外文翻译辅助</span>
     </div>
 
@@ -427,8 +433,7 @@
       <span class="footer-left">tianruoocr · Windows</span>
       <div class="footer-right">
         <span class="dot"></span>
-        开机即用
-      </div>
+        开机即�?      </div>
     </footer>
   </div>
 </body>

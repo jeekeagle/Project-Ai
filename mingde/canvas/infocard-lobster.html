@@ -27,6 +27,10 @@
       --radius: 12px;
     }
 
+    .topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
+    .topbar a{font-size:.82rem;color:var(--accent);text-decoration:none;font-weight:600;letter-spacing:.02em}
+    .topbar a:hover{text-decoration:underline}
+    body{padding-top:56px}
     body {
       font-family: 'Noto Serif SC', 'Source Han Serif CN', Georgia, serif;
       background: var(--bg);
@@ -372,6 +376,7 @@
   </style>
 </head>
 <body>
+  <div class="topbar"><a href="../index.html">&#8592; 返回主页</a></div>
   <div class="card">
     <header class="header">
       <span class="tag">

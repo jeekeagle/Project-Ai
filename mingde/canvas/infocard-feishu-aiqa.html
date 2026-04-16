@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>飞书智能问答 — 工具介绍卡</title>
+  <title>飞书智能问答 �?工具介绍�?/title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
@@ -27,7 +27,12 @@
       --radius: 12px;
     }
 
+    .topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
+    .topbar a{font-size:.82rem;color:var(--accent);text-decoration:none;font-weight:600;letter-spacing:.02em}
+    .topbar a:hover{text-decoration:underline}
+    body{padding-top:56px}
     body {
+
       font-family: 'Noto Serif SC', 'Source Han Serif CN', Georgia, serif;
       background: var(--bg);
       min-height: 100vh;
@@ -277,7 +282,7 @@
     }
 
     .example::before {
-      content: '✦';
+      content: '�?;
       color: var(--accent);
       margin-right: 6px;
       font-size: 10px;
@@ -411,6 +416,8 @@
   </style>
 </head>
 <body>
+  <div class="topbar"><a href="../index.html">&#8592; ������ҳ</a></div>
+
   <div class="card">
     <header class="header">
       <span class="tag">
@@ -418,7 +425,7 @@
         AI Q&A
       </span>
       <h1 class="title">飞书智能问答</h1>
-      <p class="subtitle">私有知识 RAG 检索 · 信源逐句溯源 · 跨文档语义汇总</p>
+      <p class="subtitle">私有知识 RAG 检�?· 信源逐句溯源 · 跨文档语义汇�?/p>
     </header>
 
     <!-- 4 Core Capabilities -->
@@ -430,7 +437,7 @@
         </div>
         <div class="feature-body">
           <div class="feature-title">RAG 精准回答</div>
-          <div class="feature-desc">基于私有文档回答<br>拒绝大模型幻觉</div>
+          <div class="feature-desc">基于私有文档回答<br>拒绝大模型幻�?/div>
         </div>
       </div>
       <div class="feature">
@@ -447,8 +454,8 @@
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
         </div>
         <div class="feature-body">
-          <div class="feature-title">多模态解析</div>
-          <div class="feature-desc">PDF·多维表格<br>图片文字·代码块</div>
+          <div class="feature-title">多模态解�?/div>
+          <div class="feature-desc">PDF·多维表格<br>图片文字·代码�?/div>
         </div>
       </div>
       <div class="feature">
@@ -456,7 +463,7 @@
           <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </div>
         <div class="feature-body">
-          <div class="feature-title">跨文档汇总</div>
+          <div class="feature-title">跨文档汇�?/div>
           <div class="feature-desc">多文件夹横向对比<br>总结提炼关键信息</div>
         </div>
       </div>
@@ -470,17 +477,17 @@
         <div class="pipe-title">建库</div>
         <div class="pipe-desc">上传 Word / PDF / Excel<br>到飞书知识库</div>
       </div>
-      <div class="pipe-arrow">→</div>
+      <div class="pipe-arrow">�?/div>
       <div class="pipe-step">
         <div class="pipe-num">2</div>
         <div class="pipe-title">挂载范围</div>
-        <div class="pipe-desc">关联知识库<br>限定仅搜私有文档</div>
+        <div class="pipe-desc">关联知识�?br>限定仅搜私有文档</div>
       </div>
-      <div class="pipe-arrow">→</div>
+      <div class="pipe-arrow">�?/div>
       <div class="pipe-step">
         <div class="pipe-num">3</div>
         <div class="pipe-title">精确提问</div>
-        <div class="pipe-desc">点击 [1] 验证原文<br>审核后直接引用</div>
+        <div class="pipe-desc">点击 [1] 验证原文<br>审核后直接引�?/div>
       </div>
     </div>
 
@@ -491,8 +498,8 @@
         <div class="examples">
           <div class="example">根据往年课件和新课标，列一个初三第一单元备课提纲</div>
           <div class="example">从习题集中挑 3 道适合课堂练习的简单题</div>
-          <div class="example">这学期小明同学表现有哪些主要波动？</div>
-          <div class="example">关于"大单元教学"的主流实施策略有哪些？</div>
+          <div class="example">这学期小明同学表现有哪些主要波动�?/div>
+          <div class="example">关于"大单元教�?的主流实施策略有哪些�?/div>
         </div>
       </div>
 
@@ -501,15 +508,15 @@
         <div class="tips">
           <div class="tip">
             <span class="tip-bullet">🔒</span>
-            <span class="tip-text">文档未分享则其他人不可见，权限自动隔离</span>
+            <span class="tip-text">文档未分享则其他人不可见，权限自动隔�?/span>
           </div>
           <div class="tip">
             <span class="tip-bullet">📷</span>
-            <span class="tip-text">扫描件 PDF 建议先用天若 OCR 转文字</span>
+            <span class="tip-text">扫描�?PDF 建议先用天若 OCR 转文�?/span>
           </div>
           <div class="tip">
             <span class="tip-bullet">✏️</span>
-            <span class="tip-text">文档多设 H1/H2 标题层级，检索精度翻倍</span>
+            <span class="tip-text">文档多设 H1/H2 标题层级，检索精度翻�?/span>
           </div>
         </div>
       </div>
@@ -517,7 +524,7 @@
 
     <!-- Scenarios -->
     <div class="scenarios">
-      <span class="scenario">📖 学科数字图书馆</span>
+      <span class="scenario">📖 学科数字图书�?/span>
       <span class="scenario">🤖 学生自助答疑</span>
       <span class="scenario">📊 作业表现分析</span>
       <span class="scenario">📚 科研综述辅助</span>
@@ -527,8 +534,7 @@
       <span class="footer-left">feishu.cn · 内置功能</span>
       <div class="footer-right">
         <span class="dot"></span>
-        零配置即用
-      </div>
+        零配置即�?      </div>
     </footer>
   </div>
 </body>

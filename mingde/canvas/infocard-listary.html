@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Listary — 工具介绍卡</title>
+  <title>Listary �?工具介绍�?/title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
@@ -27,7 +27,12 @@
       --radius: 12px;
     }
 
+    .topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
+    .topbar a{font-size:.82rem;color:var(--accent);text-decoration:none;font-weight:600;letter-spacing:.02em}
+    .topbar a:hover{text-decoration:underline}
+    body{padding-top:56px}
     body {
+
       font-family: 'Noto Serif SC', 'Source Han Serif CN', Georgia, serif;
       background: var(--bg);
       min-height: 100vh;
@@ -363,6 +368,8 @@
   </style>
 </head>
 <body>
+  <div class="topbar"><a href="../index.html">&#8592; ������ҳ</a></div>
+
   <div class="card">
     <header class="header">
       <span class="tag">
@@ -370,7 +377,7 @@
         File Search
       </span>
       <h1 class="title">Listary</h1>
-      <p class="subtitle">Windows 文件秒搜 · 对话框快捷跳目录 · 自定义网络搜索</p>
+      <p class="subtitle">Windows 文件秒搜 · 对话框快捷跳目录 · 自定义网络搜�?/p>
     </header>
 
     <!-- 4 Core Features -->
@@ -382,7 +389,7 @@
         </div>
         <div class="feature-body">
           <div class="feature-title">毫秒全盘搜索</div>
-          <div class="feature-desc">输入部分字符或拼音缩写<br>几十万文件瞬间定位</div>
+          <div class="feature-desc">输入部分字符或拼音缩�?br>几十万文件瞬间定�?/div>
         </div>
       </div>
       <div class="feature">
@@ -400,7 +407,7 @@
         </div>
         <div class="feature-body">
           <div class="feature-title">Actions 动作菜单</div>
-          <div class="feature-desc">右键或 Ctrl+O<br>复制路径 / 打开所在文件夹</div>
+          <div class="feature-desc">右键�?Ctrl+O<br>复制路径 / 打开所在文件夹</div>
         </div>
       </div>
       <div class="feature">
@@ -409,7 +416,7 @@
         </div>
         <div class="feature-body">
           <div class="feature-title">网络搜索</div>
-          <div class="feature-desc">输入 g + 关键词<br>直接调起浏览器 Google</div>
+          <div class="feature-desc">输入 g + 关键�?br>直接调起浏览�?Google</div>
         </div>
       </div>
     </div>
@@ -421,47 +428,47 @@
         <div class="workflow">
           <div class="step">
             <span class="step-num">1</span>
-            <span class="step-text">下载 listary.net → 安装到 D:\</span>
+            <span class="step-text">下载 listary.net �?安装�?D:\</span>
           </div>
           <div class="step">
             <span class="step-num">2</span>
-            <span class="step-text">允许磁盘索引扫描（快速搜索基础）</span>
+            <span class="step-text">允许磁盘索引扫描（快速搜索基础�?/span>
           </div>
           <div class="step">
             <span class="step-num">3</span>
-            <span class="step-text">托盘图标 → Options → Language → 简体中文</span>
+            <span class="step-text">托盘图标 �?Options �?Language �?简体中�?/span>
           </div>
           <div class="step">
             <span class="step-num">4</span>
-            <span class="step-text">双击 Ctrl 开始搜索</span>
+            <span class="step-text">双击 Ctrl 开始搜�?/span>
           </div>
         </div>
       </div>
 
       <div>
-        <h2 class="section-title">自定义网络搜索</h2>
+        <h2 class="section-title">自定义网络搜�?/h2>
         <div class="advanced">
           <div class="advanced-title">进阶配置</div>
           <div class="custom-search">
             <div class="search-row">
               <span class="search-key">g</span>
-              <span>→ Google 搜索</span>
+              <span>�?Google 搜索</span>
             </div>
             <div class="search-row">
               <span class="search-key">bd</span>
-              <span>→ 百度搜索</span>
+              <span>�?百度搜索</span>
             </div>
             <div class="search-row">
               <span class="search-key">cnki</span>
-              <span>→ 知网搜索</span>
+              <span>�?知网搜索</span>
             </div>
             <div class="search-row">
               <span class="search-key">db</span>
-              <span>→ 豆瓣搜索</span>
+              <span>�?豆瓣搜索</span>
             </div>
           </div>
           <div class="search-example" style="margin-top: 10px; font-size: 11px; color: var(--text-muted);">
-            双击 Ctrl → cnki 相对论 → 自动打开知网
+            双击 Ctrl �?cnki 相对�?�?自动打开知网
           </div>
         </div>
       </div>
@@ -469,8 +476,8 @@
 
     <!-- Scenarios -->
     <div class="scenarios">
-      <span class="scenario">📂 课件极速调用</span>
-      <span class="scenario">📁 作业快速归档</span>
+      <span class="scenario">📂 课件极速调�?/span>
+      <span class="scenario">📁 作业快速归�?/span>
       <span class="scenario">📄 论文定位管理</span>
     </div>
 
@@ -478,8 +485,7 @@
       <span class="footer-left">listary.net · Windows</span>
       <div class="footer-right">
         <span class="dot"></span>
-        开机自启
-      </div>
+        开机自�?      </div>
     </footer>
   </div>
 </body>

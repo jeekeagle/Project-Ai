@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>飞书知识库 — 工具介绍卡</title>
+  <title>飞书知识�?�?工具介绍�?/title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
@@ -27,7 +27,12 @@
       --radius: 12px;
     }
 
+    .topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
+    .topbar a{font-size:.82rem;color:var(--accent);text-decoration:none;font-weight:600;letter-spacing:.02em}
+    .topbar a:hover{text-decoration:underline}
+    body{padding-top:56px}
     body {
+
       font-family: 'Noto Serif SC', 'Source Han Serif CN', Georgia, serif;
       background: var(--bg);
       min-height: 100vh;
@@ -370,13 +375,15 @@
   </style>
 </head>
 <body>
+  <div class="topbar"><a href="../index.html">&#8592; ������ҳ</a></div>
+
   <div class="card">
     <header class="header">
       <span class="tag">
         <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
         Knowledge Base
       </span>
-      <h1 class="title">飞书知识库</h1>
+      <h1 class="title">飞书知识�?/h1>
       <p class="subtitle">树状知识体系 · 多维表格 · 双向链接 · 精细权限</p>
     </header>
 
@@ -389,7 +396,7 @@
         </div>
         <div class="feature-body">
           <div class="feature-title">树状目录</div>
-          <div class="feature-desc">拖拽调层级<br>一眼看清知识全貌</div>
+          <div class="feature-desc">拖拽调层�?br>一眼看清知识全�?/div>
         </div>
       </div>
       <div class="feature">
@@ -416,40 +423,40 @@
         </div>
         <div class="feature-body">
           <div class="feature-title">精细权限</div>
-          <div class="feature-desc">仅阅读 / 可编辑<br>/ 禁止导出</div>
+          <div class="feature-desc">仅阅�?/ 可编�?br>/ 禁止导出</div>
         </div>
       </div>
     </div>
 
     <!-- Workflow concept bar -->
     <div class="workflow-bar">
-      <span class="workflow-item">📥 收件箱<br><span style="font-size:11px;color:var(--text-muted)">临时存放</span></span>
-      <span class="workflow-arrow">→</span>
-      <span class="workflow-item">📚 知识库<br><span style="font-size:11px;color:var(--text-muted)">系统整理</span></span>
-      <span class="workflow-arrow">→</span>
+      <span class="workflow-item">📥 收件�?br><span style="font-size:11px;color:var(--text-muted)">临时存放</span></span>
+      <span class="workflow-arrow">�?/span>
+      <span class="workflow-item">📚 知识�?br><span style="font-size:11px;color:var(--text-muted)">系统整理</span></span>
+      <span class="workflow-arrow">�?/span>
       <span class="workflow-item">📤 分享<br><span style="font-size:11px;color:var(--text-muted)">教学输出</span></span>
     </div>
 
     <!-- Start + Tips -->
     <div class="two-col">
       <div>
-        <h2 class="section-title">快速上手</h2>
+        <h2 class="section-title">快速上�?/h2>
         <div class="steps">
           <div class="step">
             <span class="step-num">1</span>
-            <span class="step-text">飞书客户端 → 云文档 → 知识库</span>
+            <span class="step-text">飞书客户�?�?云文�?�?知识�?/span>
           </div>
           <div class="step">
             <span class="step-num">2</span>
-            <span class="step-text">点击"新建" → 创建知识库（可选教育模板）</span>
+            <span class="step-text">点击"新建" �?创建知识库（可选教育模板）</span>
           </div>
           <div class="step">
             <span class="step-num">3</span>
-            <span class="step-text">Word / Markdown 一键批量导入</span>
+            <span class="step-text">Word / Markdown 一键批量导�?/span>
           </div>
           <div class="step">
             <span class="step-num">4</span>
-            <span class="step-text">手机 App 拍照扫描 → 自动识别入库</span>
+            <span class="step-text">手机 App 拍照扫描 �?自动识别入库</span>
           </div>
         </div>
       </div>
@@ -459,15 +466,15 @@
         <div class="tips">
           <div class="tip">
             <span class="tip-bullet">🔗</span>
-            <span class="tip-text">输入 @ 引用页面/任务/人员，构建知识网络</span>
+            <span class="tip-text">输入 @ 引用页面/任务/人员，构建知识网�?/span>
           </div>
           <div class="tip">
             <span class="tip-bullet">📅</span>
-            <span class="tip-text">多维表格设截止日期 → 机器人自动提醒</span>
+            <span class="tip-text">多维表格设截止日�?�?机器人自动提�?/span>
           </div>
           <div class="tip">
-            <span class="tip-bullet">🏷️</span>
-            <span class="tip-text">题库加标签（难度/考点）→ 考前快速筛选</span>
+            <span class="tip-bullet">🏷�?/span>
+            <span class="tip-text">题库加标签（难度/考点）→ 考前快速筛�?/span>
           </div>
         </div>
       </div>
@@ -476,8 +483,8 @@
     <!-- Scenarios -->
     <div class="scenarios">
       <span class="scenario">📖 个人教学百科</span>
-      <span class="scenario">🔬 课题组协同</span>
-      <span class="scenario">📝 错题资源库</span>
+      <span class="scenario">🔬 课题组协�?/span>
+      <span class="scenario">📝 错题资源�?/span>
       <span class="scenario">📋 学生档案管理</span>
     </div>
 
