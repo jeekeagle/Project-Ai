@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--white:#ffffff;--blue-50:#eff6ff;--blue-100:#dbeafe;--blue-200:#bfdbfe;--blue-300:#93c5fd;--blue-400:#60a5fa;--blue-500:#3b82f6;--blue-600:#2563eb;--blue-700:#1d4ed8;--blue-800:#1e40af;--blue-900:#1e3a8a;--blue-accent:#4361ee;--blue-accent-dark:#3450d1;--text:#1e293b;--text-muted:#64748b;--border:rgba(59,130,246,0.12);--border-strong:rgba(59,130,246,0.22);--shadow:rgba(67,97,238,0.08);--shadow-strong:rgba(67,97,238,0.14);--green:#10b981;--green-bg:rgba(16,185,129,0.08);--green-border:rgba(16,185,129,0.2);--bg:#f0f4ff;}
+:root{--white:#ffffff;--blue-50:#eff6ff;--blue-100:#dbeafe;--blue-200:#bfdbfe;--blue-300:#93c5fd;--blue-400:#60a5fa;--blue-500:#3b82f6;--blue-600:#2563eb;--blue-700:#1d4ed8;--blue-800:#1e40af;--blue-900:#1e3a8a;--blue-accent:#4361ee;--blue-accent-dark:#3450d1;--text:#1e293b;--text-muted:#64748b;--border:rgba(59,130,246,0.12);--border-strong:rgba(59,130,246,0.22);--shadow:rgba(67,97,238,0.08);--shadow-strong:rgba(67,97,238,0.14);--green:#10b981;--green-bg:rgba(16,185,129,0.08);--green-border:rgba(16,185,129,0.2);--green-accent:#059669;--green-accent-dark:#047857;--purple:#8b5cf6;--purple-bg:rgba(139,92,246,0.08);--purple-border:rgba(139,92,246,0.2);--purple-accent:#7c3aed;--purple-accent-dark:#6d28d9;--teal:#0d9488;--teal-bg:rgba(13,148,136,0.08);--teal-border:rgba(13,148,136,0.2);--teal-accent:#0f766e;--teal-accent-dark:#115e59;--bg:#f0f4ff;}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:Manrope,'Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:0 1.5rem 4rem}
 .navbar{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 0 1rem;border-bottom:1px solid var(--border)}
@@ -46,20 +46,38 @@ body{font-family:Manrope,'Noto Sans SC',sans-serif;background:var(--bg);color:va
 .info-card--blue::before{background:linear-gradient(90deg,var(--blue-400),var(--blue-600))}
 .info-card--accent::before{background:linear-gradient(90deg,var(--blue-accent),var(--blue-500))}
 .info-card--dark::before{background:linear-gradient(90deg,var(--blue-600),var(--blue-800))}
+.info-card--green{background:var(--green-bg);border-color:var(--green-border)}
+.info-card--green:hover{border-color:var(--green-accent);box-shadow:0 6px 24px rgba(16,185,129,0.18)}
+.info-card--green::before{background:linear-gradient(90deg,var(--green),var(--green-accent))}
+.info-card--purple{background:var(--purple-bg);border-color:var(--purple-border)}
+.info-card--purple:hover{border-color:var(--purple-accent);box-shadow:0 6px 24px rgba(139,92,246,0.18)}
+.info-card--purple::before{background:linear-gradient(90deg,var(--purple),var(--purple-accent))}
+.info-card--teal{background:var(--teal-bg);border-color:var(--teal-border)}
+.info-card--teal:hover{border-color:var(--teal-accent);box-shadow:0 6px 24px rgba(13,148,136,0.18)}
+.info-card--teal::before{background:linear-gradient(90deg,var(--teal),var(--teal-accent))}
 .info-card-label{font-size:.58rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.4rem;display:flex;align-items:center;gap:.35rem}
 .info-card-label--blue{color:var(--blue-500)}
 .info-card-label--accent{color:var(--blue-accent)}
 .info-card-label--dark{color:var(--blue-800)}
+.info-card-label--green{color:var(--green-accent)}
+.info-card-label--purple{color:var(--purple-accent)}
+.info-card-label--teal{color:var(--teal-accent)}
 .info-card-label::before{content:'';display:block;width:5px;height:5px;border-radius:50%;flex-shrink:0}
 .info-card-label--blue::before{background:var(--blue-500)}
 .info-card-label--accent::before{background:var(--blue-accent)}
 .info-card-label--dark::before{background:var(--blue-700)}
+.info-card-label--green::before{background:var(--green)}
+.info-card-label--purple::before{background:var(--purple)}
+.info-card-label--teal::before{background:var(--teal)}
 .info-card-title{font-size:.95rem;font-weight:800;color:var(--blue-900);letter-spacing:-0.02em;margin-bottom:.4rem;line-height:1.3}
 .info-card-desc{font-size:.73rem;color:var(--text-muted);line-height:1.65;margin-bottom:.7rem;font-weight:400}
 .info-card-meta{display:flex;flex-wrap:wrap;gap:.3rem}
 .info-chip{background:var(--white);border:1px solid var(--border);color:var(--text-muted);padding:.15rem .5rem;border-radius:6px;font-size:.62rem;font-weight:600}
 .info-chip--blue{background:var(--blue-100);color:var(--blue-700);border-color:var(--blue-200)}
 .info-chip--accent{background:rgba(67,97,238,0.08);color:var(--blue-accent-dark);border-color:rgba(67,97,238,0.2)}
+.info-chip--green{background:var(--green-bg);color:var(--green-accent-dark);border-color:var(--green-border)}
+.info-chip--purple{background:var(--purple-bg);color:var(--purple-accent-dark);border-color:var(--purple-border)}
+.info-chip--teal{background:var(--teal-bg);color:var(--teal-accent-dark);border-color:var(--teal-border)}
 .info-card-arrow{position:absolute;bottom:1rem;right:1rem;font-size:.85rem;color:var(--blue-400);transition:transform .2s}
 .info-card:hover .info-card-arrow{transform:translateX(3px)}
 .info-card--wide{grid-column:span 2}
@@ -101,7 +119,10 @@ body{font-family:Manrope,'Noto Sans SC',sans-serif;background:var(--bg);color:va
 .en-card-desc{font-size:.65rem;color:var(--text-muted);line-height:1.5}
 .en-card-arrow{font-size:.75rem;color:var(--blue-400);align-self:flex-end;transition:transform .2s}
 .en-card:hover .en-card-arrow{transform:translateX(3px)}
-.tools-group-label{grid-column:1/-1;font-size:.65rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-400);padding:.3rem 0 .1rem;border-top:1px solid var(--border);margin-top:.3rem}
+.tools-group-label{grid-column:1/-1;font-size:.65rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:.3rem 0 .1rem;border-top:1px solid var(--border);margin-top:.3rem}
+.tools-group-label--green{color:var(--green-accent)}
+.tools-group-label--teal{color:var(--teal-accent)}
+.tools-group-label--purple{color:var(--purple-accent)}
 .reflection-mini{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.3rem}
 .ref-card{background:var(--blue-50);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1.3rem;text-decoration:none;display:block;transition:all .25s;position:relative;overflow:hidden}
 .ref-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0}
@@ -186,22 +207,22 @@ body{font-family:Manrope,'Noto Sans SC',sans-serif;background:var(--bg);color:va
     </a>
     <div class="divider"></div>
     <div class="section-header" id="cognitive-map">
-      <div class="section-num">01</div>
+      <div class="section-num">02</div>
       <div class="section-title">认知地图</div>
       <div class="section-line"></div>
     </div>
-    <a href="cognitive-map-blue.html" class="info-card info-card--dark" target="_blank">
-      <div class="info-card-label info-card-label--dark">&#9679; 认知地图</div>
+    <a href="cognitive-map-blue.html" class="info-card info-card--teal" target="_blank">
+      <div class="info-card-label info-card-label--teal">&#9679; 认知地图</div>
       <div class="info-card-title">AI 教育认知地图（中文）</div>
       <div class="info-card-desc">X轴三阶段 x Y轴四层次 = 12个单元格，清晰定位 AI 技术在教学中的角色与价值。</div>
-      <div class="info-card-meta"><span class="info-chip info-chip--blue">总览</span><span class="info-chip">3x4矩阵</span><span class="info-chip">12单元格</span></div>
+      <div class="info-card-meta"><span class="info-chip info-chip--teal">总览</span><span class="info-chip">3x4矩阵</span><span class="info-chip">12单元格</span></div>
       <span class="info-card-arrow">&#8594;</span>
     </a>
-    <a href="cognitive-map-en.html" class="info-card info-card--accent" target="_blank">
-      <div class="info-card-label info-card-label--accent">&#9679; Cognitive Map</div>
+    <a href="cognitive-map-en.html" class="info-card info-card--purple" target="_blank">
+      <div class="info-card-label info-card-label--purple">&#9679; Cognitive Map</div>
       <div class="info-card-title">AI Education Cognitive Map（English）</div>
       <div class="info-card-desc">X-axis: 3 Stages × Y-axis: 4 Levels = 12 Cells. Clearly positions the role and value of AI in education.</div>
-      <div class="info-card-meta"><span class="info-chip info-chip--accent">Overview</span><span class="info-chip">3x4 Matrix</span><span class="info-chip">12 Cells</span></div>
+      <div class="info-card-meta"><span class="info-chip info-chip--purple">Overview</span><span class="info-chip">3x4 Matrix</span><span class="info-chip">12 Cells</span></div>
       <span class="info-card-arrow">&#8594;</span>
     </a>
 
@@ -211,46 +232,46 @@ body{font-family:Manrope,'Noto Sans SC',sans-serif;background:var(--bg);color:va
       <div class="section-title">关键概念</div>
       <div class="section-line"></div>
     </div>
-    <a href="informatization-card.html" class="info-card info-card--blue" target="_blank">
-      <div class="info-card-label info-card-label--blue">&#9679; Stage 01</div>
+    <a href="informatization-card.html" class="info-card info-card--green" target="_blank">
+      <div class="info-card-label info-card-label--green">&#9679; Stage 01</div>
       <div class="info-card-title">信息化</div>
       <div class="info-card-desc">介质转换 · 信息位移 · 对话界面</div>
-      <div class="info-card-meta"><span class="info-chip info-chip--blue">Informatization</span></div>
+      <div class="info-card-meta"><span class="info-chip info-chip--green">Informatization</span></div>
       <span class="info-card-arrow">&#8594;</span>
     </a>
-    <a href="digitalization-card.html" class="info-card info-card--accent" target="_blank">
-      <div class="info-card-label info-card-label--accent">&#9679; Stage 02</div>
+    <a href="digitalization-card.html" class="info-card info-card--teal" target="_blank">
+      <div class="info-card-label info-card-label--teal">&#9679; Stage 02</div>
       <div class="info-card-title">数字化</div>
       <div class="info-card-desc">连接整合 · 知识体系化 · 数据驱动</div>
-      <div class="info-card-meta"><span class="info-chip info-chip--accent">Digitalization</span></div>
+      <div class="info-card-meta"><span class="info-chip info-chip--teal">Digitalization</span></div>
       <span class="info-card-arrow">&#8594;</span>
     </a>
-    <a href="intelligentization-card.html" class="info-card info-card--dark" target="_blank">
-      <div class="info-card-label info-card-label--dark">&#9679; Stage 03</div>
+    <a href="intelligentization-card.html" class="info-card info-card--purple" target="_blank">
+      <div class="info-card-label info-card-label--purple">&#9679; Stage 03</div>
       <div class="info-card-title">智能化</div>
       <div class="info-card-desc">人机协作 · 意图理解 · 主动建议</div>
-      <div class="info-card-meta"><span class="info-chip info-chip--blue">Intelligentization</span></div>
+      <div class="info-card-meta"><span class="info-chip info-chip--purple">Intelligentization</span></div>
       <span class="info-card-arrow">&#8594;</span>
     </a>
-    <a href="informatization-en.html" class="info-card info-card--blue" target="_blank">
-      <div class="info-card-label info-card-label--blue">&#9679; EN · Stage 01</div>
+    <a href="informatization-en.html" class="info-card info-card--green" target="_blank">
+      <div class="info-card-label info-card-label--green">&#9679; EN · Stage 01</div>
       <div class="info-card-title">Informatization</div>
       <div class="info-card-desc">English version of Stage 01</div>
-      <div class="info-card-meta"><span class="info-chip info-chip--blue">English</span></div>
+      <div class="info-card-meta"><span class="info-chip info-chip--green">English</span></div>
       <span class="info-card-arrow">&#8594;</span>
     </a>
-    <a href="digitalization-en.html" class="info-card info-card--accent" target="_blank">
-      <div class="info-card-label info-card-label--accent">&#9679; EN · Stage 02</div>
+    <a href="digitalization-en.html" class="info-card info-card--teal" target="_blank">
+      <div class="info-card-label info-card-label--teal">&#9679; EN · Stage 02</div>
       <div class="info-card-title">Digitalization</div>
       <div class="info-card-desc">English version of Stage 02</div>
-      <div class="info-card-meta"><span class="info-chip info-chip--accent">English</span></div>
+      <div class="info-card-meta"><span class="info-chip info-chip--teal">English</span></div>
       <span class="info-card-arrow">&#8594;</span>
     </a>
-    <a href="intelligentization-en.html" class="info-card info-card--dark" target="_blank">
-      <div class="info-card-label info-card-label--dark">&#9679; EN · Stage 03</div>
+    <a href="intelligentization-en.html" class="info-card info-card--purple" target="_blank">
+      <div class="info-card-label info-card-label--purple">&#9679; EN · Stage 03</div>
       <div class="info-card-title">Intelligentization</div>
       <div class="info-card-desc">English version of Stage 03</div>
-      <div class="info-card-meta"><span class="info-chip info-chip--blue">English</span></div>
+      <div class="info-card-meta"><span class="info-chip info-chip--purple">English</span></div>
       <span class="info-card-arrow">&#8594;</span>
     </a>
 
@@ -261,65 +282,65 @@ body{font-family:Manrope,'Noto Sans SC',sans-serif;background:var(--bg);color:va
       <div class="section-line"></div>
     </div>
 
-    <div class="tools-group-label">信息化工具</div>
-    <a href="./canvas/infocard-tianruo-ocr.html" class="info-card info-card--blue" target="_blank">
-      <div class="info-card-label info-card-label--blue">&#9679; 信息化</div>
+    <div class="tools-group-label tools-group-label--teal">信息化工具</div>
+    <a href="./canvas/infocard-tianruo-ocr.html" class="info-card info-card--teal" target="_blank">
+      <div class="info-card-label info-card-label--teal">&#9679; 信息化</div>
       <div class="info-card-title">天若 OCR</div>
       <div class="info-card-desc">通用文字识别，截图即转可编辑文本，支持多语言、公式、表格识别。</div>
-      <div class="info-card-meta"><span class="info-chip info-chip--blue">通用文字识别</span></div>
+      <div class="info-card-meta"><span class="info-chip info-chip--teal">通用文字识别</span></div>
       <span class="info-card-arrow">&#8594;</span>
     </a>
-    <a href="./canvas/infocard-ai-latex.html" class="info-card info-card--accent" target="_blank">
-      <div class="info-card-label info-card-label--accent">&#9679; 信息化</div>
+    <a href="./canvas/infocard-ai-latex.html" class="info-card info-card--purple" target="_blank">
+      <div class="info-card-label info-card-label--purple">&#9679; 信息化</div>
       <div class="info-card-title">学术 OCR</div>
       <div class="info-card-desc">AI + LaTeX 学术工作流，将 AI 生成内容与 LaTeX 排版无缝衔接，适合科研写作。</div>
-      <div class="info-card-meta"><span class="info-chip info-chip--accent">数学公式识别</span></div>
+      <div class="info-card-meta"><span class="info-chip info-chip--purple">数学公式识别</span></div>
       <span class="info-card-arrow">&#8594;</span>
     </a>
-    <a href="./canvas/infocard-shandian.html" class="info-card info-card--dark" target="_blank">
-      <div class="info-card-label info-card-label--dark">&#9679; 信息化</div>
+    <a href="./canvas/infocard-shandian.html" class="info-card info-card--green" target="_blank">
+      <div class="info-card-label info-card-label--green">&#9679; 信息化</div>
       <div class="info-card-title">闪电说</div>
       <div class="info-card-desc">快捷语音输入法，边说边转，支持中英文，输出带时间戳文本，方便整理与复盘。</div>
-      <div class="info-card-meta"><span class="info-chip info-chip--blue">快捷语音输入</span></div>
+      <div class="info-card-meta"><span class="info-chip info-chip--green">快捷语音输入</span></div>
       <span class="info-card-arrow">&#8594;</span>
     </a>
-    <a href="./canvas/infocard-listary.html" class="info-card info-card--blue" target="_blank">
-      <div class="info-card-label info-card-label--blue">&#9679; 信息化</div>
+    <a href="./canvas/infocard-listary.html" class="info-card info-card--teal" target="_blank">
+      <div class="info-card-label info-card-label--teal">&#9679; 信息化</div>
       <div class="info-card-title">Listary</div>
       <div class="info-card-desc">全局文件搜索，快捷键呼出搜索框，随时搜索文件名，不打断工作流。</div>
-      <div class="info-card-meta"><span class="info-chip info-chip--blue">全局文件搜索</span></div>
+      <div class="info-card-meta"><span class="info-chip info-chip--teal">全局文件搜索</span></div>
       <span class="info-card-arrow">&#8594;</span>
     </a>
-    <a href="./canvas/infocard-anytxt.html" class="info-card info-card--accent" target="_blank">
-      <div class="info-card-label info-card-label--accent">&#9679; 信息化</div>
+    <a href="./canvas/infocard-anytxt.html" class="info-card info-card--purple" target="_blank">
+      <div class="info-card-label info-card-label--purple">&#9679; 信息化</div>
       <div class="info-card-title">AnyTxt Searcher</div>
       <div class="info-card-desc">全局文档内搜索，支持 txt、PDF、Word 等多格式，支持正则，高效定位文件内容。</div>
-      <div class="info-card-meta"><span class="info-chip info-chip--accent">全局文档内搜索</span></div>
+      <div class="info-card-meta"><span class="info-chip info-chip--purple">全局文档内搜索</span></div>
       <span class="info-card-arrow">&#8594;</span>
     </a>
 
-    <div class="tools-group-label">数据化工具</div>
-    <a href="./canvas/infocard-feishu-wiki.html" class="info-card info-card--dark" target="_blank">
-      <div class="info-card-label info-card-label--dark">&#9679; 数据化</div>
+    <div class="tools-group-label tools-group-label--green">数据化工具</div>
+    <a href="./canvas/infocard-feishu-wiki.html" class="info-card info-card--green" target="_blank">
+      <div class="info-card-label info-card-label--green">&#9679; 数据化</div>
       <div class="info-card-title">飞书知识库</div>
       <div class="info-card-desc">结构化知识管理，支持多维表格、文档、Wiki 等多种内容组织，便于团队协作与知识沉淀。</div>
-      <div class="info-card-meta"><span class="info-chip info-chip--blue">知识管理</span></div>
+      <div class="info-card-meta"><span class="info-chip info-chip--green">知识管理</span></div>
       <span class="info-card-arrow">&#8594;</span>
     </a>
-    <a href="./canvas/infocard-feishu-aiqa.html" class="info-card info-card--blue" target="_blank">
-      <div class="info-card-label info-card-label--blue">&#9679; 数据化</div>
+    <a href="./canvas/infocard-feishu-aiqa.html" class="info-card info-card--teal" target="_blank">
+      <div class="info-card-label info-card-label--teal">&#9679; 数据化</div>
       <div class="info-card-title">飞书智能问答</div>
       <div class="info-card-desc">基于大模型的文档智能问答，快速检索和总结文档内容，提升信息获取效率。</div>
-      <div class="info-card-meta"><span class="info-chip info-chip--blue">AI 问答</span></div>
+      <div class="info-card-meta"><span class="info-chip info-chip--teal">AI 问答</span></div>
       <span class="info-card-arrow">&#8594;</span>
     </a>
 
-    <div class="tools-group-label">智能化工具</div>
-    <a href="./canvas/infocard-lobster.html" class="info-card info-card--accent" target="_blank">
-      <div class="info-card-label info-card-label--accent">&#9679; 智能化</div>
+    <div class="tools-group-label tools-group-label--purple">智能化工具</div>
+    <a href="./canvas/infocard-lobster.html" class="info-card info-card--purple" target="_blank">
+      <div class="info-card-label info-card-label--purple">&#9679; 智能化</div>
       <div class="info-card-title">网易龙虾 Lobster</div>
       <div class="info-card-desc">AI 全场景个人助理 Agent，7×24 小时自主处理数据分析、PPT 制作、文档撰写等生产力任务。</div>
-      <div class="info-card-meta"><span class="info-chip info-chip--accent">AI 助手</span></div>
+      <div class="info-card-meta"><span class="info-chip info-chip--purple">AI 助手</span></div>
       <span class="info-card-arrow">&#8594;</span>
     </a>
 
