@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>天若OCR — 工具介绍卡</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f0f0f0;
+      --card-bg: #ffffff;
+      --text-primary: #1a1a1a;
+      --text-secondary: #555555;
+      --text-muted: #999999;
+      --accent: #e11d48;
+      --accent-light: #ffe4e6;
+      --border: #e5e5e5;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+      --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.09), 0 2px 6px rgba(0, 0, 0, 0.04);
+      --radius: 12px;
+    }
+
+    body {
+      font-family: 'Noto Serif SC', 'Source Han Serif CN', Georgia, serif;
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 680px;
+      width: 100%;
+      padding: 44px 48px;
+      position: relative;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* Decorative corner accent */
+    .card::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(315deg, var(--accent-light) 0%, transparent 60%);
+      border-radius: 0 0 0 var(--radius);
+      opacity: 0.6;
+    }
+
+    /* Header */
+    .header {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 3px 9px;
+      border-radius: 4px;
+      letter-spacing: 0.8px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .title {
+      font-size: 25px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      letter-spacing: -0.2px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* Layout: features left, tips right */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 28px;
+    }
+
+    /* Section styles */
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Features */
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: #fafafa;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .feature-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .feature-text {
+      font-size: 13px;
+      color: var(--text-primary);
+    }
+
+    .feature-text strong {
+      font-weight: 600;
+    }
+
+    /* Tips panel */
+    .tips-panel {
+      background: #fafafa;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 16px;
+    }
+
+    .tip {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .tip:last-child {
+      margin-bottom: 0;
+    }
+
+    .tip-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      color: white;
+      background: var(--text-primary);
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .tip-text {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Install & Shortcuts */
+    .info-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .info-block {
+      padding: 16px 18px;
+      background: #fafafa;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .info-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .info-row-items {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .info-item::before {
+      content: '—';
+      color: var(--text-muted);
+      font-size: 10px;
+    }
+
+    .key-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      background: var(--text-primary);
+      color: white;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .version-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 2px 7px;
+      border-radius: 3px;
+      margin-left: 4px;
+    }
+
+    /* Scenarios bar */
+    .scenarios {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .scenario {
+      font-size: 12px;
+      color: var(--text-secondary);
+      background: #f5f5f5;
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+
+    /* Footer */
+    .footer {
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-left {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .dot {
+      width: 5px;
+      height: 5px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: pulse 2.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* Responsive */
+    @media (max-width: 580px) {
+      .card {
+        padding: 30px 26px;
+      }
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+      .info-row {
+        grid-template-columns: 1fr;
+      }
+      .title {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header class="header">
+      <span class="tag">Windows 工具</span>
+      <h1 class="title">天若OCR</h1>
+      <p class="subtitle">截图即识别 · 快捷键驱动 · 文字/公式/表格全覆盖</p>
+    </header>
+
+    <!-- Features + Tips -->
+    <div class="main-grid">
+      <div>
+        <h2 class="section-title">核心功能</h2>
+        <div class="features">
+          <div class="feature">
+            <span class="feature-dot"></span>
+            <span class="feature-text"><strong>文字识别</strong> — 截图转可编辑文本</span>
+          </div>
+          <div class="feature">
+            <span class="feature-dot"></span>
+            <span class="feature-text"><strong>公式识别</strong> — 输出 LaTeX 源码</span>
+          </div>
+          <div class="feature">
+            <span class="feature-dot"></span>
+            <span class="feature-text"><strong>表格识别</strong> — 导出 Excel 格式</span>
+          </div>
+          <div class="feature">
+            <span class="feature-dot"></span>
+            <span class="feature-text"><strong>排版优化</strong> — 自动去除多余空行</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="section-title">快速上手</h2>
+        <div class="tips-panel">
+          <div class="tip">
+            <span class="tip-num">1</span>
+            <span class="tip-text">下载解压到任意目录，双击运行主程序</span>
+          </div>
+          <div class="tip">
+            <span class="tip-num">2</span>
+            <span class="tip-text">按 <span class="key-badge">F4</span> 启动截图框，拖动选中区域</span>
+          </div>
+          <div class="tip">
+            <span class="tip-num">3</span>
+            <span class="tip-text">右键托盘图标 → 设置 → 接口，切换识别引擎（搜狗/腾讯/百度）</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Install info & Shortcuts -->
+    <div class="info-row">
+      <div class="info-block">
+        <div class="info-title">安装要求</div>
+        <div class="info-row-items">
+          <div class="info-item">.NET Framework 4.0+</div>
+          <div class="info-item">绿色软件，解压即用</div>
+          <div class="info-item">
+            开源版 GitHub 免费
+            <span class="version-tag">Free</span>
+          </div>
+          <div class="info-item">
+            专业版官网授权
+            <span class="version-tag">¥</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="info-title">快捷键</div>
+        <div class="info-row-items">
+          <div class="info-item"><span class="key-badge">F4</span> 全局截图识别</div>
+          <div class="info-item">托盘右键 → 设置</div>
+          <div class="info-item">建议开启「开机自启」</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scenarios -->
+    <div class="scenarios">
+      <span class="scenario">📚 课件素材收集</span>
+      <span class="scenario">✏️ 数学公式录入</span>
+      <span class="scenario">📜 古籍电子化</span>
+      <span class="scenario">🌐 外文翻译辅助</span>
+    </div>
+
+    <footer class="footer">
+      <span class="footer-left">tianruoocr · Windows</span>
+      <div class="footer-right">
+        <span class="dot"></span>
+        开机即用
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
