@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Action Path | 行动路径</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #ffffff;
+  --bg: #f0f4ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: rgba(59,130,246,0.12);
+  --border-strong: rgba(59,130,246,0.22);
+  --shadow: rgba(67,97,238,0.08);
+  --info: #f97316;
+  --info-bg: rgba(249,115,22,0.06);
+  --info-border: rgba(249,115,22,0.15);
+  --info-light: #fed7aa;
+  --digit: #6366f1;
+  --digit-bg: rgba(99,102,241,0.06);
+  --digit-border: rgba(99,102,241,0.15);
+  --digit-light: #c7d2fe;
+  --intel: #10b981;
+  --intel-bg: rgba(16,185,129,0.06);
+  --intel-border: rgba(16,185,129,0.15);
+  --intel-light: #a7f3d0;
+  --gold: #d97706;
+  --gold-bg: rgba(217,119,6,0.06);
+  --gold-border: rgba(217,119,6,0.15);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans SC', 'Manrope', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2rem 1.5rem 3rem;
+}
+.topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
+.topbar a{font-size:.82rem;color:#475569;text-decoration:none;font-weight:600;letter-spacing:.02em}
+.topbar a:hover{text-decoration:underline}
+body{padding-top:56px}
+.main-card {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--border-strong);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px var(--shadow);
+}
+.band {
+  background: linear-gradient(135deg, #92400e 0%, #b45309 50%, #d97706 100%);
+  padding: 1.8rem 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+.band-left { position: relative; z-index: 1; }
+.band-stage { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 0.25rem; }
+.band-title { font-family: 'Manrope', sans-serif; font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 900; color: #fff; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 0.15rem; }
+.band-en { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+.band-right { position: relative; z-index: 1; display: flex; align-items: center; gap: 0.75rem; }
+.band-badge { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 0.5rem 0.9rem; text-align: center; }
+.band-badge-icon { font-size: 1.2rem; }
+.band-badge-label { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 0.1rem; }
+.intro-strip {
+  background: linear-gradient(135deg, rgba(217,119,6,0.06) 0%, rgba(245,158,11,0.04) 100%);
+  border-bottom: 1px solid rgba(217,119,6,0.12);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+.intro-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.05rem; }
+.intro-text { font-size: 0.8rem; color: #92400e; line-height: 1.7; font-weight: 500; }
+.intro-text strong { font-weight: 800; }
+.card-body { padding: 1.6rem 1.8rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; }
+.section-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.2rem 1.3rem;
+  position: relative;
+  overflow: hidden;
+}
+.section-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+}
+.section-card.full { grid-column: 1 / -1; }
+.section-card.info { background: var(--info-bg); border-color: var(--info-border); }
+.section-card.info::before { background: linear-gradient(90deg, var(--info), #fb923c); }
+.section-card.digit { background: var(--digit-bg); border-color: var(--digit-border); }
+.section-card.digit::before { background: linear-gradient(90deg, var(--digit), #818cf8); }
+.section-card.intel { background: var(--intel-bg); border-color: var(--intel-border); }
+.section-card.intel::before { background: linear-gradient(90deg, var(--intel), #34d399); }
+.section-card.gold { background: var(--gold-bg); border-color: var(--gold-border); }
+.section-card.gold::before { background: linear-gradient(90deg, var(--gold), #fbbf24); }
+.section-label { font-size: 0.58rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem; }
+.section-label::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; }
+.lbl-info { color: var(--info); }
+.lbl-info::before { background: var(--info); }
+.lbl-digit { color: var(--digit); }
+.lbl-digit::before { background: var(--digit); }
+.lbl-intel { color: var(--intel); }
+.lbl-intel::before { background: var(--intel); }
+.lbl-gold { color: var(--gold); }
+.lbl-gold::before { background: var(--gold); }
+.section-title { font-size: 0.92rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 0.6rem; line-height: 1.3; }
+.section-desc { font-size: 0.74rem; color: var(--text-muted); line-height: 1.7; font-weight: 400; }
+.stage-path { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 0.6rem; }
+.path-stage { border-radius: 14px; padding: 1rem 1.1rem; border: 1px solid; position: relative; }
+.path-stage.info-path { background: var(--info-bg); border-color: var(--info-border); }
+.path-stage.digit-path { background: var(--digit-bg); border-color: var(--digit-border); }
+.path-stage.intel-path { background: var(--intel-bg); border-color: var(--intel-border); }
+.stage-num { font-family: 'Manrope', sans-serif; font-size: 1.6rem; font-weight: 900; line-height: 1; margin-bottom: 0.3rem; }
+.info-path .stage-num { color: var(--info); }
+.digit-path .stage-num { color: var(--digit); }
+.intel-path .stage-num { color: var(--intel); }
+.stage-name { font-size: 0.88rem; font-weight: 800; color: var(--text); margin-bottom: 0.15rem; }
+.stage-sub { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.6rem; }
+.info-path .stage-sub { color: var(--info); }
+.digit-path .stage-sub { color: var(--digit); }
+.intel-path .stage-sub { color: var(--intel); }
+.step-list { display: flex; flex-direction: column; gap: 0.45rem; }
+.step-item { display: flex; align-items: flex-start; gap: 0.4rem; font-size: 0.7rem; color: var(--text); line-height: 1.55; }
+.step-num { font-family: 'Manrope', sans-serif; font-size: 0.7rem; font-weight: 800; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.05rem; }
+.info-path .step-num { background: var(--info); color: #fff; }
+.digit-path .step-num { background: var(--digit); color: #fff; }
+.intel-path .step-num { background: var(--intel); color: #fff; }
+.arrow-path { text-align: center; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #94a3b8; padding-top: 1.5rem; }
+.principle-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8rem; margin-top: 0.6rem; }
+.principle-item { background: rgba(255,255,255,0.65); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem; text-align: center; }
+.principle-icon { font-size: 1.4rem; margin-bottom: 0.4rem; }
+.principle-title { font-size: 0.78rem; font-weight: 800; color: var(--text); margin-bottom: 0.25rem; }
+.principle-desc { font-size: 0.65rem; color: var(--text-muted); line-height: 1.55; font-weight: 400; }
+.start-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 0.6rem; }
+.start-item { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.7rem 0.85rem; border-radius: 10px; border: 1px solid; }
+.start-item.info-start { background: var(--info-bg); border-color: var(--info-border); }
+.start-item.digit-start { background: var(--digit-bg); border-color: var(--digit-border); }
+.start-item.intel-start { background: var(--intel-bg); border-color: var(--intel-border); }
+.start-num { font-family: 'Manrope', sans-serif; font-size: 1.1rem; font-weight: 900; line-height: 1; flex-shrink: 0; }
+.info-start .start-num { color: var(--info); }
+.digit-start .start-num { color: var(--digit); }
+.intel-start .start-num { color: var(--intel); }
+.start-text { font-size: 0.73rem; color: var(--text); line-height: 1.55; }
+.start-text strong { display: block; font-weight: 800; margin-bottom: 0.1rem; }
+.insight-box { background: linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(99,102,241,0.06) 100%); border: 1px solid var(--intel-border); border-radius: 14px; padding: 1.1rem 1.4rem; margin-top: 0.6rem; }
+.insight-formula { text-align: center; font-size: clamp(1rem, 2.5vw, 1.3rem); font-weight: 900; color: #1e293b; letter-spacing: -0.03em; margin-bottom: 0.6rem; }
+.insight-formula .old { color: var(--info); }
+.insight-formula .arrow { color: #94a3b8; margin: 0 0.3rem; }
+.insight-formula .new { color: var(--intel); }
+.insight-note { font-size: 0.72rem; color: var(--text-muted); line-height: 1.65; font-weight: 400; text-align: center; }
+.summary-bar { grid-column: 1 / -1; background: linear-gradient(135deg, #92400e 0%, #b45309 100%); border-radius: 14px; padding: 1.1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.summary-left { position: relative; z-index: 1; }
+.summary-eyebrow { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 0.12rem; }
+.summary-text { font-size: 0.92rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; line-height: 1.3; }
+.summary-right { position: relative; z-index: 1; display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: flex-end; }
+.sum-tag { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 0.18rem 0.6rem; border-radius: 100px; font-size: 0.62rem; font-weight: 600; white-space: nowrap; }
+.card-footer { padding: 0.9rem 2rem 1.3rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+.footer-left { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+.footer-link { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 0.22rem 0.55rem; color: #64748b; font-size: 0.65rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+.footer-link:hover { background: var(--white); border-color: var(--border-strong); color: var(--text); }
+@media (max-width: 720px) {
+  body { padding: 1rem 0.75rem 2rem; }
+  .card-body { grid-template-columns: 1fr; padding: 1.2rem 1rem; }
+  .section-card.full { grid-column: 1; }
+  .stage-path { grid-template-columns: 1fr; }
+  .principle-grid { grid-template-columns: 1fr 1fr; }
+  .start-list { grid-template-columns: 1fr; }
+  .summary-bar { flex-direction: column; align-items: flex-start; }
+  .summary-right { justify-content: flex-start; }
+  .band { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}
+</style>
+</head>
+<body>
+  <div class="topbar"><a href="index.html">&#8592; 返回主页</a></div>
+
+<div class="main-card">
+
+  <!-- TOP BAND -->
+  <div class="band">
+    <div class="band-left">
+      <div class="band-stage">Theo &nbsp;/&nbsp; Action Path</div>
+      <div class="band-title">Action Path</div>
+      <div class="band-en">行动路径</div>
+    </div>
+    <div class="band-right">
+      <div class="band-badge">
+        <div class="band-badge-icon">&#127919;</div>
+        <div class="band-badge-label">Practical Roadmap</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro-strip">
+    <div class="intro-icon">&#128640;</div>
+    <div class="intro-text">
+      <strong>The Cognitive Map defines the framework; the Action Path gives you the starting point.</strong>
+      The three stages are not a checklist to complete in order — start from where you are today.
+    </div>
+  </div>
+
+  <!-- CARD BODY -->
+  <div class="card-body">
+
+    <!-- THREE STAGE ACTION PATH -->
+    <div class="section-card gold full">
+      <div class="section-label lbl-gold">&#9679; Three-Stage Action Path</div>
+      <div class="section-title">Where do you start today?</div>
+
+      <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+        <div class="path-stage info-path" style="flex:1;">
+          <div class="stage-num">01</div>
+          <div class="stage-name">Informatization</div>
+          <div class="stage-sub">信息化</div>
+          <div class="step-list">
+            <div class="step-item"><span class="step-num">1</span><span>Scan and digitize your paper lesson plans</span></div>
+            <div class="step-item"><span class="step-num">2</span><span>Create a digital class profile with student basics</span></div>
+            <div class="step-item"><span class="step-num">3</span><span>Collect student work submissions digitally via Feishu/WeChat</span></div>
+          </div>
+        </div>
+        <div class="arrow-path">&#8594;</div>
+        <div class="path-stage digit-path" style="flex:1;">
+          <div class="stage-num">02</div>
+          <div class="stage-name">Digitalization</div>
+          <div class="stage-sub">数字化</div>
+          <div class="step-list">
+            <div class="step-item"><span class="step-num">1</span><span>Build a teaching reflection library in Obsidian or Feishu</span></div>
+            <div class="step-item"><span class="step-num">2</span><span>Write 3-sentence reflections after every class</span></div>
+            <div class="step-item"><span class="step-num">3</span><span>Compile 20+ lesson cases into your personal case library</span></div>
+          </div>
+        </div>
+        <div class="arrow-path">&#8594;</div>
+        <div class="path-stage intel-path" style="flex:1;">
+          <div class="stage-num">03</div>
+          <div class="stage-name">Intelligentization</div>
+          <div class="stage-sub">智能化</div>
+          <div class="step-list">
+            <div class="step-item"><span class="step-num">1</span><span>Use AI for lesson prep: feed your reflections as context</span></div>
+            <div class="step-item"><span class="step-num">2</span><span>Build a personal RAG: let AI know you and your students</span></div>
+            <div class="step-item"><span class="step-num">3</span><span>Design human-AI workflow: AI drafts, you judge and refine</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THREE PRINCIPLES -->
+    <div class="section-card gold full">
+      <div class="section-label lbl-gold">&#9679; Three Core Principles</div>
+      <div class="section-title">Principles that apply across all three stages</div>
+      <div class="principle-grid">
+        <div class="principle-item">
+          <div class="principle-icon">&#128221;</div>
+          <div class="principle-title">Accumulate First, Then Invoke</div>
+          <div class="principle-desc">Without your own experience, AI output stays superficial. Build your knowledge base first, then let AI amplify it.</div>
+        </div>
+        <div class="principle-item">
+          <div class="principle-icon">&#129309;</div>
+          <div class="principle-title">AI is an Amplifier</div>
+          <div class="principle-desc">It doesn't replace your thinking — it amplifies your capability. Whatever you know, AI helps you scale.</div>
+        </div>
+        <div class="principle-item">
+          <div class="principle-icon">&#128640;</div>
+          <div class="principle-title">Start Small, Start Today</div>
+          <div class="principle-desc">No need to have everything in place. Start with one lesson reflection today and build from there.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK START -->
+    <div class="section-card info">
+      <div class="section-label lbl-info">&#9679; Informatization — Entry Actions</div>
+      <div class="section-title">One thing you can do today</div>
+      <div class="start-list">
+        <div class="start-item info-start">
+          <div class="start-num">1</div>
+          <div class="start-text"><strong>Scan one paper lesson plan</strong>Photo → text → save to Feishu Docs</div>
+        </div>
+        <div class="start-item info-start">
+          <div class="start-num">2</div>
+          <div class="start-text"><strong>Build a class profile</strong>Record class average, pass rate, weak areas</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card digit">
+      <div class="section-label lbl-digit">&#9679; Digitalization — Entry Actions</div>
+      <div class="section-title">Build your personal knowledge base</div>
+      <div class="start-list">
+        <div class="start-item digit-start">
+          <div class="start-num">1</div>
+          <div class="start-text"><strong>Set up a Feishu Wiki</strong>Create a "Teaching Reflections" space; write 3 sentences daily</div>
+        </div>
+        <div class="start-item digit-start">
+          <div class="start-num">2</div>
+          <div class="start-text"><strong>Document one lesson case</strong>Use Obsidian with bi-directional links to build a knowledge network</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card intel">
+      <div class="section-label lbl-intel">&#9679; Intelligentization — Entry Actions</div>
+      <div class="section-title">Build your human-AI collaboration workflow</div>
+      <div class="start-list">
+        <div class="start-item intel-start">
+          <div class="start-num">1</div>
+          <div class="start-text"><strong>Design an AI lesson prep workflow</strong>Feed your reflection notes as context; let AI analyze and suggest</div>
+        </div>
+        <div class="start-item intel-start">
+          <div class="start-num">2</div>
+          <div class="start-text"><strong>Build a personal RAG system</strong>Organize reflections, cases, and student data so AI can draw on them</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CORE INSIGHT -->
+    <div class="section-card gold full">
+      <div class="section-label lbl-gold">&#9679; Core Insight</div>
+      <div class="insight-box">
+        <div class="insight-formula">
+          <span class="old">Your Experience</span>
+          <span class="arrow">+</span>
+          <span class="new">AI Tools</span>
+          <span class="arrow">&nbsp;=&nbsp;</span>
+          <span class="new">Compounding Teaching Growth</span>
+        </div>
+        <div class="insight-note">
+          The Cognitive Map tells you <strong>where you are</strong>.<br>
+          The Action Path tells you <strong>where to start</strong>.<br>
+          Start from wherever you are today.
+        </div>
+      </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="summary-bar">
+      <div class="summary-left">
+        <div class="summary-eyebrow">One-Line Summary</div>
+        <div class="summary-text">Cognitive Map = Framework &nbsp;|&nbsp; Action Path = Starting Point &nbsp;|&nbsp; Start Today</div>
+      </div>
+      <div class="summary-right">
+        <span class="sum-tag">Accumulate First</span>
+        <span class="sum-tag">AI Amplifier</span>
+        <span class="sum-tag">Start Small</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="card-footer">
+    <div class="footer-left">Theo &nbsp;/&nbsp; Action Path &nbsp;/&nbsp; 行动路径 &nbsp;/&nbsp; 2026</div>
+    <div>
+      <a href="cognitive-map-en.html" class="footer-link">&#8592; Cognitive Map</a>
+      <a href="informatization-en.html" class="footer-link">Informatization</a>
+      <a href="digitalization-en.html" class="footer-link">Digitalization</a>
+      <a href="intelligentization-en.html" class="footer-link">Intelligentization</a>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
