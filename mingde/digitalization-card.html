@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数字化 | Digitalization</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #ffffff;
+  --blue-50: #eff6ff;
+  --blue-100: #dbeafe;
+  --blue-200: #bfdbfe;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+  --blue-800: #1e40af;
+  --blue-900: #1e3a8a;
+  --blue-accent: #4361ee;
+  --blue-accent-dark: #3450d1;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: rgba(59, 130, 246, 0.12);
+  --border-strong: rgba(59, 130, 246, 0.22);
+  --shadow: rgba(67, 97, 238, 0.08);
+  --green: #10b981;
+  --green-light: #34d399;
+  --green-bg: rgba(16,185,129,0.08);
+  --green-border: rgba(16,185,129,0.2);
+  --amber: #f59e0b;
+  --amber-bg: rgba(245,158,11,0.08);
+  --amber-border: rgba(245,158,11,0.2);
+  --red: #ef4444;
+  --red-bg: rgba(239,68,68,0.07);
+  --red-border: rgba(239,68,68,0.15);
+  --bg: #f0f4ff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans SC', 'Manrope', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2rem 1.5rem 3rem;
+}
+.main-card {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--border-strong);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px var(--shadow), 0 1px 4px var(--shadow);
+}
+
+/* BAND */
+.band {
+  background: linear-gradient(135deg, var(--blue-800) 0%, var(--blue-600) 100%);
+  padding: 1.8rem 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+.band-left { position: relative; z-index: 1; }
+.band-stage { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-200); margin-bottom: 0.25rem; }
+.band-title { font-family: 'Manrope', sans-serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 900; color: #fff; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 0.2rem; }
+.band-en { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-300); }
+.band-right { position: relative; z-index: 1; display: flex; align-items: center; gap: 0.75rem; }
+.band-badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 0.5rem 0.8rem; text-align: center; }
+.band-badge-num { font-family: 'Manrope', sans-serif; font-size: 1.8rem; font-weight: 900; color: #fff; line-height: 1; letter-spacing: -0.04em; }
+.band-badge-label { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue-200); }
+.band-arrow { font-size: 1.4rem; color: rgba(255,255,255,0.3); }
+
+/* CARD BODY */
+.card-body {
+  padding: 1.6rem 1.8rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+/* SECTION CARDS */
+.section-card {
+  background: var(--blue-50);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.2rem 1.3rem;
+  position: relative;
+  overflow: hidden;
+}
+.section-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+}
+.section-card:nth-child(1)::before { background: linear-gradient(90deg, var(--blue-400), var(--blue-600)); }
+.section-card:nth-child(2)::before { background: linear-gradient(90deg, var(--blue-accent), var(--blue-500)); }
+.section-card:nth-child(3)::before { background: linear-gradient(90deg, var(--blue-500), var(--blue-700)); }
+.section-card:nth-child(4)::before { background: linear-gradient(90deg, var(--blue-600), var(--blue-800)); }
+.section-card.full { grid-column: 1 / -1; }
+
+.section-label {
+  font-size: 0.6rem; font-weight: 800; letter-spacing: 0.14em;
+  text-transform: uppercase; margin-bottom: 0.6rem;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.label--blue { color: var(--blue-600); }
+.label--accent { color: var(--blue-accent); }
+.label--dark { color: var(--blue-800); }
+.label--green { color: var(--green); }
+.section-label::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; }
+.label--blue::before { background: var(--blue-500); }
+.label--accent::before { background: var(--blue-accent); }
+.label--dark::before { background: var(--blue-700); }
+.label--green::before { background: var(--green); box-shadow: 0 0 5px rgba(16,185,129,0.4); }
+
+.section-title { font-size: 0.95rem; font-weight: 800; color: var(--blue-900); letter-spacing: -0.02em; margin-bottom: 0.5rem; line-height: 1.3; }
+.section-desc { font-size: 0.76rem; color: var(--text-muted); line-height: 1.7; font-weight: 400; }
+
+/* DEFINITION BOX */
+.definition-box {
+  background: linear-gradient(135deg, rgba(67,97,238,0.07) 0%, rgba(99,153,255,0.09) 100%);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  margin-top: 0.6rem;
+}
+.definition-highlight { display: inline-block; background: var(--blue-100); color: var(--blue-800); padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: 700; }
+
+/* TRANS LIST */
+.trans-list { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.6rem; }
+.trans-item { display: flex; align-items: center; gap: 0.5rem; }
+.trans-from { background: var(--blue-100); color: var(--blue-700); border: 1px solid var(--blue-200); padding: 0.2rem 0.6rem; border-radius: 8px; font-size: 0.72rem; font-weight: 600; min-width: 80px; text-align: center; }
+.trans-arrow { color: var(--blue-400); font-size: 0.9rem; flex-shrink: 0; }
+.trans-to { background: rgba(67,97,238,0.12); color: var(--blue-accent-dark); border: 1px solid rgba(67,97,238,0.25); padding: 0.2rem 0.6rem; border-radius: 8px; font-size: 0.72rem; font-weight: 600; min-width: 100px; text-align: center; }
+
+/* TRAIT GRID */
+.trait-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; margin-top: 0.6rem; }
+.trait-item { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 0.65rem 0.75rem; display: flex; align-items: flex-start; gap: 0.45rem; }
+.trait-icon { font-size: 0.88rem; flex-shrink: 0; margin-top: 0.05rem; }
+.trait-text { font-size: 0.7rem; color: var(--text); line-height: 1.5; font-weight: 400; }
+.trait-text strong { color: var(--blue-700); display: block; margin-bottom: 0.08rem; font-size: 0.72rem; }
+
+/* TOOLS */
+.tools-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.6rem; }
+.tool-tag { background: rgba(67,97,238,0.1); color: var(--blue-accent-dark); border: 1px solid rgba(67,97,238,0.2); padding: 0.22rem 0.65rem; border-radius: 100px; font-size: 0.7rem; font-weight: 600; }
+
+/* LIMIT LIST */
+.limit-list { display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.55rem; }
+.limit-item { display: flex; align-items: flex-start; gap: 0.45rem; font-size: 0.73rem; color: var(--text-muted); line-height: 1.6; font-weight: 400; }
+.limit-icon { flex-shrink: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--amber-bg); color: var(--amber); font-size: 0.52rem; display: flex; align-items: center; justify-content: center; margin-top: 0.08rem; font-weight: 800; }
+
+/* WORK IMPACT */
+.work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; margin-top: 0.55rem; }
+.work-item { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 0.65rem 0.75rem; }
+.work-item-label { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
+.work-item-label--amber { color: var(--amber); }
+.work-item-label--green { color: var(--green); }
+.work-item-label--blue { color: var(--blue-600); }
+.work-item-desc { font-size: 0.7rem; color: var(--text-muted); line-height: 1.5; font-weight: 400; }
+
+/* METHOD BOX */
+.method-box { background: linear-gradient(135deg, rgba(67,97,238,0.05) 0%, rgba(99,153,255,0.05) 100%); border: 1px solid var(--border-strong); border-radius: 14px; padding: 1rem 1.2rem; margin-top: 0.6rem; }
+.method-title { font-size: 0.76rem; font-weight: 700; color: var(--blue-800); margin-bottom: 0.4rem; }
+.method-content { font-size: 0.72rem; color: var(--text-muted); line-height: 1.7; font-weight: 400; }
+.method-content strong { color: var(--blue-700); }
+
+/* VS BOX */
+.vs-box {
+  background: linear-gradient(135deg, rgba(67,97,238,0.06) 0%, rgba(59,130,246,0.06) 100%);
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  padding: 1rem 1.2rem;
+  margin-top: 0.6rem;
+}
+.vs-row { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem; }
+.vs-row:last-child { margin-bottom: 0; }
+.vs-label { font-size: 0.68rem; font-weight: 700; width: 70px; flex-shrink: 0; text-align: center; }
+.vs-label--info { color: var(--text-muted); }
+.vs-label--digital { color: var(--blue-accent); }
+.vs-bar { flex: 1; height: 8px; border-radius: 4px; }
+.bar-gray { background: var(--blue-100); }
+.bar-blue { background: linear-gradient(90deg, var(--blue-accent), var(--blue-400)); }
+.vs-note { font-size: 0.68rem; color: var(--text-muted); line-height: 1.6; margin-top: 0.5rem; font-weight: 400; }
+
+/* SUMMARY BAR */
+.summary-bar {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, var(--blue-700) 0%, var(--blue-800) 100%);
+  border-radius: 14px;
+  padding: 1.1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.summary-bar::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 24px 24px; pointer-events: none; }
+.summary-left { position: relative; z-index: 1; }
+.summary-eyebrow { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-300); margin-bottom: 0.15rem; }
+.summary-text { font-size: 0.92rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; line-height: 1.3; }
+.summary-right { position: relative; z-index: 1; display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end; }
+.sum-tag { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 0.2rem 0.6rem; border-radius: 100px; font-size: 0.65rem; font-weight: 600; white-space: nowrap; }
+
+/* FOOTER */
+.card-footer { padding: 1rem 2rem 1.4rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+.footer-stage { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+.footer-nav { display: flex; align-items: center; gap: 0.5rem; font-size: 0.68rem; color: var(--text-muted); font-weight: 500; }
+.nav-arrow { background: var(--blue-50); border: 1px solid var(--border); border-radius: 8px; padding: 0.25rem 0.55rem; color: var(--blue-600); font-size: 0.68rem; }
+
+@media (max-width: 700px) {
+  body { padding: 1rem 0.75rem 2rem; }
+  .card-body { grid-template-columns: 1fr; padding: 1.2rem 1rem; }
+  .section-card.full { grid-column: 1; }
+  .trait-grid { grid-template-columns: 1fr; }
+  .work-grid { grid-template-columns: 1fr; }
+  .band { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .summary-bar { flex-direction: column; align-items: flex-start; }
+  .summary-right { justify-content: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="main-card">
+
+  <!-- TOP BAND -->
+  <div class="band">
+    <div class="band-left">
+      <div class="band-stage">Stage 02 &nbsp;/&nbsp; 认知地图</div>
+      <div class="band-title">数字化</div>
+      <div class="band-en">Digitalization</div>
+    </div>
+    <div class="band-right">
+      <div class="band-arrow">&#8594;</div>
+      <div class="band-badge">
+        <div class="band-badge-num">02</div>
+        <div class="band-badge-label">第二阶段</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD BODY -->
+  <div class="card-body">
+
+    <!-- ===== 1. DEFINITION ===== -->
+    <div class="section-card">
+      <div class="section-label label--blue">&#9679; 定义</div>
+      <div class="section-title">什么是数字化？</div>
+      <div class="section-desc">
+        构建数字空间，把孤立的信息打通连接起来，实现知识的系统化管理与流转。本质是<strong style="color:var(--blue-700);">连接</strong>。
+      </div>
+      <div class="definition-box">
+        <p style="font-size:0.78rem; color:var(--blue-800); line-height:1.7; font-weight:500;">
+          信息化：把信息<strong>搬到哪里</strong>（介质转化）<br>
+          数字化：把信息<strong>打通连起来</strong>（连接重组）
+        </p>
+      </div>
+    </div>
+
+    <!-- ===== 2. CORE TRAITS ===== -->
+    <div class="section-card">
+      <div class="section-label label--accent">&#9679; 核心特征</div>
+      <div class="section-title">数字化四大特征</div>
+      <div class="trait-grid">
+        <div class="trait-item">
+          <span class="trait-icon">&#128279;</span>
+          <div class="trait-text"><strong>打通连接</strong>跨系统、跨平台数据互通，打破信息孤岛</div>
+        </div>
+        <div class="trait-item">
+          <span class="trait-icon">&#128218;</span>
+          <div class="trait-text"><strong>知识体系化</strong>碎片知识整合为结构化知识库，资产化积累</div>
+        </div>
+        <div class="trait-item">
+          <span class="trait-icon">&#128200;</span>
+          <div class="trait-text"><strong>数据驱动</strong>用数据说话，经验决策升级为数据驱动决策</div>
+        </div>
+        <div class="trait-item">
+          <span class="trait-icon">&#128273;</span>
+          <div class="trait-text"><strong>协作共享</strong>个人知识变为团队协作，资源共建共享</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 3. TRANSFORMATION ===== -->
+    <div class="section-card full">
+      <div class="section-label label--dark">&#9679; 教育场景转变</div>
+      <div class="section-title">教学工作的数字化转变</div>
+      <div class="trans-list">
+        <div class="trans-item">
+          <span class="trans-from">孤立课件</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">互联知识库</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.3rem;">（10年积累的课件、反思统一整合）</span>
+        </div>
+        <div class="trans-item">
+          <span class="trans-from">纸质反思本</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">结构化知识库</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.3rem;">（Obsidian / Notion 等工具沉淀经验）</span>
+        </div>
+        <div class="trans-item">
+          <span class="trans-from">分散成绩表</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">统一数据库</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.3rem;">（多学期、多班级数据打通分析）</span>
+        </div>
+        <div class="trans-item">
+          <span class="trans-from">独立备课</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">协作备课平台</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.3rem;">（团队共建校本资源，版本协同管理）</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 4. TOOLS ===== -->
+    <div class="section-card">
+      <div class="section-label label--accent">&#9679; 典型工具</div>
+      <div class="section-title">数字化代表工具</div>
+      <div class="section-desc">数字化阶段的核心是知识管理、协作平台和数据系统的建设。</div>
+      <div class="tools-row" style="margin-top: 0.7rem;">
+        <span class="tool-tag">&#128218; Notion</span>
+        <span class="tool-tag">&#128218; Obsidian</span>
+        <span class="tool-tag">&#128200; 数据库</span>
+        <span class="tool-tag">&#127760; API 接口</span>
+        <span class="tool-tag">&#128259; RSS 聚合</span>
+        <span class="tool-tag">&#128187; 协作文档</span>
+        <span class="tool-tag">&#128202; BI Dashboard</span>
+        <span class="tool-tag">&#128203; 飞书</span>
+      </div>
+    </div>
+
+    <!-- ===== 5. VS INFOMARTIZATION ===== -->
+    <div class="section-card">
+      <div class="section-label label--green">&#9679; 信息化 vs 数字化</div>
+      <div class="section-title">两者核心区别</div>
+      <div class="vs-box">
+        <div class="vs-row">
+          <div class="vs-label vs-label--info">本质</div>
+          <div class="vs-bar bar-gray" style="width:40%;"></div>
+          <span style="font-size:0.65rem; color:var(--text-muted); width:50px; flex-shrink:0;">介质转化</span>
+          <div class="vs-bar bar-blue" style="width:60%;"></div>
+          <div class="vs-label vs-label--digital">连接打通</div>
+        </div>
+        <div class="vs-row">
+          <div class="vs-label vs-label--info">信息状态</div>
+          <div class="vs-bar bar-gray" style="width:35%;"></div>
+          <span style="font-size:0.65rem; color:var(--text-muted); width:50px; flex-shrink:0;">孤立存放</span>
+          <div class="vs-bar bar-blue" style="width:65%;"></div>
+          <div class="vs-label vs-label--digital">打通流转</div>
+        </div>
+        <div class="vs-row">
+          <div class="vs-label vs-label--info">与用户关系</div>
+          <div class="vs-bar bar-gray" style="width:30%;"></div>
+          <span style="font-size:0.65rem; color:var(--text-muted); width:50px; flex-shrink:0;">被动查询</span>
+          <div class="vs-bar bar-blue" style="width:70%;"></div>
+          <div class="vs-label vs-label--digital">主动连接</div>
+        </div>
+        <div class="vs-row">
+          <div class="vs-label vs-label--info">价值释放</div>
+          <div class="vs-bar bar-gray" style="width:35%;"></div>
+          <span style="font-size:0.65rem; color:var(--text-muted); width:50px; flex-shrink:0;">有限</span>
+          <div class="vs-bar bar-blue" style="width:65%;"></div>
+          <div class="vs-label vs-label--digital">显著提升</div>
+        </div>
+        <div class="vs-note">数字化不是信息化的"升级版"，而是<strong>不同的维度</strong>——信息化是"在哪里"，数字化是"怎么连"</div>
+      </div>
+    </div>
+
+    <!-- ===== 6. WORK IMPACT ===== -->
+    <div class="section-card full">
+      <div class="section-label label--dark">&#9679; 对人类工作的影响</div>
+      <div class="section-title">数字化阶段的人类工作状态</div>
+      <div class="work-grid">
+        <div class="work-item">
+          <div class="work-item-label work-item-label--amber">&#9679; 开始减少</div>
+          <div class="work-item-desc">重复性执行类工作开始减少，数据批量处理、模板化输出由系统代劳</div>
+        </div>
+        <div class="work-item">
+          <div class="work-item-label work-item-label--green">&#9679; 效率显著提升</div>
+          <div class="work-item-desc">知识检索速度大幅提升，有积累的教师开始享受"知识资产"带来的复利效应</div>
+        </div>
+        <div class="work-item">
+          <div class="work-item-label work-item-label--blue">&#9679; 数据辅助决策</div>
+          <div class="work-item-desc">经验判断开始有了数据依据，教学决策从"我觉得"变成"数据显示"</div>
+        </div>
+        <div class="work-item">
+          <div class="work-item-label work-item-label--blue">&#9679; 协作成为常态</div>
+          <div class="work-item-desc">独立创作过渡到团队协作，教师从"单兵作战"转向"共建共享"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 7. SUMMARY BAR ===== -->
+    <div class="summary-bar">
+      <div class="summary-left">
+        <div class="summary-eyebrow">一句话总结</div>
+        <div class="summary-text">数字化 = 连接打通，让数据流动起来，效率从系统连接中涌现</div>
+      </div>
+      <div class="summary-right">
+        <span class="sum-tag">打通连接</span>
+        <span class="sum-tag">知识体系</span>
+        <span class="sum-tag">数据驱动</span>
+        <span class="sum-tag">协作共享</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="card-footer">
+    <div class="footer-stage">Stage 02 &nbsp;/&nbsp; 数字化 &nbsp;&middot;&nbsp; Digitalization &nbsp;&middot;&nbsp; Theo InfoCard</div>
+    <div class="footer-nav">
+      <a href="informatization-card.html" style="background:var(--blue-50);border:1px solid var(--border);border-radius:8px;padding:0.25rem 0.55rem;color:var(--blue-600);font-size:0.68rem;font-weight:600;text-decoration:none;display:inline-block;">&#8592; 信息化</a>
+      <span style="color:var(--blue-400);">|</span>
+      <a href="cognitive-map-blue.html" style="background:var(--blue-50);border:1px solid var(--border);border-radius:8px;padding:0.25rem 0.55rem;color:var(--blue-600);font-size:0.68rem;font-weight:600;text-decoration:none;display:inline-block;">认知地图</a>
+      <span style="color:var(--blue-400);">|</span>
+      <a href="intelligentization-card.html" style="background:var(--blue-50);border:1px solid var(--border);border-radius:8px;padding:0.25rem 0.55rem;color:var(--blue-600);font-size:0.68rem;font-weight:600;text-decoration:none;display:inline-block;">智能化 &#8594;</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

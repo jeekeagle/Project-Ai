@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智能化 | Intelligentization</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #ffffff;
+  --blue-50: #eff6ff;
+  --blue-100: #dbeafe;
+  --blue-200: #bfdbfe;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+  --blue-800: #1e40af;
+  --blue-900: #1e3a8a;
+  --blue-accent: #4361ee;
+  --blue-accent-dark: #3450d1;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: rgba(59, 130, 246, 0.12);
+  --border-strong: rgba(59, 130, 246, 0.22);
+  --shadow: rgba(67, 97, 238, 0.08);
+  --green: #10b981;
+  --green-light: #34d399;
+  --green-bg: rgba(16,185,129,0.08);
+  --green-border: rgba(16,185,129,0.2);
+  --amber: #f59e0b;
+  --amber-bg: rgba(245,158,11,0.08);
+  --amber-border: rgba(245,158,11,0.2);
+  --red: #ef4444;
+  --red-bg: rgba(239,68,68,0.07);
+  --red-border: rgba(239,68,68,0.15);
+  --bg: #f0f4ff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans SC', 'Manrope', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2rem 1.5rem 3rem;
+}
+.main-card {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--border-strong);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px var(--shadow), 0 1px 4px var(--shadow);
+}
+
+/* BAND */
+.band {
+  background: linear-gradient(135deg, var(--blue-800) 0%, var(--blue-600) 100%);
+  padding: 1.8rem 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+.band-left { position: relative; z-index: 1; }
+.band-stage { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-200); margin-bottom: 0.25rem; }
+.band-title { font-family: 'Manrope', sans-serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 900; color: #fff; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 0.2rem; }
+.band-en { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-300); }
+.band-right { position: relative; z-index: 1; display: flex; align-items: center; gap: 0.75rem; }
+.band-badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 0.5rem 0.8rem; text-align: center; }
+.band-badge-num { font-family: 'Manrope', sans-serif; font-size: 1.8rem; font-weight: 900; color: #fff; line-height: 1; letter-spacing: -0.04em; }
+.band-badge-label { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue-200); }
+.band-arrow { font-size: 1.4rem; color: rgba(255,255,255,0.3); }
+
+/* CARD BODY */
+.card-body {
+  padding: 1.6rem 1.8rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+/* SECTION CARDS */
+.section-card {
+  background: var(--blue-50);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.2rem 1.3rem;
+  position: relative;
+  overflow: hidden;
+}
+.section-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+}
+.section-card:nth-child(1)::before { background: linear-gradient(90deg, var(--blue-400), var(--blue-600)); }
+.section-card:nth-child(2)::before { background: linear-gradient(90deg, var(--blue-accent), var(--blue-500)); }
+.section-card:nth-child(3)::before { background: linear-gradient(90deg, var(--blue-500), var(--blue-700)); }
+.section-card:nth-child(4)::before { background: linear-gradient(90deg, var(--blue-600), var(--blue-800)); }
+.section-card.full { grid-column: 1 / -1; }
+
+.section-label {
+  font-size: 0.6rem; font-weight: 800; letter-spacing: 0.14em;
+  text-transform: uppercase; margin-bottom: 0.6rem;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.label--blue { color: var(--blue-600); }
+.label--accent { color: var(--blue-accent); }
+.label--dark { color: var(--blue-800); }
+.label--green { color: var(--green); }
+.section-label::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; }
+.label--blue::before { background: var(--blue-500); }
+.label--accent::before { background: var(--blue-accent); }
+.label--dark::before { background: var(--blue-700); }
+.label--green::before { background: var(--green); box-shadow: 0 0 5px rgba(16,185,129,0.5); }
+
+.section-title { font-size: 0.95rem; font-weight: 800; color: var(--blue-900); letter-spacing: -0.02em; margin-bottom: 0.5rem; line-height: 1.3; }
+.section-desc { font-size: 0.76rem; color: var(--text-muted); line-height: 1.7; font-weight: 400; }
+
+/* DEFINITION BOX */
+.definition-box {
+  background: linear-gradient(135deg, rgba(16,185,129,0.07) 0%, rgba(52,211,153,0.07) 100%);
+  border: 1px solid rgba(16,185,129,0.2);
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  margin-top: 0.6rem;
+}
+.definition-highlight { display: inline-block; background: var(--green-bg); color: var(--green); padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: 700; border: 1px solid var(--green-border); }
+
+/* TRANS LIST */
+.trans-list { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.6rem; }
+.trans-item { display: flex; align-items: center; gap: 0.5rem; }
+.trans-from { background: rgba(67,97,238,0.1); color: var(--blue-accent-dark); border: 1px solid rgba(67,97,238,0.2); padding: 0.2rem 0.6rem; border-radius: 8px; font-size: 0.72rem; font-weight: 600; min-width: 100px; text-align: center; }
+.trans-arrow { color: var(--green); font-size: 0.9rem; flex-shrink: 0; }
+.trans-to { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); padding: 0.2rem 0.6rem; border-radius: 8px; font-size: 0.72rem; font-weight: 600; min-width: 100px; text-align: center; }
+
+/* TRAIT GRID */
+.trait-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; margin-top: 0.6rem; }
+.trait-item { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 0.65rem 0.75rem; display: flex; align-items: flex-start; gap: 0.45rem; }
+.trait-icon { font-size: 0.88rem; flex-shrink: 0; margin-top: 0.05rem; }
+.trait-text { font-size: 0.7rem; color: var(--text); line-height: 1.5; font-weight: 400; }
+.trait-text strong { color: var(--blue-700); display: block; margin-bottom: 0.08rem; font-size: 0.72rem; }
+
+/* TOOLS */
+.tools-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.6rem; }
+.tool-tag { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); padding: 0.22rem 0.65rem; border-radius: 100px; font-size: 0.7rem; font-weight: 600; }
+
+/* LIMIT LIST */
+.limit-list { display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.55rem; }
+.limit-item { display: flex; align-items: flex-start; gap: 0.45rem; font-size: 0.73rem; color: var(--text-muted); line-height: 1.6; font-weight: 400; }
+.limit-icon { flex-shrink: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--amber-bg); color: var(--amber); font-size: 0.52rem; display: flex; align-items: center; justify-content: center; margin-top: 0.08rem; font-weight: 800; }
+
+/* WORK IMPACT */
+.work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; margin-top: 0.55rem; }
+.work-item { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 0.65rem 0.75rem; }
+.work-item-label { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
+.work-item-label--green { color: var(--green); }
+.work-item-label--blue { color: var(--blue-600); }
+.work-item-desc { font-size: 0.7rem; color: var(--text-muted); line-height: 1.5; font-weight: 400; }
+
+/* VS BOX */
+.vs-box {
+  background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(67,97,238,0.05) 100%);
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  padding: 1rem 1.2rem;
+  margin-top: 0.6rem;
+}
+.vs-row { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem; }
+.vs-row:last-child { margin-bottom: 0; }
+.vs-label { font-size: 0.68rem; font-weight: 700; width: 70px; flex-shrink: 0; text-align: center; }
+.vs-label--prev { color: var(--text-muted); }
+.vs-label--intel { color: var(--green); }
+.vs-bar { flex: 1; height: 8px; border-radius: 4px; }
+.bar-gray { background: var(--blue-100); }
+.bar-green { background: linear-gradient(90deg, var(--green), #0d9488); }
+.vs-note { font-size: 0.68rem; color: var(--text-muted); line-height: 1.6; margin-top: 0.5rem; font-weight: 400; }
+
+/* METHOD BOX */
+.method-box { background: linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(67,97,238,0.05) 100%); border: 1px solid rgba(16,185,129,0.2); border-radius: 14px; padding: 1rem 1.2rem; margin-top: 0.6rem; }
+.method-title { font-size: 0.76rem; font-weight: 700; color: var(--green); margin-bottom: 0.4rem; }
+.method-content { font-size: 0.72rem; color: var(--text-muted); line-height: 1.7; font-weight: 400; }
+.method-content strong { color: var(--blue-700); }
+
+/* SYMBIOSIS BOX */
+.symbiosis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-top: 0.6rem; }
+.symbiosis-item { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 0.7rem 0.8rem; }
+.symbiosis-role { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+.symbiosis-role--human { color: var(--blue-600); }
+.symbiosis-role--ai { color: var(--green); }
+.symbiosis-desc { font-size: 0.7rem; color: var(--text-muted); line-height: 1.55; font-weight: 400; }
+
+/* SUMMARY BAR */
+.summary-bar {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, var(--blue-700) 0%, var(--blue-800) 100%);
+  border-radius: 14px;
+  padding: 1.1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.summary-bar::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 24px 24px; pointer-events: none; }
+.summary-left { position: relative; z-index: 1; }
+.summary-eyebrow { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-300); margin-bottom: 0.15rem; }
+.summary-text { font-size: 0.92rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; line-height: 1.3; }
+.summary-right { position: relative; z-index: 1; display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end; }
+.sum-tag { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 0.2rem 0.6rem; border-radius: 100px; font-size: 0.65rem; font-weight: 600; white-space: nowrap; }
+
+/* FOOTER */
+.card-footer { padding: 1rem 2rem 1.4rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+.footer-stage { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+.footer-nav { display: flex; align-items: center; gap: 0.5rem; font-size: 0.68rem; color: var(--text-muted); font-weight: 500; }
+.nav-arrow { background: var(--blue-50); border: 1px solid var(--border); border-radius: 8px; padding: 0.25rem 0.55rem; color: var(--blue-600); font-size: 0.68rem; }
+
+@media (max-width: 700px) {
+  body { padding: 1rem 0.75rem 2rem; }
+  .card-body { grid-template-columns: 1fr; padding: 1.2rem 1rem; }
+  .section-card.full { grid-column: 1; }
+  .trait-grid { grid-template-columns: 1fr; }
+  ..work-grid { grid-template-columns: 1fr; }
+  .symbiosis-grid { grid-template-columns: 1fr; }
+  .band { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .summary-bar { flex-direction: column; align-items: flex-start; }
+  .summary-right { justify-content: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="main-card">
+
+  <!-- TOP BAND -->
+  <div class="band">
+    <div class="band-left">
+      <div class="band-stage">Stage 03 &nbsp;/&nbsp; 认知地图</div>
+      <div class="band-title">智能化</div>
+      <div class="band-en">Intelligentization</div>
+    </div>
+    <div class="band-right">
+      <div class="band-arrow">&#8678;</div>
+      <div class="band-badge">
+        <div class="band-badge-num">03</div>
+        <div class="band-badge-label">第三阶段</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD BODY -->
+  <div class="card-body">
+
+    <!-- ===== 1. DEFINITION ===== -->
+    <div class="section-card">
+      <div class="section-label label--green">&#9679; 定义</div>
+      <div class="section-title">什么是智能化？</div>
+      <div class="section-desc">
+        AI 与人协同工作，替代重复性任务，主动提供分析和建议，释放人的创造力。本质是<strong style="color:var(--green);">协同</strong>——不是替代，而是与人类协同放大价值。
+      </div>
+      <div class="definition-box">
+        <p style="font-size:0.78rem; color:var(--blue-800); line-height:1.7; font-weight:500;">
+          减负 = 提效：<span class="definition-highlight">替代重复</span> + <span class="definition-highlight">释放创造</span><br>
+          做更少，效果更好——把时间留给高价值的建构性工作
+        </p>
+      </div>
+    </div>
+
+    <!-- ===== 2. CORE TRAITS ===== -->
+    <div class="section-card">
+      <div class="section-label label--accent">&#9679; 核心特征</div>
+      <div class="section-title">智能化四大特征</div>
+      <div class="trait-grid">
+        <div class="trait-item">
+          <span class="trait-icon">&#129302;</span>
+          <div class="trait-text"><strong>理解意图</strong>AI 理解自然语言，揣摩人的意图而非机械执行指令</div>
+        </div>
+        <div class="trait-item">
+          <span class="trait-icon">&#128640;</span>
+          <div class="trait-text"><strong>自动执行</strong>Agent 自主完成任务链，人只需在关键节点审核确认</div>
+        </div>
+        <div class="trait-item">
+          <span class="trait-icon">&#128200;</span>
+          <div class="trait-text"><strong>主动建议</strong>信息主动找人，AI 分析数据后主动推送决策建议</div>
+        </div>
+        <div class="trait-item">
+          <span class="trait-icon">&#129309;</span>
+          <div class="trait-text"><strong>人机协同</strong>AI 放大人的创造力，人引导 AI 的方向和判断</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 3. TRANSFORMATION ===== -->
+    <div class="section-card full">
+      <div class="section-label label--dark">&#9679; 教育场景转变</div>
+      <div class="section-title">教学工作的智能化转变</div>
+      <div class="trans-list">
+        <div class="trans-item">
+          <span class="trans-from">手工制作 PPT</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">AI 生成 + 人优化</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.3rem;">（AI 完成初稿，人负责审核和个性化调整）</span>
+        </div>
+        <div class="trans-item">
+          <span class="trans-from">人工分析成绩</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">AI 预警 + 人做决策</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.3rem;">（AI 扫描数据发现异常，人判断如何干预）</span>
+        </div>
+        <div class="trans-item">
+          <span class="trans-from">独自撰写教案</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">AI 协作备课</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.3rem;">（AI 提供素材和框架，人专注教学设计思路）</span>
+        </div>
+        <div class="trans-item">
+          <span class="trans-from">被动等待问题</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">AI 主动预警</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.3rem;">（AI 实时监测学生状态，提前推送关注提醒）</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 4. TOOLS ===== -->
+    <div class="section-card">
+      <div class="section-label label--green">&#9679; 典型工具</div>
+      <div class="section-title">智能化代表工具</div>
+      <div class="section-desc">智能化阶段的核心是 AI Agent、RAG 系统和大模型协同工作流。</div>
+      <div class="tools-row" style="margin-top: 0.7rem;">
+        <span class="tool-tag">&#129302; AI Agent</span>
+        <span class="tool-tag">&#128269; RAG 知识库</span>
+        <span class="tool-tag">&#128172; 大模型对话</span>
+        <span class="tool-tag">&#128196; AI 生成 PPT</span>
+        <span class="tool-tag">&#128200; AI 数据分析</span>
+        <span class="tool-tag">&#128221; AI 备课助手</span>
+        <span class="tool-tag">&#127891; AI 出题系统</span>
+        <span class="tool-tag">&#9888; AI 预警系统</span>
+      </div>
+    </div>
+
+    <!-- ===== 5. VS DIGITALIZATION ===== -->
+    <div class="section-card">
+      <div class="section-label label--accent">&#9679; 数字化 vs 智能化</div>
+      <div class="section-title">两者核心区别</div>
+      <div class="vs-box">
+        <div class="vs-row">
+          <div class="vs-label vs-label--prev">本质</div>
+          <div class="vs-bar bar-gray" style="width:40%;"></div>
+          <span style="font-size:0.65rem; color:var(--text-muted); width:55px; flex-shrink:0;">连接打通</span>
+          <div class="vs-bar bar-green" style="width:60%;"></div>
+          <div class="vs-label vs-label--intel">协同创造</div>
+        </div>
+        <div class="vs-row">
+          <div class="vs-label vs-label--prev">系统行为</div>
+          <div class="vs-bar bar-gray" style="width:35%;"></div>
+          <span style="font-size:0.65rem; color:var(--text-muted); width:55px; flex-shrink:0;">被动执行</span>
+          <div class="vs-bar bar-green" style="width:65%;"></div>
+          <div class="vs-label vs-label--intel">主动理解</div>
+        </div>
+        <div class="vs-row">
+          <div class="vs-label vs-label--prev">信息流</div>
+          <div class="vs-bar bar-gray" style="width:40%;"></div>
+          <span style="font-size:0.65rem; color:var(--text-muted); width:55px; flex-shrink:0;">人找信息</span>
+          <div class="vs-bar bar-green" style="width:60%;"></div>
+          <div class="vs-label vs-label--intel">信息找人</div>
+        </div>
+        <div class="vs-row">
+          <div class="vs-label vs-label--prev">人的角色</div>
+          <div class="vs-bar bar-gray" style="width:45%;"></div>
+          <span style="font-size:0.65rem; color:var(--text-muted); width:55px; flex-shrink:0;">管理者</span>
+          <div class="vs-bar bar-green" style="width:55%;"></div>
+          <div class="vs-label vs-label--intel">协作者</div>
+        </div>
+        <div class="vs-note">数字化的终点是"数据通了"，智能化的起点是"AI 懂了"——两者叠加才能实现真正的效率飞跃</div>
+      </div>
+    </div>
+
+    <!-- ===== 6. WORK IMPACT ===== -->
+    <div class="section-card full">
+      <div class="section-label label--dark">&#9679; 对人类工作的影响</div>
+      <div class="section-title">智能化阶段的人类工作状态</div>
+      <div class="work-grid">
+        <div class="work-item">
+          <div class="work-item-label work-item-label--green">&#9679; 大幅减负</div>
+          <div class="work-item-desc">重复性执行类工作被 AI 大幅替代，人从低价值劳动中彻底解放</div>
+        </div>
+        <div class="work-item">
+          <div class="work-item-label work-item-label--green">&#9679; 知识获取革命</div>
+          <div class="work-item-desc">AI 理解需求后主动整理推送，知识获取从"查找"升级为"对话获取"</div>
+        </div>
+        <div class="work-item">
+          <div class="work-item-label work-item-label--blue">&#9679; 人机协同决策</div>
+          <div class="work-item-desc">AI 提供选项和分析，人做最终判断——决策质量和效率同步提升</div>
+        </div>
+        <div class="work-item">
+          <div class="work-item-label work-item-label--blue">&#9679; 创造力大释放</div>
+          <div class="work-item-desc">人有更多时间去原创、去设计、去思考，做 AI 无法替代的创造性建构</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 7. SUMMARY BAR ===== -->
+    <div class="summary-bar">
+      <div class="summary-left">
+        <div class="summary-eyebrow">一句话总结</div>
+        <div class="summary-text">智能化 = 人机协同：AI 替代重复，人专注创造，减负 = 提效</div>
+      </div>
+      <div class="summary-right">
+        <span class="sum-tag">理解意图</span>
+        <span class="sum-tag">自动执行</span>
+        <span class="sum-tag">主动建议</span>
+        <span class="sum-tag">人机协同</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="card-footer">
+    <div class="footer-stage">Stage 03 &nbsp;/&nbsp; 智能化 &nbsp;&middot;&nbsp; Intelligentization &nbsp;&middot;&nbsp; Theo InfoCard</div>
+    <div class="footer-nav">
+      <a href="informatization-card.html" style="background:var(--blue-50);border:1px solid var(--border);border-radius:8px;padding:0.25rem 0.55rem;color:var(--blue-600);font-size:0.68rem;font-weight:600;text-decoration:none;display:inline-block;">&#8592; 信息化</a>
+      <span style="color:var(--blue-400);">|</span>
+      <a href="digitalization-card.html" style="background:var(--blue-50);border:1px solid var(--border);border-radius:8px;padding:0.25rem 0.55rem;color:var(--blue-600);font-size:0.68rem;font-weight:600;text-decoration:none;display:inline-block;">&#8592; 数字化</a>
+      <span style="color:var(--blue-400);">|</span>
+      <a href="cognitive-map-blue.html" style="background:var(--blue-50);border:1px solid var(--border);border-radius:8px;padding:0.25rem 0.55rem;color:var(--blue-600);font-size:0.68rem;font-weight:600;text-decoration:none;display:inline-block;">认知地图 &#8594;</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

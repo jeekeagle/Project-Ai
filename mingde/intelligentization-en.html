@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stage 03: Intelligentization</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #ffffff;
+  --blue-50: #eff6ff;
+  --blue-100: #dbeafe;
+  --blue-200: #bfdbfe;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+  --blue-800: #1e40af;
+  --blue-900: #1e3a8a;
+  --blue-accent: #4361ee;
+  --blue-accent-dark: #3450d1;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: rgba(59, 130, 246, 0.12);
+  --border-strong: rgba(59, 130, 246, 0.22);
+  --shadow: rgba(67, 97, 238, 0.08);
+  --green: #10b981;
+  --green-bg: rgba(16,185,129,0.08);
+  --green-border: rgba(16,185,129,0.2);
+  --amber: #f59e0b;
+  --amber-bg: rgba(245,158,11,0.08);
+  --amber-border: rgba(245,158,11,0.2);
+  --bg: #f0f4ff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Manrope', 'Noto Sans SC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2rem 1.5rem 3rem;
+}
+.main-card {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--border-strong);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px var(--shadow), 0 1px 4px var(--shadow);
+}
+.band {
+  background: linear-gradient(135deg, var(--blue-800) 0%, var(--blue-600) 100%);
+  padding: 1.8rem 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+.band-left { position: relative; z-index: 1; }
+.band-stage { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-200); margin-bottom: 0.25rem; }
+.band-title { font-family: 'Manrope', sans-serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 900; color: #fff; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 0.2rem; }
+.band-en { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-300); }
+.band-right { position: relative; z-index: 1; display: flex; align-items: center; gap: 0.75rem; }
+.band-badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 0.5rem 0.8rem; text-align: center; }
+.band-badge-num { font-family: 'Manrope', sans-serif; font-size: 1.8rem; font-weight: 900; color: #fff; line-height: 1; letter-spacing: -0.04em; }
+.band-badge-label { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue-200); }
+.band-arrow { font-size: 1.4rem; color: rgba(255,255,255,0.3); }
+.card-body { padding: 1.6rem 1.8rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.section-card {
+  background: var(--blue-50);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.2rem 1.3rem;
+  position: relative;
+  overflow: hidden;
+}
+.section-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+}
+.section-card:nth-child(1)::before { background: linear-gradient(90deg, var(--blue-400), var(--blue-600)); }
+.section-card:nth-child(2)::before { background: linear-gradient(90deg, var(--blue-accent), var(--blue-500)); }
+.section-card:nth-child(3)::before { background: linear-gradient(90deg, var(--blue-500), var(--blue-700)); }
+.section-card:nth-child(4)::before { background: linear-gradient(90deg, var(--blue-600), var(--blue-800)); }
+.section-card.full { grid-column: 1 / -1; }
+.section-label { font-size: 0.6rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem; }
+.label--blue { color: var(--blue-600); }
+.label--accent { color: var(--blue-accent); }
+.label--dark { color: var(--blue-800); }
+.label--green { color: var(--green); }
+.section-label::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; }
+.label--blue::before { background: var(--blue-500); }
+.label--accent::before { background: var(--blue-accent); }
+.label--dark::before { background: var(--blue-700); }
+.label--green::before { background: var(--green); box-shadow: 0 0 5px rgba(16,185,129,0.5); }
+.section-title { font-size: 0.95rem; font-weight: 800; color: var(--blue-900); letter-spacing: -0.02em; margin-bottom: 0.5rem; line-height: 1.3; }
+.section-desc { font-size: 0.76rem; color: var(--text-muted); line-height: 1.7; font-weight: 400; }
+.definition-box { background: linear-gradient(135deg, rgba(16,185,129,0.07) 0%, rgba(52,211,153,0.07) 100%); border: 1px solid rgba(16,185,129,0.2); border-radius: 12px; padding: 0.9rem 1.1rem; margin-top: 0.6rem; }
+.definition-highlight { display: inline-block; background: var(--green-bg); color: var(--green); padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: 700; border: 1px solid var(--green-border); }
+.trait-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; margin-top: 0.6rem; }
+.trait-item { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 0.65rem 0.75rem; display: flex; align-items: flex-start; gap: 0.45rem; }
+.trait-icon { font-size: 0.88rem; flex-shrink: 0; margin-top: 0.05rem; }
+.trait-text { font-size: 0.7rem; color: var(--text); line-height: 1.5; font-weight: 400; }
+.trait-text strong { color: var(--blue-700); display: block; margin-bottom: 0.08rem; font-size: 0.72rem; }
+.trans-list { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.6rem; }
+.trans-item { display: flex; align-items: center; gap: 0.5rem; }
+.trans-from { background: rgba(67,97,238,0.1); color: var(--blue-accent-dark); border: 1px solid rgba(67,97,238,0.2); padding: 0.2rem 0.6rem; border-radius: 8px; font-size: 0.72rem; font-weight: 600; min-width: 100px; text-align: center; }
+.trans-arrow { color: var(--green); font-size: 0.9rem; flex-shrink: 0; }
+.trans-to { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); padding: 0.2rem 0.6rem; border-radius: 8px; font-size: 0.72rem; font-weight: 600; min-width: 100px; text-align: center; }
+.tools-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.6rem; }
+.tool-tag { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); padding: 0.22rem 0.65rem; border-radius: 100px; font-size: 0.7rem; font-weight: 600; }
+.vs-box { background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(67,97,238,0.05) 100%); border: 1px solid var(--border-strong); border-radius: 14px; padding: 1rem 1.2rem; margin-top: 0.6rem; }
+.vs-row { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem; }
+.vs-row:last-child { margin-bottom: 0; }
+.vs-label { font-size: 0.68rem; font-weight: 700; width: 70px; flex-shrink: 0; text-align: center; }
+.vs-label--prev { color: var(--text-muted); }
+.vs-label--intel { color: var(--green); }
+.vs-bar { flex: 1; height: 8px; border-radius: 4px; }
+.bar-gray { background: var(--blue-100); }
+.bar-green { background: linear-gradient(90deg, var(--green), #0d9488); }
+.vs-note { font-size: 0.68rem; color: var(--text-muted); line-height: 1.6; margin-top: 0.5rem; font-weight: 400; }
+.work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; margin-top: 0.55rem; }
+.work-item { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 0.65rem 0.75rem; }
+.work-item-label { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
+.work-item-label--green { color: var(--green); }
+.work-item-label--blue { color: var(--blue-600); }
+.work-item-desc { font-size: 0.7rem; color: var(--text-muted); line-height: 1.5; font-weight: 400; }
+.summary-bar {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, var(--blue-700) 0%, var(--blue-800) 100%);
+  border-radius: 14px;
+  padding: 1.1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.summary-bar::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 24px 24px; pointer-events: none; }
+.summary-left { position: relative; z-index: 1; }
+.summary-eyebrow { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-300); margin-bottom: 0.15rem; }
+.summary-text { font-size: 0.92rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; line-height: 1.3; }
+.summary-right { position: relative; z-index: 1; display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end; }
+.sum-tag { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 0.2rem 0.6rem; border-radius: 100px; font-size: 0.65rem; font-weight: 600; white-space: nowrap; }
+.card-footer { padding: 1rem 2rem 1.4rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+.footer-stage { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+.footer-nav { display: flex; align-items: center; gap: 0.5rem; }
+.nav-link { background: var(--blue-50); border: 1px solid var(--border); border-radius: 8px; padding: 0.25rem 0.55rem; color: var(--blue-600); font-size: 0.68rem; font-weight: 600; text-decoration: none; }
+.nav-sep { color: var(--blue-400); }
+@media (max-width: 700px) {
+  body { padding: 1rem 0.75rem 2rem; }
+  .card-body { grid-template-columns: 1fr; padding: 1.2rem 1rem; }
+  .section-card.full { grid-column: 1; }
+  .trait-grid { grid-template-columns: 1fr; }
+  .work-grid { grid-template-columns: 1fr; }
+  .band { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .summary-bar { flex-direction: column; align-items: flex-start; }
+  .summary-right { justify-content: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="main-card">
+
+  <!-- TOP BAND -->
+  <div class="band">
+    <div class="band-left">
+      <div class="band-stage">Stage 03 &nbsp;/&nbsp; Cognitive Map</div>
+      <div class="band-title">Intelligentization</div>
+      <div class="band-en">Intelligentization</div>
+    </div>
+    <div class="band-right">
+      <div class="band-arrow">&#8678;</div>
+      <div class="band-badge">
+        <div class="band-badge-num">03</div>
+        <div class="band-badge-label">Stage 03</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD BODY -->
+  <div class="card-body">
+
+    <!-- 1. DEFINITION -->
+    <div class="section-card">
+      <div class="section-label label--green">&#9679; Definition</div>
+      <div class="section-title">What is Intelligentization?</div>
+      <div class="section-desc">
+        AI and humans collaborate — AI replaces routine tasks, proactively provides analysis and advice, freeing human creativity. Its essence is <strong style="color:var(--green);">collaboration</strong> — not replacement, but symbiosis that amplifies value.
+      </div>
+      <div class="definition-box">
+        <p style="font-size:0.78rem; color:var(--blue-800); line-height:1.7; font-weight:500;">
+          Reduce burden = Improve efficiency: <span class="definition-highlight">Replace routine</span> + <span class="definition-highlight">Free creativity</span><br>
+          Do less, achieve more — free time for high-value constructive work
+        </p>
+      </div>
+    </div>
+
+    <!-- 2. CORE TRAITS -->
+    <div class="section-card">
+      <div class="section-label label--accent">&#9679; Core Characteristics</div>
+      <div class="section-title">Four Key Characteristics</div>
+      <div class="trait-grid">
+        <div class="trait-item">
+          <span class="trait-icon">&#129302;</span>
+          <div class="trait-text"><strong>Intent Understanding</strong>AI understands natural language, infers human intent rather than mechanically executing commands</div>
+        </div>
+        <div class="trait-item">
+          <span class="trait-icon">&#128640;</span>
+          <div class="trait-text"><strong>Autonomous Execution</strong>Agent autonomously completes task chains — human only reviews at key checkpoints</div>
+        </div>
+        <div class="trait-item">
+          <span class="trait-icon">&#128200;</span>
+          <div class="trait-text"><strong>Proactive Recommendations</strong>Info proactively finds the person — AI analyzes data and proactively pushes decision suggestions</div>
+        </div>
+        <div class="trait-item">
+          <span class="trait-icon">&#129309;</span>
+          <div class="trait-text"><strong>Human-AI Collaboration</strong>AI amplifies human creativity, human guides AI's direction and judgment</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. TRANSFORMATION -->
+    <div class="section-card full">
+      <div class="section-label label--dark">&#9679; Education Scenario Shifts</div>
+      <div class="section-title">Intelligentization Shifts in Teaching Work</div>
+      <div class="trans-list">
+        <div class="trans-item">
+          <span class="trans-from">Create PPTs Manually</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">AI Drafts + Human Refines</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.3rem;">(AI creates draft, human reviews and personalizes)</span>
+        </div>
+        <div class="trans-item">
+          <span class="trans-from">Analyze Grades Manually</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">AI Alerts + Human Decides</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.3rem;">(AI scans data for anomalies, human judges intervention)</span>
+        </div>
+        <div class="trans-item">
+          <span class="trans-from">Write Lesson Plans Alone</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">AI-Assisted Lesson Planning</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.3rem;">(AI provides materials and frameworks, human focuses on design)</span>
+        </div>
+        <div class="trans-item">
+          <span class="trans-from">React to Problems</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">AI Proactive Alerts</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.3rem;">(AI monitors student status in real-time, pushes alerts proactively)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. TOOLS -->
+    <div class="section-card">
+      <div class="section-label label--green">&#9679; Representative Tools</div>
+      <div class="section-title">Intelligentization Era Tools</div>
+      <div class="section-desc">Core of this stage: AI Agents, RAG systems, and LLM collaborative workflows.</div>
+      <div class="tools-row" style="margin-top: 0.7rem;">
+        <span class="tool-tag">&#129302; AI Agent</span>
+        <span class="tool-tag">&#128269; RAG Knowledge Base</span>
+        <span class="tool-tag">&#128172; LLM Dialogue</span>
+        <span class="tool-tag">&#128196; AI PPT Generation</span>
+        <span class="tool-tag">&#128200; AI Data Analytics</span>
+        <span class="tool-tag">&#128221; AI Lesson Prep</span>
+        <span class="tool-tag">&#127891; AI Question Generation</span>
+        <span class="tool-tag">&#9888; AI Alert Systems</span>
+      </div>
+    </div>
+
+    <!-- 5. VS DIGITALIZATION -->
+    <div class="section-card">
+      <div class="section-label label--accent">&#9679; Digitalization vs. Intelligentization</div>
+      <div class="section-title">Core Differences</div>
+      <div class="vs-box">
+        <div class="vs-row">
+          <div class="vs-label vs-label--prev">Essence</div>
+          <div class="vs-bar bar-gray" style="width:40%;"></div>
+          <span style="font-size:0.65rem; color:var(--text-muted); width:55px; flex-shrink:0;">Connect &amp; integrate</span>
+          <div class="vs-bar bar-green" style="width:60%;"></div>
+          <div class="vs-label vs-label--intel">Collaborative creation</div>
+        </div>
+        <div class="vs-row">
+          <div class="vs-label vs-label--prev">System Behavior</div>
+          <div class="vs-bar bar-gray" style="width:35%;"></div>
+          <span style="font-size:0.65rem; color:var(--text-muted); width:55px; flex-shrink:0;">Passive execution</span>
+          <div class="vs-bar bar-green" style="width:65%;"></div>
+          <div class="vs-label vs-label--intel">Active understanding</div>
+        </div>
+        <div class="vs-row">
+          <div class="vs-label vs-label--prev">Information Flow</div>
+          <div class="vs-bar bar-gray" style="width:40%;"></div>
+          <span style="font-size:0.65rem; color:var(--text-muted); width:55px; flex-shrink:0;">Human finds info</span>
+          <div class="vs-bar bar-green" style="width:60%;"></div>
+          <div class="vs-label vs-label--intel">Info finds human</div>
+        </div>
+        <div class="vs-row">
+          <div class="vs-label vs-label--prev">Human Role</div>
+          <div class="vs-bar bar-gray" style="width:45%;"></div>
+          <span style="font-size:0.65rem; color:var(--text-muted); width:55px; flex-shrink:0;">Manager</span>
+          <div class="vs-bar bar-green" style="width:55%;"></div>
+          <div class="vs-label vs-label--intel">Collaborator</div>
+        </div>
+        <div class="vs-note">Digitalization's endpoint: "data is connected". Intelligentization's starting point: "AI understands". Only together do they achieve true efficiency leap.</div>
+      </div>
+    </div>
+
+    <!-- 6. WORK IMPACT -->
+    <div class="section-card full">
+      <div class="section-label label--dark">&#9679; Impact on Human Work</div>
+      <div class="section-title">Human Work Status in the Intelligentization Era</div>
+      <div class="work-grid">
+        <div class="work-item">
+          <div class="work-item-label work-item-label--green">&#9679; Dramatic Burden Reduction</div>
+          <div class="work-item-desc">Routine execution tasks largely replaced by AI — humans fully liberated from low-value labor</div>
+        </div>
+        <div class="work-item">
+          <div class="work-item-label work-item-label--green">&#9679; Knowledge Access Revolution</div>
+          <div class="work-item-desc">AI understands needs then proactively organizes and delivers — from "search" to "conversational acquisition"</div>
+        </div>
+        <div class="work-item">
+          <div class="work-item-label work-item-label--blue">&#9679; Human-AI Collaborative Decisions</div>
+          <div class="work-item-desc">AI provides options and analysis, human makes final judgment — decision quality and efficiency both improve</div>
+        </div>
+        <div class="work-item">
+          <div class="work-item-label work-item-label--blue">&#9679; Creativity Unleashed</div>
+          <div class="work-item-desc">Humans have more time for originality, design, and thinking — doing what AI cannot replace</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. SUMMARY -->
+    <div class="summary-bar">
+      <div class="summary-left">
+        <div class="summary-eyebrow">One-Line Summary</div>
+        <div class="summary-text">Intelligentization = Human-AI collaboration: AI replaces routine, human focuses on creation — reduce burden = improve efficiency</div>
+      </div>
+      <div class="summary-right">
+        <span class="sum-tag">Intent understanding</span>
+        <span class="sum-tag">Autonomous execution</span>
+        <span class="sum-tag">Proactive suggestions</span>
+        <span class="sum-tag">Human-AI collaboration</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="card-footer">
+    <div class="footer-stage">Stage 03 &nbsp;&middot;&nbsp; Intelligentization &nbsp;&middot;&nbsp; Theo InfoCard</div>
+    <div class="footer-nav">
+      <a href="informatization-en.html" class="nav-link">&#8592; Informatization</a>
+      <span class="nav-sep">|</span>
+      <a href="digitalization-en.html" class="nav-link">&#8592; Digitalization</a>
+      <span class="nav-sep">|</span>
+      <a href="cognitive-map-en.html" class="nav-link">Cognitive Map &#8594;</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

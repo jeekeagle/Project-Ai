@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cognitive Map | AI in Education</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #ffffff;
+  --blue-50: #eff6ff;
+  --blue-100: #dbeafe;
+  --blue-200: #bfdbfe;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+  --blue-800: #1e40af;
+  --blue-900: #1e3a8a;
+  --blue-accent: #4361ee;
+  --blue-accent-dark: #3450d1;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: rgba(59, 130, 246, 0.12);
+  --border-strong: rgba(59, 130, 246, 0.22);
+  --shadow: rgba(67, 97, 238, 0.08);
+  --shadow-strong: rgba(67, 97, 238, 0.14);
+  --green: #10b981;
+  --green-bg: rgba(16,185,129,0.08);
+  --green-border: rgba(16,185,129,0.2);
+  --amber: #f59e0b;
+  --amber-bg: rgba(245,158,11,0.08);
+  --amber-border: rgba(245,158,11,0.2);
+  --red: #ef4444;
+  --red-bg: rgba(239,68,68,0.07);
+  --red-border: rgba(239,68,68,0.15);
+  --bg: #f0f4ff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Manrope', 'Noto Sans SC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2rem 1.5rem 3rem;
+}
+.main-card {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--border-strong);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px var(--shadow), 0 1px 4px var(--shadow);
+}
+.band {
+  background: linear-gradient(135deg, var(--blue-800) 0%, var(--blue-600) 100%);
+  padding: 1.5rem 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+.band-left { position: relative; z-index: 1; }
+.band-stage { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-200); margin-bottom: 0.2rem; }
+.band-title { font-family: 'Manrope', sans-serif; font-size: clamp(1.3rem, 3.5vw, 2rem); font-weight: 900; color: #fff; letter-spacing: -0.04em; line-height: 1.1; }
+.band-right { position: relative; z-index: 1; display: flex; align-items: center; gap: 0.8rem; }
+.band-axis { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 0.4rem 0.75rem; text-align: center; }
+.band-axis-label { font-size: 0.55rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue-200); display: block; }
+.band-axis-value { font-size: 0.78rem; font-weight: 700; color: #fff; }
+.intro-strip {
+  background: var(--blue-50);
+  border-bottom: 1px solid var(--border);
+  padding: 0.9rem 2.2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+.intro-icon { font-size: 1.2rem; flex-shrink: 0; }
+.intro-text { font-size: 0.78rem; color: var(--blue-800); line-height: 1.65; font-weight: 400; }
+.intro-text strong { font-weight: 700; color: var(--blue-900); }
+.card-body { padding: 1.4rem 1.8rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+
+/* Matrix */
+.matrix-section { grid-column: 1 / -1; }
+.matrix-table { width: 100%; border-collapse: collapse; font-size: 0.76rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-strong); }
+.matrix-table th, .matrix-table td { padding: 0.65rem 0.75rem; text-align: left; vertical-align: top; border: 1px solid var(--border); }
+.matrix-table thead th { background: linear-gradient(135deg, var(--blue-700) 0%, var(--blue-800) 100%); color: #fff; font-size: 0.72rem; font-weight: 700; text-align: center; }
+.matrix-table thead th:first-child { background: var(--blue-900); text-align: left; min-width: 130px; }
+.matrix-table thead th.col-info { background: linear-gradient(135deg, var(--blue-400), var(--blue-600)); }
+.matrix-table thead th.col-digital { background: linear-gradient(135deg, var(--blue-accent), var(--blue-500)); }
+.matrix-table thead th.col-intel { background: linear-gradient(135deg, var(--blue-700), var(--blue-800)); }
+.col-num { font-family: 'Manrope', sans-serif; font-size: 1.8rem; font-weight: 900; color: rgba(255,255,255,0.2); line-height: 1; display: block; margin-bottom: 0.15rem; letter-spacing: -0.04em; }
+.col-name { font-size: 0.95rem; font-weight: 800; display: block; margin-bottom: 0.1rem; letter-spacing: -0.02em; }
+.col-en { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; display: block; color: rgba(255,255,255,0.7); }
+.col-bar { height: 2px; width: 60%; margin: 0.4rem auto 0; border-radius: 2px; background: rgba(255,255,255,0.3); }
+.row-label { background: var(--blue-50); font-weight: 700; color: var(--blue-800); font-size: 0.72rem; white-space: nowrap; border-right: 1px solid var(--border-strong); }
+.row-label span { display: block; font-size: 0.58rem; font-weight: 400; color: var(--text-muted); margin-top: 0.08rem; }
+.matrix-table tbody td { background: var(--white); font-size: 0.7rem; line-height: 1.55; color: var(--text-muted); }
+.matrix-table tbody tr:last-child td { border-bottom: none; }
+.m-tag { display: inline-block; font-size: 0.57rem; font-weight: 700; padding: 0.08rem 0.35rem; border-radius: 4px; margin-bottom: 0.3rem; }
+.m-tag--blue { background: var(--blue-100); color: var(--blue-700); }
+.m-tag--accent { background: rgba(67,97,238,0.1); color: var(--blue-accent-dark); }
+.m-tag--green { background: var(--green-bg); color: var(--green); }
+.cell-title { font-size: 0.82rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; line-height: 1.4; }
+.cell-desc { font-size: 0.68rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.35rem; }
+.cell-tools { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-bottom: 0.4rem; }
+.tool-chip { font-size: 0.58rem; font-weight: 600; padding: 0.1rem 0.4rem; border-radius: 100px; }
+.tool-chip--blue { background: var(--blue-100); color: var(--blue-700); }
+.tool-chip--accent { background: rgba(67,97,238,0.1); color: var(--blue-accent-dark); }
+.tool-chip--green { background: var(--green-bg); color: var(--green); }
+.status-pill { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.62rem; font-weight: 600; padding: 0.18rem 0.5rem; border-radius: 100px; }
+.status-red { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
+.status-amber { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
+.status-blue { background: var(--blue-100); color: var(--blue-700); border: 1px solid var(--blue-200); }
+.status-green { background: var(--green-bg); color: var(--green); border: 1px solid rgba(16,185,129,0.2); }
+.status-gray { background: var(--blue-50); color: var(--text-muted); border: 1px solid var(--border); }
+
+/* Insight cards */
+.insight-section { grid-column: 1 / -1; }
+.insight-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 0.4rem; }
+.insight-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.2rem 1.1rem; text-align: center; transition: all 0.25s; }
+.insight-card:hover { border-color: var(--blue-accent); box-shadow: 0 4px 16px var(--shadow-strong); transform: translateY(-2px); }
+.insight-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 14px 14px 0 0; }
+.insight-card:nth-child(1)::before { background: linear-gradient(90deg, var(--blue-400), var(--blue-600)); }
+.insight-card:nth-child(2)::before { background: linear-gradient(90deg, var(--blue-accent), var(--blue-500)); }
+.insight-card:nth-child(3)::before { background: linear-gradient(90deg, var(--blue-600), var(--blue-800)); }
+.insight-card { position: relative; overflow: hidden; }
+.insight-num { font-family: 'Manrope', sans-serif; font-size: 2rem; font-weight: 900; color: var(--blue-100); line-height: 1; margin-bottom: 0.4rem; letter-spacing: -0.04em; }
+.insight-title { font-size: 0.9rem; font-weight: 800; color: var(--blue-900); letter-spacing: -0.02em; margin-bottom: 0.4rem; }
+.insight-desc { font-size: 0.72rem; color: var(--text-muted); line-height: 1.65; }
+
+/* Stage links */
+.stage-links-section { grid-column: 1 / -1; margin-top: 0.5rem; }
+.stage-links-header { text-align: center; margin-bottom: 1rem; }
+.stage-links-header span { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-500); }
+.stage-links-header::before, .stage-links-header::after { content: ''; display: inline-block; width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--blue-400)); vertical-align: middle; margin: 0 0.8rem; }
+.stage-links-header::after { background: linear-gradient(90deg, var(--blue-400), transparent); }
+.stage-links { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+.stage-link-card {
+  background: var(--white);
+  border: 1px solid var(--border-strong);
+  border-radius: 18px;
+  padding: 1.2rem 1.1rem;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  display: block;
+  transition: all 0.25s;
+  box-shadow: 0 2px 12px var(--shadow);
+}
+.stage-link-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 18px 18px 0 0; }
+.stage-link-card:nth-child(1)::before { background: linear-gradient(90deg, var(--blue-400), var(--blue-600)); }
+.stage-link-card:nth-child(2)::before { background: linear-gradient(90deg, var(--blue-accent), var(--blue-500)); }
+.stage-link-card:nth-child(3)::before { background: linear-gradient(90deg, var(--blue-600), var(--blue-800)); }
+.stage-link-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px var(--shadow-strong); border-color: var(--blue-accent); }
+.stage-link-num { font-family: 'Manrope', sans-serif; font-size: 2rem; font-weight: 900; color: var(--blue-100); line-height: 1; letter-spacing: -0.04em; margin-bottom: 0.4rem; }
+.stage-link-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue-400); margin-bottom: 0.2rem; }
+.stage-link-name { font-size: 1rem; font-weight: 800; color: var(--blue-900); letter-spacing: -0.02em; margin-bottom: 0.3rem; }
+.stage-link-en { font-size: 0.68rem; font-weight: 700; color: var(--blue-accent-dark); margin-bottom: 0.4rem; }
+.stage-link-tags { font-size: 0.68rem; color: var(--text-muted); line-height: 1.5; }
+
+/* Footer */
+.card-footer { padding: 0.9rem 2rem 1.2rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+.footer-stage { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+.footer-nav { display: flex; align-items: center; gap: 0.4rem; }
+.nav-link { background: var(--blue-50); border: 1px solid var(--border); border-radius: 8px; padding: 0.22rem 0.5rem; color: var(--blue-600); font-size: 0.65rem; font-weight: 600; text-decoration: none; }
+.nav-sep { color: var(--blue-400); font-size: 0.7rem; }
+
+/* Legend */
+.legend-row { grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap; padding: 0.8rem 1rem 0; }
+.legend-item { display: flex; align-items: center; gap: 0.35rem; font-size: 0.68rem; color: var(--text-muted); font-weight: 500; }
+.legend-line { width: 20px; height: 2px; border-radius: 2px; }
+
+@media (max-width: 768px) {
+  body { padding: 1rem 0.75rem 2rem; }
+  .card-body { grid-template-columns: 1fr; padding: 1rem; }
+  .matrix-section, .insight-section, .stage-links-section { grid-column: 1; }
+  .stage-links { grid-template-columns: 1fr; }
+  .insight-grid { grid-template-columns: 1fr; }
+  .band { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="main-card">
+
+  <!-- BAND -->
+  <div class="band">
+    <div class="band-left">
+      <div class="band-stage">AI in Education &middot; Cognitive Map</div>
+      <div class="band-title">Cognitive Map of Tech in Education</div>
+    </div>
+    <div class="band-right">
+      <div class="band-axis">
+        <span class="band-axis-label">X-Axis</span>
+        <span class="band-axis-value">Tech Stage</span>
+      </div>
+      <div class="band-axis">
+        <span class="band-axis-label">Y-Axis</span>
+        <span class="band-axis-value">Work Level</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro-strip">
+    <div class="intro-icon">&#128161;</div>
+    <div class="intro-text">
+      <strong>What is this map?</strong> The X-axis shows three stages of technological development. The Y-axis shows four levels of human work. Each cell shows what that work looks like at each tech stage — and how the human role changes.
+    </div>
+  </div>
+
+  <!-- CARD BODY -->
+  <div class="card-body">
+
+    <!-- MATRIX -->
+    <div class="matrix-section">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th style="background: var(--blue-900); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue-300); padding: 0.6rem 0.75rem;">Human Work<br><span style="font-size:0.55rem; font-weight:400; color:var(--blue-300);">人类工作</span></th>
+            <th>
+              <span class="col-num">01</span>
+              <span class="col-name">Informatization</span>
+              <span class="col-en">Informatization</span>
+              <div class="col-bar"></div>
+            </th>
+            <th>
+              <span class="col-num">02</span>
+              <span class="col-name">Digitalization</span>
+              <span class="col-en">Digitalization</span>
+              <div class="col-bar"></div>
+            </th>
+            <th>
+              <span class="col-num">03</span>
+              <span class="col-name">Intelligentization</span>
+              <span class="col-en">Intelligentization</span>
+              <div class="col-bar"></div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Row 1: Routine Execution -->
+          <tr>
+            <td class="row-label">
+              Routine Execution
+              <span>重复性执行</span>
+            </td>
+            <td>
+              <span class="m-tag m-tag--blue">Informatization</span>
+              <div class="cell-title">Chalk &rarr; PPT<br>Paper &rarr; Digital Docs</div>
+              <div class="cell-desc">Medium conversion, no change in nature of information</div>
+              <div class="cell-tools">
+                <span class="tool-chip tool-chip--blue">PPT</span>
+                <span class="tool-chip tool-chip--blue">Word</span>
+                <span class="tool-chip tool-chip--blue">Email</span>
+              </div>
+              <span class="status-pill status-red">&#9679; Still dominant</span>
+            </td>
+            <td>
+              <span class="m-tag m-tag--accent">Digitalization</span>
+              <div class="cell-title">Template Output<br>Batch Data Processing</div>
+              <div class="cell-desc">Data connected, process automation begins</div>
+              <div class="cell-tools">
+                <span class="tool-chip tool-chip--accent">Excel</span>
+                <span class="tool-chip tool-chip--accent">Database</span>
+                <span class="tool-chip tool-chip--accent">API</span>
+              </div>
+              <span class="status-pill status-amber">&#9679; Starting to reduce</span>
+            </td>
+            <td>
+              <span class="m-tag m-tag--green">Intelligentization</span>
+              <div class="cell-title">AI Replaces Routine<br>Auto-Generated Content</div>
+              <div class="cell-desc">Agent executes autonomously, human only reviews</div>
+              <div class="cell-tools">
+                <span class="tool-chip tool-chip--green">AI Agent</span>
+                <span class="tool-chip tool-chip--green">AutoGen</span>
+                <span class="tool-chip tool-chip--green">RPA+AI</span>
+              </div>
+              <span class="status-pill status-gray">&#9679; Greatly reduced</span>
+            </td>
+          </tr>
+          <!-- Row 2: Information Retrieval -->
+          <tr>
+            <td class="row-label">
+              Information Retrieval
+              <span>知识检索</span>
+            </td>
+            <td>
+              <span class="m-tag m-tag--blue">Informatization</span>
+              <div class="cell-title">Search Engine<br>Keyword Lookup</div>
+              <div class="cell-desc">Information location changes, human actively searches</div>
+              <div class="cell-tools">
+                <span class="tool-chip tool-chip--blue">Google</span>
+                <span class="tool-chip tool-chip--blue">Baidu</span>
+                <span class="tool-chip tool-chip--blue">Digital Library</span>
+              </div>
+              <span class="status-pill status-blue">&#9679; Primary method</span>
+            </td>
+            <td>
+              <span class="m-tag m-tag--accent">Digitalization</span>
+              <div class="cell-title">Personal Knowledge Base<br>Precision Retrieval</div>
+              <div class="cell-desc">Knowledge connected, information proactively delivered</div>
+              <div class="cell-tools">
+                <span class="tool-chip tool-chip--accent">Notion</span>
+                <span class="tool-chip tool-chip--accent">Obsidian</span>
+                <span class="tool-chip tool-chip--accent">RSS</span>
+              </div>
+              <span class="status-pill status-blue">&#9679; Efficiency improved</span>
+            </td>
+            <td>
+              <span class="m-tag m-tag--green">Intelligentization</span>
+              <div class="cell-title">AI Understands Needs<br>Proactively Organizes Answers</div>
+              <div class="cell-desc">Knowledge finds the person, RAG + LLM</div>
+              <div class="cell-tools">
+                <span class="tool-chip tool-chip--green">ChatGPT</span>
+                <span class="tool-chip tool-chip--green">RAG</span>
+                <span class="tool-chip tool-chip--green">KB Q&amp;A</span>
+              </div>
+              <span class="status-pill status-green">&#9679; Human-AI collaboration</span>
+            </td>
+          </tr>
+          <!-- Row 3: Experience-based Decision -->
+          <tr>
+            <td class="row-label">
+              Experience-based Decision
+              <span>经验决策</span>
+            </td>
+            <td>
+              <span class="m-tag m-tag--blue">Informatization</span>
+              <div class="cell-title">Expert Experience<br>Intuition-based Judgment</div>
+              <div class="cell-desc">Relies on personal accumulation, limited dissemination</div>
+              <div class="cell-tools">
+                <span class="tool-chip tool-chip--blue">Teaching Journal</span>
+                <span class="tool-chip tool-chip--blue">Meeting Notes</span>
+              </div>
+              <span class="status-pill status-blue">&#9679; Mainly human-driven</span>
+            </td>
+            <td>
+              <span class="m-tag m-tag--accent">Digitalization</span>
+              <div class="cell-title">Data Analysis<br>Pattern Recognition</div>
+              <div class="cell-desc">Data-driven decisions, evidence-based</div>
+              <div class="cell-tools">
+                <span class="tool-chip tool-chip--accent">Dashboard</span>
+                <span class="tool-chip tool-chip--accent">BI Tools</span>
+                <span class="tool-chip tool-chip--accent">Student Data</span>
+              </div>
+              <span class="status-pill status-blue">&#9679; Data-assisted</span>
+            </td>
+            <td>
+              <span class="m-tag m-tag--green">Intelligentization</span>
+              <div class="cell-title">AI Provides Options<br>Human Makes Final Decision</div>
+              <div class="cell-desc">AI analyzes data, human responsible for judgment</div>
+              <div class="cell-tools">
+                <span class="tool-chip tool-chip--green">AI Analytics</span>
+                <span class="tool-chip tool-chip--green">Smart Recommendations</span>
+                <span class="tool-chip tool-chip--green">Alert Systems</span>
+              </div>
+              <span class="status-pill status-green">&#9679; Collaborative decision-making</span>
+            </td>
+          </tr>
+          <!-- Row 4: Creative Construction -->
+          <tr>
+            <td class="row-label">
+              Creative Construction
+              <span>创造性建构</span>
+            </td>
+            <td>
+              <span class="m-tag m-tag--blue">Informatization</span>
+              <div class="cell-title">Individual Creation<br>Independent Design</div>
+              <div class="cell-desc">Teacher completes alone, no tech enhancement</div>
+              <div class="cell-tools">
+                <span class="tool-chip tool-chip--blue">Handwritten Plans</span>
+                <span class="tool-chip tool-chip--blue">Solo Prep</span>
+              </div>
+              <span class="status-pill status-blue">&#9679; Fully human-powered</span>
+            </td>
+            <td>
+              <span class="m-tag m-tag--accent">Digitalization</span>
+              <div class="cell-title">Collaboration Platform<br>Knowledge Sharing</div>
+              <div class="cell-desc">Team collaboration, co-building resources</div>
+              <div class="cell-tools">
+                <span class="tool-chip tool-chip--accent">Collab Docs</span>
+                <span class="tool-chip tool-chip--accent">Question Bank</span>
+                <span class="tool-chip tool-chip--accent">Micro-course</span>
+              </div>
+              <span class="status-pill status-blue">&#9679; Human + platform</span>
+            </td>
+            <td>
+              <span class="m-tag m-tag--green">Intelligentization</span>
+              <div class="cell-title">Human-AI Collaborative Creation<br>AI Amplifies Human Creativity</div>
+              <div class="cell-desc">AI provides materials, human focuses on creativity and judgment</div>
+              <div class="cell-tools">
+                <span class="tool-chip tool-chip--green">AI Lesson Prep</span>
+                <span class="tool-chip tool-chip--green">Generative Design</span>
+                <span class="tool-chip tool-chip--green">Smart Question Gen</span>
+              </div>
+              <span class="status-pill status-green">&#9679; Value maximized</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- LEGEND -->
+      <div class="legend-row">
+        <div class="legend-item">
+          <div class="legend-line" style="background: linear-gradient(90deg, var(--blue-400), var(--blue-600));"></div>
+          <span>Informatization &mdash; Medium conversion</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-line" style="background: linear-gradient(90deg, var(--blue-accent), var(--blue-500));"></div>
+          <span>Digitalization &mdash; Connection &amp; integration</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-line" style="background: linear-gradient(90deg, var(--blue-600), var(--blue-800));"></div>
+          <span>Intelligentization &mdash; Collaboration &amp; creation</span>
+        </div>
+        <div style="width:1px; height:14px; background:var(--border-strong);"></div>
+        <div class="legend-item">
+          <div style="width:8px; height:8px; border-radius:50%; background:var(--red);"></div>
+          <span>Still dominant</span>
+        </div>
+        <div class="legend-item">
+          <div style="width:8px; height:8px; border-radius:50%; background:var(--blue-500);"></div>
+          <span>Efficiency improved</span>
+        </div>
+        <div class="legend-item">
+          <div style="width:8px; height:8px; border-radius:50%; background:var(--green);"></div>
+          <span>Human-AI collaboration</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSIGHT CARDS -->
+    <div class="insight-section">
+      <div class="insight-grid">
+        <div class="insight-card">
+          <div class="insight-num">01</div>
+          <div class="insight-title">&#128218; Cognitive Map</div>
+          <div class="insight-desc">X-axis (3 stages) &times; Y-axis (4 levels) = 12 cells. Each cell shows how tech reshapes that aspect of your work.</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">02</div>
+          <div class="insight-title">&#9889; Reduce = Improve</div>
+          <div class="insight-desc">Routine work replaced by AI frees human time for higher-value creative construction — the two goals are the same thing.</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">03</div>
+          <div class="insight-title">&#129309; Human-AI Collaboration</div>
+          <div class="insight-desc">Not replacement — symbiosis. AI amplifies human creativity. Human guides AI's direction. Find your position.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE LINKS -->
+    <div class="stage-links-section">
+      <div class="stage-links-header">
+        <span>Deep Dive &middot; Stage Detail Cards</span>
+      </div>
+      <div class="stage-links">
+        <a href="informatization-en.html" class="stage-link-card">
+          <div class="stage-link-num">01</div>
+          <div class="stage-link-label">Stage 01</div>
+          <div class="stage-link-name">Informatization</div>
+          <div class="stage-link-en">Informatization &rarr;</div>
+          <div class="stage-link-tags">Medium conversion &middot; Info displacement &middot; Chat interface</div>
+        </a>
+        <a href="digitalization-en.html" class="stage-link-card">
+          <div class="stage-link-num">02</div>
+          <div class="stage-link-label">Stage 02</div>
+          <div class="stage-link-name">Digitalization</div>
+          <div class="stage-link-en">Digitalization &rarr;</div>
+          <div class="stage-link-tags">Connection &amp; integration &middot; Knowledge system &middot; Data-driven</div>
+        </a>
+        <a href="intelligentization-en.html" class="stage-link-card">
+          <div class="stage-link-num">03</div>
+          <div class="stage-link-label">Stage 03</div>
+          <div class="stage-link-name">Intelligentization</div>
+          <div class="stage-link-en">Intelligentization &rarr;</div>
+          <div class="stage-link-tags">Human-AI symbiosis &middot; Intent understanding &middot; Proactive suggestions</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="card-footer">
+    <div class="footer-stage">Cognitive Map &nbsp;&middot;&nbsp; AI in Education &nbsp;&middot;&nbsp; Theo InfoCard</div>
+    <div class="footer-nav">
+      <a href="teacher-self-reflection-en.html" class="nav-link">Self-Reflection Template &#8594;</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

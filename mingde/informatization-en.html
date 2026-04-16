@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stage 01: Informatization</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #ffffff;
+  --blue-50: #eff6ff;
+  --blue-100: #dbeafe;
+  --blue-200: #bfdbfe;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+  --blue-800: #1e40af;
+  --blue-900: #1e3a8a;
+  --blue-accent: #4361ee;
+  --blue-accent-dark: #3450d1;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: rgba(59, 130, 246, 0.12);
+  --border-strong: rgba(59, 130, 246, 0.22);
+  --shadow: rgba(67, 97, 238, 0.08);
+  --green: #10b981;
+  --green-bg: rgba(16,185,129,0.08);
+  --green-border: rgba(16,185,129,0.2);
+  --amber: #f59e0b;
+  --amber-bg: rgba(245,158,11,0.08);
+  --amber-border: rgba(245,158,11,0.2);
+  --red: #ef4444;
+  --red-bg: rgba(239,68,68,0.07);
+  --red-border: rgba(239,68,68,0.15);
+  --bg: #f0f4ff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Manrope', 'Noto Sans SC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2rem 1.5rem 3rem;
+}
+.main-card {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--border-strong);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px var(--shadow), 0 1px 4px var(--shadow);
+}
+.band {
+  background: linear-gradient(135deg, var(--blue-800) 0%, var(--blue-600) 100%);
+  padding: 1.8rem 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+.band-left { position: relative; z-index: 1; }
+.band-stage { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-200); margin-bottom: 0.25rem; }
+.band-title { font-family: 'Manrope', sans-serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 900; color: #fff; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 0.2rem; }
+.band-en { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-300); }
+.band-right { position: relative; z-index: 1; display: flex; align-items: center; gap: 0.75rem; }
+.band-badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 0.5rem 0.8rem; text-align: center; }
+.band-badge-num { font-family: 'Manrope', sans-serif; font-size: 1.8rem; font-weight: 900; color: #fff; line-height: 1; letter-spacing: -0.04em; }
+.band-badge-label { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue-200); }
+.band-arrow { font-size: 1.4rem; color: rgba(255,255,255,0.3); }
+.card-body { padding: 1.6rem 1.8rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.section-card {
+  background: var(--blue-50);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.2rem 1.3rem;
+  position: relative;
+  overflow: hidden;
+}
+.section-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+}
+.section-card:nth-child(1)::before { background: linear-gradient(90deg, var(--blue-400), var(--blue-600)); }
+.section-card:nth-child(2)::before { background: linear-gradient(90deg, var(--blue-accent), var(--blue-500)); }
+.section-card:nth-child(3)::before { background: linear-gradient(90deg, var(--blue-500), var(--blue-700)); }
+.section-card:nth-child(4)::before { background: linear-gradient(90deg, var(--blue-600), var(--blue-800)); }
+.section-card.full { grid-column: 1 / -1; }
+.section-label { font-size: 0.6rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem; }
+.label--blue { color: var(--blue-600); }
+.label--accent { color: var(--blue-accent); }
+.label--dark { color: var(--blue-800); }
+.label--green { color: var(--green); }
+.section-label::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; }
+.label--blue::before { background: var(--blue-500); }
+.label--accent::before { background: var(--blue-accent); }
+.label--dark::before { background: var(--blue-700); }
+.label--green::before { background: var(--green); }
+.section-title { font-size: 0.95rem; font-weight: 800; color: var(--blue-900); letter-spacing: -0.02em; margin-bottom: 0.5rem; line-height: 1.3; }
+.section-desc { font-size: 0.76rem; color: var(--text-muted); line-height: 1.7; font-weight: 400; }
+.definition-box { background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(99,153,255,0.08) 100%); border: 1px solid var(--border-strong); border-radius: 12px; padding: 0.9rem 1.1rem; margin-top: 0.6rem; }
+.definition-highlight { display: inline-block; background: var(--blue-100); color: var(--blue-800); padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: 700; }
+.trait-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; margin-top: 0.6rem; }
+.trait-item { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 0.65rem 0.75rem; display: flex; align-items: flex-start; gap: 0.45rem; }
+.trait-icon { font-size: 0.88rem; flex-shrink: 0; margin-top: 0.05rem; }
+.trait-text { font-size: 0.7rem; color: var(--text); line-height: 1.5; font-weight: 400; }
+.trait-text strong { color: var(--blue-700); display: block; margin-bottom: 0.08rem; font-size: 0.72rem; }
+.trans-list { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.6rem; }
+.trans-item { display: flex; align-items: center; gap: 0.5rem; }
+.trans-from { background: rgba(239,68,68,0.08); color: var(--red); border: 1px solid rgba(239,68,68,0.15); padding: 0.2rem 0.6rem; border-radius: 8px; font-size: 0.72rem; font-weight: 600; min-width: 80px; text-align: center; }
+.trans-arrow { color: var(--blue-400); font-size: 0.9rem; flex-shrink: 0; }
+.trans-to { background: var(--blue-100); color: var(--blue-700); border: 1px solid var(--blue-200); padding: 0.2rem 0.6rem; border-radius: 8px; font-size: 0.72rem; font-weight: 600; min-width: 80px; text-align: center; }
+.tools-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.6rem; }
+.tool-tag { background: var(--blue-100); color: var(--blue-700); border: 1px solid var(--blue-200); padding: 0.22rem 0.65rem; border-radius: 100px; font-size: 0.7rem; font-weight: 600; }
+.limit-list { display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.55rem; }
+.limit-item { display: flex; align-items: flex-start; gap: 0.45rem; font-size: 0.73rem; color: var(--text-muted); line-height: 1.6; font-weight: 400; }
+.limit-icon { flex-shrink: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--red-bg); color: var(--red); font-size: 0.52rem; display: flex; align-items: center; justify-content: center; margin-top: 0.08rem; font-weight: 800; }
+.work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; margin-top: 0.55rem; }
+.work-item { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 0.65rem 0.75rem; }
+.work-item-label { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
+.work-item-label--red { color: var(--red); }
+.work-item-label--blue { color: var(--blue-600); }
+.work-item-desc { font-size: 0.7rem; color: var(--text-muted); line-height: 1.5; font-weight: 400; }
+.summary-bar {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, var(--blue-700) 0%, var(--blue-800) 100%);
+  border-radius: 14px;
+  padding: 1.1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.summary-bar::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 24px 24px; pointer-events: none; }
+.summary-left { position: relative; z-index: 1; }
+.summary-eyebrow { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-300); margin-bottom: 0.15rem; }
+.summary-text { font-size: 0.92rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; line-height: 1.3; }
+.summary-right { position: relative; z-index: 1; display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end; }
+.sum-tag { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 0.2rem 0.6rem; border-radius: 100px; font-size: 0.65rem; font-weight: 600; white-space: nowrap; }
+.card-footer { padding: 1rem 2rem 1.4rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+.footer-stage { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+.footer-nav { display: flex; align-items: center; gap: 0.5rem; }
+.nav-link { background: var(--blue-50); border: 1px solid var(--border); border-radius: 8px; padding: 0.25rem 0.55rem; color: var(--blue-600); font-size: 0.68rem; font-weight: 600; text-decoration: none; }
+.nav-sep { color: var(--blue-400); }
+@media (max-width: 700px) {
+  body { padding: 1rem 0.75rem 2rem; }
+  .card-body { grid-template-columns: 1fr; padding: 1.2rem 1rem; }
+  .section-card.full { grid-column: 1; }
+  .trait-grid { grid-template-columns: 1fr; }
+  .work-grid { grid-template-columns: 1fr; }
+  .band { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .summary-bar { flex-direction: column; align-items: flex-start; }
+  .summary-right { justify-content: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="main-card">
+
+  <!-- TOP BAND -->
+  <div class="band">
+    <div class="band-left">
+      <div class="band-stage">Stage 01 &nbsp;/&nbsp; Cognitive Map</div>
+      <div class="band-title">Informatization</div>
+      <div class="band-en">Informatization</div>
+    </div>
+    <div class="band-right">
+      <div class="band-arrow">&rarr;</div>
+      <div class="band-badge">
+        <div class="band-badge-num">01</div>
+        <div class="band-badge-label">Stage 01</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD BODY -->
+  <div class="card-body">
+
+    <!-- 1. DEFINITION -->
+    <div class="section-card">
+      <div class="section-label label--blue">&#9679; Definition</div>
+      <div class="section-title">What is Informatization?</div>
+      <div class="section-desc">
+        Moving information from the physical space into the digital space — from paper to the web, enabling fast information flow. Its essence is <strong style="color:var(--blue-700);">medium conversion</strong>.
+      </div>
+      <div class="definition-box">
+        <p style="font-size:0.78rem; color:var(--blue-800); line-height:1.7; font-weight:500;">
+          Chalk &rarr; <span class="definition-highlight">PPT</span> &nbsp;&nbsp;
+          Paper lesson plans &rarr; <span class="definition-highlight">Word docs</span> &nbsp;&nbsp;
+          Physical files &rarr; <span class="definition-highlight">Digital files</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- 2. CORE TRAITS -->
+    <div class="section-card">
+      <div class="section-label label--accent">&#9679; Core Characteristics</div>
+      <div class="section-title">Four Key Characteristics</div>
+      <div class="trait-grid">
+        <div class="trait-item">
+          <span class="trait-icon">&#128196;</span>
+          <div class="trait-text"><strong>Medium Conversion</strong>Physical world &rarr; digital space, storage medium changes</div>
+        </div>
+        <div class="trait-item">
+          <span class="trait-icon">&#128269;</span>
+          <div class="trait-text"><strong>Information Displacement</strong>Information location changes, human actively retrieves</div>
+        </div>
+        <div class="trait-item">
+          <span class="trait-icon">&#128172;</span>
+          <div class="trait-text"><strong>Chat Interface</strong>Human issues commands, system executes — human finds info</div>
+        </div>
+        <div class="trait-item">
+          <span class="trait-icon">&#128196;</span>
+          <div class="trait-text"><strong>No Essential Change</strong>Information itself doesn't change, just relocated</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. TRANSFORMATION -->
+    <div class="section-card full">
+      <div class="section-label label--dark">&#9679; Education Scenario Shifts</div>
+      <div class="section-title">Informatization Shifts in Teaching Work</div>
+      <div class="trans-list">
+        <div class="trans-item">
+          <span class="trans-from">Chalkboard</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">PPT</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.3rem;">(Teaching display migrates from blackboard to screen)</span>
+        </div>
+        <div class="trans-item">
+          <span class="trans-from">Paper Lesson Plans</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">Word Docs</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.3rem;">(Lesson planning shifts from handwritten to digital)</span>
+        </div>
+        <div class="trans-item">
+          <span class="trans-from">Physical Documents</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">Email / Digital Files</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.3rem;">(Document delivery shifts from courier to instant network)</span>
+        </div>
+        <div class="trans-item">
+          <span class="trans-from">Manual Research</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">Search Engines</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.3rem;">(Information retrieval shifts from books to keyword search)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. TOOLS -->
+    <div class="section-card">
+      <div class="section-label label--blue">&#9679; Representative Tools</div>
+      <div class="section-title">Informatization Era Tools</div>
+      <div class="section-desc">This stage produced abundant foundational tools across teaching, management, and resource access.</div>
+      <div class="tools-row" style="margin-top: 0.7rem;">
+        <span class="tool-tag">&#128196; PowerPoint</span>
+        <span class="tool-tag">&#128196; Word</span>
+        <span class="tool-tag">&#128196; Excel</span>
+        <span class="tool-tag">&#128229; Email</span>
+        <span class="tool-tag">&#128269; Search Engines</span>
+        <span class="tool-tag">&#128218; Digital Libraries</span>
+        <span class="tool-tag">&#128187; Computer Labs</span>
+        <span class="tool-tag">&#127909; Projectors</span>
+        <span class="tool-tag">&#128247; Lecture Recording</span>
+      </div>
+    </div>
+
+    <!-- 5. LIMITATIONS -->
+    <div class="section-card">
+      <div class="section-label label--accent">&#9679; Limitations</div>
+      <div class="section-title">Why Informatization Alone Falls Short</div>
+      <div class="section-desc">Informatization brought convenience, but has fundamental limits — which is why we must advance to digitalization and intelligentization.</div>
+      <div class="limit-list">
+        <div class="limit-item">
+          <span class="limit-icon">&#10005;</span>
+          <span><strong style="color:var(--blue-700);">Information Silos:</strong> Systems not connected, data can't flow between them</span>
+        </div>
+        <div class="limit-item">
+          <span class="limit-icon">&#10005;</span>
+          <span><strong style="color:var(--blue-700);">No Differentiation:</strong> Information itself doesn't change nature, just relocated</span>
+        </div>
+        <div class="limit-item">
+          <span class="limit-icon">&#10005;</span>
+          <span><strong style="color:var(--blue-700);">Passive Retrieval:</strong> Info doesn't connect to user — human must search actively</span>
+        </div>
+        <div class="limit-item">
+          <span class="limit-icon">&#10005;</span>
+          <span><strong style="color:var(--blue-700);">No Intelligence:</strong> Tools don't proactively think, judge, or advise</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. WORK IMPACT -->
+    <div class="section-card full">
+      <div class="section-label label--dark">&#9679; Impact on Human Work</div>
+      <div class="section-title">Human Work Status in the Informatization Era</div>
+      <div class="work-grid">
+        <div class="work-item">
+          <div class="work-item-label work-item-label--red">&#9679; Still Dominant</div>
+          <div class="work-item-desc">Large amounts of routine execution still done manually — creating PPTs, organizing documents, entering data</div>
+        </div>
+        <div class="work-item">
+          <div class="work-item-label work-item-label--red">&#9679; Limited Efficiency</div>
+          <div class="work-item-desc">Info access speed improved, but no proactive delivery or intelligent assistance — burden not truly reduced</div>
+        </div>
+        <div class="work-item">
+          <div class="work-item-label work-item-label--blue">&#9679; Medium Replacement</div>
+          <div class="work-item-desc">Teaching displays, lesson plans, and resource management go digital — but work method essence unchanged</div>
+        </div>
+        <div class="work-item">
+          <div class="work-item-label work-item-label--blue">&#9679; New Demands</div>
+          <div class="work-item-desc">Digital tool operation skills required — tool learning cost becomes a new burden</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. SUMMARY -->
+    <div class="summary-bar">
+      <div class="summary-left">
+        <div class="summary-eyebrow">One-Line Summary</div>
+        <div class="summary-text">Informatization = Medium conversion, information displaced — humans still do most routine work</div>
+      </div>
+      <div class="summary-right">
+        <span class="sum-tag">Medium conversion</span>
+        <span class="sum-tag">Info displacement</span>
+        <span class="sum-tag">Chat interface</span>
+        <span class="sum-tag">Limited efficiency</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="card-footer">
+    <div class="footer-stage">Stage 01 &nbsp;&middot;&nbsp; Informatization &nbsp;&middot;&nbsp; Theo InfoCard</div>
+    <div class="footer-nav">
+      <a href="cognitive-map-en.html" class="nav-link">&#8592; Cognitive Map</a>
+      <span class="nav-sep">|</span>
+      <a href="digitalization-en.html" class="nav-link">Digitalization &#8594;</a>
+      <span class="nav-sep">|</span>
+      <a href="intelligentization-en.html" class="nav-link">Intelligentization &#8594;</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

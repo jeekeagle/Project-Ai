@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>信息化 | Informatization</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #ffffff;
+  --blue-50: #eff6ff;
+  --blue-100: #dbeafe;
+  --blue-200: #bfdbfe;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+  --blue-800: #1e40af;
+  --blue-900: #1e3a8a;
+  --blue-accent: #4361ee;
+  --blue-accent-dark: #3450d1;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: rgba(59, 130, 246, 0.12);
+  --border-strong: rgba(59, 130, 246, 0.22);
+  --shadow: rgba(67, 97, 238, 0.08);
+  --shadow-strong: rgba(67, 97, 238, 0.14);
+  --green: #10b981;
+  --green-light: #34d399;
+  --amber: #f59e0b;
+  --amber-light: #fbbf24;
+  --red: #ef4444;
+  --red-light: #f87171;
+  --bg: #f0f4ff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans SC', 'Manrope', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2rem 1.5rem 3rem;
+}
+
+/* ===== MAIN CARD ===== */
+.main-card {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--border-strong);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px var(--shadow), 0 1px 4px var(--shadow);
+}
+
+/* ===== TOP BAND ===== */
+.band {
+  background: linear-gradient(135deg, var(--blue-800) 0%, var(--blue-600) 100%);
+  padding: 1.8rem 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+.band-left { position: relative; z-index: 1; }
+
+.band-stage {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue-200);
+  margin-bottom: 0.25rem;
+}
+
+.band-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: 0.2rem;
+}
+
+.band-en {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue-300);
+}
+
+.band-right {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.band-badge {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 0.5rem 0.8rem;
+  text-align: center;
+}
+
+.band-badge-num {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.band-badge-label {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue-200);
+}
+
+.band-arrow {
+  font-size: 1.4rem;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ===== CONTENT BODY ===== */
+.card-body {
+  padding: 1.8rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+/* ===== SECTION CARDS ===== */
+.section-card {
+  background: var(--blue-50);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.3rem 1.4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+}
+
+.section-card:nth-child(1)::before { background: linear-gradient(90deg, var(--blue-400), var(--blue-600)); }
+.section-card:nth-child(2)::before { background: linear-gradient(90deg, var(--blue-300), var(--blue-500)); }
+.section-card:nth-child(3)::before { background: linear-gradient(90deg, var(--blue-500), var(--blue-700)); }
+.section-card:nth-child(4)::before { background: linear-gradient(90deg, var(--blue-600), var(--blue-800)); }
+
+.section-card.full { grid-column: 1 / -1; }
+
+.section-label {
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.section-label--blue { color: var(--blue-600); }
+.section-label--accent { color: var(--blue-accent); }
+.section-label--dark { color: var(--blue-800); }
+
+.section-label::before {
+  content: '';
+  display: block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+
+.section-label--blue::before { background: var(--blue-500); }
+.section-label--accent::before { background: var(--blue-accent); }
+.section-label--dark::before { background: var(--blue-700); box-shadow: 0 0 6px rgba(30,64,175,0.4); }
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--blue-900);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.6rem;
+  line-height: 1.3;
+}
+
+.section-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* ===== DEFINITION BOX ===== */
+.definition-box {
+  background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(99,153,255,0.08) 100%);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  margin-top: 0.6rem;
+}
+
+.definition-box p {
+  font-size: 0.8rem;
+  color: var(--blue-800);
+  line-height: 1.7;
+  font-weight: 500;
+}
+
+.definition-highlight {
+  display: inline-block;
+  background: var(--blue-100);
+  color: var(--blue-800);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+/* ===== TRANSFORMATION ROWS ===== */
+.trans-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+}
+
+.trans-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.trans-from {
+  background: rgba(239,68,68,0.08);
+  color: var(--red);
+  border: 1px solid rgba(239,68,68,0.15);
+  padding: 0.2rem 0.6rem;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  min-width: 80px;
+  text-align: center;
+}
+
+.trans-arrow {
+  color: var(--blue-400);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.trans-to {
+  background: var(--blue-100);
+  color: var(--blue-700);
+  border: 1px solid var(--blue-200);
+  padding: 0.2rem 0.6rem;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  min-width: 80px;
+  text-align: center;
+}
+
+/* ===== CORE TRAIT GRID ===== */
+.trait-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+}
+
+.trait-item {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.trait-icon {
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+}
+
+.trait-text {
+  font-size: 0.72rem;
+  color: var(--text);
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.trait-text strong {
+  color: var(--blue-700);
+  display: block;
+  margin-bottom: 0.1rem;
+  font-size: 0.74rem;
+}
+
+/* ===== TOOLS SECTION ===== */
+.tools-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}
+
+.tool-tag {
+  background: var(--blue-100);
+  color: var(--blue-700);
+  border: 1px solid var(--blue-200);
+  padding: 0.25rem 0.7rem;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ===== LIMITATIONS ===== */
+.limit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.limit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.limit-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(239,68,68,0.1);
+  color: var(--red);
+  font-size: 0.55rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.1rem;
+  font-weight: 800;
+}
+
+/* ===== WORK IMPACT ===== */
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+}
+
+.work-item {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+}
+
+.work-item-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.3rem;
+}
+
+.work-item-label--red { color: var(--red); }
+.work-item-label--blue { color: var(--blue-600); }
+
+.work-item-desc {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* ===== SUMMARY BAR ===== */
+.summary-bar {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, var(--blue-700) 0%, var(--blue-800) 100%);
+  border-radius: 14px;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+  margin-top: 0;
+}
+
+.summary-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.summary-left {
+  position: relative;
+  z-index: 1;
+}
+
+.summary-eyebrow {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue-300);
+  margin-bottom: 0.2rem;
+}
+
+.summary-text {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.summary-right {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.sum-tag {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  padding: 0.25rem 0.7rem;
+  border-radius: 100px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ===== FULL WIDTH SECTIONS ===== */
+.content-full {
+  grid-column: 1 / -1;
+}
+
+/* ===== METHOD BOX ===== */
+.method-box {
+  background: linear-gradient(135deg, rgba(59,130,246,0.05) 0%, rgba(67,97,238,0.05) 100%);
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  padding: 1.1rem 1.3rem;
+  margin-top: 0.6rem;
+}
+
+.method-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--blue-800);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.method-content {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+.method-content strong {
+  color: var(--blue-700);
+}
+
+/* ===== FOOTER ===== */
+.card-footer {
+  padding: 1rem 2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+}
+
+.footer-stage {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.footer-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.nav-arrow {
+  background: var(--blue-50);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.3rem 0.6rem;
+  color: var(--blue-600);
+  font-size: 0.7rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 700px) {
+  body { padding: 1rem 0.75rem 2rem; }
+  .card-body { grid-template-columns: 1fr; padding: 1.2rem 1rem; }
+  .section-card.full { grid-column: 1; }
+  .trait-grid { grid-template-columns: 1fr; }
+  .work-grid { grid-template-columns: 1fr; }
+  .summary-bar { flex-direction: column; align-items: flex-start; }
+  .summary-right { justify-content: flex-start; }
+  .band { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="main-card">
+
+  <!-- ===== TOP BAND ===== -->
+  <div class="band">
+    <div class="band-left">
+      <div class="band-stage">Stage 01 &nbsp;/&nbsp; 认知地图</div>
+      <div class="band-title">信息化</div>
+      <div class="band-en">Informatization</div>
+    </div>
+    <div class="band-right">
+      <div class="band-arrow">&rarr;</div>
+      <div class="band-badge">
+        <div class="band-badge-num">01</div>
+        <div class="band-badge-label">第一阶段</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CARD BODY ===== -->
+  <div class="card-body">
+
+    <!-- ===== 1. DEFINITION ===== -->
+    <div class="section-card">
+      <div class="section-label section-label--blue">&#9679; 定义</div>
+      <div class="section-title">什么是信息化？</div>
+      <div class="section-desc">
+        把物理空间的信息搬到电子空间，从纸上到网上，信息开始快速流动。本质是一种<strong style="color:var(--blue-700);">介质的转化</strong>。
+      </div>
+      <div class="definition-box">
+        <p>
+          板书 &rarr; <span class="definition-highlight">PPT</span> &nbsp;&nbsp;
+          纸质教案 &rarr; <span class="definition-highlight">Word文档</span> &nbsp;&nbsp;
+          实体资料 &rarr; <span class="definition-highlight">电子文件</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- ===== 2. CORE TRAITS ===== -->
+    <div class="section-card">
+      <div class="section-label section-label--accent">&#9679; 核心特征</div>
+      <div class="section-title">信息化四大特征</div>
+      <div class="trait-grid">
+        <div class="trait-item">
+          <span class="trait-icon">&#128196;</span>
+          <div class="trait-text"><strong>介质转化</strong>物理世界 &rarr; 电子空间，存储介质发生变化</div>
+        </div>
+        <div class="trait-item">
+          <span class="trait-icon">&#128269;</span>
+          <div class="trait-text"><strong>信息位移</strong>信息位置变化，人主动查找获取</div>
+        </div>
+        <div class="trait-item">
+          <span class="trait-icon">&#128172;</span>
+          <div class="trait-text"><strong>Chat 接口</strong>人发号施令，系统执行，人找信息</div>
+        </div>
+        <div class="trait-item">
+          <span class="trait-icon">&#128196;</span>
+          <div class="trait-text"><strong>无本质变化</strong>信息本身没有质变，只是换了位置</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 3. TRANSFORMATION ===== -->
+    <div class="section-card full">
+      <div class="section-label section-label--dark">&#9679; 教育场景转变</div>
+      <div class="section-title">教学工作的信息化转变</div>
+      <div class="trans-list">
+        <div class="trans-item">
+          <span class="trans-from">板书</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">PPT</span>
+          <span style="font-size:0.72rem; color:var(--text-muted); margin-left:0.3rem;">（教学展示从黑板迁移到电子屏幕）</span>
+        </div>
+        <div class="trans-item">
+          <span class="trans-from">纸质教案</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">Word 文档</span>
+          <span style="font-size:0.72rem; color:var(--text-muted); margin-left:0.3rem;">（教案从手写变为电子编辑）</span>
+        </div>
+        <div class="trans-item">
+          <span class="trans-from">纸质资料</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">电子文档 / 邮件</span>
+          <span style="font-size:0.72rem; color:var(--text-muted); margin-left:0.3rem;">（资料传递从快递变为网络即时发送）</span>
+        </div>
+        <div class="trans-item">
+          <span class="trans-from">人工查找</span>
+          <span class="trans-arrow">&#8594;</span>
+          <span class="trans-to">搜索引擎</span>
+          <span style="font-size:0.72rem; color:var(--text-muted); margin-left:0.3rem;">（信息检索从翻书变为关键词搜索）</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 4. TOOLS ===== -->
+    <div class="section-card">
+      <div class="section-label section-label--blue">&#9679; 典型工具</div>
+      <div class="section-title">信息化代表工具</div>
+      <div class="section-desc">这一阶段涌现了大量基础工具，覆盖教学、管理、资源获取各个环节。</div>
+      <div class="tools-row" style="margin-top: 0.8rem;">
+        <span class="tool-tag">&#128196; PowerPoint</span>
+        <span class="tool-tag">&#128196; Word</span>
+        <span class="tool-tag">&#128196; Excel</span>
+        <span class="tool-tag">&#128229; Email</span>
+        <span class="tool-tag">&#128269; Google / 百度</span>
+        <span class="tool-tag">&#128218; 数字图书馆</span>
+        <span class="tool-tag">&#128187; 多媒体教室</span>
+        <span class="tool-tag">&#127909; 投影仪</span>
+        <span class="tool-tag">&#128247; 录课系统</span>
+      </div>
+    </div>
+
+    <!-- ===== 5. LIMITATIONS ===== -->
+    <div class="section-card">
+      <div class="section-label section-label--accent">&#9679; 局限与问题</div>
+      <div class="section-title">信息化的局限性</div>
+      <div class="section-desc">信息化带来了便利，但也存在根本性的局限，这也是为什么需要继续发展到数字化和智能化。</div>
+      <div class="limit-list">
+        <div class="limit-item">
+          <span class="limit-icon">&#10005;</span>
+          <span><strong style="color:var(--blue-700);">信息孤岛：</strong>各系统之间没有打通，数据无法流转</span>
+        </div>
+        <div class="limit-item">
+          <span class="limit-icon">&#10005;</span>
+          <span><strong style="color:var(--blue-700);">无差异化：</strong>信息本身没有质变，只是换了存储位置</span>
+        </div>
+        <div class="limit-item">
+          <span class="limit-icon">&#10005;</span>
+          <span><strong style="color:var(--blue-700);">被动获取：</strong>信息不与用户发生联系，需要人主动查找</span>
+        </div>
+        <div class="limit-item">
+          <span class="limit-icon">&#10005;</span>
+          <span><strong style="color:var(--blue-700);">无智能：</strong>工具不会主动思考、判断或提供建议</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 6. WORK IMPACT ===== -->
+    <div class="section-card full">
+      <div class="section-label section-label--dark">&#9679; 对人类工作的影响</div>
+      <div class="section-title">信息化阶段的人类工作状态</div>
+      <div class="work-grid">
+        <div class="work-item">
+          <div class="work-item-label work-item-label--red">&#9679; 仍大量存在</div>
+          <div class="work-item-desc">大量重复性执行工作仍由人工完成，如制作 PPT、整理文档、录入数据等</div>
+        </div>
+        <div class="work-item">
+          <div class="work-item-label work-item-label--red">&#9679; 效率有限</div>
+          <div class="work-item-desc">信息获取速度提升，但缺乏主动推送和智能辅助，人的负担未真正减轻</div>
+        </div>
+        <div class="work-item">
+          <div class="work-item-label work-item-label--blue">&#9679; 介质替换</div>
+          <div class="work-item-desc">教学展示、教案编写、资料管理逐步电子化，但工作方式本质未变</div>
+        </div>
+        <div class="work-item">
+          <div class="work-item-label work-item-label--blue">&#9679; 新要求出现</div>
+          <div class="work-item-desc">需要掌握基础数字工具操作能力，工具学习成本成为新的负担</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 7. SUMMARY BAR ===== -->
+    <div class="summary-bar" style="grid-column: 1 / -1; margin-top: 0;">
+      <div class="summary-left">
+        <div class="summary-eyebrow">一句话总结</div>
+        <div class="summary-text">信息化 = 介质转化，信息位移，但人仍需做大量重复性工作</div>
+      </div>
+      <div class="summary-right">
+        <span class="sum-tag">介质转化</span>
+        <span class="sum-tag">信息位移</span>
+        <span class="sum-tag">Chat 接口</span>
+        <span class="sum-tag">效率有限</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <div class="card-footer">
+    <div class="footer-stage">Stage 01 &nbsp;&middot;&nbsp; 信息化 &nbsp;&middot;&nbsp; Informatization &nbsp;&middot;&nbsp; Theo InfoCard</div>
+    <div class="footer-nav">
+      <a href="cognitive-map-blue.html" style="background:var(--blue-50);border:1px solid var(--border);border-radius:8px;padding:0.25rem 0.55rem;color:var(--blue-600);font-size:0.68rem;font-weight:600;text-decoration:none;display:inline-block;">&#8592; 认知地图</a>
+      <span style="color:var(--blue-400);">|</span>
+      <a href="digitalization-card.html" style="background:var(--blue-50);border:1px solid var(--border);border-radius:8px;padding:0.25rem 0.55rem;color:var(--blue-600);font-size:0.68rem;font-weight:600;text-decoration:none;display:inline-block;">数字化 &#8594;</a>
+      <span style="color:var(--blue-400);">|</span>
+      <a href="intelligentization-card.html" style="background:var(--blue-50);border:1px solid var(--border);border-radius:8px;padding:0.25rem 0.55rem;color:var(--blue-600);font-size:0.68rem;font-weight:600;text-decoration:none;display:inline-block;">智能化 &#8594;</a>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

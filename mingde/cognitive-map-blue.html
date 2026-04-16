@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>认知地图 | AI时代工作重构</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #ffffff;
+  --blue-50: #eff6ff;
+  --blue-100: #dbeafe;
+  --blue-200: #bfdbfe;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+  --blue-800: #1e40af;
+  --blue-900: #1e3a8a;
+  --blue-accent: #4361ee;
+  --blue-accent-dark: #3450d1;
+  --blue-slate: #334155;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: rgba(59, 130, 246, 0.12);
+  --border-strong: rgba(59, 130, 246, 0.22);
+  --shadow: rgba(67, 97, 238, 0.08);
+  --shadow-strong: rgba(67, 97, 238, 0.14);
+  --amber: #f59e0b;
+  --amber-light: #fbbf24;
+  --green: #10b981;
+  --green-light: #34d399;
+  --red: #ef4444;
+  --red-light: #f87171;
+  --bg: #f0f4ff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans SC', 'Manrope', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2rem 1.5rem 3rem;
+}
+
+/* ===== HEADER ===== */
+.header {
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blue-500);
+  margin-bottom: 0.8rem;
+}
+
+.eyebrow::before,
+.eyebrow::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--blue-400);
+}
+
+h1 {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--blue-900);
+  line-height: 1.1;
+  margin-bottom: 0.7rem;
+}
+
+h1 .accent { color: var(--blue-600); }
+
+.header-sub {
+  font-size: clamp(0.78rem, 1.3vw, 0.95rem);
+  color: var(--text-muted);
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* ===== MAIN MAP CARD ===== */
+.map-card {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--border-strong);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px var(--shadow), 0 1px 4px var(--shadow);
+}
+
+/* ===== COORDINATE HEADER BAND ===== */
+.band {
+  background: linear-gradient(135deg, var(--blue-800) 0%, var(--blue-600) 100%);
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+.band-left {
+  position: relative;
+  z-index: 1;
+}
+
+.band-eyebrow {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue-200);
+  margin-bottom: 0.25rem;
+}
+
+.band-title {
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.band-right {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.axis-label {
+  text-align: center;
+  padding: 0.5rem 1rem;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+}
+
+.axis-label-title {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue-200);
+  margin-bottom: 0.15rem;
+}
+
+.axis-label-value {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+/* ===== GRID TABLE ===== */
+.table-wrap {
+  padding: 1.5rem 1.5rem 0;
+  overflow-x: auto;
+}
+
+.map-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+/* Column header row */
+.col-header-row th {
+  padding: 0.6rem 1rem 0.5rem;
+  text-align: center;
+  border-bottom: 2px solid var(--blue-200);
+  position: relative;
+}
+
+.col-header-num {
+  font-family: 'Manrope', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--blue-100);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.col-header-name {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--blue-800);
+  letter-spacing: -0.02em;
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+.col-header-en {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue-400);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.col-header-bar {
+  height: 2px;
+  width: 60%;
+  margin: 0 auto;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--blue-400), var(--blue-600));
+}
+
+/* Stage accent colors */
+.col-header-row th:nth-child(2) .col-header-bar { background: linear-gradient(90deg, var(--blue-400), var(--blue-300)); }
+.col-header-row th:nth-child(3) .col-header-bar { background: linear-gradient(90deg, var(--blue-500), var(--blue-400)); }
+.col-header-row th:nth-child(4) .col-header-bar { background: linear-gradient(90deg, var(--blue-600), var(--blue-500)); }
+
+/* Row header cell */
+.row-header {
+  background: var(--blue-50);
+  padding: 1rem 1rem 1rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  width: 160px;
+  position: relative;
+}
+
+.row-header::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 1px;
+  background: var(--border-strong);
+}
+
+.row-header-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--blue-800);
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.row-header-sub {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  display: block;
+  letter-spacing: 0.02em;
+}
+
+/* Data cell */
+.map-cell {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  vertical-align: top;
+  position: relative;
+  transition: background 0.2s;
+  background: var(--white);
+}
+
+.map-cell:last-child { border-right: none; }
+
+.map-cell:hover {
+  background: var(--blue-50);
+}
+
+/* Cell stage tag */
+.cell-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.cell-tag--blue { color: var(--blue-500); }
+.cell-tag--accent { color: var(--blue-accent); }
+.cell-tag--green { color: var(--green); }
+
+.cell-tag::before {
+  content: '';
+  display: block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+}
+
+.cell-tag--blue::before { background: var(--blue-400); }
+.cell-tag--accent::before { background: var(--blue-accent); }
+.cell-tag--green::before { background: var(--green); box-shadow: 0 0 5px rgba(16,185,129,0.4); }
+
+.cell-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  margin-bottom: 0.35rem;
+}
+
+.cell-desc {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+}
+
+.cell-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-bottom: 0.45rem;
+}
+
+.tool-chip {
+  font-size: 0.6rem;
+  font-weight: 600;
+  padding: 0.12rem 0.45rem;
+  border-radius: 100px;
+  letter-spacing: 0.02em;
+}
+
+.tool-chip--blue { background: var(--blue-100); color: var(--blue-700); }
+.tool-chip--accent { background: rgba(67,97,238,0.1); color: var(--blue-accent-dark); }
+.tool-chip--green { background: rgba(16,185,129,0.1); color: var(--green); }
+
+/* Status indicator */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 100px;
+  letter-spacing: 0.02em;
+}
+
+.status-red {
+  background: rgba(239,68,68,0.08);
+  color: var(--red);
+  border: 1px solid rgba(239,68,68,0.15);
+}
+
+.status-amber {
+  background: rgba(245,158,11,0.08);
+  color: var(--amber);
+  border: 1px solid rgba(245,158,11,0.15);
+}
+
+.status-blue {
+  background: var(--blue-100);
+  color: var(--blue-700);
+  border: 1px solid var(--blue-200);
+}
+
+.status-green {
+  background: rgba(16,185,129,0.08);
+  color: var(--green);
+  border: 1px solid rgba(16,185,129,0.2);
+}
+
+.status-gray {
+  background: var(--blue-50);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+/* Corner cell */
+.corner-cell {
+  background: var(--blue-50) !important;
+  border-bottom: 2px solid var(--blue-200) !important;
+  border-right: 1px solid var(--border-strong) !important;
+  padding: 0.75rem 1rem;
+  vertical-align: bottom;
+  text-align: right;
+}
+
+.corner-text {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ===== BOTTOM CARDS ===== */
+.bottom-section {
+  max-width: 1200px;
+  margin: 1.5rem auto 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.bottom-card {
+  background: var(--white);
+  border: 1px solid var(--border-strong);
+  border-radius: 18px;
+  padding: 1.4rem 1.3rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s;
+  box-shadow: 0 2px 12px var(--shadow);
+}
+
+.bottom-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 18px 18px 0 0;
+}
+
+.bottom-card:nth-child(1)::before { background: linear-gradient(90deg, var(--blue-400), var(--blue-600)); }
+.bottom-card:nth-child(2)::before { background: linear-gradient(90deg, var(--blue-accent), var(--blue-500)); }
+.bottom-card:nth-child(3)::before { background: linear-gradient(90deg, var(--blue-600), var(--blue-700)); }
+
+.bottom-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px var(--shadow-strong);
+}
+
+.bottom-card-num {
+  font-family: 'Manrope', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--blue-100);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 0.5rem;
+}
+
+.bottom-card-title {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--blue-900);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
+}
+
+.bottom-card-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+/* ===== LEGEND ===== */
+.legend-row {
+  max-width: 1200px;
+  margin: 1.2rem auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 0 1rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.legend-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+
+.legend-line {
+  width: 20px; height: 2px;
+  border-radius: 2px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  max-width: 1200px;
+  margin: 2rem auto 0;
+  text-align: center;
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding-bottom: 1rem;
+}
+
+.stage-link-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px var(--shadow-strong) !important;
+  border-color: var(--blue-accent);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  body { padding: 1rem 0.75rem 2rem; }
+  .band { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .bottom-section { grid-template-columns: 1fr; }
+  .map-table { font-size: 0.85rem; }
+  .stage-links { grid-template-columns: 1fr !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="eyebrow">Theo InfoCard</div>
+  <h1>认知<span class="accent">地图</span></h1>
+  <p class="header-sub">
+    横坐标：信息化 &rarr; 数字化 &rarr; 智能化 &nbsp;&nbsp;|&nbsp;&nbsp; 纵坐标：人类工作的四个层次
+  </p>
+</div>
+
+<!-- MAIN MAP CARD -->
+<div class="map-card">
+
+  <!-- BAND HEADER -->
+  <div class="band">
+    <div class="band-left">
+      <div class="band-eyebrow">AI 赋能教育 · 技术发展阶段认知地图</div>
+      <div class="band-title">从信息化到智能化，看清技术如何重塑人类工作</div>
+    </div>
+    <div class="band-right">
+      <div class="axis-label">
+        <div class="axis-label-title">横轴</div>
+        <div class="axis-label-value">技术阶段</div>
+      </div>
+      <div class="axis-label">
+        <div class="axis-label-title">纵轴</div>
+        <div class="axis-label-value">工作层次</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRID TABLE -->
+  <div class="table-wrap">
+    <table class="map-table">
+
+      <!-- Column Headers -->
+      <thead>
+        <tr class="col-header-row">
+          <th class="corner-cell"><span class="corner-text">Human Work<br>人类工作</span></th>
+          <th>
+            <span class="col-header-num">01</span>
+            <span class="col-header-name">信息化</span>
+            <span class="col-header-en">Informatization</span>
+            <div class="col-header-bar"></div>
+          </th>
+          <th>
+            <span class="col-header-num">02</span>
+            <span class="col-header-name">数字化</span>
+            <span class="col-header-en">Digitalization</span>
+            <div class="col-header-bar"></div>
+          </th>
+          <th>
+            <span class="col-header-num">03</span>
+            <span class="col-header-name">智能化</span>
+            <span class="col-header-en">Intelligentization</span>
+            <div class="col-header-bar"></div>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <!-- Row 1: 重复性执行 -->
+        <tr>
+          <td class="row-header">
+            <span class="row-header-label">重复性执行</span>
+            <span class="row-header-sub">Routine Execution</span>
+          </td>
+          <td class="map-cell">
+            <div class="cell-tag cell-tag--blue">信息化</div>
+            <div class="cell-title">板书 &rarr; PPT<br>纸质 &rarr; 电子文档</div>
+            <div class="cell-desc">介质转化，信息本身没有质变</div>
+            <div class="cell-tools">
+              <span class="tool-chip tool-chip--blue">PPT</span>
+              <span class="tool-chip tool-chip--blue">Word</span>
+              <span class="tool-chip tool-chip--blue">Email</span>
+            </div>
+            <span class="status-pill status-red">&#9679; 仍大量存在</span>
+          </td>
+          <td class="map-cell">
+            <div class="cell-tag cell-tag--accent">数字化</div>
+            <div class="cell-title">模板化输出<br>批量数据处理</div>
+            <div class="cell-desc">数据被打通，流程开始自动化</div>
+            <div class="cell-tools">
+              <span class="tool-chip tool-chip--accent">Excel</span>
+              <span class="tool-chip tool-chip--accent">数据库</span>
+              <span class="tool-chip tool-chip--accent">API</span>
+            </div>
+            <span class="status-pill status-amber">&#9679; 开始减少</span>
+          </td>
+          <td class="map-cell">
+            <div class="cell-tag cell-tag--green">智能化</div>
+            <div class="cell-title">AI 替代重复<br>自动生成内容</div>
+            <div class="cell-desc">Agent 自动执行，人只需审核</div>
+            <div class="cell-tools">
+              <span class="tool-chip tool-chip--green">AI Agent</span>
+              <span class="tool-chip tool-chip--green">AutoGen</span>
+              <span class="tool-chip tool-chip--green">RPA+AI</span>
+            </div>
+            <span class="status-pill status-gray">&#9679; 大幅减少</span>
+          </td>
+        </tr>
+
+        <!-- Row 2: 知识检索 -->
+        <tr>
+          <td class="row-header">
+            <span class="row-header-label">知识检索</span>
+            <span class="row-header-sub">Information Retrieval</span>
+          </td>
+          <td class="map-cell">
+            <div class="cell-tag cell-tag--blue">信息化</div>
+            <div class="cell-title">搜索引擎<br>关键词查找</div>
+            <div class="cell-desc">信息位置变化，人主动找信息</div>
+            <div class="cell-tools">
+              <span class="tool-chip tool-chip--blue">Google</span>
+              <span class="tool-chip tool-chip--blue">百度</span>
+              <span class="tool-chip tool-chip--blue">文献库</span>
+            </div>
+            <span class="status-pill status-blue">&#9679; 主要方式</span>
+          </td>
+          <td class="map-cell">
+            <div class="cell-tag cell-tag--accent">数字化</div>
+            <div class="cell-title">个人知识库<br>精准检索</div>
+            <div class="cell-desc">知识被打通，信息主动找人</div>
+            <div class="cell-tools">
+              <span class="tool-chip tool-chip--accent">Notion</span>
+              <span class="tool-chip tool-chip--accent">Obsidian</span>
+              <span class="tool-chip tool-chip--accent">RSS</span>
+            </div>
+            <span class="status-pill status-blue">&#9679; 效率提升</span>
+          </td>
+          <td class="map-cell">
+            <div class="cell-tag cell-tag--green">智能化</div>
+            <div class="cell-title">AI 理解需求<br>主动整理回答</div>
+            <div class="cell-desc">知识主动找人，RAG + 大模型</div>
+            <div class="cell-tools">
+              <span class="tool-chip tool-chip--green">ChatGPT</span>
+              <span class="tool-chip tool-chip--green">RAG</span>
+              <span class="tool-chip tool-chip--green">知识库问答</span>
+            </div>
+            <span class="status-pill status-green">&#9679; 人机协同</span>
+          </td>
+        </tr>
+
+        <!-- Row 3: 经验决策 -->
+        <tr>
+          <td class="row-header">
+            <span class="row-header-label">经验决策</span>
+            <span class="row-header-sub">Experience-based Decision</span>
+          </td>
+          <td class="map-cell">
+            <div class="cell-tag cell-tag--blue">信息化</div>
+            <div class="cell-title">专家经验<br>个人直觉判断</div>
+            <div class="cell-desc">依赖个人积累，传播有限</div>
+            <div class="cell-tools">
+              <span class="tool-chip tool-chip--blue">教学日志</span>
+              <span class="tool-chip tool-chip--blue">会议记录</span>
+            </div>
+            <span class="status-pill status-blue">&#9679; 主要依靠人</span>
+          </td>
+          <td class="map-cell">
+            <div class="cell-tag cell-tag--accent">数字化</div>
+            <div class="cell-title">数据分析<br>模式识别</div>
+            <div class="cell-desc">数据驱动决策，有据可依</div>
+            <div class="cell-tools">
+              <span class="tool-chip tool-chip--accent">Dashboard</span>
+              <span class="tool-chip tool-chip--accent">BI工具</span>
+              <span class="tool-chip tool-chip--accent">学生数据</span>
+            </div>
+            <span class="status-pill status-blue">&#9679; 数据辅助</span>
+          </td>
+          <td class="map-cell">
+            <div class="cell-tag cell-tag--green">智能化</div>
+            <div class="cell-title">AI 提供选项<br>人做最终决策</div>
+            <div class="cell-desc">AI 分析数据，人负责判断</div>
+            <div class="cell-tools">
+              <span class="tool-chip tool-chip--green">AI分析</span>
+              <span class="tool-chip tool-chip--green">智能推荐</span>
+              <span class="tool-chip tool-chip--green">预警系统</span>
+            </div>
+            <span class="status-pill status-green">&#9679; 协同决策</span>
+          </td>
+        </tr>
+
+        <!-- Row 4: 创造性建构 -->
+        <tr>
+          <td class="row-header">
+            <span class="row-header-label">创造性建构</span>
+            <span class="row-header-sub">Creative Construction</span>
+          </td>
+          <td class="map-cell" style="border-bottom: none;">
+            <div class="cell-tag cell-tag--blue">信息化</div>
+            <div class="cell-title">个体创作<br>独立设计</div>
+            <div class="cell-desc">教师独立完成，无技术增强</div>
+            <div class="cell-tools">
+              <span class="tool-chip tool-chip--blue">手写教案</span>
+              <span class="tool-chip tool-chip--blue">独立备课</span>
+            </div>
+            <span class="status-pill status-blue">&#9679; 全靠人力</span>
+          </td>
+          <td class="map-cell" style="border-bottom: none;">
+            <div class="cell-tag cell-tag--accent">数字化</div>
+            <div class="cell-title">协作平台<br>知识共享</div>
+            <div class="cell-desc">团队协作，资源共建</div>
+            <div class="cell-tools">
+              <span class="tool-chip tool-chip--accent">协作文档</span>
+              <span class="tool-chip tool-chip--accent">题库系统</span>
+              <span class="tool-chip tool-chip--accent">微课平台</span>
+            </div>
+            <span class="status-pill status-blue">&#9679; 人+平台</span>
+          </td>
+          <td class="map-cell" style="border-bottom: none;">
+            <div class="cell-tag cell-tag--green">智能化</div>
+            <div class="cell-title">人机协同创作<br>AI 放大创造力</div>
+            <div class="cell-desc">AI 提供素材，人专注创意和判断</div>
+            <div class="cell-tools">
+              <span class="tool-chip tool-chip--green">AI备课</span>
+              <span class="tool-chip tool-chip--green">生成式设计</span>
+              <span class="tool-chip tool-chip--green">智能出题</span>
+            </div>
+            <span class="status-pill status-green">&#9679; 价值最大化</span>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LEGEND -->
+  <div style="padding: 1rem 1.5rem 1.5rem;">
+    <div class="legend-row">
+      <div class="legend-item">
+        <div class="legend-line" style="background: linear-gradient(90deg, var(--blue-400), var(--blue-600));"></div>
+        <span>信息化 &mdash; 介质转化</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-line" style="background: linear-gradient(90deg, var(--blue-accent), var(--blue-500));"></div>
+        <span>数字化 &mdash; 连接打通</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-line" style="background: linear-gradient(90deg, var(--blue-600), var(--blue-700));"></div>
+        <span>智能化 &mdash; 协同创造</span>
+      </div>
+      <div style="width:1px; height:14px; background:var(--border-strong);"></div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: var(--red);"></div>
+        <span>仍大量存在</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: var(--blue-500);"></div>
+        <span>效率提升</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: var(--green);"></div>
+        <span>人机协同</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- BOTTOM CARDS -->
+<div class="bottom-section">
+  <div class="bottom-card">
+    <div class="bottom-card-num">01</div>
+    <div class="bottom-card-title">&#128218; 带走认知地图</div>
+    <div class="bottom-card-desc">三阶段横坐标 × 四层次纵坐标，交叉定位你的工作，看见技术如何重塑每个环节</div>
+  </div>
+  <div class="bottom-card">
+    <div class="bottom-card-num">02</div>
+    <div class="bottom-card-title">&#9889; 减负 = 提效</div>
+    <div class="bottom-card-desc">重复性执行被 AI 替代，人从低价值中释放，去做更高层次的创造性建构</div>
+  </div>
+  <div class="bottom-card">
+    <div class="bottom-card-num">03</div>
+    <div class="bottom-card-title">&#129309; 人机协同</div>
+    <div class="bottom-card-desc">不是替代，而是协同。AI 放大人的创造力，人引导 AI 的方向——找准自己的定位</div>
+  </div>
+</div>
+
+<!-- STAGE CARDS SECTION -->
+<div class="section-header" style="max-width:1200px;margin:1.5rem auto 0.3rem;display:flex;align-items:center;gap:1rem;">
+  <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(67,97,238,0.3),transparent);"></div>
+  <span style="font-size:0.63rem;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue-500);white-space:nowrap;">深度阅读 &middot; 阶段详解</span>
+  <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(67,97,238,0.3));"></div>
+</div>
+
+<div class="stage-links" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;padding:0 0.2rem 0.2rem;">
+
+  <a href="informatization-card.html" class="stage-link-card" style="background:var(--white);border:1px solid var(--border-strong);border-radius:18px;padding:1.3rem 1.2rem;text-decoration:none;position:relative;overflow:hidden;display:block;transition:all 0.25s;box-shadow:0 2px 12px var(--shadow);">
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue-400),var(--blue-600));border-radius:18px 18px 0 0;"></div>
+    <div style="font-family:'Manrope',sans-serif;font-size:2.2rem;font-weight:900;color:var(--blue-100);line-height:1;letter-spacing:-0.04em;margin-bottom:0.5rem;">01</div>
+    <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue-400);margin-bottom:0.3rem;">Stage 01</div>
+    <div style="font-size:1rem;font-weight:800;color:var(--blue-900);letter-spacing:-0.02em;margin-bottom:0.4rem;">信息化</div>
+    <div style="font-size:0.7rem;font-weight:700;color:var(--blue-accent-dark);margin-bottom:0.5rem;">Informatization &rarr;</div>
+    <div style="font-size:0.7rem;color:var(--text-muted);line-height:1.55;font-weight:400;">介质转化 &middot; 信息位移 &middot; Chat接口</div>
+  </a>
+
+  <a href="digitalization-card.html" class="stage-link-card" style="background:var(--white);border:1px solid var(--border-strong);border-radius:18px;padding:1.3rem 1.2rem;text-decoration:none;position:relative;overflow:hidden;display:block;transition:all 0.25s;box-shadow:0 2px 12px var(--shadow);">
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue-accent),var(--blue-500));border-radius:18px 18px 0 0;"></div>
+    <div style="font-family:'Manrope',sans-serif;font-size:2.2rem;font-weight:900;color:var(--blue-100);line-height:1;letter-spacing:-0.04em;margin-bottom:0.5rem;">02</div>
+    <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue-400);margin-bottom:0.3rem;">Stage 02</div>
+    <div style="font-size:1rem;font-weight:800;color:var(--blue-900);letter-spacing:-0.02em;margin-bottom:0.4rem;">数字化</div>
+    <div style="font-size:0.7rem;font-weight:700;color:var(--blue-accent-dark);margin-bottom:0.5rem;">Digitalization &rarr;</div>
+    <div style="font-size:0.7rem;color:var(--text-muted);line-height:1.55;font-weight:400;">打通连接 &middot; 知识体系 &middot; 数据驱动</div>
+  </a>
+
+  <a href="intelligentization-card.html" class="stage-link-card" style="background:var(--white);border:1px solid var(--border-strong);border-radius:18px;padding:1.3rem 1.2rem;text-decoration:none;position:relative;overflow:hidden;display:block;transition:all 0.25s;box-shadow:0 2px 12px var(--shadow);">
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue-600),var(--blue-800));border-radius:18px 18px 0 0;"></div>
+    <div style="font-family:'Manrope',sans-serif;font-size:2.2rem;font-weight:900;color:var(--blue-100);line-height:1;letter-spacing:-0.04em;margin-bottom:0.5rem;">03</div>
+    <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue-400);margin-bottom:0.3rem;">Stage 03</div>
+    <div style="font-size:1rem;font-weight:800;color:var(--blue-900);letter-spacing:-0.02em;margin-bottom:0.4rem;">智能化</div>
+    <div style="font-size:0.7rem;font-weight:700;color:var(--blue-accent-dark);margin-bottom:0.5rem;">Intelligentization &rarr;</div>
+    <div style="font-size:0.7rem;color:var(--text-muted);line-height:1.55;font-weight:400;">人机协同 &middot; 理解意图 &middot; 主动建议</div>
+  </a>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  AI 赋能教育教学实践应用 &nbsp;&middot;&nbsp; 认知地图 &nbsp;&middot;&nbsp; Theo InfoCard
+</div>
+
+</body>
+</html>

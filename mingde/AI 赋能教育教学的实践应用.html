@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)file:///E:/Apex/Apex-Obsidian/Then-Inbox/Mingde/index.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 赋能教育教学的实践应用</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./AI 赋能教育教学的实践应用_files/css2" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+body{font-family:'Noto Sans SC','Manrope','PingFang SC','Microsoft YaHei',sans-serif;background:#fff;color:#1e293b;overflow-x:hidden}
+.slide{width:100vw;height:100vh;height:100dvh;overflow:hidden;scroll-snap-align:start;display:flex;flex-direction:column;position:relative}
+.slide-content{flex:1;display:flex;flex-direction:column;justify-content:center;max-height:100%;overflow:hidden;padding:clamp(1.5rem,4vw,4.5rem)}
+.slide--dark{background:#1e3a8a;color:#fff}
+.slide-inner{max-width:1100px;width:100%;margin:0 auto}
+h1{font-size:clamp(2rem,6vw,5rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1}
+h2{font-size:clamp(1.5rem,4vw,3rem);font-weight:700;letter-spacing:-0.02em;line-height:1.2;margin-bottom:clamp(0.8rem,2vw,2rem)}
+h3{font-size:clamp(1.1rem,2.5vw,1.75rem);font-weight:600;line-height:1.3}
+p,li{font-size:clamp(0.85rem,1.5vw,1.15rem);color:#475569;line-height:1.75}
+.title-slide .slide-content{align-items:center;text-align:center}
+.title-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(67,97,238,0.2);border:1px solid rgba(67,97,238,0.4);color:#93c5fd;padding:0.4rem 1.2rem;border-radius:100px;font-size:clamp(0.7rem,1.2vw,0.95rem);font-weight:600;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:clamp(0.8rem,2vw,2rem)}
+.title-slide h1{color:#fff;margin-bottom:clamp(0.8rem,2vw,2rem);max-width:16ch}
+.title-slide .subtitle{color:rgba(255,255,255,0.7);font-size:clamp(0.85rem,1.5vw,1.15rem);font-weight:400;max-width:50ch}
+.title-author{margin-top:clamp(1.2rem,3vw,3rem);font-size:clamp(0.7rem,1.2vw,0.95rem);color:rgba(255,255,255,0.5)}
+.title-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(67,97,238,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(67,97,238,0.07) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.section-tag{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(67,97,238,0.08);color:#4361ee;padding:0.3rem 0.9rem;border-radius:6px;font-size:clamp(0.7rem,1.2vw,0.95rem);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:clamp(0.3rem,1vw,0.8rem)}
+.section-tag--gold{background:rgba(217,119,6,0.1);color:#d97706}
+.stage-slide{background:#4361ee;color:#fff}
+.stage-slide .stage-number{font-size:clamp(5rem,14vw,12rem);font-weight:800;color:rgba(255,255,255,0.12);line-height:1;position:absolute;top:clamp(1.5rem,4vw,4.5rem);right:clamp(1.5rem,4vw,4.5rem)}
+.stage-slide .stage-label{font-size:clamp(0.7rem,1.2vw,0.95rem);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:clamp(0.3rem,1vw,0.8rem)}
+.stage-slide h2{color:#fff;font-size:clamp(2rem,6vw,5rem);max-width:12ch}
+.stage-slide p{color:rgba(255,255,255,0.8);max-width:45ch;margin-top:clamp(0.3rem,1vw,0.8rem)}
+.def-box{background:linear-gradient(135deg,rgba(67,97,238,0.06) 0%,rgba(147,197,253,0.1) 100%);border-left:4px solid #4361ee;border-radius:0 12px 12px 0;padding:clamp(1rem,2.5vw,2rem) clamp(1.2rem,3vw,2.5rem);margin-bottom:clamp(0.8rem,2vw,2rem)}
+.def-box h3{color:#4361ee;margin-bottom:0.5rem}
+.def-box--gold{background:linear-gradient(135deg,rgba(217,119,6,0.06) 0%,rgba(252,211,77,0.1) 100%);border-left-color:#d97706}
+.def-box--gold h3{color:#d97706}
+.keyword{display:inline-block;background:rgba(67,97,238,0.1);color:#4361ee;padding:0.15rem 0.6rem;border-radius:4px;font-weight:600}
+.keyword--gold{background:rgba(217,119,6,0.1);color:#d97706}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,3rem);align-items:start;margin-top:clamp(0.8rem,2vw,2rem)}
+.two-col-60-40{grid-template-columns:3fr 2fr}
+.feature-list{list-style:none;display:flex;flex-direction:column;gap:clamp(0.3rem,1vw,0.8rem)}
+.feature-list li{display:flex;align-items:flex-start;gap:0.8rem;font-size:clamp(0.85rem,1.5vw,1.15rem);color:#475569;line-height:1.75}
+.feature-dot{flex-shrink:0;width:8px;height:8px;background:#4361ee;border-radius:50%;margin-top:0.55em}
+.feature-dot--gold{background:#d97706}
+.feature-label{font-weight:700;color:#1e293b}
+.quote-box{background:#fffbeb;border:1px solid #fcd34d;border-radius:12px;padding:clamp(1rem,2.5vw,1.8rem);position:relative}
+.quote-box::before{content:'"';font-size:clamp(3rem,6vw,5rem);color:#fcd34d;position:absolute;top:-0.2em;left:0.3em;line-height:1;font-weight:800}
+.quote-box p{color:#78350f;font-size:clamp(0.85rem,1.5vw,1.15rem);font-weight:500;padding-left:1.5rem}
+.takeaway-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(0.8rem,2vw,2rem);margin-top:clamp(0.8rem,2vw,2rem)}
+.takeaway-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:clamp(1rem,2.5vw,2rem);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.35s ease}
+.takeaway-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(67,97,238,0.12)}
+.takeaway-number{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;color:rgba(67,97,238,0.1);line-height:1;margin-bottom:0.5rem}
+.takeaway-card h3{color:#4361ee;margin-bottom:0.5rem}
+.takeaway-card p{font-size:clamp(0.7rem,1.2vw,0.95rem)}
+.comparison-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2.5vw,1.8rem);margin-top:clamp(0.8rem,2vw,2rem);align-items:stretch}
+.comparison-card{border-radius:20px;padding:clamp(1.2rem,3vw,2.2rem);transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.4s ease;display:flex;flex-direction:column}
+.comparison-card:hover{transform:translateY(-10px);box-shadow:0 20px 60px rgba(0,0,0,0.12)}
+.comparison-card--info{background:linear-gradient(145deg,#eff6ff 0%,#dbeafe 100%);border:1px solid #bfdbfe}
+.comparison-card--digital{background:linear-gradient(145deg,rgba(67,97,238,0.06) 0%,rgba(67,97,238,0.14) 100%);border:1px solid rgba(67,97,238,0.22)}
+.comparison-card--ai{background:linear-gradient(145deg,#fffbeb 0%,#fef3c7 100%);border:1px solid #fcd34d}
+.comparison-stage{font-size:clamp(0.7rem,1.2vw,0.95rem);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.25rem 0.75rem;border-radius:100px;display:inline-block;margin-bottom:clamp(0.3rem,1vw,0.8rem)}
+.comparison-card--info .comparison-stage{background:rgba(59,130,246,0.15);color:#1d4ed8}
+.comparison-card--digital .comparison-stage{background:rgba(67,97,238,0.15);color:#4361ee}
+.comparison-card--ai .comparison-stage{background:rgba(217,119,6,0.15);color:#d97706}
+.comparison-card h3{font-size:clamp(1.1rem,2.5vw,1.75rem);margin-bottom:0.6rem}
+.comparison-card--info h3{color:#1e40af}
+.comparison-card--digital h3{color:#4361ee}
+.comparison-card--ai h3{color:#92400e}
+.comparison-card p{font-size:clamp(0.7rem,1.2vw,0.95rem);color:#475569;margin-bottom:clamp(0.3rem,1vw,0.8rem);flex:1}
+.comparison-role{font-size:clamp(0.7rem,1.2vw,0.95rem);font-weight:600;color:#1e293b;padding:0.4rem 0.8rem;background:rgba(255,255,255,0.7);border-radius:8px;display:inline-block;margin-top:auto}
+.comparison-keyword{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;line-height:1;margin-bottom:0.5rem}
+.comparison-card--info .comparison-keyword{color:rgba(59,130,246,0.2)}
+.comparison-card--digital .comparison-keyword{color:rgba(67,97,238,0.2)}
+.comparison-card--ai .comparison-keyword{color:rgba(217,119,6,0.2)}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:clamp(0.8rem,2vw,1.4rem);margin-top:clamp(0.8rem,2vw,2rem)}
+.tool-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:clamp(0.8rem,2vw,1.4rem);transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+.tool-card:hover{background:#eff6ff;border-color:#93c5fd;transform:translateY(-4px)}
+.tool-icon{width:34px;height:34px;background:rgba(67,97,238,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;margin-bottom:0.6rem}
+.tool-card h4{font-size:clamp(0.85rem,1.5vw,1.15rem);font-weight:700;color:#1e293b;margin-bottom:0.3rem}
+.tool-card p{font-size:clamp(0.7rem,1.2vw,0.95rem)}
+.logic-row{display:grid;grid-template-columns:1fr 2fr;gap:clamp(0.8rem,2vw,1.5rem);align-items:stretch;margin-bottom:clamp(0.5rem,1.2vw,0.8rem)}
+.logic-label{background:#4361ee;color:#fff;border-radius:12px;padding:clamp(0.6rem,1.5vw,1.2rem);display:flex;align-items:center;justify-content:center;text-align:center}
+.logic-label h4{font-size:clamp(0.7rem,1.2vw,0.95rem);font-weight:700;letter-spacing:0.05em}
+.logic-content{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:clamp(0.6rem,1.5vw,1.2rem)}
+.logic-content h4{font-size:clamp(0.7rem,1.2vw,0.95rem);font-weight:700;color:#4361ee;margin-bottom:0.25rem}
+.logic-content p{font-size:clamp(0.7rem,1.2vw,0.95rem)}
+.logic-row--gold .logic-label{background:#d97706}
+.logic-row--gold .logic-content h4{color:#d97706}
+.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(0.8rem,2vw,2rem);margin-top:clamp(0.8rem,2vw,2rem)}
+.memory-card{border-radius:14px;padding:clamp(0.8rem,2vw,1.5rem);text-align:center}
+.memory-card--light{background:#f0f9ff;border:1px solid #bae6fd}
+.memory-card--mid{background:rgba(67,97,238,0.06);border:1px solid rgba(67,97,238,0.2)}
+.memory-card--gold{background:#fffbeb;border:1px solid #fcd34d}
+.memory-card h4{font-size:clamp(0.85rem,1.5vw,1.15rem);font-weight:700;margin-bottom:0.4rem}
+.memory-card--light h4{color:#0369a1}
+.memory-card--mid h4{color:#4361ee}
+.memory-card--gold h4{color:#d97706}
+.memory-card p{font-size:clamp(0.7rem,1.2vw,0.95rem)}
+.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2.5vw,1.8rem);margin-top:clamp(0.8rem,2vw,2rem)}
+.summary-card{border-radius:16px;padding:clamp(1rem,2.5vw,1.8rem)}
+.summary-card--blue{background:linear-gradient(145deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe}
+.summary-card--purple{background:linear-gradient(145deg,rgba(67,97,238,0.08),rgba(67,97,238,0.14);border:1px solid rgba(67,97,238,0.22)}
+.summary-card--gold{background:linear-gradient(145deg,#fffbeb,#fef3c7);border:1px solid #fcd34d}
+.summary-card h4{font-size:clamp(0.85rem,1.5vw,1.15rem);font-weight:700;margin-bottom:0.4rem}
+.summary-card--blue h4{color:#1d4ed8}
+.summary-card--purple h4{color:#4361ee}
+.summary-card--gold h4{color:#d97706}
+.summary-card p{font-size:clamp(0.7rem,1.2vw,0.95rem);color:#475569;margin-bottom:0.4rem}
+.summary-card p:last-child{margin-bottom:0}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:#4361ee;width:0%;z-index:1000;transition:width 0.3s ease}
+.nav-dots{position:fixed;right:clamp(0.8rem,2vw,1.5rem);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:100}
+.nav-dot{width:8px;height:8px;border-radius:50%;background:rgba(67,97,238,0.25);cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+.nav-dot.active{background:#4361ee;transform:scale(1.5)}
+.nav-dot:hover{background:#4361ee}
+.slide-counter{position:fixed;bottom:clamp(0.8rem,2vw,1.5rem);right:clamp(0.8rem,2vw,1.5rem);font-size:clamp(0.7rem,1.2vw,0.95rem);color:#94a3b8;font-weight:600;z-index:100}
+.ending-slide .slide-content{align-items:center;text-align:center}
+.ending-slide h1{color:#fff;font-size:clamp(2rem,6vw,5rem);margin-bottom:clamp(0.8rem,2vw,2rem)}
+.ending-sub{color:rgba(255,255,255,0.6);font-size:clamp(0.85rem,1.5vw,1.15rem);max-width:40ch}
+.slide-deco-circle{position:absolute;border-radius:50%;background:linear-gradient(135deg,rgba(67,97,238,0.07),rgba(147,197,253,0.04));pointer-events:none}
+.deco-1{width:clamp(200px,30vw,400px);height:clamp(200px,30vw,400px);bottom:-10%;right:-5%}
+.deco-2{width:clamp(150px,20vw,280px);height:clamp(150px,20vw,280px);top:10%;right:15%}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1),transform 0.65s cubic-bezier(0.16,1,0.3,1)}
+.slide.visible .reveal{opacity:1;transform:translateY(0)}
+.reveal:nth-child(1){transition-delay:0.05s}
+.reveal:nth-child(2){transition-delay:0.12s}
+.reveal:nth-child(3){transition-delay:0.19s}
+.reveal:nth-child(4){transition-delay:0.26s}
+.reveal:nth-child(5){transition-delay:0.33s}
+.reveal:nth-child(6){transition-delay:0.40s}
+.reveal-delay-1{transition-delay:0.1s!important}
+.reveal-delay-2{transition-delay:0.2s!important}
+.reveal-delay-3{transition-delay:0.3s!important}
+[data-editable]{outline:none;border-radius:4px;transition:background 0.2s,box-shadow 0.2s;cursor:text}
+[data-editable]:hover{background:rgba(67,97,238,0.05)}
+[data-editable]:focus{background:rgba(67,97,238,0.08);box-shadow:0 0 0 2px rgba(67,97,238,0.3)}
+.edit-hotzone{position:fixed;top:0;left:0;width:80px;height:80px;z-index:9998;cursor:pointer}
+.edit-toggle{position:fixed;bottom:clamp(0.8rem,2vw,1.5rem);left:clamp(0.8rem,2vw,1.5rem);z-index:9999;background:#4361ee;color:#fff;border:none;border-radius:8px;padding:0.5rem 1rem;font-size:clamp(0.7rem,1.2vw,0.9rem);font-weight:600;cursor:pointer;transition:opacity 0.3s,background 0.2s;font-family:inherit;box-shadow:0 2px 12px rgba(67,97,238,0.4);display:flex;align-items:center;gap:0.4rem}
+.edit-toggle.show,.edit-toggle.active{opacity:1;pointer-events:auto;background:#2563eb}
+.edit-toggle:hover{background:#3651d4}
+@media(max-width:768px){.takeaway-grid,.comparison-grid,.memory-grid,.summary-grid{grid-template-columns:1fr}.two-col,.two-col-60-40{grid-template-columns:1fr}.nav-dots{display:none}.logic-row{grid-template-columns:1fr}}
+@media(max-width:600px){.tools-grid{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.2s!important}html{scroll-behavior:auto}}
+
+</style>
+</head>
+<body>
+<div class="edit-hotzone"></div>
+<button class="edit-toggle active show" id="editToggle" title="按 E 键或点击该按钮，然后点击任意文字编辑，Ctrl+S 保存" style="background: rgb(22, 163, 74);">保存 (Ctrl+S)</button>
+<button class="edit-toggle" id="exportBtn" style="bottom:clamp(0.8rem,2vw,1.5rem);left:auto;right:clamp(0.8rem,2vw,1.5rem);background:#d97706;" title="导出可编辑HTML">导出HTML</button>
+<div class="progress-bar" id="progressBar" style="width: 94.7665%;"></div>
+<nav class="nav-dots" id="navDots"><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot active"></div><div class="nav-dot"></div></nav>
+<div class="slide-counter" id="slideCounter">19 / 20</div>
+<section class="slide slide--dark title-slide" data-slide="1"><div class="title-grid"></div><div class="slide-deco-circle deco-1"></div><div class="slide-deco-circle deco-2"></div><div class="slide-content"><div class="title-badge reveal" data-editable="1" contenteditable="true" style="cursor: text;">信息化⇒数字化⇒智能化</div><h1 class="reveal" data-editable="1" contenteditable="true" style="cursor: text;">AI 赋能教育教学<br>的实践应用</h1><p class="subtitle reveal" data-editable="1" contenteditable="true" style="cursor: text;">从信息化到智能化：教师角色的重塑与升级</p><p class="title-author reveal" data-editable="1" contenteditable="true" style="cursor: text;">王益国 · 中国海洋大学</p></div></section><section class="slide" data-slide="2"><div class="slide-deco-circle deco-1" style="background:linear-gradient(135deg,rgba(67,97,238,0.06),rgba(147,197,253,0.04))"></div><div class="slide-content"><div class="slide-inner"><div class="section-tag reveal" data-editable="1" contenteditable="true" style="cursor: text;">开场</div><h2 class="reveal" data-editable="1" contenteditable="true" style="cursor: text;"><strong style="color: rgb(71, 85, 105); font-size: 13.8015px; letter-spacing: normal;">AI 在教育教学上的实践应用</strong><span style="color: rgb(71, 85, 105); font-size: 13.8015px; font-weight: 400; letter-spacing: normal;">。</span></h2><div class="two-col reveal"><div><p style="margin-bottom: 0.8rem; cursor: text;" data-editable="1" contenteditable="true">王益国&nbsp; :&nbsp; 专业领域/研究领域是<strong>人工智能和</strong><strong>教育教学评价</strong>。持续关注 AI 发展，研究并实践 AI 对各行业赋能方法。</p><p data-editable="1" contenteditable="true" style="cursor: text;">今天 <strong>90 分钟</strong>聚焦一件事：<strong>AI 在教育教学上的实践应用</strong>。</p></div><div class="def-box def-box--gold reveal"><h3 data-editable="1" contenteditable="true" style="cursor: text;">一件事的两个层面</h3><p data-editable="1" contenteditable="true" style="cursor: text;"><span class="keyword keyword--gold">减负</span> — 自动化该自动化的，简化该简化的</p><p style="margin-top: 0.4rem; cursor: text;" data-editable="1" contenteditable="true"><span class="keyword keyword--gold">提效</span> — 做的更少，效果更好<br><span style="font-size:clamp(0.7rem,1.2vw,0.95rem);color:#94a3b8;margin-top:0.3rem;display:block">看似矛盾，Agent 时代完全可行</span></p></div></div></div></div></section><section class="slide" data-slide="3"><div class="slide-deco-circle deco-1" style="background:linear-gradient(135deg,rgba(67,97,238,0.05),transparent)"></div><div class="slide-content"><div class="slide-inner"><div class="section-tag reveal" data-editable="1" contenteditable="true" style="cursor: text;">目标</div><h2 class="reveal" data-editable="1" contenteditable="true" style="cursor: text;">听完这堂课，带走三样东西</h2><div class="takeaway-grid"><div class="takeaway-card reveal"><div class="takeaway-number">01</div><h3 data-editable="1" contenteditable="true" style="cursor: text;">一份认知地图</h3><p data-editable="1" contenteditable="true" style="cursor: text;">梳理信息化到数字化到智能化发展脉络，帮助你清晰定位工作的本质，找到合适的工具与方法。</p></div><div class="takeaway-card reveal reveal-delay-1"><div class="takeaway-number">02</div><h3 data-editable="1" contenteditable="true" style="cursor: text;">一套工具组合</h3><p data-editable="1" contenteditable="true" style="cursor: text;">沿三个阶段方向，交付可直接使用的工具组合，现场演示基本用法，打开就能用。</p></div><div class="takeaway-card reveal reveal-delay-2"><div class="takeaway-number">03</div><h3 data-editable="1" contenteditable="true" style="cursor: text;">一个完整案例</h3><p data-editable="1" contenteditable="true" style="cursor: text;">通过真实案例讲解智能时代 Agent 协同工作的方法论，从理念到实践的完整闭环。</p></div></div></div></div></section><section class="slide" data-slide="4"><div class="slide-deco-circle deco-1" style="background:linear-gradient(135deg,rgba(67,97,238,0.06),transparent)"></div><div class="slide-content"><div class="slide-inner"><div class="section-tag reveal" data-editable="1" contenteditable="true" style="cursor: text;">第一部分 · 认知地图</div><h2 class="reveal" data-editable="1" contenteditable="true" style="cursor: text;">为什么我们感到 AI 焦虑？</h2><div class="two-col two-col-60-40 reveal"><div><div class="quote-box" style="margin-bottom:clamp(0.8rem,2vw,2rem)"><p data-editable="1" contenteditable="true" style="cursor: text;">焦虑不是因为信息不够，而是因为<strong>信息太多</strong>。</p></div><ul class="feature-list"><li><span class="feature-dot"></span><span data-editable="1" contenteditable="true" style="cursor: text;">今天学提示词，明天学 Agent，后天学 AI 备课——每件都值得，但加在一起，可能还在原地转圈。</span></li><li><span class="feature-dot"></span><span data-editable="1" contenteditable="true" style="cursor: text;">没有一张地图，学得越多，脑子里越散。</span></li><li><span class="feature-dot"></span><span data-editable="1" contenteditable="true" style="cursor: text;">不是因为不努力，而是没有<strong>清晰的定位和方向</strong>。</span></li></ul></div><div style="display:flex;align-items:center;justify-content:center"><div style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border-radius:20px;padding:clamp(1.5rem,3vw,2.5rem);text-align:center;border:1px solid #bfdbfe"><div style="font-size:clamp(3rem,6vw,5rem);line-height:1">🗺️</div><p style="font-weight: 700; color: rgb(67, 97, 238); margin-top: 0.5rem; cursor: text;" data-editable="1" contenteditable="true">认知地图</p><p style="font-size: clamp(0.7rem, 1.2vw, 0.95rem); cursor: text;" data-editable="1" contenteditable="true">解决定位与方向问题</p></div></div></div></div></div></section><section class="slide stage-slide" data-slide="5"><div class="stage-number">01</div><div class="slide-content"><p class="stage-label" data-editable="1" contenteditable="true" style="cursor: text;">第一阶段</p><h2 data-editable="1" contenteditable="true" style="cursor: text;">信息化</h2><p data-editable="1" contenteditable="true" style="cursor: text;">把物理实体变成电子比特——<br>从"纸上"到"网上"，信息开始流动。</p></div></section><section class="slide" data-slide="6"><div class="slide-deco-circle deco-1" style="background:linear-gradient(135deg,rgba(59,130,246,0.05),transparent)"></div><div class="slide-content"><div class="slide-inner"><div class="section-tag reveal" data-editable="1" contenteditable="true" style="cursor: text;">Stage 1 · 信息化</div><h2 class="reveal" data-editable="1" contenteditable="true" style="cursor: text;">什么是信息化？</h2><div class="def-box reveal"><h3 data-editable="1" contenteditable="true" style="cursor: text;">介质转换</h3><p data-editable="1" contenteditable="true" style="cursor: text;">把板书变成 PPT，把教案敲进 Word——物理实体变成电子比特。信息从"纸上"搬到了"网上"，但没有真正"活"起来。</p></div><div class="two-col reveal"><div><h3 style="color: rgb(67, 97, 238); margin-bottom: clamp(0.3rem, 1vw, 0.8rem); cursor: text;" data-editable="1" contenteditable="true">对应的 AI 阶段</h3><div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:clamp(0.8rem,2vw,1.5rem)"><p style="font-weight: 800; color: rgb(67, 97, 238); font-size: clamp(1.1rem, 2.5vw, 1.75rem); margin-bottom: 0.4rem; cursor: text;" data-editable="1" contenteditable="true">提示词工程</p><p style="font-size: clamp(0.7rem, 1.2vw, 0.95rem); color: rgb(148, 163, 184); margin-bottom: 0.8rem; cursor: text;" data-editable="1" contenteditable="true">Prompt Engineering</p><p style="font-size: clamp(0.7rem, 1.2vw, 0.95rem); color: rgb(71, 85, 105); cursor: text;" data-editable="1" contenteditable="true">你像发号施令的长官，AI 是执行力极强但"没有记忆"的列兵。只根据当前指令行事。</p></div></div><div><h3 style="color: rgb(67, 97, 238); margin-bottom: clamp(0.3rem, 1vw, 0.8rem); cursor: text;" data-editable="1" contenteditable="true">阶段特征</h3><ul class="feature-list"><li><span class="feature-dot"></span><span><span class="feature-label">孤立性</span> — <span data-editable="1" contenteditable="true" style="cursor: text;">你说一句话，它答一句话，说完就忘</span></span></li><li><span class="feature-dot"></span><span><span class="feature-label">精准依赖</span> — <span data-editable="1" contenteditable="true" style="cursor: text;">你的提问能力就是 AI 产出的天花板</span></span></li><li><span class="feature-dot"></span><span><span class="feature-label">无个性化</span> — <span data-editable="1" contenteditable="true" style="cursor: text;">它不了解你是谁，不懂你的教学风格</span></span></li></ul></div></div></div></div></section><section class="slide stage-slide" data-slide="7"><div class="stage-number" style="color:rgba(255,255,255,0.1)">02</div><div class="slide-content"><p class="stage-label" data-editable="1" contenteditable="true" style="cursor: text;">第二阶段</p><h2 data-editable="1" contenteditable="true" style="cursor: text;">数字化</h2><p data-editable="1" contenteditable="true" style="cursor: text;">把你的"教学生命"数字化——<br>AI 不再是工具，而是懂你的高级助教。</p></div></section><section class="slide" data-slide="8"><div class="slide-deco-circle deco-1" style="background:linear-gradient(135deg,rgba(67,97,238,0.06),transparent)"></div><div class="slide-content"><div class="slide-inner"><div class="section-tag reveal" data-editable="1" contenteditable="true" style="cursor: text;">Stage 2 · 数字化</div><h2 class="reveal" data-editable="1" contenteditable="true" style="cursor: text;">什么是数字化？</h2><div class="def-box reveal"><h3 data-editable="1" contenteditable="true" style="cursor: text;">教师外脑的延伸</h3><p data-editable="1" contenteditable="true" style="cursor: text;">你硬盘里 10 年的优质课件、数万字的教学反思——这些不再是沉睡的文件，而是打通的数据流。AI 看过你三年所有的教案，知道你喜欢用"问题链"驱动课堂。</p></div><div class="two-col reveal"><div><h3 style="color: rgb(67, 97, 238); margin-bottom: clamp(0.3rem, 1vw, 0.8rem); cursor: text;" data-editable="1" contenteditable="true">对应的 AI 阶段</h3><div style="background:rgba(67,97,238,0.06);border:1px solid rgba(67,97,238,0.2);border-radius:12px;padding:clamp(0.8rem,2vw,1.5rem)"><p style="font-weight: 800; color: rgb(67, 97, 238); font-size: clamp(1.1rem, 2.5vw, 1.75rem); margin-bottom: 0.4rem; cursor: text;" data-editable="1" contenteditable="true">上下文工程</p><p style="font-size: clamp(0.7rem, 1.2vw, 0.95rem); color: rgb(148, 163, 184); margin-bottom: 0.8rem; cursor: text;" data-editable="1" contenteditable="true">Context Engineering</p><p style="font-size: clamp(0.7rem, 1.2vw, 0.95rem); color: rgb(71, 85, 105); cursor: text;" data-editable="1" contenteditable="true">你喂给 AI 的是你的专业上下文，AI 开始"懂你"了，写出来的东西带着"你的味道"。</p></div></div><div><h3 style="color: rgb(67, 97, 238); margin-bottom: clamp(0.3rem, 1vw, 0.8rem); cursor: text;" data-editable="1" contenteditable="true">本质突破</h3><ul class="feature-list"><li><span class="feature-dot"></span><span data-editable="1" contenteditable="true" style="cursor: text;">从"使用工具"<strong>进化</strong>到"培养关系"</span></li><li><span class="feature-dot"></span><span data-editable="1" contenteditable="true" style="cursor: text;">AI 变成了你专属的、深刻理解你教学思想的高级助教</span></li><li><span class="feature-dot"></span><span data-editable="1" contenteditable="true" style="cursor: text;">不再是对机器发号施令，而是在<strong>培养一个懂你的合作伙伴</strong></span></li></ul></div></div></div></div></section><section class="slide stage-slide" data-slide="9"><div class="stage-number" style="color:rgba(255,255,255,0.08)">03</div><div class="slide-content"><p class="stage-label" data-editable="1" contenteditable="true" style="cursor: text;">第三阶段</p><h2 data-editable="1" contenteditable="true" style="cursor: text;">智能化</h2><p data-editable="1" contenteditable="true" style="cursor: text;">当 AI 有了主动感知、规划和行动的能力——<br>你从"列兵"升级为"指挥官"。</p></div></section><section class="slide" data-slide="10"><div class="slide-deco-circle deco-1" style="background:linear-gradient(135deg,rgba(217,119,6,0.05),transparent)"></div><div class="slide-content"><div class="slide-inner"><div class="section-tag section-tag--gold reveal" data-editable="1" contenteditable="true" style="cursor: text;">Stage 3 · 智能化</div><h2 class="reveal" data-editable="1" contenteditable="true" style="cursor: text;">什么是智能化？</h2><div class="def-box def-box--gold reveal"><h3 data-editable="1" contenteditable="true" style="cursor: text;">驾驭工程</h3><p data-editable="1" contenteditable="true" style="cursor: text;">让 AI 成为你的延伸，由你来掌控方向。它不再被动地等你发指令——而是有主动感知、规划和行动的能力。</p></div><div class="two-col reveal"><div><h3 style="color: rgb(217, 119, 6); margin-bottom: clamp(0.3rem, 1vw, 0.8rem); cursor: text;" data-editable="1" contenteditable="true">对应的 AI 阶段</h3><div style="background:#fffbeb;border:1px solid #fcd34d;border-radius:12px;padding:clamp(0.8rem,2vw,1.5rem)"><p style="font-weight: 800; color: rgb(217, 119, 6); font-size: clamp(1.1rem, 2.5vw, 1.75rem); margin-bottom: 0.4rem; cursor: text;" data-editable="1" contenteditable="true">驾驭工程</p><p style="font-size: clamp(0.7rem, 1.2vw, 0.95rem); color: rgb(146, 64, 14); margin-bottom: 0.8rem; cursor: text;" data-editable="1" contenteditable="true">Harness Engineering</p><p style="font-size: clamp(0.7rem, 1.2vw, 0.95rem); color: rgb(120, 53, 15); cursor: text;" data-editable="1" contenteditable="true">你只需输入一个宏观"意图"，剩下的苦活累活由驾驭者去办。AI 自动拆解任务、检索信息、生成方案。</p></div></div><div><h3 style="color: rgb(217, 119, 6); margin-bottom: clamp(0.3rem, 1vw, 0.8rem); cursor: text;" data-editable="1" contenteditable="true">教师的角色转变</h3><ul class="feature-list"><li><span class="feature-dot feature-dot--gold"></span><span><span class="feature-label" style="color:#92400e">教育架构师</span> — <span data-editable="1" contenteditable="true" style="cursor: text;">设计学习场域而非执行者</span></span></li><li><span class="feature-dot feature-dot--gold"></span><span><span class="feature-label" style="color:#92400e">项目大总管</span> — <span data-editable="1" contenteditable="true" style="cursor: text;">把野生的计划任务交给 AI</span></span></li><li><span class="feature-dot feature-dot--gold"></span><span><span class="feature-label" style="color:#92400e">决策层</span> — <span data-editable="1" contenteditable="true" style="cursor: text;">从执行层上升到决策层，抓住大方向</span></span></li></ul></div></div></div></div></section><section class="slide" data-slide="11"><div class="slide-deco-circle deco-1" style="background:linear-gradient(135deg,rgba(67,97,238,0.05),transparent)"></div><div class="slide-content"><div class="slide-inner"><div class="section-tag reveal" data-editable="1" contenteditable="true" style="cursor: text;">核心等式</div><h2 class="reveal" data-editable="1" contenteditable="true" style="cursor: text;">三阶段核心关键词对比</h2><div class="comparison-grid"><div class="comparison-card comparison-card--info reveal"><div class="comparison-keyword">载</div><span class="comparison-stage">信息化</span><h3 data-editable="1" contenteditable="true" style="cursor: text;">提示词工程</h3><p data-editable="1" contenteditable="true" style="cursor: text;">你发号施令，AI 机械执行。执行力极强但"没有记忆"的列兵。</p><span class="comparison-role" data-editable="1" contenteditable="true" style="cursor: text;">知识搬运工</span></div><div class="comparison-card comparison-card--digital reveal reveal-delay-1"><div class="comparison-keyword">连</div><span class="comparison-stage">数字化</span><h3 data-editable="1" contenteditable="true" style="cursor: text;">上下文工程</h3><p data-editable="1" contenteditable="true" style="cursor: text;">你喂给 AI 上下文，AI 开始"懂你"。带着你的味道输出。</p><span class="comparison-role" data-editable="1" contenteditable="true" style="cursor: text;">知识架构师</span></div><div class="comparison-card comparison-card--ai reveal reveal-delay-2"><div class="comparison-keyword">代</div><span class="comparison-stage">智能化</span><h3 data-editable="1" contenteditable="true" style="cursor: text;">驾驭工程</h3><p data-editable="1" contenteditable="true" style="cursor: text;">你输入意图，AI 全程自主完成。主动感知、规划和行动。</p><span class="comparison-role" data-editable="1" contenteditable="true" style="cursor: text;">教学总导演</span></div></div></div></div></section><section class="slide" data-slide="12"><div class="slide-deco-circle deco-1" style="background:linear-gradient(135deg,rgba(67,97,238,0.06),transparent)"></div><div class="slide-content"><div class="slide-inner"><div class="section-tag reveal" data-editable="1" contenteditable="true" style="cursor: text;">小结</div><h2 class="reveal" data-editable="1" contenteditable="true" style="cursor: text;">不是 AI 越来越聪明了——而是你给它的"上下文"越来越丰富了</h2><div class="memory-grid"><div class="memory-card memory-card--light reveal"><h4 data-editable="1" contenteditable="true" style="cursor: text;">信息化</h4><p data-editable="1" contenteditable="true" style="cursor: text;">只有模型训练时的那份死知识，用完就没了。</p></div><div class="memory-card memory-card--mid reveal reveal-delay-1"><h4 data-editable="1" contenteditable="true" style="cursor: text;">数字化</h4><p data-editable="1" contenteditable="true" style="cursor: text;">多了你的专属资料库，RAG 帮你检索相关内容。</p></div><div class="memory-card memory-card--gold reveal reveal-delay-2"><h4 data-editable="1" contenteditable="true" style="cursor: text;">智能化</h4><p data-editable="1" contenteditable="true" style="cursor: text;">RAG + 你的历史记录 + 你的风格偏好，全部沉淀下来，越用越懂你。</p></div></div></div></div></section><section class="slide" data-slide="13"><div class="slide-deco-circle deco-1" style="background:linear-gradient(135deg,rgba(67,97,238,0.05),transparent)"></div><div class="slide-content"><div class="slide-inner"><div class="section-tag reveal" data-editable="1" contenteditable="true" style="cursor: text;">第二部分 · 工具实践</div><h2 class="reveal" data-editable="1" contenteditable="true" style="cursor: text;">什么是信息化工具？</h2><div class="def-box reveal"><h3 data-editable="1" contenteditable="true" style="cursor: text;">教学资源的"物理迁移"</h3><p data-editable="1" contenteditable="true" style="cursor: text;">本质：把物理形态的教案、课本、卷子，搬到电脑和云端。解决"书包变轻了，搜索变快了"的问题。</p></div><div class="two-col reveal"><div><div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;padding:clamp(0.8rem,2vw,1.5rem);margin-bottom:clamp(0.5rem,1vw,0.8rem)"><h4 style="color: rgb(3, 105, 161); font-size: clamp(0.85rem, 1.5vw, 1.15rem); margin-bottom: 0.3rem; cursor: text;" data-editable="1" contenteditable="true">迁移工具</h4><p style="font-size: clamp(0.7rem, 1.2vw, 0.95rem); cursor: text;" data-editable="1" contenteditable="true">OCR扫描纸质教案、手机拍题录入错题等。</p></div></div><div><ul class="feature-list"><li><span class="feature-dot"></span><span><strong data-editable="1" contenteditable="true" style="cursor: text;">检索工具</strong> — <span data-editable="1" contenteditable="true" style="cursor: text;">Listary / Everything，在数千个教学素材中瞬间定位文件</span></span></li><li><span class="feature-dot"></span><span><strong data-editable="1" contenteditable="true" style="cursor: text;">内容检索</strong> — <span data-editable="1" contenteditable="true" style="cursor: text;">AnyTxt 等，忘记文件名？直接搜内容里的关键词</span></span></li></ul></div></div></div></div></section><section class="slide" data-slide="14"><div class="slide-deco-circle deco-1" style="background:linear-gradient(135deg,rgba(67,97,238,0.06),transparent)"></div><div class="slide-content"><div class="slide-inner"><div class="section-tag reveal" data-editable="1" contenteditable="true" style="cursor: text;">第二部分 · 工具实践</div><h2 class="reveal" data-editable="1" contenteditable="true" style="cursor: text;">数字化的本质是什么？</h2><div class="def-box reveal"><h3 data-editable="1" contenteditable="true" style="cursor: text;">建立属于老师个人的"教学知识库"</h3><p data-editable="1" contenteditable="true" style="cursor: text;">把教师几十年的教学经验，对某个知识点的独特理解、以及表达风格，全部注入到一个"数字大脑"中。</p></div><div class="quote-box reveal"><p data-editable="1" contenteditable="true" style="cursor: text;">最终目标：基于这个库，当你面临新的授课任务时，AI 不再是给你一个通用的教案，而是给出一个"像你、懂你、带有你教学风格"的个性化方案。</p></div></div></div></section><section class="slide" data-slide="15"><div class="slide-deco-circle deco-1" style="background:linear-gradient(135deg,rgba(217,119,6,0.05),transparent)"></div><div class="slide-content"><div class="slide-inner"><div class="section-tag section-tag--gold reveal" data-editable="1" contenteditable="true" style="cursor: text;">第三部分 · 智能化工具</div><h2 class="reveal" data-editable="1" contenteditable="true" style="cursor: text;">Agent 智能体：网易有道 Lobster</h2><div class="tools-grid"><div class="tool-card reveal"><div class="tool-icon">💡</div><h4 data-editable="1" contenteditable="true" style="cursor: text;">提示词工程</h4><p data-editable="1" contenteditable="true" style="cursor: text;">指令化，往工具中输入命令</p></div><div class="tool-card reveal reveal-delay-1"><div class="tool-icon">📚</div><h4 data-editable="1" contenteditable="true" style="cursor: text;">知识库 RAG</h4><p data-editable="1" contenteditable="true" style="cursor: text;">把专属知识注入向量数据库</p></div><div class="tool-card reveal reveal-delay-2"><div class="tool-icon">🤖</div><h4 data-editable="1" contenteditable="true" style="cursor: text;">Agent 智能体</h4><p data-editable="1" contenteditable="true" style="cursor: text;">自主行动，从指令到完成全自动</p></div></div><div class="def-box def-box--gold reveal" style="margin-top:clamp(0.8rem,2vw,2rem)"><h3 data-editable="1" contenteditable="true" style="cursor: text;">具体案例："校园碳中和"跨学科PBL</h3><p data-editable="1" contenteditable="true" style="cursor: text;">你只需输入意图——"对象是初二学生，练习时间16周，练习者不能超过2小时"——Agent 自动完成整个跨学科项目规划。</p></div></div></div></section><section class="slide" data-slide="16"><div class="slide-deco-circle deco-1" style="background:linear-gradient(135deg,rgba(67,97,238,0.06),transparent)"></div><div class="slide-content"><div class="slide-inner"><div class="section-tag reveal" data-editable="1" contenteditable="true" style="cursor: text;">底层逻辑</div><h2 class="reveal" data-editable="1" contenteditable="true" style="cursor: text;">决定教师角色重填的核心问题</h2><div class="logic-row reveal"><div class="logic-label"><h4 data-editable="1" contenteditable="true" style="cursor: text;">信息化</h4></div><div class="logic-content"><h4 data-editable="1" contenteditable="true" style="cursor: text;">介质转换与资源获取的平权</h4><p data-editable="1" contenteditable="true" style="cursor: text;">处于这一阶段，备课的本质并没有改变，依然是高度依赖教师个人经验的单向输出。改变的是工具和效率。</p></div></div><div class="logic-row reveal"><div class="logic-label"><h4 data-editable="1" contenteditable="true" style="cursor: text;">数字化</h4></div><div class="logic-content"><h4 data-editable="1" contenteditable="true" style="cursor: text;">从"经验主义"向"实证主义"的范式转移</h4><p data-editable="1" contenteditable="true" style="cursor: text;">数字化的核心是业务流程的数据化和连接。备课的底层逻辑变了：从"备教材"转向了真正的"备学生"。</p></div></div><div class="logic-row logic-row--gold reveal"><div class="logic-label"><h4 data-editable="1" contenteditable="true" style="cursor: text;">智能化</h4></div><div class="logic-content"><h4 data-editable="1" contenteditable="true" style="cursor: text;">算力对脑力的解放，从"内容生产者"到"体验设计师"的跃升</h4><p data-editable="1" contenteditable="true" style="cursor: text;">教师备课的核心精力被强制转移到"不可替代属性"上——情感连接、价值观引导、以及复杂课堂情境的应对策略。</p></div></div></div></div></section><section class="slide" data-slide="17"><div class="slide-deco-circle deco-1" style="background:linear-gradient(135deg,rgba(67,97,238,0.05),transparent)"></div><div class="slide-content"><div class="slide-inner"><div class="section-tag reveal" data-editable="1" contenteditable="true" style="cursor: text;">总结</div><h2 class="reveal" data-editable="1" contenteditable="true" style="cursor: text;">三阶段的核心跨越</h2><div class="summary-grid"><div class="summary-card summary-card--blue reveal"><h4 data-editable="1" contenteditable="true" style="cursor: text;">信息化</h4><p data-editable="1" contenteditable="true" style="cursor: text;">让备课变得<strong>更轻松</strong></p><p style="font-size: clamp(0.7rem, 1.2vw, 0.95rem); color: rgb(71, 85, 105); cursor: text;" data-editable="1" contenteditable="true">改变了工具</p></div><div class="summary-card summary-card--purple reveal reveal-delay-1"><h4 data-editable="1" contenteditable="true" style="cursor: text;">数字化</h4><p data-editable="1" contenteditable="true" style="cursor: text;">让备课变得<strong>更精准</strong></p><p style="font-size: clamp(0.7rem, 1.2vw, 0.95rem); color: rgb(71, 85, 105); cursor: text;" data-editable="1" contenteditable="true">改变了依据</p></div><div class="summary-card summary-card--gold reveal reveal-delay-2"><h4 data-editable="1" contenteditable="true" style="cursor: text;">智能化</h4><p data-editable="1" contenteditable="true" style="cursor: text;">让备课变得<strong>更具创造性</strong></p><p style="font-size: clamp(0.7rem, 1.2vw, 0.95rem); color: rgb(71, 85, 105); cursor: text;" data-editable="1" contenteditable="true">改变了主体，人机协同</p></div></div></div></div></section><section class="slide" data-slide="18"><div class="slide-deco-circle deco-1" style="background:linear-gradient(135deg,rgba(67,97,238,0.06),transparent)"></div><div class="slide-content"><div class="slide-inner"><div class="section-tag reveal" data-editable="1" contenteditable="true" style="cursor: text;">反思</div><h2 class="reveal" data-editable="1" contenteditable="true" style="cursor: text;">请大家想一想：</h2><div class="quote-box reveal"><p data-editable="1" contenteditable="true" style="cursor: text;">你当前的核心工作，是使用什么方法来实现的？</p></div><div class="two-col reveal" style="margin-top:clamp(0.8rem,2vw,2rem)"><div><p style="font-size: clamp(0.85rem, 1.5vw, 1.15rem); color: rgb(71, 85, 105); cursor: text;" data-editable="1" contenteditable="true"><strong>信息化</strong>时代：你在"使用"一个工具</p><p style="font-size: clamp(0.85rem, 1.5vw, 1.15rem); color: rgb(71, 85, 105); margin-top: 0.5rem; cursor: text;" data-editable="1" contenteditable="true"><strong>数字化</strong>时代：你在"培养"一个专属助教</p><p style="font-size: clamp(0.85rem, 1.5vw, 1.15rem); color: rgb(217, 119, 6); margin-top: 0.5rem; cursor: text;" data-editable="1" contenteditable="true"><strong>智能化</strong>时代：你在"领导"一个专家团队</p></div><div class="def-box reveal"><h3 data-editable="1" contenteditable="true" style="cursor: text;">不同阶段，选择不同工具</h3><p data-editable="1" contenteditable="true" style="cursor: text;">了解自己所处的阶段，才能明确谁是你的"驾驭者"。</p></div></div></div></div></section><section class="slide visible" data-slide="19"><div class="slide-deco-circle deco-1" style="background:linear-gradient(135deg,rgba(217,119,6,0.05),transparent)"></div><div class="slide-content"><div class="slide-inner"><div class="section-tag section-tag--gold reveal" data-editable="1" contenteditable="true" style="cursor: text;">核心观点</div><h2 class="reveal" data-editable="1" contenteditable="true" style="cursor: text;">从"指令"到"驾驭"的无限化：</h2><div class="def-box def-box--gold reveal"><h3 data-editable="1" contenteditable="true" style="cursor: text;">三个重要转变</h3><p data-editable="1" contenteditable="true" style="cursor: text;"><strong>信息化 + 提示词工程</strong> = 我们在"使用"工具</p><p style="margin-top: 0.5rem; cursor: text;" data-editable="1" contenteditable="true"><strong>数字化 + 上下文工程</strong> = 我们在"培养"专属助教</p><p style="margin-top: 0.5rem; cursor: text;" data-editable="1" contenteditable="true"><strong>智能化 + 驾驭工程</strong> = 我们在"领导"一个专家团队</p></div></div></div></section><section class="slide slide--dark ending-slide" data-slide="20"><div class="title-grid"></div><div class="slide-deco-circle deco-1"></div><div class="slide-deco-circle deco-2"></div><div class="slide-content"><h1 class="reveal" data-editable="1" contenteditable="true" style="cursor: text;">谢谢大家</h1><p class="ending-sub reveal" data-editable="1" contenteditable="true" style="cursor: text;">带走三样东西：认知地图、工具组合、完整案例</p><p class="title-author reveal" style="margin-top: clamp(1.2rem, 3vw, 3rem); cursor: text;" data-editable="1" contenteditable="true">王益国 · 中国海洋大学</p></div></section>
+<script>
+(function(){
+    var editor = { isActive: false, saveKey: 'ai-edu-v1' };
+
+    function updateEditUI() {
+        var btn = document.getElementById('editToggle');
+        var editables = document.querySelectorAll('[data-editable]');
+        if (btn && btn.classList.contains('active')) {
+            btn.textContent = '\u270f \u7f16\u8f91\u4e2d';
+            btn.style.background = '#16a34a';
+            editables.forEach(function(el){ el.contentEditable = 'true'; el.style.cursor = 'text'; });
+        } else {
+            if (btn) { btn.textContent = '\u270f \u5f00\u59cb\u7f16\u8f91'; btn.style.background = '#4361ee'; }
+            editables.forEach(function(el){
+                el.contentEditable = 'inherit';
+                el.style.cursor = '';
+            });
+        }
+    }
+
+    function exportHTML() {
+        var src = document.documentElement.outerHTML;
+        var blob = new Blob([src], {type:'text/html'});
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'AI\u8d4b\u80fd\u6559\u80b2\u5b66\u4e60_\u53ef\u7f16\u8f91\u7248.html';
+        a.click();
+    }
+
+    function hideBtn() {
+        var btn = document.getElementById('editToggle');
+        if (btn && !editor.isActive) { btn.classList.remove('show'); }
+    }
+
+    document.getElementById('editToggle').addEventListener('click', function() {
+        editor.isActive = !editor.isActive;
+        this.classList.toggle('active', editor.isActive);
+        this.classList.toggle('show', true);
+        updateEditUI();
+    });
+
+    var hotzone = document.querySelector('.edit-hotzone');
+    var btn = document.getElementById('editToggle');
+    var hideTimer = null;
+
+    hotzone.addEventListener('mouseenter', function() {
+        clearTimeout(hideTimer);
+        if (btn) { btn.classList.add('show'); btn.classList.add('edit-hotzone-hover'); }
+    });
+    hotzone.addEventListener('mouseleave', function() {
+        hideTimer = setTimeout(function() {
+            if (!editor.isActive && btn) { btn.classList.remove('show'); btn.classList.remove('edit-hotzone-hover'); }
+        }, 400);
+    });
+    hotzone.addEventListener('click', function() {
+        editor.isActive = !editor.isActive;
+        if (btn) { btn.classList.toggle('active', editor.isActive); btn.classList.add('show'); }
+        updateEditUI();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if ((e.key === 'e' || e.key === 'E') && !e.target.getAttribute('contenteditable')) {
+            editor.isActive = !editor.isActive;
+            if (btn) { btn.classList.toggle('active', editor.isActive); btn.classList.add('show'); }
+            updateEditUI();
+        }
+        if (e.ctrlKey && e.key === 's') {
+            e.preventDefault();
+            if (btn) {
+                btn.textContent = '\u5df2\u4fdd\u5b58!';
+                setTimeout(function() { if (btn && editor.isActive) { btn.textContent = '\u4fdd\u5b58 (Ctrl+S)'; } }, 1500);
+            }
+        }
+    });
+
+    document.getElementById('exportBtn').addEventListener('click', exportHTML);
+    updateEditUI();
+
+    // --- Slide navigation ---
+    var slides = document.querySelectorAll('.slide');
+    var total = slides.length;
+    var cur = 0;
+
+    function setActive(idx) {
+        slides.forEach(function(s, i) { s.classList.toggle('visible', i === idx); });
+        document.querySelectorAll('.nav-dot').forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+        var pb = document.getElementById('progressBar');
+        if (pb) { pb.style.width = ((idx + 1) / total * 100) + '%'; }
+        var sc = document.getElementById('slideCounter');
+        if (sc) { sc.textContent = (idx + 1) + ' / ' + total; }
+        cur = idx;
+    }
+
+    var nav = document.getElementById('navDots');
+    slides.forEach(function(_, i) {
+        var dot = document.createElement('div');
+        dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+        dot.onclick = function() { slides[i].scrollIntoView({ behavior: 'smooth' }); };
+        nav.appendChild(dot);
+    });
+
+    var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (e.isIntersecting) {
+                var idx = Array.from(slides).indexOf(e.target);
+                setActive(idx);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    slides.forEach(function(s) { obs.observe(s); });
+    setTimeout(function() { slides[0].classList.add('visible'); }, 100);
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
+            e.preventDefault();
+            slides[Math.min(cur + 1, total - 1)].scrollIntoView({ behavior: 'smooth' });
+        } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+            e.preventDefault();
+            slides[Math.max(cur - 1, 0)].scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+
+    window.addEventListener('scroll', function() {
+        var pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+        var pb = document.getElementById('progressBar');
+        if (pb) { pb.style.width = pct + '%'; }
+    }, { passive: true });
+
+    setActive(0);
+})();
+</script>
+
+
+</body></html>

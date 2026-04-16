@@ -1,696 +1,312 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>明德双语学校 — AI家教理念</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --parchment:   #f5f4ed;
-      --ivory:       #faf9f5;
-      --white:       #ffffff;
-      --sand:        #e8e6dc;
-      --border-cream:#f0eee6;
-      --border-warm: #e8e6dc;
-      --ring-warm:   #d1cfc5;
-      --near-black:  #141413;
-      --charcoal:    #4d4c48;
-      --olive:       #5e5d59;
-      --stone:       #87867f;
-      --warm-silver: #b0aea5;
-      --terracotta:  #c96442;
-      --coral:       #d97757;
-      --font:        'Inter', system-ui, -apple-system, sans-serif;
-      --mono:        'JetBrains Mono', ui-monospace, monospace;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font);
-      background: var(--parchment);
-      color: var(--near-black);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      padding: 0 48px;
-      background: rgba(245,244,237,0.88);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-warm);
-    }
-    nav .logo {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--near-black);
-      letter-spacing: -0.24px;
-    }
-    nav .logo span { color: var(--terracotta); }
-    nav .nav-center {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-    }
-    nav .nav-pill {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--olive);
-      text-decoration: none;
-      padding: 5px 16px;
-      border-radius: 9999px;
-      transition: color 0.15s, background 0.15s;
-      letter-spacing: -0.1px;
-    }
-    nav .nav-pill:hover,
-    nav .nav-pill.active {
-      color: var(--near-black);
-      background: var(--sand);
-    }
-    nav .nav-right {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .badge-date {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--stone);
-      background: var(--sand);
-      border: 1px solid var(--border-warm);
-      padding: 4px 12px;
-      border-radius: 9999px;
-      letter-spacing: 0.02em;
-    }
-    .btn-back {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--charcoal);
-      text-decoration: none;
-      padding: 6px 14px;
-      border-radius: 8px;
-      border: 1px solid var(--border-warm);
-      transition: background 0.15s, color 0.15s;
-    }
-    .btn-back:hover { background: var(--sand); color: var(--near-black); }
-    .btn-back svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 1.5; }
-
-    /* ── HERO (Section 1) ── */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 100px 48px 80px;
-      position: relative;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: 48px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1px;
-      height: 48px;
-      background: linear-gradient(to bottom, var(--charcoal), transparent);
-      opacity: 0.3;
-    }
-    .hero-overline {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--terracotta);
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-    }
-    .hero h1 {
-      font-size: clamp(40px, 7vw, 88px);
-      font-weight: 700;
-      line-height: 1.00;
-      letter-spacing: -2.5px;
-      color: var(--near-black);
-      margin-bottom: 24px;
-      max-width: 900px;
-    }
-    .hero h1 .accent { color: var(--terracotta); }
-    .hero-sub {
-      font-size: clamp(16px, 2vw, 22px);
-      font-weight: 400;
-      color: var(--olive);
-      max-width: 640px;
-      line-height: 1.55;
-      margin-bottom: 52px;
-      letter-spacing: -0.2px;
-    }
-    .hero-cta-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .btn-primary {
-      background: var(--terracotta);
-      color: var(--ivory);
-      font-size: 14px;
-      font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.15s, transform 0.15s;
-      letter-spacing: -0.1px;
-    }
-    .btn-primary:hover { background: #b85a3a; transform: translateY(-1px); }
-    .btn-secondary {
-      background: var(--ivory);
-      color: var(--charcoal);
-      font-size: 14px;
-      font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 10px;
-      border: 1px solid var(--border-warm);
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.15s;
-      letter-spacing: -0.1px;
-    }
-    .btn-secondary:hover { background: var(--sand); }
-
-    /* ── SECTION DIVIDER ── */
-    .section-divider {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 48px;
-    }
-    .section-divider::before,
-    .section-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border-warm);
-    }
-    .section-divider .label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--stone);
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    /* ── SECTION HEADER ── */
-    .section-header {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 100px 48px 56px;
-    }
-    .section-eyebrow {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--terracotta);
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .section-title {
-      font-size: clamp(28px, 4vw, 48px);
-      font-weight: 700;
-      letter-spacing: -1.5px;
-      color: var(--near-black);
-      line-height: 1.05;
-      margin-bottom: 16px;
-    }
-    .section-desc {
-      font-size: 16px;
-      color: var(--olive);
-      max-width: 600px;
-      line-height: 1.65;
-    }
-
-    /* ── PPT GRID (Section 2) ── */
-    .ppt-section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 48px 100px;
-    }
-    .ppt-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
-    }
-    .ppt-card {
-      background: var(--ivory);
-      border: 1px solid var(--border-cream);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
-      box-shadow: rgba(0,0,0,0.04) 0 4px 24px;
-    }
-    .ppt-card:hover {
-      box-shadow: rgba(0,0,0,0.08) 0 8px 40px;
-      border-color: var(--border-warm);
-      transform: translateY(-2px);
-    }
-    .ppt-preview {
-      height: 180px;
-      background: var(--sand);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .ppt-preview-pattern {
-      position: absolute;
-      inset: 0;
-      opacity: 0.4;
-      background:
-        linear-gradient(135deg, var(--border-warm) 25%, transparent 25%),
-        linear-gradient(225deg, var(--border-warm) 25%, transparent 25%),
-        linear-gradient(45deg,  var(--border-warm) 25%, transparent 25%),
-        linear-gradient(315deg, var(--border-warm) 25%, transparent 25%);
-      background-size: 32px 32px;
-      background-position: 0 0, 16px 0, 16px -16px, 0 16px;
-    }
-    .ppt-preview-icon {
-      position: relative;
-      z-index: 1;
-      width: 64px;
-      height: 64px;
-      background: var(--white);
-      border: 1px solid var(--border-warm);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-    }
-    .ppt-preview-icon svg { width: 28px; height: 28px; stroke: var(--terracotta); fill: none; stroke-width: 1.5; }
-    .ppt-badge {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--terracotta);
-      background: rgba(255,255,255,0.92);
-      border: 1px solid var(--border-warm);
-      padding: 3px 10px;
-      border-radius: 9999px;
-      letter-spacing: 0.04em;
-    }
-    .ppt-body { padding: 22px 24px; }
-    .ppt-module {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--stone);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 8px;
-    }
-    .ppt-title {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--near-black);
-      margin-bottom: 8px;
-      letter-spacing: -0.3px;
-      line-height: 1.3;
-    }
-    .ppt-desc {
-      font-size: 13px;
-      color: var(--olive);
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-    .ppt-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 14px;
-      border-top: 1px solid var(--border-cream);
-    }
-    .ppt-meta {
-      font-size: 11px;
-      color: var(--stone);
-      font-family: var(--mono);
-    }
-    .ppt-action {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--terracotta);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      transition: gap 0.15s;
-    }
-    .ppt-action:hover { gap: 8px; }
-    .ppt-action svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
-
-    /* ── REFERENCES (Section 3) ── */
-    .refs-section {
-      background: var(--near-black);
-      padding: 0;
-    }
-    .refs-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 100px 48px;
-    }
-    .refs-inner .section-eyebrow { color: var(--coral); }
-    .refs-inner .section-title { color: var(--ivory); }
-    .refs-inner .section-desc { color: var(--warm-silver); margin-bottom: 64px; }
-    .refs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-    }
-    .ref-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
-      padding: 24px;
-      text-decoration: none;
-      transition: background 0.2s, border-color 0.2s;
-      display: block;
-    }
-    .ref-card:hover {
-      background: rgba(255,255,255,0.07);
-      border-color: rgba(255,255,255,0.14);
-    }
-    .ref-category {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--coral);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 10px;
-    }
-    .ref-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--ivory);
-      margin-bottom: 6px;
-      letter-spacing: -0.15px;
-    }
-    .ref-desc {
-      font-size: 12px;
-      color: var(--warm-silver);
-      line-height: 1.55;
-    }
-    .ref-arrow {
-      margin-top: 14px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--stone);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      transition: color 0.15s, gap 0.15s;
-    }
-    .ref-card:hover .ref-arrow { color: var(--coral); gap: 8px; }
-    .ref-arrow svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--near-black);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 40px 48px;
-      text-align: center;
-    }
-    footer p { font-size: 12px; color: var(--warm-silver); letter-spacing: 0.02em; }
-    footer a { color: var(--stone); text-decoration: none; }
-    footer a:hover { color: var(--ivory); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      nav { padding: 0 24px; }
-      nav .nav-center { display: none; }
-      .hero { padding: 80px 24px 60px; }
-      .section-header { padding: 72px 24px 40px; }
-      .ppt-section { padding: 0 24px 72px; }
-      .refs-inner { padding: 72px 24px; }
-      footer { padding: 32px 24px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 赋能教育教学 — 课程主页</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--white:#ffffff;--blue-50:#eff6ff;--blue-100:#dbeafe;--blue-200:#bfdbfe;--blue-300:#93c5fd;--blue-400:#60a5fa;--blue-500:#3b82f6;--blue-600:#2563eb;--blue-700:#1d4ed8;--blue-800:#1e40af;--blue-900:#1e3a8a;--blue-accent:#4361ee;--blue-accent-dark:#3450d1;--text:#1e293b;--text-muted:#64748b;--border:rgba(59,130,246,0.12);--border-strong:rgba(59,130,246,0.22);--shadow:rgba(67,97,238,0.08);--shadow-strong:rgba(67,97,238,0.14);--green:#10b981;--green-bg:rgba(16,185,129,0.08);--green-border:rgba(16,185,129,0.2);--bg:#f0f4ff;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Manrope,'Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:0 1.5rem 4rem}
+.navbar{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 0 1rem;border-bottom:1px solid var(--border)}
+.nav-brand{font-size:1rem;font-weight:800;color:var(--blue-800);letter-spacing:-0.03em}
+.nav-brand span{color:var(--blue-400);font-weight:400;margin-left:.3rem;font-size:.85rem}
+.nav-links{display:flex;gap:.3rem}
+.nav-links a{padding:.35rem .85rem;border-radius:8px;font-size:.72rem;font-weight:600;text-decoration:none;transition:all .2s;color:var(--text-muted);border:1px solid transparent}
+.nav-links a:hover{background:var(--blue-50);color:var(--blue-700);border-color:var(--border)}
+.main-card{max-width:1200px;margin:2rem auto 0;background:var(--white);border:1px solid var(--border-strong);border-radius:24px;overflow:hidden;box-shadow:0 4px 24px var(--shadow)}
+.hero{background:linear-gradient(135deg,var(--blue-900) 0%,var(--blue-700) 50%,var(--blue-600) 100%);padding:3rem 2.5rem 2.5rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-1px;left:-1px;right:-1px;height:60px;background:linear-gradient(to bottom,transparent,rgba(30,64,175,0.25))}
+.hero-eyebrow{font-size:.65rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--blue-300);margin-bottom:.7rem;position:relative;z-index:1}
+.hero-title{font-size:clamp(1.8rem,4vw,3rem);font-weight:900;color:#fff;letter-spacing:-0.04em;line-height:1.15;margin-bottom:.7rem;position:relative;z-index:1}
+.hero-title em{font-style:normal;color:var(--blue-200)}
+.hero-subtitle{font-size:.88rem;color:var(--blue-200);line-height:1.7;max-width:600px;font-weight:400;position:relative;z-index:1}
+.hero-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.2rem;position:relative;z-index:1}
+.hero-tag{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:#fff;padding:.2rem .7rem;border-radius:100px;font-size:.68rem;font-weight:600}
+.hero-badge{position:absolute;right:2.5rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:1rem 1.4rem;text-align:center;z-index:1}
+.hero-badge-num{font-family:Manrope,sans-serif;font-size:2.5rem;font-weight:900;color:#fff;line-height:1;letter-spacing:-0.04em}
+.hero-badge-label{font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-300);margin-top:.2rem}
+.intro-strip{background:var(--blue-50);border-bottom:1px solid var(--border);padding:1rem 2.5rem;display:flex;align-items:center;gap:1rem}
+.intro-icon{font-size:1.3rem;flex-shrink:0}
+.intro-text{font-size:.78rem;color:var(--blue-800);line-height:1.7}
+.intro-text strong{font-weight:700}
+.card-body{padding:2rem 2.5rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2rem}
+.section-header{grid-column:1/-1;display:flex;align-items:center;gap:.8rem;margin-bottom:.3rem}
+.section-num{font-family:Manrope,sans-serif;font-size:1.5rem;font-weight:900;color:var(--blue-100);letter-spacing:-0.04em;line-height:1}
+.section-title{font-size:1.05rem;font-weight:800;color:var(--blue-900);letter-spacing:-0.02em}
+.section-line{flex:1;height:1px;background:linear-gradient(90deg,var(--blue-200),transparent);margin-left:.5rem}
+.info-card{background:var(--blue-50);border:1px solid var(--border);border-radius:16px;padding:1.2rem 1.3rem;position:relative;overflow:hidden;text-decoration:none;display:block;transition:all .25s}
+.info-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0;transition:height .25s}
+.info-card:hover{border-color:var(--blue-accent);box-shadow:0 6px 24px var(--shadow-strong);transform:translateY(-3px)}
+.info-card:hover::before{height:5px}
+.info-card--blue::before{background:linear-gradient(90deg,var(--blue-400),var(--blue-600))}
+.info-card--accent::before{background:linear-gradient(90deg,var(--blue-accent),var(--blue-500))}
+.info-card--dark::before{background:linear-gradient(90deg,var(--blue-600),var(--blue-800))}
+.info-card-label{font-size:.58rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.4rem;display:flex;align-items:center;gap:.35rem}
+.info-card-label--blue{color:var(--blue-500)}
+.info-card-label--accent{color:var(--blue-accent)}
+.info-card-label--dark{color:var(--blue-800)}
+.info-card-label::before{content:'';display:block;width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.info-card-label--blue::before{background:var(--blue-500)}
+.info-card-label--accent::before{background:var(--blue-accent)}
+.info-card-label--dark::before{background:var(--blue-700)}
+.info-card-title{font-size:.95rem;font-weight:800;color:var(--blue-900);letter-spacing:-0.02em;margin-bottom:.4rem;line-height:1.3}
+.info-card-desc{font-size:.73rem;color:var(--text-muted);line-height:1.65;margin-bottom:.7rem;font-weight:400}
+.info-card-meta{display:flex;flex-wrap:wrap;gap:.3rem}
+.info-chip{background:var(--white);border:1px solid var(--border);color:var(--text-muted);padding:.15rem .5rem;border-radius:6px;font-size:.62rem;font-weight:600}
+.info-chip--blue{background:var(--blue-100);color:var(--blue-700);border-color:var(--blue-200)}
+.info-chip--accent{background:rgba(67,97,238,0.08);color:var(--blue-accent-dark);border-color:rgba(67,97,238,0.2)}
+.info-card-arrow{position:absolute;bottom:1rem;right:1rem;font-size:.85rem;color:var(--blue-400);transition:transform .2s}
+.info-card:hover .info-card-arrow{transform:translateX(3px)}
+.info-card--wide{grid-column:span 2}
+.info-card--full{grid-column:1/-1}
+.stats-row{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:.5rem}
+.stat-card{background:linear-gradient(135deg,var(--blue-700) 0%,var(--blue-800) 100%);border-radius:14px;padding:1.2rem 1.3rem;text-align:center;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:20px 20px;pointer-events:none}
+.stat-num{font-family:Manrope,sans-serif;font-size:2.2rem;font-weight:900;color:#fff;line-height:1;letter-spacing:-0.04em;margin-bottom:.2rem;position:relative;z-index:1}
+.stat-label{font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue-300);position:relative;z-index:1}
+.divider{grid-column:1/-1;height:1px;background:linear-gradient(90deg,transparent,var(--blue-200),transparent);margin:.3rem 0}
+.stage-row{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+.stage-mini{background:var(--white);border:1px solid var(--border-strong);border-radius:16px;padding:1.1rem 1.2rem;text-decoration:none;display:block;position:relative;overflow:hidden;transition:all .25s;box-shadow:0 2px 10px var(--shadow)}
+.stage-mini::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0}
+.stage-mini:nth-child(1)::before{background:linear-gradient(90deg,var(--blue-400),var(--blue-600))}
+.stage-mini:nth-child(2)::before{background:linear-gradient(90deg,var(--blue-accent),var(--blue-500))}
+.stage-mini:nth-child(3)::before{background:linear-gradient(90deg,var(--blue-600),var(--blue-800))}
+.stage-mini:hover{transform:translateY(-3px);box-shadow:0 8px 24px var(--shadow-strong);border-color:var(--blue-accent)}
+.stage-mini-num{font-family:Manrope,sans-serif;font-size:2rem;font-weight:900;color:var(--blue-100);line-height:1;letter-spacing:-0.04em;margin-bottom:.3rem}
+.stage-mini-label{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-400);margin-bottom:.2rem}
+.stage-mini-name{font-size:.95rem;font-weight:800;color:var(--blue-900);letter-spacing:-0.02em;margin-bottom:.2rem}
+.stage-mini-en{font-size:.7rem;font-weight:700;color:var(--blue-accent);margin-bottom:.4rem}
+.stage-mini-tags{font-size:.68rem;color:var(--text-muted);line-height:1.5}
+.stage-mini-arrow{position:absolute;bottom:.9rem;right:1rem;color:var(--blue-400);font-size:.85rem;transition:transform .2s}
+.stage-mini:hover .stage-mini-arrow{transform:translateX(3px)}
+.unit1-grid{grid-column:1/-1;display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem}
+.unit1-card{background:var(--white);border:1px solid var(--border-strong);border-radius:14px;padding:1rem;text-decoration:none;display:flex;flex-direction:column;gap:.3rem;transition:all .25s;box-shadow:0 2px 8px var(--shadow)}
+.unit1-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px var(--shadow-strong);border-color:var(--blue-accent)}
+.unit1-icon{font-size:1.6rem;margin-bottom:.2rem}
+.unit1-label{font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-400)}
+.unit1-name{font-size:.85rem;font-weight:800;color:var(--blue-900);letter-spacing:-0.02em;line-height:1.3}
+.unit1-desc{font-size:.68rem;color:var(--text-muted);line-height:1.5;font-weight:400;flex:1}
+.unit1-arrow{font-size:.8rem;color:var(--blue-400);margin-top:auto;align-self:flex-end;transition:transform .2s}
+.unit1-card:hover .unit1-arrow{transform:translateX(3px)}
+.en-versions{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+.en-card{background:var(--white);border:1px solid var(--border-strong);border-radius:12px;padding:.9rem 1rem;text-decoration:none;display:flex;flex-direction:column;gap:.3rem;transition:all .2s;box-shadow:0 2px 8px var(--shadow)}
+.en-card:hover{border-color:var(--blue-accent);box-shadow:0 4px 14px var(--shadow-strong);transform:translateY(-2px)}
+.en-card-label{font-size:.55rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-400)}
+.en-card-title{font-size:.82rem;font-weight:800;color:var(--blue-900);letter-spacing:-0.01em}
+.en-card-desc{font-size:.65rem;color:var(--text-muted);line-height:1.5}
+.en-card-arrow{font-size:.75rem;color:var(--blue-400);align-self:flex-end;transition:transform .2s}
+.en-card:hover .en-card-arrow{transform:translateX(3px)}
+.reflection-mini{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.3rem}
+.ref-card{background:var(--blue-50);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1.3rem;text-decoration:none;display:block;transition:all .25s;position:relative;overflow:hidden}
+.ref-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0}
+.ref-card:nth-child(1)::before{background:linear-gradient(90deg,var(--blue-400),var(--blue-600))}
+.ref-card:nth-child(2)::before{background:linear-gradient(90deg,var(--blue-accent),var(--blue-500))}
+.ref-card:hover{border-color:var(--blue-accent);box-shadow:0 4px 16px var(--shadow-strong);transform:translateY(-2px)}
+.ref-label{font-size:.58rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-500);margin-bottom:.4rem}
+.ref-title{font-size:.92rem;font-weight:800;color:var(--blue-900);letter-spacing:-0.02em;margin-bottom:.35rem}
+.ref-desc{font-size:.72rem;color:var(--text-muted);line-height:1.6;font-weight:400}
+.ref-arrow{position:absolute;bottom:.9rem;right:1rem;font-size:.85rem;color:var(--blue-400);transition:transform .2s}
+.ref-card:hover .ref-arrow{transform:translateX(3px)}
+.quote-card{grid-column:1/-1;background:linear-gradient(135deg,var(--blue-900) 0%,var(--blue-700) 100%);border-radius:16px;padding:1.5rem 2rem;position:relative;overflow:hidden}
+.quote-card::before{content:'"';position:absolute;top:-.5rem;left:1.5rem;font-family:Georgia,serif;font-size:8rem;color:rgba(255,255,255,0.06);line-height:1;pointer-events:none}
+.quote-text{font-size:.95rem;font-weight:600;color:#fff;line-height:1.7;position:relative;z-index:1;margin-bottom:.5rem}
+.quote-author{font-size:.72rem;color:var(--blue-300);font-weight:500;position:relative;z-index:1}
+.quote-tags{display:flex;gap:.4rem;margin-top:.8rem;position:relative;z-index:1;flex-wrap:wrap}
+.quote-tag{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:#fff;padding:.15rem .6rem;border-radius:100px;font-size:.62rem;font-weight:600}
+.card-footer{padding:1.1rem 2.5rem 1.4rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.footer-left{font-size:.68rem;color:var(--text-muted);font-weight:500}
+.footer-right{display:flex;gap:.4rem}
+.footer-link{background:var(--blue-50);border:1px solid var(--border);border-radius:8px;padding:.22rem .55rem;color:var(--blue-600);font-size:.65rem;font-weight:600;text-decoration:none;transition:all .2s}
+.footer-link:hover{background:var(--blue-100);border-color:var(--blue-300)}
+@media(max-width:900px){.card-body{grid-template-columns:1fr 1fr;padding:1.5rem}.stats-row{grid-template-columns:1fr 1fr}.unit1-grid{grid-template-columns:1fr 1fr 1fr}.stage-row{grid-template-columns:1fr}.en-versions{grid-template-columns:1fr 1fr}.info-card--wide{grid-column:span 2}.hero-badge{display:none}}
+@media(max-width:640px){body{padding:0 .75rem 3rem}.card-body{grid-template-columns:1fr;padding:1.2rem 1rem}.info-card--wide{grid-column:1}.stats-row{grid-template-columns:1fr 1fr}.unit1-grid{grid-template-columns:1fr 1fr}.en-versions{grid-template-columns:1fr}.reflection-mini{grid-template-columns:1fr}.nav-links{display:none}}
+</style>
 </head>
 <body>
-
-  <!-- NAV -->
-  <nav>
-    <div class="logo">AI<span>+</span> Education</div>
-    <div class="nav-center">
-      <a href="#hero" class="nav-pill active">理念</a>
-      <a href="#materials" class="nav-pill">课程材料</a>
-      <a href="#references" class="nav-pill">参考资料</a>
+<nav class="navbar">
+  <div class="nav-brand">AI 教育课程 <span>/ AUTO-EDU</span></div>
+  <div class="nav-links">
+    <a href="#overview" class="active">课程概览</a>
+    <a href="#cognitive-map">认知地图</a>
+    <a href="#stage-cards">三阶段详解</a>
+    <a href="#unit1">Unit 1 资料</a>
+    <a href="cognitive-map-blue.html">中文版</a>
+    <a href="cognitive-map-en.html">EN</a>
+  </div>
+</nav>
+<div class="main-card">
+  <div class="hero">
+    <div class="hero-eyebrow">Course Hub &nbsp;&middot;&nbsp; AI 赋能教育教学</div>
+    <h1 class="hero-title">AI 赋能教育教学<br><em>实践应用课程</em></h1>
+    <p class="hero-subtitle">从信息化到智能化，系统掌握 AI 技术与教学实践的深度融合。核心理念：减负 = 提效，该自动化的自动化，该简化的简化，把时间留给真正重要的事。</p>
+    <div class="hero-tags">
+      <span class="hero-tag">认知地图</span>
+      <span class="hero-tag">AI 工具链</span>
+      <span class="hero-tag">人机协作</span>
+      <span class="hero-tag">数据驱动</span>
+      <span class="hero-tag">教学自动化</span>
     </div>
-    <div class="nav-right">
-      <span class="badge-date">2026-04-17</span>
-      <a href="../index.html" class="btn-back">
-        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        返回项目
+    <div class="hero-badge">
+      <div class="hero-badge-num">5</div>
+      <div class="hero-badge-label">Cards</div>
+    </div>
+  </div>
+  <div class="intro-strip">
+    <div class="intro-icon">&#9734;</div>
+    <div class="intro-text"><strong>本课程系统</strong> 以"认知地图"为理论框架，详解信息化 &rarr; 数字化 &rarr; 智能化三阶段，并配套 <strong>PEP 8A Unit 1</strong> 完整教学材料。所有页面均采用蓝白 InfoCard 风格，可直接用于教学展示。</div>
+  </div>
+  <div class="card-body">
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">发展阶段</div></div>
+      <div class="stat-card"><div class="stat-num">12</div><div class="stat-label">认知地图单元格</div></div>
+      <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">配套教学工具</div></div>
+      <div class="stat-card"><div class="stat-num">37</div><div class="stat-label">Unit 1 词汇量</div></div>
+    </div>
+    <div class="section-header" id="overview">
+      <div class="section-num">01</div>
+      <div class="section-title">课程概览</div>
+      <div class="section-line"></div>
+    </div>
+    <a href="AI%20%E8%B5%8B%E8%83%BD%E6%95%99%E8%82%B2%E6%95%99%E5%AD%A6%E7%9A%84%E5%AE%9E%E8%B7%B5%E5%BA%94%E7%94%A8.html" class="info-card info-card--blue info-card--wide" target="_blank">
+      <div class="info-card-label info-card-label--blue">&#9679; 完整课程</div>
+      <div class="info-card-title">AI 赋能教育教学的实践应用 — 完整讲座</div>
+      <div class="info-card-desc">50页完整讲座幻灯片，涵盖 AI 教育全景：从信息化基础概念到智能化教学方法，含讲师讲稿与互动演示。适合系统学习与教学宣讲。</div>
+      <div class="info-card-meta"><span class="info-chip info-chip--blue">50+ 页</span><span class="info-chip">完整讲座</span><span class="info-chip">互动演示</span></div>
+      <span class="info-card-arrow">&#8594;</span>
+    </a>
+    <a href="cognitive-map-blue.html" class="info-card info-card--dark" target="_blank">
+      <div class="info-card-label info-card-label--dark">&#9679; 认知地图</div>
+      <div class="info-card-title">AI 教育认知地图（中文）</div>
+      <div class="info-card-desc">X轴三阶段 x Y轴四层次 = 12个单元格，清晰定位 AI 技术在教学中的角色与价值。</div>
+      <div class="info-card-meta"><span class="info-chip info-chip--blue">总览</span><span class="info-chip">3x4矩阵</span><span class="info-chip">12单元格</span></div>
+      <span class="info-card-arrow">&#8594;</span>
+    </a>
+    <a href="cognitive-map-en.html" class="info-card info-card--accent" target="_blank">
+      <div class="info-card-label info-card-label--accent">&#9679; Cognitive Map</div>
+      <div class="info-card-title">AI Education Cognitive Map（English）</div>
+      <div class="info-card-desc">完整英文版认知地图，适合国际课程或双语教学场景使用。</div>
+      <div class="info-card-meta"><span class="info-chip info-chip--accent">English</span><span class="info-chip">Overview</span><span class="info-chip">Bilingual</span></div>
+      <span class="info-card-arrow">&#8594;</span>
+    </a>
+    <div class="divider"></div>
+    <div class="section-header" id="cognitive-map">
+      <div class="section-num">02</div>
+      <div class="section-title">认知地图 — 三阶段详解</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="stage-row" id="stage-cards">
+      <a href="informatization-card.html" class="stage-mini" target="_blank">
+        <div class="stage-mini-num">01</div>
+        <div class="stage-mini-label">Stage 01</div>
+        <div class="stage-mini-name">信息化</div>
+        <div class="stage-mini-en">Informatization</div>
+        <div class="stage-mini-tags">介质转换 middot; 信息位移 middot; 对话界面</div>
+        <span class="stage-mini-arrow">&#8594;</span>
+      </a>
+      <a href="digitalization-card.html" class="stage-mini" target="_blank">
+        <div class="stage-mini-num">02</div>
+        <div class="stage-mini-label">Stage 02</div>
+        <div class="stage-mini-name">数字化</div>
+        <div class="stage-mini-en">Digitalization</div>
+        <div class="stage-mini-tags">连接整合 middot; 知识体系化 middot; 数据驱动</div>
+        <span class="stage-mini-arrow">&#8594;</span>
+      </a>
+      <a href="intelligentization-card.html" class="stage-mini" target="_blank">
+        <div class="stage-mini-num">03</div>
+        <div class="stage-mini-label">Stage 03</div>
+        <div class="stage-mini-name">智能化</div>
+        <div class="stage-mini-en">Intelligentization</div>
+        <div class="stage-mini-tags">人机协作 middot; 意图理解 middot; 主动建议</div>
+        <span class="stage-mini-arrow">&#8594;</span>
       </a>
     </div>
-  </nav>
-
-  <!-- ── SECTION 1: HERO ── -->
-  <section class="hero" id="hero">
-    <div class="hero-overline">明德双语学校 &middot; 全学段教师培训</div>
-    <h1>
-      AI家教<br>
-      <span class="accent">重新定义教学</span>
-    </h1>
-    <p class="hero-sub">
-      不是学习工具，是设计工作流程。<br>
-      从「学什么」转向「用什么解决什么」——<br>
-      让孩子在智能时代真正掌握判断力。
-    </p>
-    <div class="hero-cta-row">
-      <a href="#materials" class="btn-primary">查看课程材料</a>
-      <a href="#references" class="btn-secondary">参考资料</a>
+    <div class="en-versions">
+      <a href="informatization-en.html" class="en-card" target="_blank">
+        <div class="en-card-label">EN middot; Stage 01</div>
+        <div class="en-card-title">Informatization</div>
+        <div class="en-card-desc">English version of Stage 01</div>
+        <span class="en-card-arrow">&#8594;</span>
+      </a>
+      <a href="digitalization-en.html" class="en-card" target="_blank">
+        <div class="en-card-label">EN middot; Stage 02</div>
+        <div class="en-card-title">Digitalization</div>
+        <div class="en-card-desc">English version of Stage 02</div>
+        <span class="en-card-arrow">&#8594;</span>
+      </a>
+      <a href="intelligentization-en.html" class="en-card" target="_blank">
+        <div class="en-card-label">EN middot; Stage 03</div>
+        <div class="en-card-title">Intelligentization</div>
+        <div class="en-card-desc">English version of Stage 03</div>
+        <span class="en-card-arrow">&#8594;</span>
+      </a>
     </div>
-  </section>
 
-  <!-- SECTION DIVIDER -->
-  <div class="section-divider"><span class="label">Section 02</span></div>
-
-  <!-- ── SECTION 2: PPT MATERIALS ── -->
-  <div class="section-header" id="materials">
-    <div class="section-eyebrow">Course Materials</div>
-    <h2 class="section-title">本次培训课程材料</h2>
-    <p class="section-desc">
-      点击任意卡片即可预览或下载对应模块的 PPT 演示文稿。
-      共三个核心模块，覆盖认知建立、工具链与完整实操。
-    </p>
-  </div>
-
-  <div class="ppt-section">
-    <div class="ppt-grid">
-
-      <!-- PPT Card 1 -->
-      <div class="ppt-card">
-        <div class="ppt-preview">
-          <div class="ppt-preview-pattern"></div>
-          <div class="ppt-preview-icon">
-            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <span class="ppt-badge">Module 01</span>
-        </div>
-        <div class="ppt-body">
-          <div class="ppt-module">模块一 &middot; 25-30 分钟</div>
-          <div class="ppt-title">认知建立：智能时代的教育者定位</div>
-          <div class="ppt-desc">
-            理解信息化三阶段的演进逻辑，建立清晰变革定位。了解 CHATPRO 框架——人与 AI 协作的四种基本模式。
-          </div>
-          <div class="ppt-footer">
-            <span class="ppt-meta">PDF &middot; 12.4 MB</span>
-            <a href="#" class="ppt-action">
-              预览
-              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- PPT Card 2 -->
-      <div class="ppt-card">
-        <div class="ppt-preview">
-          <div class="ppt-preview-pattern"></div>
-          <div class="ppt-preview-icon">
-            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <span class="ppt-badge">Module 02</span>
-        </div>
-        <div class="ppt-body">
-          <div class="ppt-module">模块二 &middot; 35 分钟</div>
-          <div class="ppt-title">工具展示：国产大模型工具链</div>
-          <div class="ppt-desc">
-            秘塔搜索、通义千问、Kimi、讯飞听见、iSlide、Gamma、Monica、Sider——全链路工具清单与演示。
-          </div>
-          <div class="ppt-footer">
-            <span class="ppt-meta">PDF &middot; 18.7 MB</span>
-            <a href="#" class="ppt-action">
-              预览
-              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- PPT Card 3 -->
-      <div class="ppt-card">
-        <div class="ppt-preview">
-          <div class="ppt-preview-pattern"></div>
-          <div class="ppt-preview-icon">
-            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <span class="ppt-badge">Module 03</span>
-        </div>
-        <div class="ppt-body">
-          <div class="ppt-module">模块三 &middot; 50-60 分钟</div>
-          <div class="ppt-title">实操练习：备课工作流端到端</div>
-          <div class="ppt-desc">
-            从语音输入到讲稿生成，从 iSlide 驱动的 PPT 大纲到个性化调校——完整端到端实操演练。
-          </div>
-          <div class="ppt-footer">
-            <span class="ppt-meta">PDF &middot; 21.2 MB</span>
-            <a href="#" class="ppt-action">
-              预览
-              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
+    <div class="section-header" id="unit1">
+      <div class="section-num">04</div>
+      <div class="section-title">PEP 8A Unit 1 配套资料</div>
+      <div class="section-line"></div>
     </div>
-  </div>
-
-  <!-- SECTION DIVIDER -->
-  <div class="section-divider"><span class="label">Section 03</span></div>
-
-  <!-- ── SECTION 3: REFERENCES ── -->
-  <div class="refs-section" id="references">
-    <div class="refs-inner">
-      <div class="section-eyebrow">Reference Materials</div>
-      <h2 class="section-title">延伸阅读与参考资源</h2>
-      <p class="section-desc">
-        培训期间及之后持续使用的工具文档与学习材料，
-        全部为国内可用，无须翻墙。
-      </p>
-
-      <div class="refs-grid">
-
-        <a href="#" class="ref-card">
-          <div class="ref-category">搜索</div>
-          <div class="ref-title">秘塔AI搜索</div>
-          <div class="ref-desc">无广告结构化搜索结果，适合教育类内容调研与学科资料核查。</div>
-          <div class="ref-arrow">
-            访问
-            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-        </a>
-
-        <a href="#" class="ref-card">
-          <div class="ref-category">内容生成</div>
-          <div class="ref-title">通义千问 &middot; Kimi</div>
-          <div class="ref-desc">讲稿生成、教案辅助、学生评语撰写等文本任务的主力工具。</div>
-          <div class="ref-arrow">
-            访问
-            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-        </a>
-
-        <a href="#" class="ref-card">
-          <div class="ref-category">语音处理</div>
-          <div class="ref-title">讯飞听见 &middot; 飞书妙记</div>
-          <div class="ref-desc">会议转录、口述笔记、课堂录音整理，语音输入无需打字。</div>
-          <div class="ref-arrow">
-            访问
-            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-        </a>
-
-        <a href="#" class="ref-card">
-          <div class="ref-category">PPT辅助</div>
-          <div class="ref-title">iSlide &middot; Gamma</div>
-          <div class="ref-desc">大纲驱动生成、配色与排版辅助，显著提升备课效率。</div>
-          <div class="ref-arrow">
-            访问
-            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-        </a>
-
-        <a href="#" class="ref-card">
-          <div class="ref-category">浏览器插件</div>
-          <div class="ref-title">Monica &middot; Sider</div>
-          <div class="ref-desc">随时唤起 AI 辅助，不打断工作流，适合阅读与写作增强。</div>
-          <div class="ref-arrow">
-            访问
-            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-        </a>
-
-        <a href="#" class="ref-card">
-          <div class="ref-category">CHATPRO</div>
-          <div class="ref-title">CHATPRO 人机协作框架</div>
-          <div class="ref-desc">教师与 AI 协作的四种基本模式：指导、创作、评估、探索。</div>
-          <div class="ref-arrow">
-            了解框架
-            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-        </a>
-
+    <div class="unit1-grid">
+      <a href="../file-unit1/Unit1-PPT/index.html" class="unit1-card" target="_blank">
+        <div class="unit1-icon">&#128218;</div>
+        <div class="unit1-label">PPT</div>
+        <div class="unit1-name">课堂教学幻灯片</div>
+        <div class="unit1-desc">24页完整课堂教学演示，覆盖听说读写全部环节</div>
+        <div class="unit1-arrow">&#8594;</div>
+      </a>
+      <a href="../file-unit1/Unit1-Infocard/infocard.html" class="unit1-card" target="_blank">
+        <div class="unit1-icon">&#128196;</div>
+        <div class="unit1-label">Infocard</div>
+        <div class="unit1-name">词汇闪卡系统</div>
+        <div class="unit1-desc">37张词汇卡，带字母间隔展示 + 左右箭头键盘翻页</div>
+        <div class="unit1-arrow">&#8594;</div>
+      </a>
+      <a href="../file-unit1/Unit1-Worksheet/worksheet.html" class="unit1-card" target="_blank">
+        <div class="unit1-icon">&#128203;</div>
+        <div class="unit1-label">Worksheet</div>
+        <div class="unit1-name">综合练习卷</div>
+        <div class="unit1-desc">词汇、语法、听力、写作五大部分，配套答案</div>
+        <div class="unit1-arrow">&#8594;</div>
+      </a>
+      <a href="../file-unit1/Unit1-FlashGame/battle.html" class="unit1-card" target="_blank">
+        <div class="unit1-icon">&#127942;</div>
+        <div class="unit1-label">Game</div>
+        <div class="unit1-name">词汇对战游戏</div>
+        <div class="unit1-desc">20道题双队伍对战，PK模式翻转课堂</div>
+        <div class="unit1-arrow">&#8594;</div>
+      </a>
+      <a href="../file-unit1/LessonPlan-Unit1.md" class="unit1-card" target="_blank">
+        <div class="unit1-icon">&#128221;</div>
+        <div class="unit1-label">Lesson Plan</div>
+        <div class="unit1-name">教案文档</div>
+        <div class="unit1-desc">完整教学流程设计，含教学目标、重难点、活动设计</div>
+        <div class="unit1-arrow">&#8594;</div>
+      </a>
+    </div>
+    <div class="divider"></div>
+    <div class="quote-card">
+      <div class="quote-text">减负的目标在于，该自动化的就自动化，该简化的就简化。提效的关键是做得更少，但效果更好。</div>
+      <div class="quote-author">— 课程核心理念</div>
+      <div class="quote-tags">
+        <span class="quote-tag">减负 = 提效</span>
+        <span class="quote-tag">人机协作</span>
+        <span class="quote-tag">该自动化就自动化</span>
+        <span class="quote-tag">做更少，效果更好</span>
       </div>
     </div>
   </div>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>
-      AI+ Education &middot; 明德双语学校案例 &middot;
-      <a href="../index.html">返回项目首页</a>
-    </p>
-  </footer>
-
-  <script>
-    // Active nav pill on scroll
-    const sections = ['hero', 'materials', 'references'];
-    const pills = document.querySelectorAll('.nav-pill');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          pills.forEach(p => p.classList.remove('active'));
-          const active = document.querySelector('.nav-pill[href="#' + entry.target.id + '"]');
-          if (active) active.classList.add('active');
-        }
-      });
-    }, { threshold: 0.4 });
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-  </script>
-
+  <div class="card-footer">
+    <div class="footer-left">AI 教育课程 &nbsp;&middot;&nbsp; AUTO-EDU &nbsp;&middot;&nbsp; 2026</div>
+    <div class="footer-right">
+      <a href="cognitive-map-blue.html" class="footer-link">中文版</a>
+      <a href="cognitive-map-en.html" class="footer-link">English</a>
+    </div>
+  </div>
+</div>
 </body>
 </html>
