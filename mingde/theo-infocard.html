@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 教学错位诊断 — 思考清单</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #ffffff;
+  --bg: #f0f4ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: rgba(59,130,246,0.12);
+  --border-strong: rgba(59,130,246,0.22);
+  --shadow: rgba(67,97,238,0.08);
+  --shadow-strong: rgba(67,97,238,0.14);
+  --info-accent: #f97316;
+  --info-accent-dark: #c2410c;
+  --info-bg: rgba(249,115,22,0.06);
+  --info-border: rgba(249,115,22,0.15);
+  --info-light: #fed7aa;
+  --digit-accent: #6366f1;
+  --digit-accent-dark: #4338ca;
+  --digit-bg: rgba(99,102,241,0.06);
+  --digit-border: rgba(99,102,241,0.15);
+  --digit-light: #c7d2fe;
+  --intel-accent: #10b981;
+  --intel-accent-dark: #047857;
+  --intel-bg: rgba(16,185,129,0.06);
+  --intel-border: rgba(16,185,129,0.15);
+  --intel-light: #a7f3d0;
+  --warn: #ef4444;
+  --warn-bg: rgba(239,68,68,0.06);
+  --warn-border: rgba(239,68,68,0.15);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans SC', 'Manrope', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2rem 1.5rem 3rem;
+}
+.topbar{display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(255,255,255,0.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:9px 20px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
+.topbar a{font-size:.82rem;color:#475569;text-decoration:none;font-weight:600;letter-spacing:.02em}
+.topbar a:hover{text-decoration:underline}
+body{padding-top:56px}
+.main-card {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--border-strong);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px var(--shadow);
+}
+.band {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  padding: 1.8rem 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+.band-left { position: relative; z-index: 1; }
+.band-stage { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.25rem; }
+.band-title { font-family: 'Manrope', sans-serif; font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 900; color: #fff; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 0.15rem; }
+.band-en { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+.band-right { position: relative; z-index: 1; display: flex; align-items: center; gap: 0.75rem; }
+.band-badge { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.25); border-radius: 10px; padding: 0.5rem 0.9rem; text-align: center; }
+.band-badge-icon { font-size: 1.2rem; }
+.band-badge-label { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #fca5a5; margin-top: 0.1rem; }
+.insight-strip {
+  background: linear-gradient(135deg, rgba(239,68,68,0.05) 0%, rgba(249,115,22,0.05) 100%);
+  border-bottom: 1px solid rgba(239,68,68,0.1);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+.insight-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem; }
+.insight-text { font-size: 0.82rem; color: #1e293b; line-height: 1.7; font-weight: 500; }
+.insight-text strong { color: #ef4444; font-weight: 800; }
+.insight-text em { color: #f97316; font-style: normal; font-weight: 700; }
+.card-body { padding: 1.6rem 1.8rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; }
+.section-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.2rem 1.3rem;
+  position: relative;
+  overflow: hidden;
+}
+.section-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+}
+.section-card.full { grid-column: 1 / -1; }
+.section-card.info { background: var(--info-bg); border-color: var(--info-border); }
+.section-card.info::before { background: linear-gradient(90deg, var(--info-accent), #fb923c); }
+.section-card.digit { background: var(--digit-bg); border-color: var(--digit-border); }
+.section-card.digit::before { background: linear-gradient(90deg, var(--digit-accent), #818cf8); }
+.section-card.intel { background: var(--intel-bg); border-color: var(--intel-border); }
+.section-card.intel::before { background: linear-gradient(90deg, var(--intel-accent), #34d399); }
+.section-card.warn { background: var(--warn-bg); border-color: var(--warn-border); }
+.section-card.warn::before { background: linear-gradient(90deg, var(--warn), #f87171); }
+.section-card.core { background: rgba(30,41,59,0.04); border-color: rgba(30,41,59,0.1); }
+.section-card.core::before { background: linear-gradient(90deg, #475569, #64748b); }
+.section-label { font-size: 0.58rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem; }
+.section-label::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.lbl-info { color: var(--info-accent-dark); }
+.lbl-info::before { background: var(--info-accent); }
+.lbl-digit { color: var(--digit-accent-dark); }
+.lbl-digit::before { background: var(--digit-accent); }
+.lbl-intel { color: var(--intel-accent-dark); }
+.lbl-intel::before { background: var(--intel-accent); }
+.lbl-warn { color: var(--warn); }
+.lbl-warn::before { background: var(--warn); }
+.lbl-core { color: #475569; }
+.lbl-core::before { background: #475569; }
+.section-title { font-size: 0.92rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 0.65rem; line-height: 1.3; }
+.section-desc { font-size: 0.74rem; color: var(--text-muted); line-height: 1.7; font-weight: 400; }
+.check-list { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.5rem; }
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.74rem;
+  color: var(--text);
+  line-height: 1.6;
+  font-weight: 400;
+  padding: 0.55rem 0.7rem;
+  background: rgba(255,255,255,0.65);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+.check-item:hover { background: rgba(255,255,255,0.95); border-color: var(--border-strong); }
+.check-box {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 2px solid currentColor;
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+  opacity: 0.4;
+  transition: all 0.2s;
+}
+.check-item.checked .check-box { opacity: 1; background: currentColor; color: #fff; }
+.check-item.checked .check-text { text-decoration: line-through; color: var(--text-muted); }
+.check-text { flex: 1; }
+.check-tag { font-size: 0.56rem; font-weight: 700; padding: 0.1rem 0.35rem; border-radius: 4px; flex-shrink: 0; margin-top: 0.05rem; }
+.tag-warn { background: rgba(252,165,165,0.3); color: var(--warn); }
+.tag-intel { background: var(--intel-light); color: var(--intel-accent-dark); }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.9rem; }
+.col-card { border-radius: 12px; padding: 0.95rem 1rem; border: 1px solid; }
+.col-card.info-col { background: var(--info-bg); border-color: var(--info-border); }
+.col-card.digit-col { background: var(--digit-bg); border-color: var(--digit-border); }
+.col-card.intel-col { background: var(--intel-bg); border-color: var(--intel-border); }
+.col-title { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.35rem; }
+.col-title.info-col { color: var(--info-accent-dark); }
+.col-title.digit-col { color: var(--digit-accent-dark); }
+.col-title.intel-col { color: var(--intel-accent-dark); }
+.col-num { font-family: 'Manrope', sans-serif; font-size: 1.5rem; font-weight: 900; line-height: 1; }
+.col-items { display: flex; flex-direction: column; gap: 0.5rem; }
+.col-item { display: flex; align-items: flex-start; gap: 0.35rem; font-size: 0.68rem; line-height: 1.5; color: var(--text); }
+.col-x { color: var(--warn); font-weight: 900; flex-shrink: 0; font-size: 0.75rem; }
+.col-check { color: var(--intel-accent); font-weight: 800; flex-shrink: 0; font-size: 0.75rem; }
+.example-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+.example-box { background: rgba(255,255,255,0.55); border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; }
+.example-label { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--warn); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.3rem; }
+.example-text { font-size: 0.72rem; color: var(--text); line-height: 1.65; font-weight: 400; }
+.example-text strong { color: var(--warn); font-weight: 700; }
+.example-text em { color: var(--text); font-style: normal; font-weight: 600; }
+.formula-box { background: rgba(30,41,59,0.04); border: 1px solid rgba(30,41,59,0.1); border-radius: 14px; padding: 1.1rem 1.4rem; text-align: center; }
+.formula-label { font-size: 0.6rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.6rem; }
+.formula-text { font-size: clamp(0.95rem, 2.5vw, 1.3rem); font-weight: 900; letter-spacing: -0.02em; color: #1e293b; line-height: 1.5; }
+.formula-text .old { color: var(--info-accent); text-decoration: line-through; }
+.formula-text .mid { color: #94a3b8; }
+.formula-text .new { color: var(--intel-accent); }
+.formula-note { font-size: 0.7rem; color: var(--text-muted); line-height: 1.65; margin-top: 0.6rem; font-weight: 400; }
+.key-q-list { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.5rem; }
+.key-q { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.74rem; line-height: 1.6; color: var(--text); padding: 0.55rem 0.7rem; background: rgba(255,255,255,0.6); border: 1px solid var(--border); border-radius: 10px; }
+.key-q-num { font-family: 'Manrope', sans-serif; font-size: 1.1rem; font-weight: 900; color: var(--digit-accent); flex-shrink: 0; line-height: 1; margin-top: 0.05rem; }
+.key-q-text { flex: 1; }
+.summary-bar { grid-column: 1 / -1; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 14px; padding: 1.1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.summary-left { position: relative; z-index: 1; }
+.summary-eyebrow { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.12rem; }
+.summary-text { font-size: 0.92rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; line-height: 1.3; }
+.summary-right { position: relative; z-index: 1; display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: flex-end; }
+.sum-tag { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); color: #fff; padding: 0.18rem 0.6rem; border-radius: 100px; font-size: 0.62rem; font-weight: 600; white-space: nowrap; }
+.card-footer { padding: 0.9rem 2rem 1.3rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+.footer-left { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+.footer-link { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 0.22rem 0.55rem; color: #64748b; font-size: 0.65rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+.footer-link:hover { background: var(--white); border-color: var(--border-strong); color: var(--text); }
+@media (max-width: 720px) {
+  body { padding: 1rem 0.75rem 2rem; }
+  .card-body { grid-template-columns: 1fr; padding: 1.2rem 1rem; }
+  .section-card.full { grid-column: 1; }
+  .three-col { grid-template-columns: 1fr; }
+  .example-grid { grid-template-columns: 1fr; }
+  .summary-bar { flex-direction: column; align-items: flex-start; }
+  .summary-right { justify-content: flex-start; }
+  .insight-strip { padding: 0.9rem 1.2rem; }
+  .band { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}
+</style>
+</head>
+<body>
+  <div class="topbar"><a href="index.html">&#8592; 返回主页</a></div>
+
+<div class="main-card">
+
+  <!-- TOP BAND -->
+  <div class="band">
+    <div class="band-left">
+      <div class="band-stage">Theo &nbsp;/&nbsp; 思考清单</div>
+      <div class="band-title">AI 教学错位诊断</div>
+      <div class="band-en">Misalignment Checklist</div>
+    </div>
+    <div class="band-right">
+      <div class="band-badge">
+        <div class="band-badge-icon">&#9888;</div>
+        <div class="band-badge-label">自检清单</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CORE INSIGHT -->
+  <div class="insight-strip">
+    <div class="insight-icon">&#9888;</div>
+    <div class="insight-text">
+      <strong>核心错位：</strong>用<em>信息化方法</em>调用<em>智能化工具</em>。
+      把 AI 当搜索引擎用，把大模型当秘书使，输出无个人经验沉淀、无 RAG 材料支撑——
+      这样的"智能化"，不过是披着 AI 外衣的信息化。
+    </div>
+  </div>
+
+  <!-- CARD BODY -->
+  <div class="card-body">
+
+    <!-- PART 1: QUICK DIAGNOSIS -->
+    <div class="section-card warn full">
+      <div class="section-label lbl-warn">&#9679; 快速自检 — 常见错位现象</div>
+      <div class="section-title">你中了哪几条？（点击勾选）</div>
+      <div class="check-list">
+        <div class="check-item" onclick="this.classList.toggle('checked')">
+          <div class="check-box"></div>
+          <div class="check-text">直接对 AI 说"帮我写一个六年级英语 Unit 1 的教案"，不加任何背景、学生情况、教学目标</div>
+          <span class="check-tag tag-warn">信息化</span>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('checked')">
+          <div class="check-box"></div>
+          <div class="check-text">AI 生成什么就直接用什么，不做任何修改、补充个人判断或经验校验</div>
+          <span class="check-tag tag-warn">信息化</span>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('checked')">
+          <div class="check-box"></div>
+          <div class="check-text">用 AI 生成教案、课件、练习，但没有自己的教学反思库、案例库做 RAG 支撑</div>
+          <span class="check-tag tag-warn">数字化</span>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('checked')">
+          <div class="check-box"></div>
+          <div class="check-text">没有积累个人教学经验、班级数据、学生档案，完全依赖 AI 输出</div>
+          <span class="check-tag tag-warn">数字化</span>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('checked')">
+          <div class="check-box"></div>
+          <div class="check-text">把 AI 当权威：AI 说的就对，AI 生成的直接用，不做专业判断</div>
+          <span class="check-tag tag-intel">智能化</span>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('checked')">
+          <div class="check-box"></div>
+          <div class="check-text">用 AI 替代思考：备课不问自己怎么教，直接让 AI 把所有事情做完</div>
+          <span class="check-tag tag-intel">智能化</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART 2: THREE STAGE MISALIGNMENTS -->
+    <div class="section-card core full">
+      <div class="section-label lbl-core">&#9679; 三阶段错位详解</div>
+      <div class="section-title">用错了哪个阶段的方法？</div>
+      <div class="three-col">
+        <div class="col-card info-col">
+          <div class="col-title info-col"><span class="col-num">01</span> &nbsp;信息化错位</div>
+          <div class="col-items">
+            <div class="col-item"><span class="col-x">&#10005;</span><span>把 AI 当高级搜索引擎，一问一答不过脑子</span></div>
+            <div class="col-item"><span class="col-x">&#10005;</span><span>提示词模糊，不给角色、背景、目标</span></div>
+            <div class="col-item"><span class="col-x">&#10005;</span><span>AI 输出直接用，不审核、不调整、不补充</span></div>
+            <div class="col-item"><span class="col-x">&#10005;</span><span>人发指令 AI 执行，人是主人 AI 是工具——且用得很浅</span></div>
+          </div>
+        </div>
+        <div class="col-card digit-col">
+          <div class="col-title digit-col"><span class="col-num">02</span> &nbsp;数字化错位</div>
+          <div class="col-items">
+            <div class="col-item"><span class="col-x">&#10005;</span><span>用数字工具但没有个人知识积累，AI 无料可查</span></div>
+            <div class="col-item"><span class="col-x">&#10005;</span><span>没有 IAG 体系：AI 不知道你是谁、学生什么特点</span></div>
+            <div class="col-item"><span class="col-x">&#10005;</span><span>工具用了，但经验仍是碎片，没有体系化、结构化</span></div>
+            <div class="col-item"><span class="col-x">&#10005;</span><span>团队没有共建共享，各用各的，重复造轮子</span></div>
+          </div>
+        </div>
+        <div class="col-card intel-col">
+          <div class="col-title intel-col"><span class="col-num">03</span> &nbsp;智能化错位</div>
+          <div class="col-items">
+            <div class="col-item"><span class="col-x">&#10005;</span><span>把 AI 当权威，AI 说什么就信什么，放弃专业判断</span></div>
+            <div class="col-item"><span class="col-x">&#10005;</span><span>用 AI 替代思考，而非放大思考——人变懒而非变强</span></div>
+            <div class="col-item"><span class="col-x">&#10005;</span><span>缺乏人机协作意识：要么不用，要么全让 AI 做</span></div>
+            <div class="col-item"><span class="col-x">&#10005;</span><span>没有建立个人 AI 工作流，工具和能力散在各处</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART 3: WRONG EXAMPLES -->
+    <div class="section-card info full">
+      <div class="section-label lbl-info">&#9679; 典型案例 — 错在哪里</div>
+      <div class="section-title">这些场景，你见过几个？</div>
+      <div class="example-grid">
+        <div class="example-box">
+          <div class="example-label">&#9888; 典型 A：模糊 Prompt</div>
+          <div class="example-text">
+            "帮我写一份六年级英语第一单元的教案。"
+            <br><br>
+            <strong>错在哪：</strong>没有班级情况、没有学生水平、没有教学目标。
+            AI 只能给你一个通用模板，而不是<em>你的教案</em>。
+          </div>
+        </div>
+        <div class="example-box">
+          <div class="example-label">&#9888; 典型 B：拿来主义</div>
+          <div class="example-text">
+            AI 生成 30 页课件，直接发给学生用，不做任何调整。
+            <br><br>
+            <strong>错在哪：</strong>没有融合自己的教学风格，没有针对本班学生特点修改。
+            AI 的是通用的，你的才是个性化的。
+          </div>
+        </div>
+        <div class="example-box">
+          <div class="example-label">&#9888; 典型 C：零积累 AI</div>
+          <div class="example-text">
+            每次备课都从零问 AI，没有自己的案例库、反思记录、学生档案。
+            <br><br>
+            <strong>错在哪：</strong>AI 每次都在盲猜你的情况，输出永远浮于表面。
+            真正的效率来自于：<em>你的积累 × AI 的能力</em>。
+          </div>
+        </div>
+        <div class="example-box">
+          <div class="example-label">&#9888; 典型 D：权威依赖</div>
+          <div class="example-text">
+            AI 说这个知识点学生很难掌握，就信了，不去查自己的教学记录验证。
+            <br><br>
+            <strong>错在哪：</strong>AI 的建议需要用你的经验来校验。
+            <em>你的经验 + AI 的能力 = 最优解</em>，而不是 <em>AI = 答案</em>。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART 4: RIGHT APPROACH -->
+    <div class="section-card intel">
+      <div class="section-label lbl-intel">&#9679; 正确姿势</div>
+      <div class="section-title">用智能工具的正确方式</div>
+      <div class="check-list">
+        <div class="check-item" style="background:rgba(16,185,129,0.07);border-color:rgba(16,185,129,0.2);" onclick="this.classList.toggle('checked')">
+          <div class="check-box" style="color:var(--intel-accent);"></div>
+          <div class="check-text"><strong style="color:var(--intel-accent-dark)">给 AI 上下文：</strong>先描述班级情况、学生水平、教学目标，再让 AI 辅助生成</div>
+        </div>
+        <div class="check-item" style="background:rgba(16,185,129,0.07);border-color:rgba(16,185,129,0.2);" onclick="this.classList.toggle('checked')">
+          <div class="check-box" style="color:var(--intel-accent);"></div>
+          <div class="check-text"><strong style="color:var(--intel-accent-dark)">AI 草稿 + 人优化：</strong>AI 做初稿，人负责审核、补充、个性化调整</div>
+        </div>
+        <div class="check-item" style="background:rgba(16,185,129,0.07);border-color:rgba(16,185,129,0.2);" onclick="this.classList.toggle('checked')">
+          <div class="check-box" style="color:var(--intel-accent);"></div>
+          <div class="check-text"><strong style="color:var(--intel-accent-dark)">建立个人 RAG：</strong>用 Obsidian / 飞书沉淀教学反思、案例、学生数据，让 AI 认识你</div>
+        </div>
+        <div class="check-item" style="background:rgba(16,185,129,0.07);border-color:rgba(16,185,129,0.2);" onclick="this.classList.toggle('checked')">
+          <div class="check-box" style="color:var(--intel-accent);"></div>
+          <div class="check-text"><strong style="color:var(--intel-accent-dark)">AI 放大人，不替代人：</strong>AI 处理重复，人专注创造；AI 提供选项，人做最终判断</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART 5: CORE FORMULA -->
+    <div class="section-card core">
+      <div class="section-label lbl-core">&#9679; 核心公式</div>
+      <div class="section-title">真正提效的等式</div>
+      <div class="formula-box">
+        <div class="formula-label">你的 AI 使用水平 =</div>
+        <div class="formula-text">
+          <span class="old">你的经验积累（IAG）</span>
+          <span class="mid">&nbsp;&#215;&nbsp;</span>
+          <span class="new">&#129302; AI 工具能力</span>
+        </div>
+        <div class="formula-note">
+          没有左边，右边再强也是空中楼阁。<br>
+          没有右边，左边再厚也难以高效复制和放大。
+        </div>
+      </div>
+    </div>
+
+    <!-- PART 6: KEY QUESTIONS -->
+    <div class="section-card digit full">
+      <div class="section-label lbl-digit">&#9679; 核心追问</div>
+      <div class="section-title">每次用 AI 之前，先问自己这三个问题</div>
+      <div class="key-q-list">
+        <div class="key-q">
+          <div class="key-q-num">Q1</div>
+          <div class="key-q-text"><strong>我有没有给 AI 足够的上下文？</strong>（班级情况、学生水平、教学目标、课时安排）——没有上下文，AI 给的就是通用垃圾。</div>
+        </div>
+        <div class="key-q">
+          <div class="key-q-num">Q2</div>
+          <div class="key-q-text"><strong>AI 输出的东西，我自己有没有能力判断对不对？</strong>——如果完全信 AI，说明你自己的专业积累不够。</div>
+        </div>
+        <div class="key-q">
+          <div class="key-q-num">Q3</div>
+          <div class="key-q-text"><strong>我有没有把这次产出积累到自己的知识库里？</strong>——没有积累，下次又是从零开始，永远享受不到复利。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="summary-bar">
+      <div class="summary-left">
+        <div class="summary-eyebrow">一句话总结</div>
+        <div class="summary-text">AI 提效 = 你的积累 × AI 的能力 &nbsp;|&nbsp; 没有积累，AI 再强也是零</div>
+      </div>
+      <div class="summary-right">
+        <span class="sum-tag">上下文</span>
+        <span class="sum-tag">经验校验</span>
+        <span class="sum-tag">个人 RAG</span>
+        <span class="sum-tag">人机协同</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="card-footer">
+    <div class="footer-left">Theo &nbsp;&middot;&nbsp; 思考清单 &nbsp;&middot;&nbsp; AI 教学错位诊断 &nbsp;&middot;&nbsp; 2026</div>
+    <div>
+      <a href="cognitive-map-blue.html" class="footer-link">&#8592; 认知地图</a>
+      <a href="informatization-card.html" class="footer-link">信息化</a>
+      <a href="digitalization-card.html" class="footer-link">数字化</a>
+      <a href="intelligentization-card.html" class="footer-link">智能化</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+document.querySelectorAll('.check-item').forEach(function(item) {
+  item.addEventListener('click', function() {
+    this.classList.toggle('checked');
+  });
+});
+</script>
+
+</body>
+</html>
